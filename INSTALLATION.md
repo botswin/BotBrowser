@@ -55,7 +55,9 @@ cd BotBrowser
 ```
 
 The script will:
-- Download the latest BotBrowser DMG
+- Auto-detect your Mac's architecture (Apple Silicon or Intel)
+- Fetch the latest release from GitHub automatically
+- Download the correct DMG for your platform
 - Mount and copy the application to `/Applications/`
 - Remove macOS quarantine attributes
 - Clean up temporary files
