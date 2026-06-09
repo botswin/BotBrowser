@@ -18,7 +18,7 @@ These guides cover everything from initial setup to advanced deployment scenario
 | [Profile Management](getting-started/PROFILE_MANAGEMENT.md) | Manage profile files, versions, and lifecycle for reproducible browser identity. |
 | [First Verification](getting-started/FIRST_VERIFICATION.md) | Validate fingerprint consistency with CreepJS and BrowserLeaks. |
 | [Automation Consistency Practices](getting-started/AUTOMATION_CONSISTENCY.md) | Reduce framework-related inconsistency signals in Playwright/Puppeteer workflows. |
-| [CanvasLab](getting-started/CANVASLAB.md) | Record Canvas 2D, WebGL, and WebGL2 API calls to study tracking techniques and verify fingerprint protection. |
+| [CanvasLab](getting-started/CANVASLAB.md) | Record Canvas 2D, WebGL, and WebGL2 API calls to study graphics signal collection and verify fingerprint protection. |
 | [AudioLab](getting-started/AUDIOLAB.md) | Record Web Audio API calls to study audio fingerprint collection and verify audio privacy protection. |
 | [V8Log Forensics](getting-started/V8LOG.md) | Review browser-runtime calls, arguments, and return previews for authorized privacy validation. |
 
@@ -89,6 +89,7 @@ These guides cover everything from initial setup to advanced deployment scenario
 | [Cross-Platform Profiles](platform/CROSS_PLATFORM_PROFILES.md) | Run the same profile across Windows, macOS, and Linux with consistent output. |
 | [Android Emulation](platform/ANDROID_EMULATION.md) | Emulate Android browser identity on desktop with mobile API behavior. |
 | [Android WebView](platform/ANDROID_WEBVIEW.md) | Configure Android WebView identity for in-app browser simulation. |
+| [WebKit-family Profile Consistency](platform/WEBKIT_PROFILE_CONSISTENCY.md) | Use premium WebKit-family profiles for runtime, network, and protocol consistency. |
 | [Windows on Mac/Linux](platform/WINDOWS_ON_MAC_LINUX.md) | Use Windows-target profiles while running on macOS or Linux hosts. |
 | [CJK Font Rendering](platform/CJK_FONT_RENDERING.md) | Keep Chinese/Japanese/Korean font rendering consistent across hosts. |
 | [Widevine DRM Setup](platform/WIDEVINE_DRM_SETUP.md) | Set up Widevine/CDM compatibility for DRM playback workflows. |

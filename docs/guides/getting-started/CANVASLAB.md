@@ -1,6 +1,6 @@
-# CanvasLab: Canvas Forensics and Tracking Analysis
+# CanvasLab: Canvas Forensics and Privacy Validation
 
-> Record Canvas 2D, WebGL, WebGL2, and WebGPU API calls to study tracking techniques and verify fingerprint protection.
+> Record Canvas 2D, WebGL, WebGL2, and WebGPU API calls to study graphics signal collection and verify fingerprint protection.
 
 ---
 
@@ -45,6 +45,8 @@ When `--bot-canvas-record-file` is set, BotBrowser intercepts every Canvas API c
 
 Noise variance is disabled during recording so captured data reflects the raw API calls.
 
+Canvas Replay is a separate ENT Tier4 profile-backed capability. When a premium profile includes replay data for an approved validation workflow, BotBrowser can return deterministic Canvas responses from profile data instead of live rendering.
+
 ---
 
 <a id="common-scenarios"></a>
@@ -82,7 +84,7 @@ Open the HTML-based replay viewer to inspect recordings interactively:
 2. Load your `.jsonl` file
 3. Scrub through events, view generated code, and watch canvas rendering step by step
 
-### Identify which tracking library made each call
+### Identify which script made each call
 
 Every recorded event includes a `caller` field with the source location:
 
@@ -99,7 +101,7 @@ Every recorded event includes a `caller` field with the source location:
 }
 ```
 
-Use this to trace which scripts are performing Canvas fingerprinting operations.
+Use this to trace which scripts are reading or writing Canvas surfaces during the session.
 
 ### Cross-platform protection validation
 

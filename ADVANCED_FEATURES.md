@@ -2,13 +2,13 @@
 
 Technical architecture and implementation details behind BotBrowser's fingerprint protection. This document covers the design and capabilities of each subsystem. For configuration syntax and usage examples, see the [CLI Flags Reference](CLI_FLAGS.md).
 
-> License tiers: Some capabilities show tier hints in parentheses (PRO, ENT Tier1/Tier2/Tier3); those options are subscription-gated.
+> License tiers: Some capabilities show tier hints in parentheses (PRO, ENT Tier1/Tier2/Tier3/Tier4); those options are subscription-gated.
 
 ---
 
 ## Capabilities Index
 
-[navigator.webdriver removal](#chrome-behavior-emulation), [main-world isolation](#playwright-puppeteer-integration), [JS hook isolation](#playwright-puppeteer-integration), [Canvas noise](#multi-layer-fingerprint-noise), [WebGL/WebGPU param control](#multi-layer-fingerprint-noise), [Skia anti-alias](#cross-platform-font-engine), [HarfBuzz shaping](#cross-platform-font-engine), [MediaDevices protection](#complete-fingerprint-control), [font list authenticity](#cross-platform-font-engine), [UA congruence](#browser-os-fingerprinting), [custom User-Agent (ENT Tier3)](CLI_FLAGS.md#profile-configuration-override-flags), [per-context proxy (ENT Tier1) geo](CLI_FLAGS.md#enhanced-proxy-configuration), [DNS-through-proxy](#network-fingerprint-control), [active window emulation](#active-window-emulation), [HTTP headers/HTTP2/HTTP3](#chrome-behavior-emulation), [headless parity](#headless-incognito-compatibility), [WebRTC SDP/ICE control](#webrtc-leak-protection), [TLS fingerprint (JA3/JARM)](#network-fingerprint-control), [port protection (PRO)](#port-protection), [dynamic proxy switching (ENT Tier3)](#dynamic-proxy-switching), [distributed privacy consistency](#mirror-distributed-privacy-consistency), [CDP quick reference](#cdp-quick-reference)
+[navigator.webdriver removal](#chrome-behavior-emulation), [main-world isolation](#playwright-puppeteer-integration), [JS hook isolation](#playwright-puppeteer-integration), [Canvas noise](#multi-layer-fingerprint-noise), [Canvas replay (ENT Tier4)](#multi-layer-fingerprint-noise), [WebGL/WebGPU param control](#multi-layer-fingerprint-noise), [Skia anti-alias](#cross-platform-font-engine), [HarfBuzz shaping](#cross-platform-font-engine), [MediaDevices protection](#complete-fingerprint-control), [font list authenticity](#cross-platform-font-engine), [UA congruence](#browser-os-fingerprinting), [custom User-Agent (ENT Tier3)](CLI_FLAGS.md#profile-configuration-override-flags), [WebKit-family profile consistency (ENT Tier4)](#webkit-family-profile-consistency), [per-context proxy (ENT Tier1) geo](CLI_FLAGS.md#enhanced-proxy-configuration), [DNS-through-proxy](#network-fingerprint-control), [active window emulation](#active-window-emulation), [HTTP headers/HTTP2/HTTP3](#chrome-behavior-emulation), [headless parity](#headless-incognito-compatibility), [WebRTC SDP/ICE control](#webrtc-leak-protection), [TLS behavior consistency](#network-fingerprint-control), [port protection (PRO)](#port-protection), [dynamic proxy switching (ENT Tier3)](#dynamic-proxy-switching), [distributed privacy consistency](#mirror-distributed-privacy-consistency), [CDP quick reference](#cdp-quick-reference)
 
 ---
 
@@ -33,7 +33,7 @@ Smart auto-configuration: timezone, locale, and languages derive from your proxy
 - **DNS Routing:** SOCKS5 proxies route all lookups through the proxy tunnel, preventing local DNS leakage.
 - **UDP over SOCKS5 (ENT Tier3):** Automatic UDP associate when supported to tunnel QUIC and STUN; ICE presets often unnecessary if UDP is available.
 - **WebRTC:** SDP/ICE manipulation and candidate filtering to prevent local IP disclosure (see [WebRTC Leak Protection](#webrtc-leak-protection)).
-- **TLS Fingerprints (JA3/JARM/ALPN):** Roadmap: cipher/extension ordering and ALPN tuning under evaluation.
+- **TLS behavior consistency:** Network protocol behavior is aligned with the active profile family across supported platforms.
 
 **Stack differentiators:**
 - [Per-context proxies](PER_CONTEXT_FINGERPRINT.md) with proxy-based geo detection (timezone/locale/language) across contexts and sessions
@@ -105,6 +105,7 @@ await page.goto('https://example.co.uk');
 Deterministic noise generation prevents fingerprint collection while maintaining session consistency.
 
 - **Canvas**: Controlled variance applied to Canvas 2D rendering
+- **Canvas Replay (ENT Tier4)**: Profile-backed deterministic Canvas responses for approved validation workflows
 - **WebGL image**: Controlled variance applied to WebGL readback
 - **WebGPU**: Deterministic noise applied to WebGPU canvases by default so GPU-only probes inherit the same reproducible noise characteristics
 - **AudioContext**: Inaudible noise calibration (Chromium 141+) with cross-worker consistency
@@ -347,10 +348,19 @@ Comprehensive hardware emulation and fingerprint management.
 |-----------|-------------|
 | **User Agent** | Version control, userAgentData brands, full version override, custom UA with placeholders (ENT Tier3) |
 | **Platform Detection** | Windows/macOS/Android(PRO) with authentic APIs |
-| **Browser Features** | Debugger control, CDP leak protection, Chrome-specific behavior, WebView brand (ENT Tier3) |
+| **Browser Features** | Debugger control, CDP leak protection, Chrome-specific behavior, WebView brand (ENT Tier3), WebKit-family profile consistency (ENT Tier4) |
 | **Font System** | Built-in cross-platform fonts, Blink features, authentic fallback chains |
 | **Client Hints** | DPR, device-memory, UA-CH, and other CH values stay aligned with JavaScript-visible metrics |
 | **userAgentData** | Full control over platform, platformVersion, model, architecture, bitness, mobile (ENT Tier3) |
+
+<a id="webkit-family-profile-consistency"></a>
+### WebKit-Family Profile Consistency (ENT Tier4)
+
+WebKit-family Profile Consistency extends premium profiles beyond browser-brand metadata. The browser runtime, CSS behavior, media capability behavior, navigation headers, TLS behavior, HTTP/2 behavior, and per-context isolation are shaped to match the selected WebKit-family profile across supported host platforms.
+
+Supported profile bundles cover desktop and mobile WebKit-family identities. Use this capability for authorized privacy validation when a workflow needs browser-family consistency while keeping BotBrowser's profile, automation, and per-context control model.
+
+See [WebKit-family Profile Consistency](WEBKIT_PROFILE_CONSISTENCY.md) for the full feature page and setup notes.
 
 ### Location & Time Management
 
@@ -493,7 +503,7 @@ All commands live under the `BotBrowser` CDP domain. Send them through a **brows
 - [Per-Context Fingerprint](PER_CONTEXT_FINGERPRINT.md) - Independent fingerprint per BrowserContext
 - [Validation Results](VALIDATION.md) - Research and testing data
 - [Mirror](tools/mirror/) - Distributed privacy consistency verification
-- [CanvasLab](tools/canvaslab/) - Canvas 2D / WebGL / WebGL2 forensics and tracking analysis tool
+- [CanvasLab](tools/canvaslab/) - Canvas 2D / WebGL / WebGL2 forensics and privacy validation tool
 - [AudioLab](tools/audiolab/) - Web Audio API forensics and audio fingerprint collection analysis tool
 - [V8Log Forensics](tools/v8log/) - Browser-runtime evidence for authorized fingerprint protection sessions
 - [Examples](examples/) - Playwright, Puppeteer, bot-script integration

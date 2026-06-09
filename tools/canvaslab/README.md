@@ -1,17 +1,17 @@
 # CanvasLab: Canvas Forensics for Privacy Protection (Beta)
 
-Record every Canvas 2D, WebGL, and WebGL2 API call to see exactly what tracking code is doing. Study fingerprint collection techniques and verify that BotBrowser's privacy protections work against them.
+Record every Canvas 2D, WebGL, and WebGL2 API call to review which graphics signals a page reads. Study fingerprint collection patterns and verify that BotBrowser's privacy protections behave as expected.
 
 ---
 
 ## What Is CanvasLab?
 
-CanvasLab records every Canvas 2D, WebGL, and WebGL2 API call so you can see exactly what tracking code is trying to do. When you capture these recordings, you can study the tracking techniques and make sure BotBrowser's privacy protections are working against them.
+CanvasLab records every Canvas 2D, WebGL, and WebGL2 API call so you can review which graphics signals a page reads. When you capture these recordings, you can study fingerprint collection patterns and make sure BotBrowser's privacy protections behave as expected.
 
-- **See what trackers do** - watch every Canvas and WebGL API call they make and understand their techniques
-- **Test your defenses** - verify that BotBrowser's protections actually stop the tracking attempts
-- **Check protection** - make sure privacy defenses work the same across Windows, macOS, and Linux
-- **Understand the threat** - know exactly what you're protecting users from
+- **Review graphics signals** - inspect every Canvas and WebGL API call a page makes
+- **Validate protections** - verify that BotBrowser's protections produce the expected protected behavior
+- **Check consistency** - make sure privacy defenses work the same across Windows, macOS, and Linux
+- **Document privacy risk** - understand which graphics surfaces need protection
 
 ---
 
@@ -41,7 +41,7 @@ CanvasLab records every Canvas 2D, WebGL, and WebGL2 API call so you can see exa
 
 ---
 
-## Quick Start: Recording Tracking Attempts
+## Quick Start: Recording Canvas Activity
 
 **Step 1: Start recording** (see [`--bot-canvas-record-file`](../../CLI_FLAGS.md#--bot-canvas-record-file))
 ```bash
@@ -51,11 +51,11 @@ chromium \
   --user-data-dir="$(mktemp -d)"
 ```
 
-**Step 2: Visit a site and let tracking happen**
-Go to the website you want to study. Let it load normally. CanvasLab will record every Canvas 2D, WebGL, WebGL2, and WebGPU API call the tracking code makes.
+**Step 2: Visit a site and let the page run**
+Go to the website you want to study. Let it load normally. CanvasLab will record every Canvas 2D, WebGL, WebGL2, and WebGPU API call the page makes.
 
 **Step 3: Look at what was recorded**
-Close BotBrowser. Your recording is saved to `/tmp/canvaslab.jsonl`. You can now see exactly what Canvas, WebGL, and WebGPU calls the tracking code tried to make.
+Close BotBrowser. Your recording is saved to `/tmp/canvaslab.jsonl`. You can now review the Canvas, WebGL, and WebGPU calls made during the session.
 
 ---
 
@@ -72,7 +72,7 @@ Close BotBrowser. Your recording is saved to `/tmp/canvaslab.jsonl`. You can now
 | **`read`** | Data extraction and measurements | `getImageData`, `toBlob`, `measureText`, `readPixels`, `getParameter` |
 | **`resize`** | Canvas dimension changes | `canvas.width/height` modifications |
 
-> **Note:** Every API call includes the source location (URL, line, column) so you can find exactly which tracking library made each call.
+> **Note:** Every API call includes the source location (URL, line, column) so you can identify which script made each call.
 
 ### What Gets Recorded
 
@@ -98,8 +98,8 @@ Close BotBrowser. Your recording is saved to `/tmp/canvaslab.jsonl`. You can now
 **Source code information:**
 - Where every Canvas API call came from (URL, line, column)
 - What function names are involved
-- Which tracking libraries made which API calls
-- Everything you need to understand what tracking code is trying to do
+- Which scripts made which API calls
+- Everything you need to understand the graphics activity recorded during the session
 
 **Example event with caller:**
 ```json
@@ -121,20 +121,20 @@ Close BotBrowser. Your recording is saved to `/tmp/canvaslab.jsonl`. You can now
 
 | Scenario | How CanvasLab Helps |
 |----------|---------------------|
-| **Privacy Defense Development** | See how trackers try to fingerprint users through Canvas and build stronger protections against it |
-| **Tracking Analysis** | Document exactly what Canvas API calls tracking code makes so you know what to defend against |
-| **Source Code Attribution** | Find which tracking libraries are calling which Canvas APIs by looking at source locations |
+| **Privacy Defense Development** | Review how pages use Canvas surfaces and build stronger protections |
+| **Signal Review** | Document which Canvas API calls appear during a session so you know which surfaces need protection |
+| **Source Code Attribution** | Find which scripts are calling which Canvas APIs by looking at source locations |
 | **Privacy Protection Validation** | Make sure BotBrowser's defenses work the same way on all platforms: Windows, macOS, Linux |
 | **Privacy Testing** | Verify that privacy protections keep working after BotBrowser updates |
-| **Privacy Research** | Study real-world tracking techniques with complete records and source information for fingerprint protection research |
+| **Privacy Research** | Study real-world graphics signal collection with complete records and source information for fingerprint protection research |
 
 ---
 
-## Canvas Fingerprint Replay
+## Canvas Fingerprint Replay (ENT Tier4)
 
-BotBrowser supports exact canvas fingerprint replay: when a profile contains canvas data for a specific site, BotBrowser returns those recorded values at runtime instead of performing live GPU/CPU rendering. This makes canvas fingerprints deterministic and site-specific.
+BotBrowser supports profile-backed canvas fingerprint replay: when a profile contains canvas data for a specific site, BotBrowser returns deterministic, site-specific Canvas responses at runtime.
 
-Canvas data is embedded in the profile, not controlled by a CLI flag. To get a profile with replay support for a specific site or antibot system, contact us at [support@botbrowser.io](mailto:support@botbrowser.io). We analyze the target's canvas fingerprinting approach and provide a profile with the corresponding canvas data.
+Canvas data is embedded in the profile, not controlled by a CLI flag. Canvas Replay is available with ENT Tier4 profiles for approved validation workflows. To get a profile with replay support for a specific site or privacy validation target, contact us at [support@botbrowser.io](mailto:support@botbrowser.io).
 
 ---
 

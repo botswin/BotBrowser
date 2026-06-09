@@ -20,6 +20,8 @@
 
 The `--bot-cookies` flag lets you inject cookies into BotBrowser sessions at launch time. Cookies are loaded before the first page navigation, so the browser starts with the desired session state. This is useful for restoring authenticated sessions, setting consent preferences, or pre-populating any cookie-dependent state.
 
+With [Per-Context Fingerprint](../../../PER_CONTEXT_FINGERPRINT.md), `--bot-cookies` can also be passed when creating a BrowserContext. This lets each context start with its own cookie state while sharing one browser process.
+
 You can provide cookies as inline JSON directly in the flag value, or load them from a JSON file.
 
 ---
@@ -57,6 +59,8 @@ The file should contain a JSON array of cookie objects.
 2. **Cookie injection.** Cookies are injected into the browser's cookie store before any page navigation occurs. This means the first HTTP request already includes the injected cookies.
 
 3. **Domain matching.** Each cookie must include a `url` field. The browser uses it to set the cookie origin and only sends cookies to matching domains, following standard cookie rules.
+
+4. **Per-context import.** When `--bot-cookies` is passed through `botbrowserFlags` at BrowserContext creation time, cookies are imported into that context only.
 
 ### Cookie Format
 
@@ -213,6 +217,35 @@ chromium-browser \
   --bot-cookies="@/path/to/cookies.json"
 ```
 
+### Per-context cookie state
+
+Use `--bot-cookies` inside `botbrowserFlags` when each BrowserContext needs its own session state:
+
+```javascript
+const client = await browser.newBrowserCDPSession();
+
+const cookies = JSON.stringify([
+  {
+    url: "https://example.com",
+    name: "session_id",
+    value: "context-a",
+    domain: ".example.com",
+    path: "/",
+    secure: true,
+    httpOnly: true
+  }
+]);
+
+const { browserContextId } = await client.send("Target.createBrowserContext", {
+  botbrowserFlags: [
+    "--bot-profile=/path/to/profile.enc",
+    "--bot-cookies=" + cookies
+  ]
+});
+```
+
+Create pages after the context is created so the first navigation uses the context-scoped cookie state.
+
 ### JavaScript flag construction
 
 When building the `--bot-cookies` flag in JavaScript, do not wrap the JSON value in extra quotes:
@@ -235,7 +268,7 @@ args.push(`--bot-cookies='${JSON.stringify(cookies)}'`);
 | Problem | Solution |
 |---------|----------|
 | Cookies not injected (silently skipped) | Each cookie object must include a `url` field (e.g., `"url": "https://example.com"`). Without it, the cookie is silently dropped. |
-| Puppeteer: `context.cookies()` returns empty | Use `browser.defaultBrowserContext()`. Cookies from `--bot-cookies` are injected into the default context only, not into contexts created with `browser.createBrowserContext()`. |
+| Puppeteer: `context.cookies()` returns empty | For startup cookies, use `browser.defaultBrowserContext()`. For Per-Context Fingerprint, pass `--bot-cookies` through `botbrowserFlags` when creating the BrowserContext. |
 | Cookies not sent with requests | Verify the `domain` field matches the target site. Use `.example.com` (with leading dot) to include subdomains. |
 | "Invalid JSON" error | Check that the cookie value is a valid JSON array. Use a JSON validator if needed. |
 | File not found | When using `@/path/to/file.json`, ensure the path is absolute. |
@@ -251,6 +284,7 @@ args.push(`--bot-cookies='${JSON.stringify(cookies)}'`);
 - [History Seeding](HISTORY_SEEDING.md). Add browsing history for privacy protection.
 - [CLI Flags Reference](../../../CLI_FLAGS.md#--bot-cookies). Full flag documentation.
 - [Playwright Guide](../getting-started/PLAYWRIGHT.md). Framework integration basics.
+- [Per-Context Fingerprint](../../../PER_CONTEXT_FINGERPRINT.md). Context-scoped profile and session state.
 
 ---
 

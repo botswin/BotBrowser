@@ -61,6 +61,8 @@ chromium-browser \
 
 That is it. BotBrowser loads the profile, opens a browser window, and executes your script in a privileged context.
 
+For multi-identity workflows, `--bot-script` can also be passed through Per-Context Fingerprint when creating a BrowserContext. Use this when each context needs its own framework-less automation bootstrap.
+
 ---
 
 <a id="how-it-works"></a>
@@ -76,6 +78,8 @@ The `--bot-script` flag tells BotBrowser to execute a JavaScript file in a privi
 3. **Early execution.** The script runs before the first page navigation completes, allowing you to set up CDP listeners, intercept network requests, or configure protections before any page code executes.
 
 4. **Standard browser APIs.** You have access to `console`, `setTimeout`, `setInterval`, `fetch`, and other standard APIs alongside the `chrome.*` extension APIs.
+
+5. **Context-scoped bootstrap.** When used with Per-Context Fingerprint, a bot script can be associated with a newly created BrowserContext so automation setup follows the selected context profile.
 
 ---
 
@@ -118,6 +122,23 @@ chrome.debugger.getTargets(function (targets) {
   });
 });
 ```
+
+### Per-context bot script bootstrap
+
+Create a BrowserContext with a profile and bot script in the same call:
+
+```javascript
+const client = await browser.newBrowserCDPSession();
+
+const { browserContextId } = await client.send("Target.createBrowserContext", {
+  botbrowserFlags: [
+    "--bot-profile=/path/to/profile.enc",
+    "--bot-script=/path/to/context-bootstrap.js"
+  ]
+});
+```
+
+Create pages after the context is created so the script and profile are available from the start of the workflow.
 
 ### Interacting with iframe content
 
@@ -264,6 +285,7 @@ For the full list of CDP commands you can send via `chrome.debugger.sendCommand(
 |---------|----------|
 | "chrome.debugger API not available" | Ensure you are using `--bot-script`, not loading the script another way. |
 | Script does not execute | Use an absolute path for `--bot-script`. Relative paths resolve from the binary's directory. |
+| Context-scoped script does not run | Pass `--bot-script` in `botbrowserFlags` when creating the BrowserContext, then create pages after that context exists. |
 | `chrome.runtime.lastError` on attach | Another debugger may already be attached. Call `chrome.debugger.detach()` first, then retry. |
 | Target not found | Targets appear asynchronously. Use `setTimeout` to poll `chrome.debugger.getTargets()` until the target appears. |
 | No output visible | Console output from bot scripts appears in the terminal where BotBrowser was launched. |
@@ -280,6 +302,7 @@ For the full list of CDP commands you can send via `chrome.debugger.sendCommand(
 - [Puppeteer Guide](PUPPETEER.md). Alternative framework integration.
 - [Profile Management](PROFILE_MANAGEMENT.md). Understand profile types, versions, and configuration.
 - [Bot Script Examples](../../../examples/bot-script/). Additional script examples for common automation patterns.
+- [Per-Context Fingerprint](../../../PER_CONTEXT_FINGERPRINT.md). Use bot scripts with isolated BrowserContexts.
 
 ---
 

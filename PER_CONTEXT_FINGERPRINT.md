@@ -298,17 +298,18 @@ Most `--bot-*` flags from [CLI_FLAGS.md](CLI_FLAGS.md) work with per-context con
 
 | Category | Example Flags |
 |----------|---------------|
-| Profile | `--bot-profile` (load a completely different profile per context) |
+| Profile | `--bot-profile` (load a completely different profile per context), `--bot-profile-dir` (select from a directory at context creation) |
 | Noise Seed | [`--bot-noise-seed`](CLI_FLAGS.md#behavior--protection-toggles) for deterministic fingerprint variance |
 | Timing | [`--bot-time-scale`](CLI_FLAGS.md#behavior--protection-toggles) for performance timing control, [`--bot-time-seed`](ADVANCED_FEATURES.md#performance-timing-protection) for deterministic timing diversity, [`--bot-stack-seed`](ADVANCED_FEATURES.md#stack-depth-control) for stack depth variation, [`--bot-fps`](CLI_FLAGS.md#behavior--protection-toggles) for frame rate control |
 | Network | [`--bot-network-info-override`](ADVANCED_FEATURES.md#network-info-privacy) for profile-defined `navigator.connection` values |
 | WebRTC | [`--bot-webrtc-ice`](ADVANCED_FEATURES.md#webrtc-leak-protection) for ICE endpoint control |
 | Window | [`--bot-always-active`](ADVANCED_FEATURES.md#active-window-emulation) to maintain active window state |
-| Session | `--bot-inject-random-history` for session authenticity (supports precise count, e.g., `=15`) |
+| Session | `--bot-inject-random-history` for session authenticity (supports precise count, e.g., `=15`), `--bot-cookies` for context-scoped cookie import at creation time |
+| Automation | `--bot-script` for context-scoped framework-less automation bootstrap at creation time |
 | Google Headers | [`--bot-enable-variations-in-context`](CLI_FLAGS.md#behavior--protection-toggles) for `X-Client-Data` consistency in incognito contexts (ENT Tier2) |
 | Proxy | [`--proxy-server`](CLI_FLAGS.md#enhanced-proxy-configuration) (configure proxy per-context via `botbrowserFlags`), `--proxy-ip` to skip IP lookups |
 | HTTP | [`--bot-custom-headers`](CLI_FLAGS.md#--bot-custom-headers-pro) for custom HTTP request headers per context |
-| Config | [`--bot-config-platform`, `--bot-config-timezone`, `--bot-config-noise-canvas`, etc.](CLI_FLAGS.md#profile-configuration-override-flags) |
+| Config | [`--bot-config-platform`, `--bot-config-timezone`, `--bot-config-noise-canvas`, `--bot-config-webgl=disabled`, `--bot-config-webgpu=disabled`, etc.](CLI_FLAGS.md#profile-configuration-override-flags) |
 
 See [CLI_FLAGS.md](CLI_FLAGS.md) for the complete flag reference.
 
@@ -317,7 +318,7 @@ See [CLI_FLAGS.md](CLI_FLAGS.md) for the complete flag reference.
 **Privacy Research at Scale**
 - Run fingerprint protection validation across multiple configurations simultaneously
 - Compare behavior across different platform/locale combinations
-- Study tracking mechanisms with controlled, isolated contexts
+- Study signal collection behavior with controlled, isolated contexts
 
 **Cross-Platform Testing**
 - Validate application behavior across different platform fingerprints

@@ -90,7 +90,7 @@ All configurations are embedded in the `configs` field inside your profile JSON 
 | `disableConsoleMessage` (ENT Tier1)        | Suppresses console message forwarding into page contexts and CDP logs to prevent CDP log noise from leaking. | `true`     |
 | `timezone`                      | `auto` = IP-based (default); `real` = system timezone; custom timezone name (ENT Tier1). | `auto`    |
 | `location`                      | `auto` = IP-based (default); `real` = system GPS; custom coordinates (ENT Tier1). | `auto`    |
-| `browserBrand` (ENT Tier2, webview requires ENT Tier3)    | Override for `navigator.userAgentData.brands` and related UA fields. Supports chromium, chrome, edge, brave, opera, webview. | `chrome`    |
+| `browserBrand` (ENT Tier2, webview requires ENT Tier3)    | Override for browser identity fields. Supports chromium, chrome, edge, brave, opera, webview. WebKit-family identities are delivered through ENT Tier4 premium profiles. | `chrome`    |
 | `brandFullVersion` (ENT Tier2)| Optional brand-specific full version string for UA-CH tuples (Edge/Opera cadences). | `""`    |
 | `injectRandomHistory` (PRO feature) | Adds synthetic navigation history for session authenticity. Accepts `true` (random 2-7 entries), a number for precise control (e.g., `15` for `history.length` of 16), or `false` to disable. | `false`    |
 | `enableVariationsInContext` (ENT Tier2) | Include `X-Client-Data` headers in incognito browser contexts for Google domains, same as regular browsing. | `false`    |
@@ -116,6 +116,12 @@ Full control over User-Agent string and userAgentData for building any browser i
 | `mobile`                        | Mobile device flag for userAgentData: true, false.                                       | from profile |
 
 These fields work together with `--user-agent` CLI flag. BotBrowser auto-generates matching `navigator.userAgentData` (brands, fullVersionList with GREASE) and all Sec-CH-UA-* headers. Values stay consistent across main thread, workers, and HTTP requests.
+
+### WebKit-Family Profile Consistency (ENT Tier4)
+
+WebKit-family profile bundles are provided as premium `.enc` profiles. Use those profiles as the source of truth for browser-family identity consistency, including runtime behavior, CSS behavior, media capability behavior, navigation headers, TLS behavior, and HTTP/2 behavior.
+
+Do not assemble WebKit-family behavior from standalone profile fields. Use the provided premium profile and reserve CLI overrides for session-specific values such as proxy, locale, user data directory, and operational routing.
 
 ### Proxy Settings
 
@@ -269,10 +275,10 @@ These fields work together with `--user-agent` CLI flag. BotBrowser auto-generat
     // noiseTextRects: Introduce controlled variance to TextRects for fingerprint protection
     "noiseTextRects": true,
 
-    // browserBrand: override for `navigator.userAgentData.brands` and related UA fields. Supports "chromium", "chrome", "edge", "brave", "opera", "webview" (ENT Tier3)
+    // browserBrand: override for browser identity fields. Supports "chromium", "chrome", "edge", "brave", "opera", and "webview" (ENT Tier3). WebKit-family identities use ENT Tier4 premium profiles.
     "browserBrand": "chrome",
 
-    // brandFullVersion: optional brand-specific full version string for UA-CH tuples when the vendor’s cadence diverges
+    // brandFullVersion: optional brand-specific full version string for UA-CH tuples when the vendor's cadence diverges
     "brandFullVersion": "142.0.3595.65",
 
     // injectRandomHistory: Adds synthetic navigation history for session authenticity
@@ -356,7 +362,7 @@ These fields work together with `--user-agent` CLI flag. BotBrowser auto-generat
 - If a field is omitted, BotBrowser uses profile defaults where appropriate.
 - CLI `--bot-config-*` flags override profile `configs` with the highest priority
 - **uaFullVersion Tip:** When JavaScript calls `navigator.userAgentData.fullVersion`, BotBrowser replaces the default value with this field. Ensure the full version matches the Chromium major version (e.g., Chromium 138 → full version starts with “138.”). See https://chromiumdash.appspot.com/releases.
-- **brandFullVersion Tip:** Pair this with `browserBrand` when mimicking Edge/Opera/Brave cadences so UA-CH tuples expose the vendor’s own full-version token instead of the Chromium one.
+- **brandFullVersion Tip:** Pair this with `browserBrand` when matching Edge/Opera/Brave cadences so UA-CH tuples expose the vendor's own full-version token instead of the Chromium one.
 
 ---
 

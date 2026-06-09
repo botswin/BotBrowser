@@ -377,6 +377,8 @@ chromium-browser \
   --user-data-dir="$(mktemp -d)"
 ```
 
+For Per-Context Fingerprint, pass the same flag through `botbrowserFlags` when creating the BrowserContext so the context selects its own profile from the directory.
+
 ---
 
 ## Common Scenarios

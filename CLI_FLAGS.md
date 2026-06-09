@@ -8,7 +8,7 @@ This document explains BotBrowser's CLI configuration system. These flags extend
 
 > Dynamic configuration: `--bot-*` flags (config overrides + behavior toggles) enable runtime fingerprint control, which is ideal for CI/CD and multi-instance scenarios.
 
-> License tiers: Some flags show tier hints in parentheses (PRO, ENT Tier1/Tier2/Tier3); those options are subscription-gated.
+> License tiers: Some flags show tier hints in parentheses (PRO, ENT Tier1/Tier2/Tier3/Tier4); those options are subscription-gated.
 
 ## Table of Contents
 
@@ -50,6 +50,7 @@ Specify a directory containing multiple `.enc` profile files. BotBrowser will ra
 - Each startup randomly selects a different profile from the directory
 - Useful for multi-instance deployments requiring fingerprint variation
 - Cannot be used together with `--bot-profile` (directory takes precedence if both are specified)
+- Can be used at BrowserContext creation time through Per-Context Fingerprint when a context should select its own profile from a directory
 
 ---
 
@@ -210,7 +211,7 @@ Sets custom browser window title and taskbar/dock icon label.
 ### `--bot-cookies` (PRO)
 Session restoration and cookie management.
 
-Accepts cookie data as either inline JSON or from a file.
+Accepts cookie data as either inline JSON or from a file. In Per-Context Fingerprint workflows, cookies can be imported at BrowserContext creation time so each context starts with its own session state.
 
 **Inline JSON:**
 ```bash
@@ -238,9 +239,11 @@ Guide: [Bookmark Seeding](https://botbrowser.io/docs/identity/bookmark-seeding/)
 
 <a id="--bot-canvas-record-file"></a>
 ### `--bot-canvas-record-file`
-Canvas forensics and tracking analysis.
+Canvas forensics and privacy validation.
 
 Records all Canvas 2D, WebGL, WebGL2, and WebGPU API calls to a JSONL file for forensic analysis and replay.
+
+CanvasLab recording is a diagnostic workflow. Profile-backed Canvas Replay is an ENT Tier4 capability for approved validation workflows that require deterministic graphics protection from embedded profile data.
 
 ```bash
 --bot-canvas-record-file="/tmp/canvaslab.jsonl"
@@ -304,7 +307,7 @@ Learn more: [V8Log Guide](docs/guides/getting-started/V8LOG.md) | [V8Log Tool](t
 ### `--bot-script`
 Framework-less approach with a privileged JavaScript context.
 
-Execute a JavaScript file right after BotBrowser starts in a privileged, non-extension context where `chrome.debugger` is available.
+Execute a JavaScript file right after BotBrowser starts in a privileged, non-extension context where `chrome.debugger` is available. In Per-Context Fingerprint workflows, bot scripts can also be attached at BrowserContext creation time.
 
 ```bash
 --bot-script="/path/to/script.js"
@@ -389,7 +392,7 @@ BotBrowser supports command-line flags that override profile configuration value
 Flags that directly map to profile `configs` and override them at runtime.
 
 **Identity & Locale** - Guides: [Browser Brand Alignment](https://botbrowser.io/docs/identity/browser-brand-alignment/), [Custom User-Agent](https://botbrowser.io/docs/identity/custom-user-agent/), [Timezone, Locale, and Language](https://botbrowser.io/docs/identity/timezone-locale-language/)
-- `--bot-config-browser-brand=chrome` (ENT Tier2, webview requires ENT Tier3): Browser brand: chrome, chromium, edge, brave, opera, webview
+- `--bot-config-browser-brand=chrome` (ENT Tier2, webview requires ENT Tier3): Browser brand: chrome, chromium, edge, brave, opera, webview. WebKit-family identities are delivered through ENT Tier4 premium profiles.
 - `--bot-config-brand-full-version=142.0.3595.65` (ENT Tier2): Brand-specific full version (Edge/Opera cadence) for UA-CH congruence
 - `--bot-config-ua-full-version=142.0.7444.60` (ENT Tier2): User agent version: full version string matching Chromium major
 - `--bot-config-languages=auto`: Languages: `auto` (IP-based, default) or custom value like `en-US,fr-FR` (ENT Tier1)

@@ -46,7 +46,7 @@ All engineering focuses on privacy research, cross-platform tracking-resistance 
 
 <table cellspacing="0" cellpadding="8">
   <tr>
-    <td width="50%"><strong>High-Fidelity, Always-Current Profiles</strong> including Android WebView, built on the latest stable Chromium so fingerprints always match current browser behavior and trackers cannot key on stale engines</td>
+    <td width="50%"><strong>High-Fidelity, Always-Current Profiles</strong> including <a href="docs/guides/platform/ANDROID_WEBVIEW.md">Android WebView</a> and <a href="WEBKIT_PROFILE_CONSISTENCY.md">WebKit-family profile consistency</a>, built on the latest stable Chromium so fingerprints stay aligned with current browser behavior and reduce stale-engine correlation risk</td>
     <td width="50%"><strong>Network Stack Parity</strong> with <a href="ADVANCED_FEATURES.md#network-fingerprint-control">Full-Proxy QUIC/STUN</a> (UDP over SOCKS5) delivers Chromium-level tunneling so geo metadata does not leak and privacy labs maintain clean transport parity</td>
   </tr>
   <tr>
@@ -61,7 +61,7 @@ All engineering focuses on privacy research, cross-platform tracking-resistance 
 
 ### Cross-Platform Fingerprint Protection
 
-- Single profile, every host OS: identical UA, screen metrics, touch surfaces, fonts, and device APIs on Windows, macOS, Linux (ENT Tier1), Android (PRO), and WebView (ENT Tier3) so trackers see the same fingerprint everywhere.
+- Single profile, every host OS: identical UA, screen metrics, touch surfaces, fonts, and device APIs on Windows, macOS, Linux (ENT Tier1), Android (PRO), WebView (ENT Tier3), and WebKit-family profile bundles (ENT Tier4) for consistent browser identity across environments.
 - Built-in configuration handles touch simulation, device metrics, and locale/timezone detection from the proxy IP while still allowing CLI overrides when privacy experiments require them.
 - Quick demos: [▶️ CreepJS Android](//botswin.github.io/BotBrowser/video_player/index.html?video=antibots-creepjs-creepjs-Android) • [▶️ Iphey](//botswin.github.io/BotBrowser/video_player/index.html?video=antibots-iphey-iphey-Android) • [▶️ Pixelscan](//botswin.github.io/BotBrowser/video_player/index.html?video=antibots-pixelscan-pixelscan-Android)
 
@@ -177,6 +177,7 @@ Product overview, engineering design, FAQ: [TRIMMED_BUILD.md](TRIMMED_BUILD.md).
 | Custom User-Agent with full userAgentData control | [Profile Overrides](CLI_FLAGS.md#profile-configuration-override-flags) | [Guide](https://botbrowser.io/docs/identity/custom-user-agent/) |
 | Client Hints alignment (DPR, device-memory, UA-CH) | [Browser & OS](ADVANCED_FEATURES.md#browser-os-fingerprinting) | [Guide](https://botbrowser.io/docs/fingerprint/navigator-properties/) |
 | Android WebView emulation | [Profile Overrides](CLI_FLAGS.md#profile-configuration-override-flags) | [Guide](https://botbrowser.io/docs/platform/android-webview/) |
+| WebKit-family profile consistency (ENT Tier4) | [Feature Page](WEBKIT_PROFILE_CONSISTENCY.md) | [Guide](docs/guides/platform/WEBKIT_PROFILE_CONSISTENCY.md) |
 | Chrome behavior emulation (HTTP/2, HTTP/3, headers) | [Chrome Behavior](ADVANCED_FEATURES.md#chrome-behavior-emulation) | |
 
 ### Automation & Scripting
@@ -189,7 +190,7 @@ Product overview, engineering design, FAQ: [TRIMMED_BUILD.md](TRIMMED_BUILD.md).
 | Console message suppression | [Behavior Toggles](CLI_FLAGS.md#behavior--protection-toggles) | [Guide](https://botbrowser.io/docs/fingerprint/console-suppression/) |
 | Headless / GUI parity | [Headless Compatibility](ADVANCED_FEATURES.md#headless-incognito-compatibility) | [Guide](https://botbrowser.io/docs/fingerprint/incognito/) |
 | Mirror: distributed privacy consistency | [Mirror Documentation](tools/mirror/) | [Guide](https://botbrowser.io/docs/deployment/mirror-distributed/) |
-| CanvasLab: Canvas 2D / WebGL / WebGL2 recorder | [--bot-canvas-record-file](CLI_FLAGS.md#--bot-canvas-record-file) | [Guide](https://botbrowser.io/docs/proof/canvaslab/) |
+| CanvasLab: Canvas 2D / WebGL / WebGL2 recorder and ENT Tier4 Canvas Replay | [--bot-canvas-record-file](CLI_FLAGS.md#--bot-canvas-record-file) | [Guide](https://botbrowser.io/docs/proof/canvaslab/) |
 | AudioLab: Web Audio API recorder | [--bot-audio-record-file](CLI_FLAGS.md#--bot-audio-record-file) | [Guide](https://botbrowser.io/docs/proof/audiolab/) |
 | V8Log Forensics | [--bot-v8-log](CLI_FLAGS.md#--bot-v8-log) | [Guide](docs/guides/getting-started/V8LOG.md) · [Tool](tools/v8log/) |
 
@@ -230,7 +231,7 @@ This reference maps privacy protection goals to BotBrowser implementation detail
 | DNS privacy | Use local DNS solver (ENT Tier1) for private resolution that avoids DNS leaks and provider restrictions, or use SOCKS5H to keep DNS within proxy tunnels | [CLI_FLAGS#Enhanced Proxy Configuration](CLI_FLAGS.md#enhanced-proxy-configuration) |
 | Public IP discovery | Customizable IP lookup backend for geo derivation via `--bot-ip-service` (supports comma-separated endpoints; BotBrowser races them and uses the fastest successful response) | [CLI_FLAGS#Enhanced Proxy Configuration](CLI_FLAGS.md#enhanced-proxy-configuration) |
 | Protocol conformance | HTTP/2 and HTTP/3 behavior matches Chrome specifications preventing protocol based differentiation | [ADVANCED_FEATURES#Chrome Behavior Emulation](ADVANCED_FEATURES.md#chrome-behavior-emulation) |
-| TLS fingerprint protection | JA3, JARM, and ALPN parameters optimized for uniform TLS negotiation across platforms | [CHANGELOG](CHANGELOG.md) |
+| TLS behavior consistency | Network protocol behavior aligned with the active profile family across supported platforms | [CHANGELOG](CHANGELOG.md) |
 | DRM capability consistency | Widevine persistent license support with platform-appropriate license negotiation prevents tracking via EME capability fingerprinting | [ADVANCED_FEATURES](ADVANCED_FEATURES.md#complete-fingerprint-control) |
 | Authentication capability uniformity | WebAuthn client capabilities return platform-specific values preventing tracking via Touch ID, Bluetooth authenticator, and payment extension detection | [ADVANCED_FEATURES](ADVANCED_FEATURES.md#complete-fingerprint-control) |
 

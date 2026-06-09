@@ -195,6 +195,8 @@ chromium-browser \
 
 This is useful for multi-instance deployments where you want fingerprint diversity without manual profile assignment.
 
+With [Per-Context Fingerprint](../../../PER_CONTEXT_FINGERPRINT.md), `--bot-profile-dir` can also be passed through `botbrowserFlags` when creating a BrowserContext. That lets each context select a profile from the directory at creation time.
+
 ### Same profile, different identities
 
 Use one profile with different session settings to create distinct user sessions:

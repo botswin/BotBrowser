@@ -1,11 +1,11 @@
 # BotBrowser Stable Profiles (v148, v149)
 
-This directory contains the current supported public demo profile lines.
+This directory contains the current supported profile lines.
 
-| Chrome line | Matching BotBrowser build | Public demo profiles |
-|-------------|---------------------------|----------------------|
+| Release line | Matching BotBrowser build | Profile files |
+|--------------|---------------------------|---------------|
 | v148 | [148.0.7778.97](https://github.com/botswin/BotBrowser/releases/tag/148.0.7778.97) Early Stable Release | `chrome148_*.enc` |
-| v149 | [149.0.7827.54](https://github.com/botswin/BotBrowser/releases/tag/149.0.7827.54) | `chrome149_*.enc` |
+| v149 | [149.0.7827.59](https://github.com/botswin/BotBrowser/releases/tag/149.0.7827.59) | `chrome149_*.enc`, `webkit26_*.enc` |
 
 Use a profile with the matching BotBrowser major version. For example, v148 profiles require a v148 BotBrowser binary, and v149 profiles require a v149 BotBrowser binary.
 

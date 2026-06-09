@@ -3,6 +3,17 @@
 > **Research scope:** Entries in this changelog describe features evaluated in authorized labs and defensive benchmarking programs. Follow the [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md). We work with security vendors to investigate any misuse, so report concerns to [support@botbrowser.io](mailto:support@botbrowser.io).
 
 
+## [2026-06-09]
+### Major
+- **Chromium Core -> 149.0.7827.59**: Updated to Chrome 149 stable (149.0.7827.59). Web Platform consistency, rendering accuracy, and security patches stay aligned with upstream Chrome.
+
+### New
+- **WebKit-Family Profile Consistency (ENT Tier4)**: Added premium WebKit-family profile support for desktop and mobile browser-family identity consistency on the BotBrowser browser core. This extends profile consistency beyond browser brand and platform metadata into engine-level runtime behavior, CSS behavior, media capability behavior, navigation headers, TLS behavior, HTTP/2 behavior, and BrowserContext isolation, giving privacy teams a controlled way to validate WebKit-family profile bundles across supported host platforms.
+
+### Improvements
+- **Per-Context Fingerprint Flag Coverage**: Expanded validated per-context support for `--bot-profile-dir`, `--bot-script`, `--bot-cookies`, graphics mode controls, lifecycle controls, and WebRTC ICE settings.
+
+
 ## [2026-06-06]
 ### Major
 - **Chromium Core -> 148.0.7778.254**: Updated the Chrome 148 stable line to 148.0.7778.254. Web Platform consistency, rendering accuracy, and security patches stay aligned with upstream Chrome.
@@ -1040,7 +1051,6 @@ Refined per-OS rendering differences (fonts, CSS, anti-aliasing, text sizing) so
 - **Browser Brand Config**: New `configs.browserBrand` option for `chromium`, `chrome`, `brave`, or `edge`, enabling high-fidelity brand emulation.
 - **Brave Simulation**: Full Brave browser emulation including `userAgent`, `userAgentData`, and `navigator.brave.isBrave` properties.
 - **Edge Simulation**: Full Microsoft Edge emulation covering `userAgent`, `userAgentData`, and Edge-specific APIs.
-- **WebKit Emulation**: Preliminary WebKit engine simulation for basic Safari-like behaviors.
 - **Random History Augmentation**: `configs.injectRandomHistory` adds realistic history entries (URLs, timestamps) on new page loads without an opener.
 
 ### Improved
