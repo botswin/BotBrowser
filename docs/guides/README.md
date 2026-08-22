@@ -21,6 +21,7 @@ Configuration, deployment, and verification guides. Each guide includes prerequi
 | [Puppeteer](getting-started/PUPPETEER.md) | Integrate BotBrowser with Puppeteer for consistent fingerprint control in automation workflows. |
 | [Bot Script](getting-started/BOT_SCRIPT.md) | Automate BotBrowser without Playwright or Puppeteer using `--bot-script` and Chrome Debugger APIs. |
 | [CLI Recipes](getting-started/CLI_RECIPES.md) | Use copy-paste CLI recipes for proxy, fingerprint, identity, and deployment scenarios. |
+| [Google Translate Page Translation](getting-started/GOOGLE_TRANSLATE.md) | Configure a Google Cloud API key and launch BotBrowser with page translation enabled. |
 | [Profile Management](getting-started/PROFILE_MANAGEMENT.md) | Manage profile files, versions, and lifecycle for reproducible browser identity. |
 | [First Verification](getting-started/FIRST_VERIFICATION.md) | Validate fingerprint consistency with CreepJS and BrowserLeaks. |
 | [Automation Consistency Practices](getting-started/AUTOMATION_CONSISTENCY.md) | Reduce framework-related inconsistency signals in Playwright/Puppeteer workflows. |

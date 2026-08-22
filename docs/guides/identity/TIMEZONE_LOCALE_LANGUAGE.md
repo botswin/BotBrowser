@@ -115,6 +115,8 @@ Settings are resolved in this order (highest priority first):
 2. **Profile `configs`** (`timezone`, `locale`, `languages` fields in the profile JSON)
 3. **Auto-detected** from proxy IP (default behavior)
 
+An `auto` value selects automatic alignment rather than acting as a manual override. Explicit values apply per setting, so the remaining settings can continue to follow the proxy.
+
 ---
 
 <a id="common-scenarios"></a>

@@ -78,9 +78,11 @@ Automation frameworks can introduce browser-environment inconsistencies that und
 
 3. **Framework bindings.** Playwright injects `__playwright__binding__` and `__pwInitScripts` into the page context. The `addInitScript` call removes these before any page JavaScript executes.
 
-4. **Chrome DevTools Protocol (CDP) artifacts.** BotBrowser's console suppression feature (`--bot-disable-console-message`) ensures consistent console API behavior when CDP is connected.
+4. **Chrome DevTools Protocol (CDP) artifacts.** BotBrowser's console suppression feature (`--bot-disable-console-message`) keeps protected console and runtime events from changing page-visible behavior when CDP is connected. It does not disable the CDP Runtime domain, so normal evaluation and exception handling remain available.
 
 5. **`--bot-script` alternative.** For the smallest framework footprint, use `--bot-script` instead of an external framework. This runs JavaScript in a privileged isolated page context with `chrome.debugger` access. No external framework bindings or separate CDP client connections are needed.
+
+6. **Serial CDP mouse movement.** The optional `--bot-cdp-coalesce` policy lets Chromium combine short runs of plain hover movement while preserving normal delivery for other input types.
 
 ---
 
@@ -141,7 +143,32 @@ chrome.debugger.getTargets((targets) => {
 
 ### Console suppression for CDP consistency
 
-Some runtime consistency checks can infer CDP connections by monitoring console behavior. BotBrowser's `--bot-disable-console-message` flag (ENT Tier1, enabled by default) prevents frameworks from activating these CDP domains, keeping runtime behavior consistent with non-instrumented sessions.
+Some runtime consistency checks can infer CDP connections from changes that automation can cause in console or exception behavior. BotBrowser's `--bot-disable-console-message` flag (ENT Tier1, enabled by default) suppresses the protected event paths while keeping normal CDP evaluation and exception propagation available.
+
+When a protected profile is used, connecting Playwright or Puppeteer and enabling the Runtime domain does not add a page-visible Error-stack timing signal. Keep the flag enabled for routine automation. Diagnostic sessions that intentionally disable the protection should be treated as a separate compatibility run.
+
+<a id="cdp-mouse-move-coalescing"></a>
+### CDP mouse move coalescing
+
+Enable coalescing when an automation client sends serial mouse hover moves:
+
+```bash
+--bot-cdp-coalesce
+```
+
+The flag is off by default and belongs to the BrowserContext identity. Apply it before creating the first page. Plain mouse hover movement is eligible; button, drag, wheel, keyboard, touch, pen, and relative-motion input keep their normal paths.
+
+For multiple BrowserContexts, include the flag only in the contexts that need it:
+
+```javascript
+const client = await browser.target().createCDPSession();
+const context = await browser.createBrowserContext();
+
+await client.send("BotBrowser.setBrowserContextFlags", {
+    browserContextId: context._contextId,
+    botbrowserFlags: ["--bot-cdp-coalesce"],
+});
+```
 
 ### Combining all protections
 
@@ -179,6 +206,7 @@ await page.goto("https://example.com");
 | `navigator.webdriver` returns `true` | Ensure `--bot-profile` is loaded correctly. BotBrowser handles this automatically when a profile is active. |
 | Framework bindings still visible | Confirm `addInitScript` is called before the first `page.goto()`. It must run before page JavaScript executes. |
 | CDP consistency checks still show instrumentation state | Enable `--bot-disable-console-message` (enabled by default on ENT Tier1). |
+| Serial CDP hover movement is delivered one point at a time | Enable `--bot-cdp-coalesce` before the first page is created. |
 | Page title shows extension name | Use `--bot-title` to set a custom title when using `--bot-script`. |
 | Viewport size mismatch | Do not set `defaultViewport` in Puppeteer. Do not set viewport options in Playwright. Let the profile control dimensions. |
 | Framework artifacts remain despite flags | Use `--bot-script` for the smallest framework footprint. Framework-based automation always carries some artifacts. |

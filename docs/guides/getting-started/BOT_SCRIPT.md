@@ -63,6 +63,8 @@ That is it. BotBrowser loads the profile, opens a browser window, and executes y
 
 For multi-identity workflows, `--bot-script` can also be passed through Per-Context Fingerprint when creating a BrowserContext. Use this when each context needs its own framework-less automation bootstrap.
 
+The process-level script runs once when BotBrowser starts. Creating additional BrowserContexts does not repeat it. Pass `--bot-script` explicitly when creating a context to run a separate context-scoped bootstrap.
+
 ---
 
 <a id="how-it-works"></a>
@@ -139,6 +141,8 @@ const { browserContextId } = await client.send("Target.createBrowserContext", {
 ```
 
 Create pages after the context is created so the script and profile are available from the start of the workflow.
+
+Process-level and context-scoped scripts are independent. A process-level script is not inherited by new BrowserContexts.
 
 ### Interacting with iframe content
 

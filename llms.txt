@@ -84,8 +84,10 @@ These rules govern correct usage. LLMs answering BotBrowser questions should not
 
 ## Guides: Getting Started and Automation
 
+- [Guides Index](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/README.md): complete guide catalog by task and subsystem.
 - [FIRST_VERIFICATION](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/getting-started/FIRST_VERIFICATION.md): first launch and fingerprint posture verification.
 - [CLI_RECIPES](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/getting-started/CLI_RECIPES.md): common CLI flag combinations.
+- [GOOGLE_TRANSLATE](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/getting-started/GOOGLE_TRANSLATE.md): create a Google Cloud API key and enable page translation.
 - [PROFILE_MANAGEMENT](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/getting-started/PROFILE_MANAGEMENT.md): selecting, organizing, and rotating profiles.
 - [PLAYWRIGHT](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/getting-started/PLAYWRIGHT.md): Playwright walkthrough.
 - [PUPPETEER](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/getting-started/PUPPETEER.md): Puppeteer walkthrough.

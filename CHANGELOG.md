@@ -3,6 +3,57 @@
 > **Research scope:** Entries in this changelog describe features evaluated in authorized labs and defensive benchmarking programs. Follow the [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md). We work with security vendors to investigate any misuse, so report concerns to [support@botbrowser.io](mailto:support@botbrowser.io).
 
 
+## [2026-08-14]
+### Major
+- **Chromium Core -> 151.0.7922.76**: Updated the BotBrowser 151 release line with upstream Web Platform, rendering, and security updates.
+
+### New
+- **Per-Context UDP Proxy Policy (`--bot-udp-proxy`)**: Added per-context control over UDP proxy and HTTP/3 handling, so sibling browser contexts sharing one profile can independently opt in or out.
+
+### Improvements
+- **Timezone and Geolocation Consistency**: Improved profile-backed timezone and location alignment across pages, workers, and browser contexts when routing through proxies.
+- **Cross-Platform Font Consistency**: Improved font metric consistency for browser-family profiles running across host platforms.
+- **Per-Context Consistency**: Improved per-context fingerprint identity consistency.
+- **Server Stability**: Improved stability on servers without dedicated graphics hardware.
+
+
+## [2026-08-03]
+### Major
+- **Chromium Core -> 151.0.7922.47**: Updated the BotBrowser 151 release line with upstream Web Platform, rendering, and security updates.
+
+### New
+- **CDP Mouse Move Coalescing (`--bot-cdp-coalesce`)**: Added an opt-in input mode for more natural mouse-movement delivery in supported automation workflows.
+- **V8Log API Filters (`--bot-v8-log-exclude-api`)**: Added exact API filtering for focused browser-runtime validation traces.
+
+### Improvements
+- **Network Information Policies (`--bot-network-info-override`)**: Added profile, native, and field-level custom JSON policies with consistent behavior across pages, workers, browser contexts, and requests.
+
+
+## [2026-07-29]
+### Major
+- **Chromium Core -> 151.0.7922.34**: Started the BotBrowser 151 release line with upstream Web Platform, rendering, and security updates.
+
+
+## [2026-07-27]
+### Major
+- **Chromium Core -> 150.0.7871.182**: Updated the BotBrowser 150 release line to 150.0.7871.182. Web Platform consistency, rendering accuracy, and security patches stay aligned with upstream Chrome.
+
+### Improvements
+- **Cross-Platform CSS Math Consistency**: Improved profile-backed CSS numeric behavior across supported host platforms and browser-family profiles.
+
+
+## [2026-07-24]
+### Major
+- **Chromium Core -> 150.0.7871.127**: Updated the BotBrowser 150 release line to 150.0.7871.127. Web Platform consistency, rendering accuracy, and security patches stay aligned with upstream Chrome.
+
+### Improvements
+- **Runtime Math Consistency**: Improved profile-backed runtime math behavior across supported host platforms and browser families.
+- **Proxy Regional Consistency**: Improved automatic language, locale, and timezone alignment for proxy-backed main and per-context sessions.
+- **Per-Context Automation Isolation**: Kept process-level automation bootstrap separate from context-scoped automation across multi-context workflows.
+- **Android Target Isolation**: Improved per-context platform behavior for external protocol handling in Android-target sessions.
+- **Navigation Stability**: Improved resilience for controlled response and extension-related navigation workflows.
+
+
 ## [2026-07-11]
 ### Major
 - **Chromium Core -> 150.0.7871.46**: Updated the BotBrowser 150 release line to 150.0.7871.46. Web Platform consistency, rendering accuracy, and security patches stay aligned with upstream Chrome.

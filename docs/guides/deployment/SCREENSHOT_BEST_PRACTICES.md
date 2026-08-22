@@ -108,6 +108,19 @@ await page.waitForTimeout(500);
 await page.screenshot({ path: "fullpage.png", fullPage: true });
 ```
 
+### Full-page captures and responsive layout
+
+Let the full-page capture API work from the profile's existing viewport. Do not resize the
+viewport to the document's full height before calling `fullPage` or CDP
+`Page.captureScreenshot({captureBeyondViewport: true})`. A temporary full-height viewport can
+change `vh` units, media queries, resize handlers, sticky elements, and lazy layout, producing
+an image with the right dimensions but missing or displaced content.
+
+For very tall pages, validate the bottom of the image and a known content marker, rather than
+checking only the PNG/JPEG dimensions. In containers, increase `/dev/shm` when capture hangs or
+returns a protocol error. Shared memory helps the capture complete, but it does not correct
+content that was laid out against the wrong viewport.
+
 ### PNG vs. JPEG format
 
 ```javascript
@@ -180,6 +193,8 @@ await element.screenshot({ path: "element.png" });
 | Blank or all-white screenshot | The page may not have finished loading. Use `waitUntil: "networkidle"` or wait for a specific element. |
 | Screenshot resolution is wrong | In Puppeteer, set `defaultViewport: null` to let the profile control dimensions. In Playwright, do not set explicit viewport options. |
 | Full page screenshot crashes | Avoid capturing viewport and full page screenshots in rapid succession. Add a brief wait between them. |
+| Full page image has blank or displaced sections | Keep the original profile viewport and use the full-page API directly. Do not set the viewport to the document height before capture. |
+| A very tall capture hangs in Docker | Increase the container's `/dev/shm` allocation and verify the returned image contains a bottom marker. Shared memory alone does not fix layout changes. |
 | Fonts look different than expected | BotBrowser uses the profile's embedded font bundle. Verify the profile matches your expected platform (Windows, macOS, etc.). |
 | Colors appear different across runs | This is expected. Canvas noise produces deterministic but session-unique visual output. Use the same profile and noise seed for identical results. |
 

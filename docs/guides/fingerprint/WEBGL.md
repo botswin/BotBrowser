@@ -73,6 +73,13 @@ Use `--bot-noise-seed` for reproducible WebGL image output:
 
 On headless Linux servers without a physical GPU, BotBrowser provides full GPU context simulation (ENT Tier2). The profile's GPU information is presented to WebGL regardless of the host's actual hardware.
 
+### Translated shader source
+
+When the `WEBGL_debug_shaders` extension is available, the translated shader source follows the
+target platform represented by the active profile. This keeps shader-language output consistent
+with the profile instead of exposing the host operating system or graphics backend. The same
+profile policy applies when the page runs in a separate BrowserContext.
+
 ---
 
 <a id="how-botbrowser-protects"></a>
@@ -105,6 +112,7 @@ To verify protection is active:
 | WebGL not available on headless server | GPU simulation requires ENT Tier2. Verify your license tier supports headless GPU simulation. |
 | WebGL image fingerprint varies between runs | Use `--bot-noise-seed` with a fixed value for reproducible output. |
 | Shader output reveals host OS | Ensure `--bot-config-webgl=profile` is active. The profile normalizes shader translation output. |
+| `WEBGL_debug_shaders` returns an unexpected shader language | Confirm that the intended profile is loaded in the current BrowserContext and that WebGL is using `profile` mode. Check the returned source for the profile's target language, not the host machine's native backend. |
 
 ---
 

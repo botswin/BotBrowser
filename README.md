@@ -81,7 +81,7 @@ All engineering focuses on privacy research, cross-platform tracking-resistance 
 
 **Step 1: Download**
 - [Latest release](https://github.com/botswin/BotBrowser/releases) for your OS
-- A matching profile package. BotBrowser 150 profiles are available through subscription or support at [support@botbrowser.io](mailto:support@botbrowser.io) or [@botbrowser_support](https://t.me/botbrowser_support); legacy demo profiles remain available for earlier evaluation lines.
+- A matching profile package. BotBrowser 150 and newer profiles are available through subscription or support at [support@botbrowser.io](mailto:support@botbrowser.io) or [@botbrowser_support](https://t.me/botbrowser_support); legacy demo profiles remain available for earlier evaluation lines.
 
 **Step 2: Launch**
 - **GUI:** Use [BotBrowserLauncher](launcher/) for one-click profile selection and multi-instance management
@@ -178,7 +178,7 @@ Product overview, engineering design, FAQ: [TRIMMED_BUILD.md](TRIMMED_BUILD.md).
 | Video FPS control for media workloads | [--bot-video-fps](CLI_FLAGS.md#flag-bot-video-fps) | [Guide](docs/guides/fingerprint/FPS_CONTROL.md#video-fps-control) |
 | Stack depth fingerprint control (main/Worker/WASM) | [Stack Depth Control](ADVANCED_FEATURES.md#stack-depth-control) | [Guide](docs/guides/fingerprint/STACK_DEPTH.md) |
 | Memory and storage quota control | [--bot-js-heap-size-limit / --bot-storage-quota](CLI_FLAGS.md#flag-bot-js-heap-size-limit) | [Guide](docs/guides/fingerprint/STORAGE_QUOTA.md#runtime-overrides) |
-| Network information privacy (rtt/downlink/effectiveType) | [Network Info Privacy](ADVANCED_FEATURES.md#network-info-privacy) | [Guide](docs/guides/fingerprint/NAVIGATOR_PROPERTIES.md) |
+| Network information policies (profile/native/custom JSON) | [Network Info Privacy](ADVANCED_FEATURES.md#network-info-privacy) | [Guide](docs/guides/fingerprint/NAVIGATOR_PROPERTIES.md) |
 | CPU core scaling protection | [CPU Core Scaling](ADVANCED_FEATURES.md#cpu-core-scaling) | [Guide](docs/guides/fingerprint/CPU_CORE_SCALING.md) |
 | Cross-platform font engine (Win/Mac/Android) | [Font Engine](ADVANCED_FEATURES.md#cross-platform-font-engine) | [Guide](docs/guides/fingerprint/FONT.md) |
 | Profile-backed permission states | [Complete Fingerprint Control](ADVANCED_FEATURES.md#complete-fingerprint-control) | [Guide](docs/guides/fingerprint/PERMISSIONS.md) |
@@ -202,13 +202,14 @@ Product overview, engineering design, FAQ: [TRIMMED_BUILD.md](TRIMMED_BUILD.md).
 |---------|-----------|-------|
 | Playwright / Puppeteer integration | [Examples](examples/) | [Playwright](docs/guides/getting-started/PLAYWRIGHT.md) · [Puppeteer](docs/guides/getting-started/PUPPETEER.md) |
 | Framework-less bot-script (chrome.debugger API) | [--bot-script](CLI_FLAGS.md#flag-bot-script) | [Guide](docs/guides/getting-started/BOT_SCRIPT.md) |
+| CDP mouse move coalescing | [--bot-cdp-coalesce](CLI_FLAGS.md#flag-bot-cdp-coalesce) | [Guide](docs/guides/getting-started/AUTOMATION_CONSISTENCY.md#cdp-mouse-move-coalescing) |
 | Per-context fingerprint (multiple profiles per process) | [Per-Context Fingerprint](PER_CONTEXT_FINGERPRINT.md) | [Guide](docs/guides/identity/MULTI_ACCOUNT_ISOLATION.md) |
 | Console message suppression | [--bot-disable-console-message](CLI_FLAGS.md#flag-bot-disable-console-message) | [Guide](docs/guides/fingerprint/CONSOLE_SUPPRESSION.md) |
 | Headless / GUI parity | [Headless Compatibility](ADVANCED_FEATURES.md#headless-incognito-compatibility) | [Guide](docs/guides/fingerprint/INCOGNITO.md) |
 | Mirror: distributed privacy consistency | [Mirror Documentation](tools/mirror/) | [Guide](docs/guides/deployment/MIRROR_DISTRIBUTED.md) |
 | CanvasLab: Canvas 2D / WebGL / WebGL2 recorder and ENT Tier4 Canvas Replay | [--bot-canvas-record-file](CLI_FLAGS.md#flag-bot-canvas-record-file) | [Guide](docs/guides/getting-started/CANVASLAB.md) |
 | AudioLab: Web Audio API recorder | [--bot-audio-record-file](CLI_FLAGS.md#flag-bot-audio-record-file) | [Guide](docs/guides/getting-started/AUDIOLAB.md) |
-| V8Log Forensics | [--bot-v8-log](CLI_FLAGS.md#flag-bot-v8-log) | [Guide](docs/guides/getting-started/V8LOG.md) · [Tool](tools/v8log/) |
+| V8Log Forensics and API filters | [--bot-v8-log](CLI_FLAGS.md#flag-bot-v8-log) | [Guide](docs/guides/getting-started/V8LOG.md) · [Tool](tools/v8log/) |
 
 ### Session & Behavior
 

@@ -289,7 +289,7 @@ Comprehensive hardware emulation and fingerprint management.
 
 <a id="network-info-privacy"></a>
 
-**Network Information Privacy**: `navigator.connection` properties (`rtt`, `downlink`, `effectiveType`, `saveData`) and corresponding Client Hints headers can reveal server-side network characteristics that contradict the profile's geographic identity. Enable [`--bot-network-info-override`](CLI_FLAGS.md#flag-bot-network-info-override) or `configs.networkInfoOverride` to return profile-defined values.
+**Network Information Privacy**: [`--bot-network-info-override`](CLI_FLAGS.md#flag-bot-network-info-override) applies profile, native, or field-level custom JSON policies to network information properties and corresponding Client Hints. The same resolved policy follows the active BrowserContext across pages, workers, and requests. `configs.networkInfoOverride` remains a profile-level `true` or `false` setting.
 
 <a id="memory-storage-quota-controls"></a>
 
@@ -326,7 +326,7 @@ Comprehensive hardware emulation and fingerprint management.
 - Performance timing protection via [`--bot-time-seed`](CLI_FLAGS.md#flag-bot-time-seed) (ENT Tier2): deterministic execution timing diversity across 27 browser operations, plus resource and navigation timing redistribution (see above)
 - Stack depth control via [`--bot-stack-seed`](CLI_FLAGS.md#flag-bot-stack-seed) (ENT Tier2): `profile`, `real`, or integer seed for stack depth across main thread, Worker, and WASM contexts
 - Runtime timing scaling via [`--bot-time-scale`](CLI_FLAGS.md#flag-bot-time-scale) (ENT Tier2) to compress `performance.now()` deltas
-- Network information privacy via [`--bot-network-info-override`](CLI_FLAGS.md#flag-bot-network-info-override): profile-defined `navigator.connection` values and Client Hints headers
+- Network information privacy via [`--bot-network-info-override`](CLI_FLAGS.md#flag-bot-network-info-override): profile, native, or field-level custom JSON policies across JavaScript and Client Hints
 - Memory and storage quota controls via [`--bot-js-heap-size-limit`](CLI_FLAGS.md#flag-bot-js-heap-size-limit) and [`--bot-storage-quota`](CLI_FLAGS.md#flag-bot-storage-quota): `profile`, `real`, or explicit byte values
 - CPU core scaling: Worker threads automatically constrained to match `navigator.hardwareConcurrency` on Linux and Windows
 
@@ -448,6 +448,13 @@ See [WebKit-family Profile Consistency](WEBKIT_PROFILE_CONSISTENCY.md) for the f
 
 ## Integration with Automation Frameworks
 
+<a id="cdp-mouse-move-coalescing"></a>
+### CDP Mouse Move Coalescing
+
+[`--bot-cdp-coalesce`](CLI_FLAGS.md#flag-bot-cdp-coalesce) is an opt-in BrowserContext policy for serial CDP hover movement. It groups short runs of plain mouse moves before Chromium delivers them, while button, drag, wheel, keyboard, touch, pen, and relative-motion input keep their normal paths.
+
+Documentation: [Automation Consistency](docs/guides/getting-started/AUTOMATION_CONSISTENCY.md#cdp-mouse-move-coalescing)
+
 ### Framework-Less Automation ([`--bot-script`](CLI_FLAGS.md#flag-bot-script))
 
 Execute JavaScript with privileged `chrome.debugger` access, with no framework dependencies.
@@ -525,7 +532,7 @@ All commands live under the `BotBrowser` CDP domain. Send them through a **brows
 - [Mirror](tools/mirror/) - Distributed privacy consistency verification
 - [CanvasLab](tools/canvaslab/) - Canvas 2D / WebGL / WebGL2 forensics and privacy validation tool
 - [AudioLab](tools/audiolab/) - Web Audio API forensics and audio fingerprint collection analysis tool
-- [V8Log Forensics](tools/v8log/) - Browser-runtime evidence for authorized fingerprint protection sessions
+- [V8Log Forensics](tools/v8log/) - Browser-runtime evidence and exact API filters for authorized fingerprint protection sessions
 - [Examples](examples/) - Playwright, Puppeteer, bot-script integration
 - [Main README](README.md) - Project overview and quick start
 

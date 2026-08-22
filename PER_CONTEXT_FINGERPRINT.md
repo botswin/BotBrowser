@@ -302,11 +302,12 @@ Most `--bot-*` flags from [CLI_FLAGS.md](CLI_FLAGS.md) work with per-context con
 | Noise Seed | [`--bot-noise-seed`](CLI_FLAGS.md#flag-bot-noise-seed) for deterministic fingerprint variance |
 | Timing | [`--bot-time-scale`](CLI_FLAGS.md#flag-bot-time-scale) for performance timing control, [`--bot-time-seed`](CLI_FLAGS.md#flag-bot-time-seed) for deterministic timing diversity, [`--bot-stack-seed`](CLI_FLAGS.md#flag-bot-stack-seed) for stack depth variation, [`--bot-fps`](CLI_FLAGS.md#flag-bot-fps) for frame rate control |
 | Storage and Memory | [`--bot-js-heap-size-limit`](CLI_FLAGS.md#flag-bot-js-heap-size-limit) and [`--bot-storage-quota`](CLI_FLAGS.md#flag-bot-storage-quota) for profile, real, or explicit byte-value policy |
-| Network | [`--bot-network-info-override`](CLI_FLAGS.md#flag-bot-network-info-override) for profile-defined `navigator.connection` values, [`--bot-local-dns`](CLI_FLAGS.md#flag-bot-local-dns) for context DNS policy |
+| Network | [`--bot-network-info-override`](CLI_FLAGS.md#flag-bot-network-info-override) for profile, native, or custom JSON network information policy, [`--bot-local-dns`](CLI_FLAGS.md#flag-bot-local-dns) for context DNS policy |
 | WebRTC | [`--bot-webrtc-ice`](ADVANCED_FEATURES.md#webrtc-leak-protection) for ICE endpoint control |
 | Window | [`--bot-always-active`](ADVANCED_FEATURES.md#active-window-emulation) to maintain active window state |
 | Session | `--bot-inject-random-history` for session authenticity (supports precise count, e.g., `=15`), `--bot-cookies` for context-scoped cookie import at creation time |
-| Automation | `--bot-script` for context-scoped framework-less automation bootstrap at creation time |
+| Automation | [`--bot-cdp-coalesce`](CLI_FLAGS.md#flag-bot-cdp-coalesce) for context-scoped CDP hover movement, `--bot-script` for framework-less automation bootstrap at creation time |
+| Diagnostics | [`--bot-v8-log-exclude-api`](CLI_FLAGS.md#flag-bot-v8-log-exclude-api) for context-scoped V8Log API filters |
 | Google Headers | [`--bot-enable-variations-in-context`](CLI_FLAGS.md#flag-bot-enable-variations-in-context) for `X-Client-Data` consistency in incognito contexts (ENT Tier2) |
 | Proxy | [`--proxy-server`](CLI_FLAGS.md#flag-proxy-server) (configure proxy per-context via `botbrowserFlags`), [`--proxy-ip`](CLI_FLAGS.md#flag-proxy-ip) to skip IP lookups |
 | HTTP | [`--bot-custom-headers`](CLI_FLAGS.md#flag-bot-custom-headers) for custom HTTP request headers per context |
@@ -350,6 +351,8 @@ Supported live session controls remain available after identity sealing when the
 ⚠️ UDP proxy support applies at the browser level and cannot be configured per-context. LocalDNS policy can be assigned per context and remains a supported live-safe policy after identity sealing.
 
 ⚠️ Each context can load a completely different profile (`--bot-profile`), or use `--bot-config-*` flags to override specific settings from the browser's base profile.
+
+⚠️ A process-level `--bot-script` runs once at browser startup and is not replayed when new BrowserContexts are created. Pass `--bot-script` explicitly in a context's `botbrowserFlags` when that context needs its own automation bootstrap.
 
 ⚠️ Proxy merge semantics are explicit: `--proxy-server` in `botbrowserFlags` sets or replaces the context proxy route, while `--proxy-ip` only supplies the exit IP for geo-detection. If a context was created with `createBrowserContext({ proxyServer })`, a later `setBrowserContextFlags` call with only `--proxy-ip` preserves that proxy route.
 

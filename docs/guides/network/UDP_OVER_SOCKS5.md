@@ -96,6 +96,17 @@ Use the standard `--disable-quic` flag when you want HTTP traffic to stay on TCP
 
 This disables QUIC/HTTP/3. It does not disable WebRTC or STUN; those continue to follow your UDP-over-SOCKS5 and WebRTC settings.
 
+### Per-context UDP policy (ENT Tier3)
+
+When several browser contexts share one profile, use `--bot-udp-proxy` to keep UDP proxy and HTTP/3 on for some contexts and off for others in the same browser process. A bare flag means true.
+
+```bash
+--bot-udp-proxy=false   # process-wide default for this profile
+--bot-udp-proxy=true    # per-context override through Per-Context Fingerprint
+```
+
+Set the process default on the main command line, then override it per context through Per-Context Fingerprint. Unlike `--disable-quic`, which takes the whole process off QUIC, this policy stays scoped to the context that sets it. It applies only to profiles that already carry the UDP entitlement.
+
 ### When the proxy does not support UDP
 
 If the proxy does not support UDP ASSOCIATE, BotBrowser falls back gracefully:
@@ -136,7 +147,7 @@ const page = await ctx.newPage();
 ## Limitations
 
 - **Proxy must support UDP ASSOCIATE.** Not all SOCKS5 proxies support UDP. Check with your provider. HTTP and HTTPS proxies do not support UDP tunneling.
-- **Browser-level setting.** UDP proxy support applies at the browser level and cannot be configured per-context independently.
+- **Proxy transport stays browser-level.** The SOCKS5 UDP association is negotiated per proxy route. `--bot-udp-proxy` controls whether a context uses UDP proxying and HTTP/3, and applies only to profiles that carry the UDP entitlement.
 - **QUIC control.** Use `--disable-quic` when your workload should avoid QUIC/HTTP/3. This does not disable WebRTC.
 - **Performance.** UDP-over-SOCKS5 adds latency compared to direct UDP. For latency-sensitive WebRTC applications, this trade-off favors privacy over raw speed.
 

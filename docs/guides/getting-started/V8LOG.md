@@ -61,6 +61,22 @@ Use the shortest page flow that reproduces the behavior. Evidence files can grow
 
 ---
 
+<a id="api-filters"></a>
+## API Filters
+
+Use [`--bot-v8-log-exclude-api`](../../../CLI_FLAGS.md#flag-bot-v8-log-exclude-api) to omit high-volume APIs that are outside the current review:
+
+```bash
+--bot-v8-log=full
+--bot-v8-log-exclude-api=String.charCodeAt,Array.join
+```
+
+The value is a comma-separated list of exact API names. Whitespace around names is ignored. Excluded calls are not written and do not consume the trace event budget. Other APIs and events without an API name remain in the trace.
+
+Apply a separate list to each BrowserContext when concurrent validation sessions need different evidence scopes.
+
+---
+
 <a id="sample-jsonl"></a>
 ## Sample JSONL
 
@@ -101,6 +117,7 @@ await browser.close();
 |---------|----------|
 | No files are written | Confirm `--bot-v8-log` is not `none`, the directory exists, and the browser process can write to it. |
 | Files are too large | Use `sample`, shorten the reproduction, and close the browser immediately after the target behavior appears. |
+| A high-volume API obscures later evidence | Add its exact API name to `--bot-v8-log-exclude-api`. |
 | V8Log does not start in release | Confirm the profile and subscription include V8Log support. |
 
 ---

@@ -82,14 +82,14 @@ Use this for video-heavy workloads where lower visual video cadence is acceptabl
 
 ### Network Information Override
 
-Control network connection property values with `--bot-network-info-override`:
+Use `--bot-network-info-override` for profile, native, or custom JSON network information policies:
 
 ```bash
 # Use profile-defined network info values
 --bot-network-info-override
 ```
 
-This overrides network connection properties and corresponding Client Hints headers with profile-defined values.
+The same policy applies to JavaScript and corresponding Client Hints in the active BrowserContext. See [Navigator Properties](NAVIGATOR_PROPERTIES.md#network-information) for custom JSON fields, source selectors, validation, and precedence.
 
 ### Stack Depth Control
 

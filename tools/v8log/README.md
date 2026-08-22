@@ -55,6 +55,17 @@ Use `full` only for short guided validations:
 --bot-v8-log-dir=/tmp/botbrowser-v8log
 ```
 
+### Filter APIs
+
+Exclude selected API names when a high-volume call is outside the current review:
+
+```bash
+--bot-v8-log=full
+--bot-v8-log-exclude-api=String.charCodeAt,Array.join
+```
+
+Names are matched exactly. Excluded calls do not appear in the JSONL output and do not consume the trace event budget. See the [V8Log guide](../../docs/guides/getting-started/V8LOG.md#api-filters) for BrowserContext usage.
+
 ---
 
 ## Sample JSONL

@@ -97,6 +97,10 @@ BotBrowser configures all platform-related surfaces to report Android identity: 
 
 BotBrowser normalizes the DevTools inspector page zoom and font scaling when debugging Android profiles, keeping the interface readable on desktop.
 
+### External Protocol Isolation
+
+Android-target contexts prevent unsupported external URL schemes from opening applications on the desktop host. Standard web navigation continues normally.
+
 ---
 
 <a id="phone-vs-tablet"></a>

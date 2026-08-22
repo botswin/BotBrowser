@@ -44,7 +44,9 @@ This guide focuses on **configuration strategy**:
 
 1. Launch with proxy (`--proxy-server`).
 2. BotBrowser derives geographic signals from the proxy exit IP.
-3. Optional overrides (`--bot-config-timezone`, `--bot-config-locale`, `--bot-config-languages`) take priority.
+3. Explicit CLI or profile `configs` values take priority for the settings they define.
+
+Values set to `auto` keep proxy-based alignment enabled. For example, an explicit locale can remain fixed while timezone and languages continue to follow the proxy.
 
 For internals (lookup pipeline, data source behavior, accuracy boundaries), see [GeoIP Database](GEOIP_DATABASE.md).
 

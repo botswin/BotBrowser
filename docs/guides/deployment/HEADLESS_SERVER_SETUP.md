@@ -10,7 +10,7 @@
 
 - **Ubuntu 20.04 or later** (x86_64 or arm64).
 - **BotBrowser Ubuntu binary** installed via dpkg or the install script. See [Installation Guide](../../../INSTALLATION.md).
-- **A matching profile package** (`.enc` for production). BotBrowser 150 profiles are available through subscription or support at [support@botbrowser.io](mailto:support@botbrowser.io) or [@botbrowser_support](https://t.me/botbrowser_support).
+- **A matching profile package** (`.enc` for production). BotBrowser 150 and newer profiles are available through subscription or support at [support@botbrowser.io](mailto:support@botbrowser.io) or [@botbrowser_support](https://t.me/botbrowser_support).
 - **Root or sudo access** for installing system packages.
 
 > **Note:** Ubuntu/Linux binaries require an ENT Plan Tier 1 or higher subscription.
