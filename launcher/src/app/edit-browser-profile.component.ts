@@ -33,6 +33,7 @@ import {
     BrowserBrands,
     BrowserProfileStatus,
     ColorSchemes,
+    DprModes,
     FontOptions,
     GpuEmulationModes,
     MediaTypesOptions,
@@ -140,6 +141,7 @@ export class EditBrowserProfileComponent implements OnInit, AfterViewInit, OnDes
     readonly fontOptions = FontOptions;
     readonly mediaTypesOptions = MediaTypesOptions;
     readonly colorSchemes = ColorSchemes;
+    readonly dprModes = DprModes;
     readonly orientationOptions = OrientationOptions;
     readonly gpuEmulationModes = GpuEmulationModes;
     readonly v8LogModes = V8LogModes;
@@ -197,7 +199,7 @@ export class EditBrowserProfileComponent implements OnInit, AfterViewInit, OnDes
 
     // Identity & Locale. browserBrand has NO default — when unset, the kernel uses the
     // brand encoded in the bot profile (WebKit-family profiles must NOT receive
-    // --bot-config-browser-brand=chrome or they get coerced into Chrome identity).
+    // --bot-browser-brand=chrome or they get coerced into Chrome identity).
     // botInjectRandomHistory: migrate from old behavior location
     readonly identityLocaleGroup = this.#formBuilder.group<IdentityLocaleConfig>({
         botConfigBrowserBrand: this.#injectedData?.launchOptions?.identityLocale?.botConfigBrowserBrand,
@@ -238,7 +240,7 @@ export class EditBrowserProfileComponent implements OnInit, AfterViewInit, OnDes
         botConfigArchitecture: this.#injectedData?.launchOptions?.customUserAgent?.botConfigArchitecture,
         botConfigBitness: this.#injectedData?.launchOptions?.customUserAgent?.botConfigBitness,
         // Old slide-toggle saved `false` for "off" (= "no override"); the new tri-state
-        // mat-select would otherwise re-emit it as an explicit `--bot-config-mobile=false`
+        // mat-select would otherwise re-emit it as an explicit `--bot-mobile=false`
         // and silently force desktop mode on Android profiles. Coerce legacy false → null
         // and map undefined → null so [value]="null" pre-selects "Default (from profile)".
         botConfigMobile: (() => {
@@ -251,6 +253,7 @@ export class EditBrowserProfileComponent implements OnInit, AfterViewInit, OnDes
     readonly displayInputGroup = this.#formBuilder.group<DisplayInputConfig>({
         botConfigWindow: this.#injectedData?.launchOptions?.displayInput?.botConfigWindow,
         botConfigScreen: this.#injectedData?.launchOptions?.displayInput?.botConfigScreen,
+        botDpr: this.#injectedData?.launchOptions?.displayInput?.botDpr,
         botConfigKeyboard: this.#injectedData?.launchOptions?.displayInput?.botConfigKeyboard,
         botConfigFonts: this.#injectedData?.launchOptions?.displayInput?.botConfigFonts,
         botConfigOrientation: this.#injectedData?.launchOptions?.displayInput?.botConfigOrientation,

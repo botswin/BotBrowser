@@ -55,6 +55,9 @@ export const ProfileRealDisabledOptions: ProfileRealDisabled[] = ['profile', 're
 export type ProfileReal = 'profile' | 'real';
 export const ProfileRealOptions: ProfileReal[] = ['profile', 'real'];
 
+export type DprMode = ProfileReal | 'advanced';
+export const DprModes: DprMode[] = ['profile', 'real', 'advanced'];
+
 // GPU emulation modes (--bot-gpu-emulation accepts false | true | priority)
 export type GpuEmulationMode = 'off' | 'on' | 'priority';
 export const GpuEmulationModes: GpuEmulationMode[] = ['off', 'on', 'priority'];
@@ -117,6 +120,7 @@ export interface CustomUserAgentConfig {
 export interface DisplayInputConfig {
     botConfigWindow?: string;
     botConfigScreen?: string;
+    botDpr?: DprMode;
     botConfigKeyboard?: ProfileReal;
     botConfigFonts?: FontOption;
     botConfigOrientation?: OrientationOption;

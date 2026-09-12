@@ -33,25 +33,27 @@ Every browser reports which media formats it can play. The combination of suppor
 
 BotBrowser controls MIME type and codec responses at the browser engine level to ensure they match the target profile's platform identity.
 
+Profile-backed media capability checks preserve codec spelling and support ordering across browser contexts. Use the profile policy when validating WebCodecs or HEVC capability behavior.
+
 ### Configuration
 
-The default configuration uses `expand` mode, which prioritizes local decoders while extending the list with profile-defined types. This can be configured via the `--bot-config-media-types` flag:
+The default configuration uses `expand` mode, which prioritizes local decoders while extending the list with profile-defined types. This can be configured via the `--bot-media-types` flag:
 
 ```bash
 # expand (default): profile types + local decoders
 chromium-browser \
   --bot-profile="/path/to/profile.enc" \
-  --bot-config-media-types=expand
+  --bot-media-types=expand
 
 # profile: use only profile-defined media types
 chromium-browser \
   --bot-profile="/path/to/profile.enc" \
-  --bot-config-media-types=profile
+  --bot-media-types=profile
 
 # real: use actual system media types
 chromium-browser \
   --bot-profile="/path/to/profile.enc" \
-  --bot-config-media-types=real
+  --bot-media-types=real
 ```
 
 All media type and codec query APIs return platform-consistent results matching the profile. Responses remain identical across all execution contexts (main page, Workers, Service Workers, iframes).

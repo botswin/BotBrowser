@@ -108,7 +108,7 @@ To verify that regular and incognito modes produce identical fingerprints:
 |---------|----------|
 | Storage quota differs between modes | Ensure you are using the same profile for both sessions. Different profiles may define different quota values. |
 | Extensions not loading in incognito | This is standard browser behavior. BotBrowser does not modify extension loading policies. |
-| Fingerprint values differ between modes | Verify both sessions use the same `--bot-profile` and identical `--bot-config-*` flags. |
+| Fingerprint values differ between modes | Verify both sessions use the same `--bot-profile` and identical `--bot-*` flags. |
 
 ---
 

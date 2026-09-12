@@ -189,10 +189,10 @@ Product overview, engineering design, FAQ: [TRIMMED_BUILD.md](TRIMMED_BUILD.md).
 | Feature | Reference | Guide |
 |---------|-----------|-------|
 | Cross-platform profile portability (Win / Mac / Linux) | [Advanced Features](ADVANCED_FEATURES.md) | [Guide](docs/guides/platform/CROSS_PLATFORM_PROFILES.md) |
-| Browser brand switching (Chrome/Edge/Brave/Opera) | [`--bot-config-browser-brand`](CLI_FLAGS.md#flag-bot-config-browser-brand) | [Guide](docs/guides/identity/BROWSER_BRAND_ALIGNMENT.md) |
-| Custom User-Agent with full userAgentData control | [`--bot-config-ua-full-version`](CLI_FLAGS.md#flag-bot-config-ua-full-version) | [Guide](docs/guides/identity/CUSTOM_USER_AGENT.md) |
+| Browser brand switching (Chrome/Edge/Brave/Opera) | [`--bot-browser-brand`](CLI_FLAGS.md#flag-bot-browser-brand) | [Guide](docs/guides/identity/BROWSER_BRAND_ALIGNMENT.md) |
+| Custom User-Agent with full userAgentData control | [`--bot-ua-full-version`](CLI_FLAGS.md#flag-bot-ua-full-version) | [Guide](docs/guides/identity/CUSTOM_USER_AGENT.md) |
 | Client Hints alignment (DPR, device-memory, UA-CH) | [Browser & OS](ADVANCED_FEATURES.md#browser-os-fingerprinting) | [Guide](docs/guides/fingerprint/NAVIGATOR_PROPERTIES.md) |
-| Android WebView emulation | [`--bot-config-browser-brand`](CLI_FLAGS.md#flag-bot-config-browser-brand) | [Guide](docs/guides/platform/ANDROID_WEBVIEW.md) |
+| Android WebView emulation | [`--bot-browser-brand`](CLI_FLAGS.md#flag-bot-browser-brand) | [Guide](docs/guides/platform/ANDROID_WEBVIEW.md) |
 | WebKit-family profile consistency (ENT Tier4) | [Feature Page](WEBKIT_PROFILE_CONSISTENCY.md) | [Guide](docs/guides/platform/WEBKIT_PROFILE_CONSISTENCY.md) |
 | Chrome behavior emulation (HTTP/2, HTTP/3, headers) | [Chrome Behavior](ADVANCED_FEATURES.md#chrome-behavior-emulation) | |
 
@@ -224,8 +224,8 @@ Product overview, engineering design, FAQ: [TRIMMED_BUILD.md](TRIMMED_BUILD.md).
 | Plaintext storage access (cookies, localStorage) | [Storage Access](examples/storage-access/) | [Guide](docs/guides/identity/STORAGE_ACCESS.md) |
 | Precision FPS simulation | [--bot-fps](CLI_FLAGS.md#flag-bot-fps) | [Guide](docs/guides/fingerprint/FPS_CONTROL.md) |
 | Timing scale (performance.now compression) | [--bot-time-scale](CLI_FLAGS.md#flag-bot-time-scale) | [Guide](docs/guides/fingerprint/PERFORMANCE.md) |
-| Window/screen dimension control | [--bot-config-window](CLI_FLAGS.md#flag-bot-config-window) | [Guide](docs/guides/fingerprint/SCREEN_WINDOW.md) |
-| Mobile screen orientation control | [--bot-config-orientation](CLI_FLAGS.md#flag-bot-config-orientation) | [Guide](docs/guides/platform/DEVICE_EMULATION.md) |
+| Window/screen dimension control | [--bot-window](CLI_FLAGS.md#flag-bot-window) | [Guide](docs/guides/fingerprint/SCREEN_WINDOW.md) |
+| Mobile screen orientation control | [--bot-orientation](CLI_FLAGS.md#flag-bot-orientation) | [Guide](docs/guides/platform/DEVICE_EMULATION.md) |
 | Mobile keyboard visual viewport control | [--bot-mobile-keyboard](CLI_FLAGS.md#flag-bot-mobile-keyboard) | [Guide](docs/guides/platform/DEVICE_EMULATION.md#mobile-keyboard-visual-viewport) |
 
 </details>

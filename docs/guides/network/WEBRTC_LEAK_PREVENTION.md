@@ -55,6 +55,8 @@ BotBrowser implements protection at the browser engine level:
 
 **STUN/TURN Consistency.** STUN and TURN responses reflect your configured network identity. When combined with UDP-over-SOCKS5 (ENT Tier3), STUN probes themselves are tunneled through the proxy.
 
+When a proxy has only one public address family, declare the unavailable family with `--proxy-ip=ipv4_none,<ipv6>` or `--proxy-ip=<ipv4>,ipv6_none`. This keeps WebRTC candidate handling aligned with the declared proxy identity.
+
 ### ICE Server Control
 
 The `--bot-webrtc-ice` flag (ENT Tier1) controls which STUN and TURN endpoints are visible to page JavaScript:
@@ -84,7 +86,7 @@ The `--bot-webrtc-ice` flag (ENT Tier1) controls which STUN and TURN endpoints a
 Use the profile's built-in WebRTC settings:
 
 ```bash
---bot-config-webrtc=profile
+--bot-webrtc=profile
 ```
 
 This applies the WebRTC configuration defined in your profile file, providing consistent behavior across sessions with the same profile.
@@ -94,7 +96,7 @@ This applies the WebRTC configuration defined in your profile file, providing co
 If your use case does not require WebRTC, you can disable it:
 
 ```bash
---bot-config-webrtc=disabled
+--bot-webrtc=disabled
 ```
 
 This prevents all WebRTC-related API calls from functioning, which eliminates any possibility of IP disclosure through this channel.
@@ -123,7 +125,7 @@ await client.send("BotBrowser.setBrowserContextFlags", {
   browserContextId: ctx2._contextId,
   botbrowserFlags: [
     "--bot-profile=/path/to/profile.enc",
-    "--bot-config-webrtc=disabled",
+    "--bot-webrtc=disabled",
   ],
 });
 ```
@@ -156,7 +158,7 @@ To verify protection is active, visit [BrowserLeaks WebRTC test](https://browser
 | Problem | Solution |
 |---------|----------|
 | Real IP appears in WebRTC test | Ensure proxy is set via `--proxy-server`, not framework options. Add `--bot-webrtc-ice=google` for ICE control. |
-| WebRTC completely non-functional | Check if `--bot-config-webrtc=disabled` is set. Change to `profile` or `real` if WebRTC is needed. |
+| WebRTC completely non-functional | Check if `--bot-webrtc=disabled` is set. Change to `profile` or `real` if WebRTC is needed. |
 | ICE candidates show unexpected IPs | Use `--bot-webrtc-ice=google` (ENT Tier1) or a custom server list to control which STUN endpoints are queried. |
 | STUN probes not going through proxy | STUN uses UDP. If your proxy does not support UDP, use `--bot-webrtc-ice` (ENT Tier1) to control ICE servers. UDP proxy tunneling itself is an ENT Tier3 capability. |
 

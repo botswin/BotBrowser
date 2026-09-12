@@ -148,7 +148,7 @@ You can customize profile behavior through two methods: the `configs` block in t
 
 ### Configuration priority (highest to lowest)
 
-1. **CLI `--bot-config-*` flags.** Highest priority. Always overrides profile settings.
+1. **CLI `--bot-*` flags.** Highest priority. Always overrides profile settings.
 2. **Profile `configs` block.** Medium priority. Overrides profile defaults.
 3. **Profile default values.** Lowest priority. Built-in profile data.
 
@@ -159,10 +159,10 @@ CLI flags are the preferred way to customize behavior because they do not requir
 ```bash
 chromium-browser \
   --bot-profile="/path/to/profile.enc" \
-  --bot-config-timezone=Europe/Berlin \
-  --bot-config-locale=de-DE \
-  --bot-config-languages=de-DE,de,en-US,en \
-  --bot-config-webrtc=disabled \
+  --bot-timezone=Europe/Berlin \
+  --bot-locale=de-DE \
+  --bot-languages=de-DE,de,en-US,en \
+  --bot-webrtc=disabled \
   --user-data-dir="$(mktemp -d)"
 ```
 
@@ -229,8 +229,8 @@ chromium-browser \
 chromium-browser \
   --bot-profile="/path/to/profile.enc" \
   --proxy-server=socks5://user:pass@de-proxy.example.com:1080 \
-  --bot-config-timezone=Europe/Berlin \
-  --bot-config-locale=de-DE \
+  --bot-timezone=Europe/Berlin \
+  --bot-locale=de-DE \
   --bot-cookies='[{"url":"https://example.com","name":"session","value":"de-user","domain":".example.com"}]' \
   --user-data-dir="$(mktemp -d)" &
 ```
@@ -259,7 +259,7 @@ Platform compatibility tiers:
 | "Profile not found" error | Use an absolute path for `--bot-profile`. Relative paths resolve from the browser binary's directory. |
 | Browser exits before navigation | Read the startup profile message and check for a missing, invalid, expired, or version-mismatched package. A v150 binary needs a v150 profile. |
 | Cannot use `--bot-profile` and `--bot-profile-dir` together | `--bot-profile-dir` takes precedence. Use one or the other. |
-| Profile changes have no effect | CLI `--bot-config-*` flags override profile `configs`. Check if a CLI flag is overriding your change. |
+| Profile changes have no effect | CLI `--bot-*` flags override profile `configs`. Check if a CLI flag is overriding your change. |
 | "Profile is damaged" or parse errors | Re-download the profile. Ensure the file was not corrupted during transfer. |
 | Demo profile limitations | Legacy demo profiles do not support headless mode or automation frameworks. BotBrowser 150 and newer profile packages are available through subscription or support at [support@botbrowser.io](mailto:support@botbrowser.io) or [@botbrowser_support](https://t.me/botbrowser_support). |
 
@@ -270,7 +270,7 @@ Platform compatibility tiers:
 ## Next Steps
 
 - [Profile Configuration Guide](../../../profiles/PROFILE_CONFIGS.md). Complete reference for all configurable fields.
-- [CLI Flags Reference](../../../CLI_FLAGS.md). All available flags, including `--bot-config-*` overrides.
+- [CLI Flags Reference](../../../CLI_FLAGS.md). All available flags, including `--bot-*` overrides.
 - [CLI Recipes](CLI_RECIPES.md). Common flag combinations for typical scenarios.
 - [First Verification](FIRST_VERIFICATION.md). Verify your setup is working correctly.
 - [Playwright Guide](PLAYWRIGHT.md). Use profiles with Playwright.

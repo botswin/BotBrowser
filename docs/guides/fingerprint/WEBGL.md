@@ -36,17 +36,17 @@ WebGL is a privacy-relevant API surface. BotBrowser provides profile-driven cont
 
 ### WebGL Mode
 
-Control WebGL behavior with the `--bot-config-webgl` flag:
+Control WebGL behavior with the `--bot-webgl` flag:
 
 ```bash
 # Use profile-defined WebGL settings (default)
---bot-config-webgl=profile
+--bot-webgl=profile
 
 # Use real system WebGL (no protection)
---bot-config-webgl=real
+--bot-webgl=real
 
 # Disable WebGL entirely
---bot-config-webgl=disabled
+--bot-webgl=disabled
 ```
 
 ### WebGL Image Noise
@@ -55,10 +55,10 @@ Enable deterministic noise on WebGL image readback:
 
 ```bash
 # Enable WebGL image noise (default)
---bot-config-noise-webgl-image=true
+--bot-noise-webgl-image=true
 
 # Disable WebGL image noise
---bot-config-noise-webgl-image=false
+--bot-noise-webgl-image=false
 ```
 
 ### Noise Seed
@@ -111,7 +111,7 @@ To verify protection is active:
 | WebGL renderer shows host GPU instead of profile GPU | Verify profile is loaded with `--bot-profile`. Check startup logs for profile loading errors. |
 | WebGL not available on headless server | GPU simulation requires ENT Tier2. Verify your license tier supports headless GPU simulation. |
 | WebGL image fingerprint varies between runs | Use `--bot-noise-seed` with a fixed value for reproducible output. |
-| Shader output reveals host OS | Ensure `--bot-config-webgl=profile` is active. The profile normalizes shader translation output. |
+| Shader output reveals host OS | Ensure `--bot-webgl=profile` is active. The profile normalizes shader translation output. |
 | `WEBGL_debug_shaders` returns an unexpected shader language | Confirm that the intended profile is loaded in the current BrowserContext and that WebGL is using `profile` mode. Check the returned source for the profile's target language, not the host machine's native backend. |
 
 ---

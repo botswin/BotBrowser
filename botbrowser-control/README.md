@@ -42,7 +42,7 @@ BotBrowser Control is an open-source Electron desktop application that provides 
 - **One-click Launch / Stop** — Spawn and kill BotBrowser instances per profile
 - **Per-profile User Data** — Each profile gets an isolated `--user-data-dir` automatically
 - **Proxy Support** — HTTP, HTTPS, SOCKS4, SOCKS5 with credentials, per-profile
-- **Fingerprint Configuration** — Map to all BotBrowser `--bot-config-*` flags: locale, timezone, WebGL, WebRTC, canvas noise, seeds, etc.
+- **Fingerprint Configuration**: Set BotBrowser options for locale, timezone, WebGL, WebRTC, canvas noise, seeds, and display scale.
 - **`.enc` Profile File Support** — Load BotBrowser encrypted fingerprint profiles
 - **Cookie Persistence** — Auto-save and reload cookies via CDP on stop/start
 - **Session Monitor** — Live view of all running browser instances with PID and start time
@@ -203,17 +203,17 @@ The profile editor maps directly to BotBrowser CLI flags. The most important fie
 
 | Tab | Field | BotBrowser Flag |
 |-----|-------|-----------------|
-| General | Browser Brand | `--bot-config-browser-brand` |
+| General | Browser Brand | `--bot-browser-brand` |
 | General | Profile File (.enc) | `--bot-profile` |
 | General | Start URL | positional argument |
 | Network | Proxy Server | `--proxy-server` |
 | Network | Proxy IP Override | `--proxy-ip` |
-| Identity | Locale | `--bot-config-locale` |
-| Identity | Timezone | `--bot-config-timezone` |
-| Identity | Color Scheme | `--bot-config-color-scheme` |
-| Fingerprint | WebGL | `--bot-config-webgl` |
-| Fingerprint | WebRTC | `--bot-config-webrtc` |
-| Fingerprint | Canvas Noise | `--bot-config-noise-canvas` |
+| Identity | Locale | `--bot-locale` |
+| Identity | Timezone | `--bot-timezone` |
+| Identity | Color Scheme | `--bot-color-scheme` |
+| Fingerprint | WebGL | `--bot-webgl` |
+| Fingerprint | WebRTC | `--bot-webrtc` |
+| Fingerprint | Canvas Noise | `--bot-noise-canvas` |
 | Fingerprint | Noise Seed | `--bot-noise-seed` |
 | Behavior | Disable Debugger | `--bot-disable-debugger` |
 | Behavior | Always Active | `--bot-always-active` |

@@ -39,8 +39,8 @@ CSS provides several mechanisms that reveal information about the user's operati
 Control the reported color scheme:
 
 ```bash
---bot-config-color-scheme=light
---bot-config-color-scheme=dark
+--bot-color-scheme=light
+--bot-color-scheme=dark
 ```
 
 ### Font System
@@ -49,10 +49,10 @@ The font configuration controls how system font keywords resolve:
 
 ```bash
 # Profile fonts (system-ui maps to profile's platform font)
---bot-config-fonts=profile
+--bot-fonts=profile
 
 # Real system fonts (no protection)
---bot-config-fonts=real
+--bot-fonts=real
 ```
 
 ### Display Properties
@@ -61,7 +61,7 @@ Screen and display characteristics are controlled through profile configuration:
 
 ```bash
 # Use profile-defined screen properties (color depth, dimensions)
---bot-config-screen=profile
+--bot-screen=profile
 ```
 
 ---
@@ -88,8 +88,8 @@ BotBrowser 150 expands profile-backed browser-family consistency for CSS interfa
 
 | Problem | Solution |
 |---------|----------|
-| System font renders as host OS font | Verify `--bot-config-fonts=profile` is set. |
-| Color scheme doesn't match expectation | Set explicitly with `--bot-config-color-scheme=light` or `dark`. |
+| System font renders as host OS font | Verify `--bot-fonts=profile` is set. |
+| Color scheme doesn't match expectation | Set explicitly with `--bot-color-scheme=light` or `dark`. |
 | @supports query reveals wrong platform | Check that the profile matches your intended platform. Feature availability follows the profile. |
 | CSS system colors expose host theme | Ensure profile is loaded. System colors are controlled at the engine level. |
 

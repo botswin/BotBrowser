@@ -36,47 +36,50 @@ Screen and window properties vary across devices and monitor configurations. The
 
 ### Window Dimensions
 
-Control window size with `--bot-config-window`:
+Control window size with `--bot-window`:
 
 ```bash
 # Use profile's window settings (default for headless)
---bot-config-window=profile
+--bot-window=profile
 
 # Use real system window dimensions (default for desktop headful)
---bot-config-window=real
+--bot-window=real
 
 # Direct size specification (innerWidth x innerHeight)
---bot-config-window=1920x1080
+--bot-window=1920x1080
 
 # Full JSON customization
---bot-config-window='{"innerWidth":1920,"innerHeight":1080,"devicePixelRatio":2}'
+--bot-window='{"innerWidth":1920,"innerHeight":1080,"devicePixelRatio":2}'
 ```
 
 When using `WxH` format, `outerWidth` and `outerHeight` are auto-derived from the profile's border definitions to maintain consistent frame dimensions.
 
 ### Screen Properties
 
-Control screen dimensions with `--bot-config-screen`:
+Control screen dimensions with `--bot-screen`:
 
 ```bash
 # Use profile's screen settings (default for headless)
---bot-config-screen=profile
+--bot-screen=profile
 
 # Use real system screen dimensions (default for desktop headful)
---bot-config-screen=real
+--bot-screen=real
 
 # Direct size specification (width x height)
---bot-config-screen=2560x1440
+--bot-screen=2560x1440
 
 # Full JSON customization
---bot-config-screen='{"width":2560,"height":1440,"availWidth":2560,"availHeight":1400}'
+--bot-screen='{"width":2560,"height":1440,"availWidth":2560,"availHeight":1400}'
 ```
 
 ### Device Scale Factor
 
+Use [`--bot-dpr`](DEVICE_PIXEL_RATIO.md) to select profile, host, or compatibility display-scale behavior. See [Device Pixel Ratio Policy](DEVICE_PIXEL_RATIO.md) for mode selection and per-context setup.
+
+The separate GUI scaling control does not select a DPR policy:
+
 ```bash
-# Disable device scale factor override
---bot-config-disable-device-scale-factor=true
+--bot-disable-device-scale-factor=true
 ```
 
 ### Headful Mode Note
@@ -84,9 +87,15 @@ Control screen dimensions with `--bot-config-screen`:
 Desktop profiles default to `real` in headful mode, meaning the browser uses actual system window and screen dimensions. To apply profile-defined dimensions in headful mode, set both flags explicitly:
 
 ```bash
---bot-config-window=profile
---bot-config-screen=profile
+--bot-window=profile
+--bot-screen=profile
 ```
+
+<a id="per-context-configuration"></a>
+
+### Per-Context Configuration
+
+For Per-Context Fingerprint, pass `--bot-window` and `--bot-screen` in `botbrowserFlags` before the context creates its first page or worker. The selected display policy then remains associated with that BrowserContext across desktop and mobile profile workflows. See [Per-Context Fingerprint](../../../PER_CONTEXT_FINGERPRINT.md) for the setup order.
 
 ---
 
@@ -111,9 +120,9 @@ BotBrowser controls all screen and window properties at the browser engine level
 | Problem | Solution |
 |---------|----------|
 | Viewport doesn't match profile | Do not set `defaultViewport` in Puppeteer. Do not set viewport options in Playwright. Let the profile control dimensions. |
-| Screen size shows host display in headful mode | Set `--bot-config-screen=profile` and `--bot-config-window=profile` explicitly for headful. |
+| Screen size shows host display in headful mode | Set `--bot-screen=profile` and `--bot-window=profile` explicitly for headful. |
 | Frame dimensions inconsistent with claimed OS | Verify the profile matches your intended platform. Frame borders are OS-specific. |
-| devicePixelRatio shows host value | Ensure profile is loaded and `--bot-config-disable-device-scale-factor` is not set. |
+| devicePixelRatio shows host value | Load the intended profile and select `--bot-dpr=profile`. GUI scaling is controlled separately. |
 
 ---
 

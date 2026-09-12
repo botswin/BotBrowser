@@ -1,6 +1,6 @@
 # Media Devices Privacy
 
-> Control how `navigator.mediaDevices.enumerateDevices()` reports audio and video devices with `--bot-config-media-devices`.
+> Control how `navigator.mediaDevices.enumerateDevices()` reports audio and video devices with `--bot-media-devices`.
 
 ---
 
@@ -40,7 +40,7 @@ By default, BotBrowser returns the profile's device list. No extra flags needed.
 
 ## Configuration
 
-The `--bot-config-media-devices` flag controls device enumeration:
+The `--bot-media-devices` flag controls device enumeration:
 
 | Value | Behavior |
 |-------|----------|
@@ -51,12 +51,12 @@ The `--bot-config-media-devices` flag controls device enumeration:
 # Use profile devices (default)
 chromium-browser \
     --bot-profile="/path/to/profile.enc" \
-    --bot-config-media-devices=profile
+    --bot-media-devices=profile
 
 # Use host system devices
 chromium-browser \
     --bot-profile="/path/to/profile.enc" \
-    --bot-config-media-devices=real
+    --bot-media-devices=real
 ```
 
 ---
@@ -94,7 +94,7 @@ When testing audio/video capture locally, use `real` mode:
 ```bash
 chromium-browser \
     --bot-profile="/path/to/profile.enc" \
-    --bot-config-media-devices=real \
+    --bot-media-devices=real \
     --user-data-dir="$(mktemp -d)"
 ```
 
@@ -107,7 +107,7 @@ chromium-browser \
 | Problem | Solution |
 |---------|----------|
 | Empty device list | Ensure the profile contains media device data. Most standard profiles include default device entries. |
-| Need real microphone access | Set `--bot-config-media-devices=real` to expose host hardware. |
+| Need real microphone access | Set `--bot-media-devices=real` to expose host hardware. |
 | Device IDs change between sessions | Device IDs are derived from the profile. Use the same profile for consistent IDs across sessions. |
 
 ---
@@ -118,7 +118,7 @@ chromium-browser \
 
 - [Audio Fingerprint Protection](AUDIO.md). Control audio rendering and noise.
 - [Navigator Properties](NAVIGATOR_PROPERTIES.md). Other navigator-level fingerprint surfaces.
-- [`--bot-config-media-devices`](../../../CLI_FLAGS.md#flag-bot-config-media-devices). CLI values and availability.
+- [`--bot-media-devices`](../../../CLI_FLAGS.md#flag-bot-media-devices). CLI values and availability.
 
 ---
 

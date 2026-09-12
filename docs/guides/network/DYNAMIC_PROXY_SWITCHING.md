@@ -60,9 +60,10 @@ When you call `BotBrowser.setBrowserContextProxy`, BotBrowser:
 1. Updates the proxy configuration for the specified BrowserContext.
 2. Re-detects the new proxy's exit IP (unless `proxyIp` is provided).
 3. Re-configures timezone, locale, and language to match the new proxy location.
-4. All subsequent network requests from that context use the new proxy.
+4. Completes the command after the updated geographic state is applied to the context.
+5. Uses the new proxy for subsequent network requests from that context.
 
-Pages already loaded in the context continue to function. New navigations and network requests use the updated proxy.
+Pages already loaded in the context continue to function. Await the command before starting a new navigation that depends on the updated proxy location.
 
 ### CDP Command Parameters
 
@@ -70,7 +71,7 @@ Pages already loaded in the context continue to function. New navigations and ne
 |-----------|----------|-------------|
 | `browserContextId` | Yes | The ID of the BrowserContext to update. |
 | `proxyServer` | Yes | Proxy URL with embedded credentials (e.g., `socks5://user:pass@host:port`). |
-| `proxyIp` | No | The proxy's exit IP. Skips auto-detection for faster geo configuration. |
+| `proxyIp` | No | The proxy's exit IP. Accepts IPv4, IPv6, or a comma-separated pair with one address from each family. Use `ipv4_none` or `ipv6_none` when that family is unavailable; this skips auto-detection for faster geo configuration. |
 | `proxyBypassList` | No | Semicolon-separated list of hosts to connect directly (e.g., `localhost;127.0.0.1`). |
 | `proxyBypassRgx` | No | Regex pattern (RE2 syntax) for URLs that should connect directly. |
 
@@ -124,7 +125,7 @@ await page.goto("https://example.co.jp");
 
 ### Using proxyIp to skip detection
 
-When you know the exit IP upfront, pass `proxyIp` to skip the IP detection step. This eliminates the one-time detection latency on the first navigation after each switch:
+When you know the exit IP upfront, pass `proxyIp` to skip the IP detection step. It can contain IPv4, IPv6, or one address from each family separated by a comma. Use `ipv4_none` or `ipv6_none` to declare a family that the proxy does not provide. This eliminates the one-time detection latency on the first navigation after each switch:
 
 ```javascript
 await client.send("BotBrowser.setBrowserContextProxy", {
@@ -156,7 +157,7 @@ await client.send("BotBrowser.setBrowserContextProxy", {
 | Problem | Solution |
 |---------|----------|
 | `setBrowserContextProxy` not found | The `BotBrowser` CDP domain is only available on **browser-level** sessions. Use `browser.target().createCDPSession()` (Puppeteer) or `browser.newBrowserCDPSession()` (Playwright) instead of `page.createCDPSession()`. Also ensure you have an ENT Tier3 license. |
-| Geo signals not updating after switch | Geo re-detection happens on the next main-frame navigation. Navigate to a new page after switching. |
+| Geo signals not updating after switch | Await the command before starting a navigation that depends on the updated proxy location. |
 | Slow proxy switch | Pass `proxyIp` to skip IP auto-detection on each switch. |
 | Old proxy still used for some requests | In-flight requests complete on the previous proxy. New requests use the updated proxy. |
 

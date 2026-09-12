@@ -1123,43 +1123,44 @@ function buildLaunchArgs(profile, userDataDir, botProfileArg) {
   if (profile.proxyIp && profile.proxyIp.trim()) args.push(`--proxy-ip=${profile.proxyIp.trim()}`);
   if (profile.proxyBypassRgx && profile.proxyBypassRgx.trim()) args.push(`--proxy-bypass-rgx=${profile.proxyBypassRgx.trim()}`);
 
-  if (profile.browserBrand && profile.browserBrand !== '') args.push(`--bot-config-browser-brand=${profile.browserBrand}`);
-  if (profile.brandFullVersion && profile.brandFullVersion !== '') args.push(`--bot-config-brand-full-version=${profile.brandFullVersion}`);
-  if (profile.uaFullVersion && profile.uaFullVersion !== '') args.push(`--bot-config-ua-full-version=${profile.uaFullVersion}`);
+  if (profile.browserBrand && profile.browserBrand !== '') args.push(`--bot-browser-brand=${profile.browserBrand}`);
+  if (profile.brandFullVersion && profile.brandFullVersion !== '') args.push(`--bot-brand-full-version=${profile.brandFullVersion}`);
+  if (profile.uaFullVersion && profile.uaFullVersion !== '') args.push(`--bot-ua-full-version=${profile.uaFullVersion}`);
   if (profile.userAgent && profile.userAgent.trim()) args.push(`--user-agent=${profile.userAgent.trim()}`);
 
-  if (profile.locale && profile.locale !== '') args.push(`--bot-config-locale=${profile.locale}`);
-  if (profile.timezone && profile.timezone !== '') args.push(`--bot-config-timezone=${profile.timezone}`);
-  if (profile.languages && profile.languages !== '') args.push(`--bot-config-languages=${profile.languages}`);
-  if (profile.location && profile.location !== '') args.push(`--bot-config-location=${profile.location}`);
-  if (profile.colorScheme) args.push(`--bot-config-color-scheme=${profile.colorScheme}`);
+  if (profile.locale && profile.locale !== '') args.push(`--bot-locale=${profile.locale}`);
+  if (profile.timezone && profile.timezone !== '') args.push(`--bot-timezone=${profile.timezone}`);
+  if (profile.languages && profile.languages !== '') args.push(`--bot-languages=${profile.languages}`);
+  if (profile.location && profile.location !== '') args.push(`--bot-location=${profile.location}`);
+  if (profile.colorScheme) args.push(`--bot-color-scheme=${profile.colorScheme}`);
 
-  if (profile.platform && profile.platform !== '') args.push(`--bot-config-platform=${profile.platform}`);
-  if (profile.platformVersion) args.push(`--bot-config-platform-version=${profile.platformVersion}`);
-  if (profile.model) args.push(`--bot-config-model=${profile.model}`);
-  if (profile.architecture) args.push(`--bot-config-architecture=${profile.architecture}`);
-  if (profile.bitness) args.push(`--bot-config-bitness=${profile.bitness}`);
-  if (profile.mobile !== undefined && profile.mobile !== '') args.push(`--bot-config-mobile=${!!profile.mobile}`);
+  if (profile.platform && profile.platform !== '') args.push(`--bot-platform=${profile.platform}`);
+  if (profile.platformVersion) args.push(`--bot-platform-version=${profile.platformVersion}`);
+  if (profile.model) args.push(`--bot-model=${profile.model}`);
+  if (profile.architecture) args.push(`--bot-architecture=${profile.architecture}`);
+  if (profile.bitness) args.push(`--bot-bitness=${profile.bitness}`);
+  if (profile.mobile !== undefined && profile.mobile !== '') args.push(`--bot-mobile=${!!profile.mobile}`);
 
-  if (profile.windowSize) args.push(`--bot-config-window=${profile.windowSize}`);
-  if (profile.screenSize) args.push(`--bot-config-screen=${profile.screenSize}`);
-  if (profile.orientation) args.push(`--bot-config-orientation=${profile.orientation}`);
-  if (profile.keyboard) args.push(`--bot-config-keyboard=${profile.keyboard}`);
-  if (profile.fonts) args.push(`--bot-config-fonts=${profile.fonts}`);
-  if (profile.disableDeviceScaleFactorOnGUI) args.push('--bot-config-disable-device-scale-factor');
+  if (profile.windowSize) args.push(`--bot-window=${profile.windowSize}`);
+  if (profile.screenSize) args.push(`--bot-screen=${profile.screenSize}`);
+  if (profile.dprMode) args.push(`--bot-dpr=${profile.dprMode}`);
+  if (profile.orientation) args.push(`--bot-orientation=${profile.orientation}`);
+  if (profile.keyboard) args.push(`--bot-keyboard=${profile.keyboard}`);
+  if (profile.fonts) args.push(`--bot-fonts=${profile.fonts}`);
+  if (profile.disableDeviceScaleFactorOnGUI) args.push('--bot-disable-device-scale-factor');
 
-  if (profile.webgl) args.push(`--bot-config-webgl=${profile.webgl}`);
-  if (profile.webgpu) args.push(`--bot-config-webgpu=${profile.webgpu}`);
-  if (profile.webrtc) args.push(`--bot-config-webrtc=${profile.webrtc}`);
-  if (profile.speechVoices) args.push(`--bot-config-speech-voices=${profile.speechVoices}`);
-  if (profile.mediaDevices) args.push(`--bot-config-media-devices=${profile.mediaDevices}`);
-  if (profile.mediaTypes) args.push(`--bot-config-media-types=${profile.mediaTypes}`);
+  if (profile.webgl) args.push(`--bot-webgl=${profile.webgl}`);
+  if (profile.webgpu) args.push(`--bot-webgpu=${profile.webgpu}`);
+  if (profile.webrtc) args.push(`--bot-webrtc=${profile.webrtc}`);
+  if (profile.speechVoices) args.push(`--bot-speech-voices=${profile.speechVoices}`);
+  if (profile.mediaDevices) args.push(`--bot-media-devices=${profile.mediaDevices}`);
+  if (profile.mediaTypes) args.push(`--bot-media-types=${profile.mediaTypes}`);
 
-  if (profile.noiseCanvas !== undefined && profile.noiseCanvas !== '') args.push(`--bot-config-noise-canvas=${!!profile.noiseCanvas}`);
-  if (profile.noiseWebglImage !== undefined && profile.noiseWebglImage !== '') args.push(`--bot-config-noise-webgl-image=${!!profile.noiseWebglImage}`);
-  if (profile.noiseAudioContext !== undefined && profile.noiseAudioContext !== '') args.push(`--bot-config-noise-audio-context=${!!profile.noiseAudioContext}`);
-  if (profile.noiseClientRects !== undefined && profile.noiseClientRects !== '') args.push(`--bot-config-noise-client-rects=${!!profile.noiseClientRects}`);
-  if (profile.noiseTextRects !== undefined && profile.noiseTextRects !== '') args.push(`--bot-config-noise-text-rects=${!!profile.noiseTextRects}`);
+  if (profile.noiseCanvas !== undefined && profile.noiseCanvas !== '') args.push(`--bot-noise-canvas=${!!profile.noiseCanvas}`);
+  if (profile.noiseWebglImage !== undefined && profile.noiseWebglImage !== '') args.push(`--bot-noise-webgl-image=${!!profile.noiseWebglImage}`);
+  if (profile.noiseAudioContext !== undefined && profile.noiseAudioContext !== '') args.push(`--bot-noise-audio-context=${!!profile.noiseAudioContext}`);
+  if (profile.noiseClientRects !== undefined && profile.noiseClientRects !== '') args.push(`--bot-noise-client-rects=${!!profile.noiseClientRects}`);
+  if (profile.noiseTextRects !== undefined && profile.noiseTextRects !== '') args.push(`--bot-noise-text-rects=${!!profile.noiseTextRects}`);
 
   if (profile.disableDebugger === true || profile.disableDebugger === 'true') args.push('--bot-disable-debugger');
   if (!(profile.disableConsoleMessage === false || profile.disableConsoleMessage === 'false')) args.push('--bot-disable-console-message');

@@ -145,13 +145,13 @@ When reviewing verification tool results, confirm that all reported properties a
 | Failure | Cause | Fix |
 |---------|-------|-----|
 | Timezone mismatch | Using framework proxy options instead of `--proxy-server` | Pass the proxy via `--proxy-server` flag so BotBrowser can auto-detect geo info. |
-| WebRTC IP leak | WebRTC is enabled and exposing the real local IP | Use `--bot-config-webrtc=disabled` or `--bot-webrtc-ice=google` to control ICE candidates. |
+| WebRTC IP leak | WebRTC is enabled and exposing the real local IP | Use `--bot-webrtc=disabled` or `--bot-webrtc-ice=google` to control ICE candidates. |
 | navigator.webdriver is true | Profile not loaded correctly | Verify `--bot-profile` points to a valid profile file. BotBrowser handles `navigator.webdriver` automatically. |
 | Playwright bindings detected | `__playwright__binding__` visible in page context | Add `page.addInitScript()` to remove Playwright bindings. Not needed for Puppeteer. |
 | Viewport size mismatch | Playwright or Puppeteer is overriding viewport | Do not set `defaultViewport` in Puppeteer (use `null`). Do not set viewport options in Playwright. |
 | OS mismatch in User-Agent | Profile Chrome version does not match binary version | Use profiles that match your BotBrowser binary version (e.g., v146 binary needs v146 profiles). |
-| Fonts do not match profile | Font config set to `real` instead of `profile` | Use `--bot-config-fonts=profile` (default) to use the profile's embedded font list. |
-| Language does not match location | Manual language override conflicts with proxy location | Either let BotBrowser auto-detect (`auto`) or align `--bot-config-languages` with `--bot-config-timezone`. |
+| Fonts do not match profile | Font config set to `real` instead of `profile` | Use `--bot-fonts=profile` (default) to use the profile's embedded font list. |
+| Language does not match location | Manual language override conflicts with proxy location | Either let BotBrowser auto-detect (`auto`) or align `--bot-languages` with `--bot-timezone`. |
 | Canvas/WebGL shows "undefined" | Profile not loaded correctly | Verify `--bot-profile` points to a valid, non-corrupted profile file using an absolute path. |
 
 ---

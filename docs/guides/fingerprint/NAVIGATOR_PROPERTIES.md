@@ -38,19 +38,19 @@ The `navigator` object is one of the most information-rich API surfaces in the b
 
 ```bash
 # Browser brand (ENT Tier2)
---bot-config-browser-brand=chrome
+--bot-browser-brand=chrome
 
 # User-Agent version (ENT Tier2)
---bot-config-ua-full-version=146.0.7644.60
+--bot-ua-full-version=146.0.7644.60
 
 # Languages (ENT Tier1)
---bot-config-languages=en-US,en,de
+--bot-languages=en-US,en,de
 
 # Locale (ENT Tier1)
---bot-config-locale=en-US
+--bot-locale=en-US
 
 # Timezone (ENT Tier1)
---bot-config-timezone=America/New_York
+--bot-timezone=America/New_York
 ```
 
 ### Custom User-Agent (ENT Tier3)
@@ -59,12 +59,12 @@ Build a complete, internally consistent browser identity:
 
 ```bash
 --user-agent="Mozilla/5.0 (Linux; Android {platform-version}; {model}) ..."
---bot-config-platform=Android
---bot-config-platform-version=13
---bot-config-model=SM-G991B
---bot-config-architecture=arm
---bot-config-bitness=64
---bot-config-mobile=true
+--bot-platform=Android
+--bot-platform-version=13
+--bot-model=SM-G991B
+--bot-architecture=arm
+--bot-bitness=64
+--bot-mobile=true
 ```
 
 BotBrowser auto-generates matching Client Hints values (brands, fullVersionList with proper GREASE) and all corresponding HTTP headers. Values stay consistent across the main thread, workers, and HTTP requests.
@@ -73,10 +73,10 @@ BotBrowser auto-generates matching Client Hints values (brands, fullVersionList 
 
 ```bash
 # Use profile-defined synthetic devices (default)
---bot-config-media-devices=profile
+--bot-media-devices=profile
 
 # Use real system devices
---bot-config-media-devices=real
+--bot-media-devices=real
 ```
 
 <a id="network-information"></a>
@@ -99,7 +99,7 @@ Use one policy for JavaScript network information and corresponding Client Hints
 --bot-network-info-override='{"type":"profile","effectiveType":"profile","rtt":"host","downlink":2.5,"downlinkMax":"host","saveData":"profile"}'
 ```
 
-The bare flag, an empty value, `true`, and `profile` use every available value under the profile's network information. `false` keeps native Chromium behavior.
+The bare flag, `true`, and `profile` use every available value under the profile's network information. `false` keeps native Chromium behavior.
 
 A JSON policy accepts these fields:
 
@@ -112,9 +112,9 @@ A JSON policy accepts these fields:
 | `downlinkMax` | Non-negative number in the supported range | `profile`, `host` |
 | `saveData` | `true`, `false` | `profile`, `host` |
 
-Omitted fields remain native. Invalid JSON, unknown fields, invalid values, or a `profile` selector without the required profile field reject the complete policy. A custom or `host` policy can be used without a profile.
+Omitted fields remain native. Invalid JSON, unknown fields, invalid values, or a `profile` selector without the required profile field cause the policy to be ignored and measured values to remain in use. A custom or `host` policy can be used without a profile.
 
-The CLI policy takes priority over `configs.networkInfoOverride`. The profile config remains a boolean setting: `true` selects profile values and `false` keeps native behavior.
+The CLI policy takes priority over `configs.networkInfoOverride`. The profile config accepts `true`, `false`, `profile`, or a JSON policy using the same field selectors and values.
 
 The resolved policy is scoped to the active BrowserContext and remains consistent across pages, workers, navigation, and supported request headers. Set it before creating the first page in that context.
 
@@ -141,7 +141,7 @@ BotBrowser controls all navigator properties at the browser engine level. Identi
 | Problem | Solution |
 |---------|----------|
 | navigator.webdriver returns true | Verify BotBrowser profile is loaded correctly. BotBrowser handles this automatically when a profile is active. |
-| Language doesn't match proxy location | Use `--proxy-server` (not framework proxy) for auto-detection, or set `--bot-config-languages` manually. |
+| Language doesn't match proxy location | Use `--proxy-server` (not framework proxy) for auto-detection, or set `--bot-languages` manually. |
 | UA-CH headers don't match JavaScript values | This should not happen with BotBrowser. Verify profile is loaded and no external extensions modify headers. |
 | hardwareConcurrency shows host value | Ensure profile defines the CPU core count and is loaded correctly. |
 | A custom network policy is rejected | Check the JSON syntax, field names, value types, and any `profile` selectors. The policy is applied atomically. |

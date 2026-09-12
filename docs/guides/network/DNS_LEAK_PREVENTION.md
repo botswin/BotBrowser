@@ -61,6 +61,8 @@ BotBrowser provides two layers of DNS leak protection:
 - You want to control DNS resolution behavior independently from the proxy.
 - You need consistent DNS behavior across different proxy providers.
 
+For supported proxy connections, LocalDNS keeps dual-stack target selection aligned with the active proxy route. No additional flag is required.
+
 ```bash
 --bot-local-dns
 --bot-local-dns=true

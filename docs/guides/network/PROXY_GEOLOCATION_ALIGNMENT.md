@@ -34,6 +34,8 @@ chromium-browser \
   --proxy-ip=203.0.113.1
 ```
 
+`--proxy-ip` accepts IPv4, IPv6, or a comma-separated pair containing one address from each family. Use `ipv4_none` or `ipv6_none` when the proxy has no exit address in that family. This declares the family unavailable and prevents a lookup for it. Use a pair when the proxy has distinct IPv4 and IPv6 exit identities.
+
 ---
 
 <a id="how-it-works"></a>
@@ -66,14 +68,14 @@ For internals (lookup pipeline, data source behavior, accuracy boundaries), see 
 
 ```bash
 --proxy-server=http://user:pass@proxy.example.com:8080 \
---bot-config-timezone=Europe/Berlin
+--bot-timezone=Europe/Berlin
 ```
 
 ### Scenario 3: Manual language override, keep timezone auto
 
 ```bash
 --proxy-server=http://user:pass@proxy.example.com:8080 \
---bot-config-languages=de-DE,de,en-US,en
+--bot-languages=de-DE,de,en-US,en
 ```
 
 ### Scenario 4: Full manual geographic identity
@@ -81,14 +83,28 @@ For internals (lookup pipeline, data source behavior, accuracy boundaries), see 
 ```bash
 --proxy-server=http://user:pass@proxy.example.com:8080 \
 --proxy-ip=203.0.113.1 \
---bot-config-timezone=Europe/Berlin \
---bot-config-locale=de-DE \
---bot-config-languages=de-DE,de,en-US,en
+--bot-timezone=Europe/Berlin \
+--bot-locale=de-DE \
+--bot-languages=de-DE,de,en-US,en
 ```
 
 ### Scenario 5: Different geo per BrowserContext
 
 Use per-context proxy assignment. See [Per-Context Proxy](PER_CONTEXT_PROXY.md).
+
+### Scenario 6: IPv4-only proxy
+
+```bash
+--proxy-server=socks5://user:pass@proxy.example.com:1080 \\
+--proxy-ip=203.0.113.1,ipv6_none
+```
+
+### Scenario 7: IPv6-only proxy
+
+```bash
+--proxy-server=socks5://user:pass@proxy.example.com:1080 \\
+--proxy-ip=ipv4_none,2001:db8::1009
+```
 
 ---
 
@@ -99,7 +115,7 @@ Use per-context proxy assignment. See [Per-Context Proxy](PER_CONTEXT_PROXY.md).
 | Problem | Solution |
 |---------|----------|
 | Timezone does not match proxy region | Ensure proxy is set via `--proxy-server` (or per-context proxy), not framework-only proxy options. |
-| Unexpected language list | Check whether `--bot-config-languages` is explicitly set. Manual value overrides auto mapping. |
+| Unexpected language list | Check whether `--bot-languages` is explicitly set. Manual value overrides auto mapping. |
 | First page load is slow | Provide `--proxy-ip` or set custom IP services via `--bot-ip-service`. |
 | Different contexts show different geo values | Expected when contexts use different proxies. |
 

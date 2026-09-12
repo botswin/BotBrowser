@@ -74,9 +74,9 @@ const browser = await puppeteer.launch({
   args: [
     `--bot-profile=${process.env.BOT_PROFILE_PATH}`,
     "--proxy-server=socks5://user:pass@proxy.example.com:1080",
-    "--bot-config-timezone=Asia/Tokyo",
-    "--bot-config-locale=ja-JP",
-    "--bot-config-languages=ja-JP,ja,en-US,en",
+    "--bot-timezone=Asia/Tokyo",
+    "--bot-locale=ja-JP",
+    "--bot-languages=ja-JP,ja,en-US,en",
   ],
 });
 ```

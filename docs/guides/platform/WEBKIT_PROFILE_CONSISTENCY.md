@@ -6,7 +6,7 @@
 
 WebKit-family Profile Consistency is profile-backed. The encrypted profile carries the browser-family data, and the browser loads it before the page starts.
 
-The profile coordinates selected WebKit-family browser surfaces, TLS ClientHello behavior, and HTTP/2 behavior so the selected browser-family identity remains consistent across supported hosts. BotBrowser 150.0.7871.46 expands this coverage across worker identity, runtime behavior, CSS and system UI values, font loading, canvas output, permission states, property ordering, and mobile profile surfaces.
+The profile coordinates selected WebKit-family browser surfaces, TLS ClientHello behavior, and HTTP/2 behavior so the selected browser-family identity remains consistent across supported hosts. BotBrowser 150.0.7871.46 expands this coverage across worker identity, runtime behavior, CSS and system UI values, font loading, canvas output, media capabilities, permission states, property ordering, and mobile profile surfaces. BotBrowser 152.0.7977.76 further aligns WebKit-family TLS and HTTP/2 behavior with current platform expectations.
 
 Use this profile line for desktop and mobile WebKit-family bundles. Use Chromium-family profiles for Chrome, Chromium, Edge, Brave, Opera, Android, and Android WebView.
 
@@ -14,7 +14,7 @@ For the product page, see [WebKit-family Profile Consistency](../../../WEBKIT_PR
 
 ## Requirements
 
-- BotBrowser 150.0.7871.46 or newer for the current BotBrowser 150 profile line.
+- BotBrowser 150.0.7871.46 or newer with a matching WebKit-family profile package.
 - ENT Tier4 access.
 - A WebKit-family `.enc` profile issued through the enterprise channel.
 - A separate `--user-data-dir` for each browser instance.
@@ -37,7 +37,7 @@ For WebKit-family mobile profile workflows, add `--bot-mobile-keyboard` when edi
 
 - Do not use `browserBrand` or User-Agent overrides to build this profile line by hand.
 - Keep proxy settings with the browser instance or BrowserContext that uses the profile.
-- Use BotBrowser 150.0.7871.46 or newer with a matching BotBrowser 150 profile package for the current WebKit-family consistency updates.
+- Use BotBrowser 150.0.7871.46 or newer with a matching WebKit-family profile package.
 - Validate desktop and mobile profile bundles separately.
 
 **Related documentation:** [Feature Page](../../../WEBKIT_PROFILE_CONSISTENCY.md) | [Profile Management](../getting-started/PROFILE_MANAGEMENT.md) | [Per-Context Fingerprint](../../../PER_CONTEXT_FINGERPRINT.md) | [CLI Flags Reference](../../../CLI_FLAGS.md)

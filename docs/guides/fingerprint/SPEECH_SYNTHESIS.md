@@ -36,14 +36,14 @@ The speech synthesis voice list varies by operating system, browser build, and i
 
 ### Speech Voices Mode
 
-Control voice list behavior with `--bot-config-speech-voices`:
+Control voice list behavior with `--bot-speech-voices`:
 
 ```bash
 # Use profile-defined synthetic voice list (default)
---bot-config-speech-voices=profile
+--bot-speech-voices=profile
 
 # Use real system voices (no protection)
---bot-config-speech-voices=real
+--bot-speech-voices=real
 ```
 
 When set to `profile`, BotBrowser returns a voice list consistent with the profile's declared platform and browser brand. This ensures voice data aligns with all other identity surfaces.
@@ -70,10 +70,10 @@ BotBrowser generates a complete, platform-consistent voice list at the browser e
 
 | Problem | Solution |
 |---------|----------|
-| Voice list shows host system voices | Verify `--bot-config-speech-voices=profile` is set. |
-| Google TTS voices missing in Chrome profile | Ensure `--bot-config-browser-brand=chrome` is active. Non-Chrome brands do not include Google voices. |
+| Voice list shows host system voices | Verify `--bot-speech-voices=profile` is set. |
+| Google TTS voices missing in Chrome profile | Ensure `--bot-browser-brand=chrome` is active. Non-Chrome brands do not include Google voices. |
 | Voice list empty | Some headless configurations may not initialize speech synthesis. Check profile compatibility. |
-| Voice language doesn't match profile locale | Verify `--bot-config-languages` and `--bot-config-locale` are consistent with the profile. |
+| Voice language doesn't match profile locale | Verify `--bot-languages` and `--bot-locale` are consistent with the profile. |
 
 ---
 

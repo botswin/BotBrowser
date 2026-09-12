@@ -448,27 +448,27 @@ export class BrowserLauncherService {
 
         // Identity & Locale
         if (opts?.identityLocale?.botConfigBrowserBrand)
-            args.push(`--bot-config-browser-brand=${opts.identityLocale.botConfigBrowserBrand}`);
+            args.push(`--bot-browser-brand=${opts.identityLocale.botConfigBrowserBrand}`);
         if (opts?.identityLocale?.botConfigBrandFullVersion)
-            args.push(`--bot-config-brand-full-version=${shQuote(opts.identityLocale.botConfigBrandFullVersion)}`);
+            args.push(`--bot-brand-full-version=${shQuote(opts.identityLocale.botConfigBrandFullVersion)}`);
         if (opts?.identityLocale?.botConfigUaFullVersion)
-            args.push(`--bot-config-ua-full-version=${shQuote(opts.identityLocale.botConfigUaFullVersion)}`);
+            args.push(`--bot-ua-full-version=${shQuote(opts.identityLocale.botConfigUaFullVersion)}`);
         // 'auto' equals BB's IP-derived default; suppress to avoid redundant emit.
         {
             const v = opts?.identityLocale?.botConfigLanguages?.trim();
-            if (v && v.toLowerCase() !== 'auto') args.push(`--bot-config-languages=${shQuote(v)}`);
+            if (v && v.toLowerCase() !== 'auto') args.push(`--bot-languages=${shQuote(v)}`);
         }
         {
             const v = opts?.identityLocale?.botConfigLocale?.trim();
-            if (v && v.toLowerCase() !== 'auto') args.push(`--bot-config-locale=${shQuote(v)}`);
+            if (v && v.toLowerCase() !== 'auto') args.push(`--bot-locale=${shQuote(v)}`);
         }
         {
             const v = opts?.identityLocale?.botConfigTimezone?.trim();
-            if (v && v.toLowerCase() !== 'auto') args.push(`--bot-config-timezone=${shQuote(v)}`);
+            if (v && v.toLowerCase() !== 'auto') args.push(`--bot-timezone=${shQuote(v)}`);
         }
         {
             const v = opts?.identityLocale?.botConfigLocation?.trim();
-            if (v && v.toLowerCase() !== 'auto') args.push(`--bot-config-location=${shQuote(v)}`);
+            if (v && v.toLowerCase() !== 'auto') args.push(`--bot-location=${shQuote(v)}`);
         }
         if (opts?.identityLocale?.botInjectRandomHistory != null) {
             const v = opts.identityLocale.botInjectRandomHistory;
@@ -482,45 +482,47 @@ export class BrowserLauncherService {
         if (opts?.customUserAgent?.userAgent)
             args.push(`--user-agent=${shQuote(opts.customUserAgent.userAgent)}`);
         if (opts?.customUserAgent?.botConfigPlatform)
-            args.push(`--bot-config-platform=${opts.customUserAgent.botConfigPlatform}`);
+            args.push(`--bot-platform=${opts.customUserAgent.botConfigPlatform}`);
         if (opts?.customUserAgent?.botConfigPlatformVersion)
-            args.push(`--bot-config-platform-version=${shQuote(opts.customUserAgent.botConfigPlatformVersion)}`);
+            args.push(`--bot-platform-version=${shQuote(opts.customUserAgent.botConfigPlatformVersion)}`);
         if (opts?.customUserAgent?.botConfigModel)
-            args.push(`--bot-config-model=${shQuote(opts.customUserAgent.botConfigModel)}`);
+            args.push(`--bot-model=${shQuote(opts.customUserAgent.botConfigModel)}`);
         if (opts?.customUserAgent?.botConfigArchitecture)
-            args.push(`--bot-config-architecture=${opts.customUserAgent.botConfigArchitecture}`);
+            args.push(`--bot-architecture=${opts.customUserAgent.botConfigArchitecture}`);
         if (opts?.customUserAgent?.botConfigBitness)
-            args.push(`--bot-config-bitness=${opts.customUserAgent.botConfigBitness}`);
+            args.push(`--bot-bitness=${opts.customUserAgent.botConfigBitness}`);
         // Tri-state: null/undefined → inherit profile's mobile flag (no emit).
-        if (opts?.customUserAgent?.botConfigMobile === true) args.push('--bot-config-mobile=true');
-        else if (opts?.customUserAgent?.botConfigMobile === false) args.push('--bot-config-mobile=false');
+        if (opts?.customUserAgent?.botConfigMobile === true) args.push('--bot-mobile=true');
+        else if (opts?.customUserAgent?.botConfigMobile === false) args.push('--bot-mobile=false');
 
         // Display & Input — window/screen accept JSON, so always quote.
         if (opts?.displayInput?.botConfigWindow)
-            args.push(`--bot-config-window=${shQuote(opts.displayInput.botConfigWindow)}`);
+            args.push(`--bot-window=${shQuote(opts.displayInput.botConfigWindow)}`);
         if (opts?.displayInput?.botConfigScreen)
-            args.push(`--bot-config-screen=${shQuote(opts.displayInput.botConfigScreen)}`);
+            args.push(`--bot-screen=${shQuote(opts.displayInput.botConfigScreen)}`);
+        if (opts?.displayInput?.botDpr)
+            args.push(`--bot-dpr=${opts.displayInput.botDpr}`);
         if (opts?.displayInput?.botConfigKeyboard)
-            args.push(`--bot-config-keyboard=${opts.displayInput.botConfigKeyboard}`);
+            args.push(`--bot-keyboard=${opts.displayInput.botConfigKeyboard}`);
         if (opts?.displayInput?.botConfigFonts)
-            args.push(`--bot-config-fonts=${opts.displayInput.botConfigFonts}`);
+            args.push(`--bot-fonts=${opts.displayInput.botConfigFonts}`);
         if (opts?.displayInput?.botConfigOrientation)
-            args.push(`--bot-config-orientation=${opts.displayInput.botConfigOrientation}`);
+            args.push(`--bot-orientation=${opts.displayInput.botConfigOrientation}`);
         if (opts?.displayInput?.botConfigColorScheme)
-            args.push(`--bot-config-color-scheme=${opts.displayInput.botConfigColorScheme}`);
+            args.push(`--bot-color-scheme=${opts.displayInput.botConfigColorScheme}`);
         if (opts?.displayInput?.botConfigDisableDeviceScaleFactor)
-            args.push('--bot-config-disable-device-scale-factor');
+            args.push('--bot-disable-device-scale-factor');
 
         // Noise toggles: emit only when user diverges from BB default; matching default → no flag.
         const emitToggle = (flag: string, v: boolean | null | undefined, bbDefault: boolean) => {
             if (v == null || v === bbDefault) return;
             args.push(`${flag}=${v}`);
         };
-        emitToggle('--bot-config-noise-webgl-image', opts?.noise?.botConfigNoiseWebglImage, true);
-        emitToggle('--bot-config-noise-canvas', opts?.noise?.botConfigNoiseCanvas, true);
-        emitToggle('--bot-config-noise-audio-context', opts?.noise?.botConfigNoiseAudioContext, true);
-        emitToggle('--bot-config-noise-client-rects', opts?.noise?.botConfigNoiseClientRects, false);
-        emitToggle('--bot-config-noise-text-rects', opts?.noise?.botConfigNoiseTextRects, false);
+        emitToggle('--bot-noise-webgl-image', opts?.noise?.botConfigNoiseWebglImage, true);
+        emitToggle('--bot-noise-canvas', opts?.noise?.botConfigNoiseCanvas, true);
+        emitToggle('--bot-noise-audio-context', opts?.noise?.botConfigNoiseAudioContext, true);
+        emitToggle('--bot-noise-client-rects', opts?.noise?.botConfigNoiseClientRects, false);
+        emitToggle('--bot-noise-text-rects', opts?.noise?.botConfigNoiseTextRects, false);
         if (opts?.noise?.botNoiseSeed != null) args.push(`--bot-noise-seed=${opts.noise.botNoiseSeed}`);
         if (opts?.noise?.botTimeScale != null) args.push(`--bot-time-scale=${opts.noise.botTimeScale}`);
         if (opts?.noise?.botFps) args.push(`--bot-fps=${opts.noise.botFps}`);
@@ -531,17 +533,17 @@ export class BrowserLauncherService {
 
         // Rendering & Media
         if (opts?.renderingMedia?.botConfigWebgl)
-            args.push(`--bot-config-webgl=${opts.renderingMedia.botConfigWebgl}`);
+            args.push(`--bot-webgl=${opts.renderingMedia.botConfigWebgl}`);
         if (opts?.renderingMedia?.botConfigWebgpu)
-            args.push(`--bot-config-webgpu=${opts.renderingMedia.botConfigWebgpu}`);
+            args.push(`--bot-webgpu=${opts.renderingMedia.botConfigWebgpu}`);
         if (opts?.renderingMedia?.botConfigSpeechVoices)
-            args.push(`--bot-config-speech-voices=${opts.renderingMedia.botConfigSpeechVoices}`);
+            args.push(`--bot-speech-voices=${opts.renderingMedia.botConfigSpeechVoices}`);
         if (opts?.renderingMedia?.botConfigMediaDevices)
-            args.push(`--bot-config-media-devices=${opts.renderingMedia.botConfigMediaDevices}`);
+            args.push(`--bot-media-devices=${opts.renderingMedia.botConfigMediaDevices}`);
         if (opts?.renderingMedia?.botConfigMediaTypes)
-            args.push(`--bot-config-media-types=${opts.renderingMedia.botConfigMediaTypes}`);
+            args.push(`--bot-media-types=${opts.renderingMedia.botConfigMediaTypes}`);
         if (opts?.renderingMedia?.botConfigWebrtc)
-            args.push(`--bot-config-webrtc=${opts.renderingMedia.botConfigWebrtc}`);
+            args.push(`--bot-webrtc=${opts.renderingMedia.botConfigWebrtc}`);
         if (opts?.renderingMedia?.botWebrtcIce)
             args.push(`--bot-webrtc-ice=${shQuote(opts.renderingMedia.botWebrtcIce)}`);
         {
