@@ -3,7 +3,7 @@
         {{ data.title }}
     </h2>
 }
-<mat-dialog-content> {{ data.message }} </mat-dialog-content>
+<mat-dialog-content style="white-space: pre-wrap">{{ data.message }}</mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close (click)="onClose()">OK</button>
 </mat-dialog-actions>

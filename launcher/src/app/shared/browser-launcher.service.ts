@@ -76,6 +76,7 @@ export interface RunningInfo {
     resolver?: any;
     startTime?: number;
     kernelId?: string;
+    stdErrTail?: string; // shown when a launch fails, so the cause isn't just an exit code
 }
 
 @Injectable({ providedIn: 'root' })
@@ -99,6 +100,9 @@ export class BrowserLauncherService {
                 case 'stdErr':
                     {
                         console.error('stdErr', evt.detail.data);
+                        if (runningInfo) {
+                            runningInfo.stdErrTail = ((runningInfo.stdErrTail ?? '') + evt.detail.data).slice(-800);
+                        }
                         const rgx = /\bws:\/\/.*\/devtools\/browser\/.*\b/;
                         const match = evt.detail.data.match(rgx);
                         const wsURL = match?.[0];
@@ -117,9 +121,11 @@ export class BrowserLauncherService {
                         runningInfo.spawnProcessInfo = undefined;
 
                         if (exitCode !== 0 && uptime < 5000) {
-                            const message = exitedKernelId
+                            const detail = runningInfo.stdErrTail?.trim();
+                            const base = exitedKernelId
                                 ? `Browser failed to start (exit code ${exitCode}). This can happen right after a kernel update while files are being indexed. Please wait a few seconds and try again.`
                                 : `Browser failed to start (exit code ${exitCode}). Check the custom Binary Path and any extra arguments in the profile's Advanced section, or switch back to "Auto (from kernel)".`;
+                            const message = detail ? `${base}\n\nLast output from the browser:\n${detail}` : base;
                             this.#dialog.open(AlertDialogComponent, { data: { message } });
                         }
 
