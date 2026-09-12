@@ -4,7 +4,7 @@ import { inject, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import * as Neutralino from '@neutralinojs/lib';
 import { AppName } from '../const';
-import { extractMajorVersion, getRequiredKernelMajor, isWebKitProfile } from '../data/bot-profile';
+import { extractMajorVersion, getKernelMajorFromKernelField, getRequiredKernelMajor, isWebKitProfile } from '../data/bot-profile';
 import { BrowserProfileStatus, getBrowserProfileStatusText, type BrowserProfile } from '../data/browser-profile';
 import { SimpleCDP } from '../simple-cdp';
 import { createDirectoryIfNotExists, sleep } from '../utils';
@@ -76,6 +76,7 @@ export interface RunningInfo {
     resolver?: any;
     startTime?: number;
     kernelId?: string;
+    stdErrTail?: string; // shown when a launch fails, so the cause isn't just an exit code
 }
 
 @Injectable({ providedIn: 'root' })
@@ -99,6 +100,9 @@ export class BrowserLauncherService {
                 case 'stdErr':
                     {
                         console.error('stdErr', evt.detail.data);
+                        if (runningInfo) {
+                            runningInfo.stdErrTail = ((runningInfo.stdErrTail ?? '') + evt.detail.data).slice(-800);
+                        }
                         const rgx = /\bws:\/\/.*\/devtools\/browser\/.*\b/;
                         const match = evt.detail.data.match(rgx);
                         const wsURL = match?.[0];
@@ -117,9 +121,11 @@ export class BrowserLauncherService {
                         runningInfo.spawnProcessInfo = undefined;
 
                         if (exitCode !== 0 && uptime < 5000) {
-                            const message = exitedKernelId
+                            const detail = runningInfo.stdErrTail?.trim();
+                            const base = exitedKernelId
                                 ? `Browser failed to start (exit code ${exitCode}). This can happen right after a kernel update while files are being indexed. Please wait a few seconds and try again.`
                                 : `Browser failed to start (exit code ${exitCode}). Check the custom Binary Path and any extra arguments in the profile's Advanced section, or switch back to "Auto (from kernel)".`;
+                            const message = detail ? `${base}\n\nLast output from the browser:\n${detail}` : base;
                             this.#dialog.open(AlertDialogComponent, { data: { message } });
                         }
 
@@ -256,7 +262,13 @@ export class BrowserLauncherService {
             if (overrideVersion) {
                 majorVersion = overrideVersion;
             } else {
-                majorVersion = extractMajorVersion(userAgent);
+                // The `kernel` field is authoritative; WebKit UAs only carry a Safari version.
+                majorVersion = getKernelMajorFromKernelField(botProfileObject.kernel);
+                if (majorVersion) {
+                    console.log(`Bot profile kernel field -> major ${majorVersion} (${botProfileObject.kernel})`);
+                } else {
+                    majorVersion = extractMajorVersion(userAgent);
+                }
                 if (!majorVersion) {
                     const requiredMajor = getRequiredKernelMajor(userAgent);
                     if (requiredMajor != null) {
