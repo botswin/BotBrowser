@@ -4,7 +4,7 @@ import { inject, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import * as Neutralino from '@neutralinojs/lib';
 import { AppName } from '../const';
-import { extractMajorVersion, getRequiredKernelMajor, isWebKitProfile } from '../data/bot-profile';
+import { extractMajorVersion, getKernelMajorFromKernelField, getRequiredKernelMajor, isWebKitProfile } from '../data/bot-profile';
 import { BrowserProfileStatus, getBrowserProfileStatusText, type BrowserProfile } from '../data/browser-profile';
 import { SimpleCDP } from '../simple-cdp';
 import { createDirectoryIfNotExists, sleep } from '../utils';
@@ -256,7 +256,13 @@ export class BrowserLauncherService {
             if (overrideVersion) {
                 majorVersion = overrideVersion;
             } else {
-                majorVersion = extractMajorVersion(userAgent);
+                // The `kernel` field is authoritative; WebKit UAs only carry a Safari version.
+                majorVersion = getKernelMajorFromKernelField(botProfileObject.kernel);
+                if (majorVersion) {
+                    console.log(`Bot profile kernel field -> major ${majorVersion} (${botProfileObject.kernel})`);
+                } else {
+                    majorVersion = extractMajorVersion(userAgent);
+                }
                 if (!majorVersion) {
                     const requiredMajor = getRequiredKernelMajor(userAgent);
                     if (requiredMajor != null) {

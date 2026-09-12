@@ -79,6 +79,9 @@
                         <p><strong>Source file:</strong> {{ botProfileInfoGroup.value.filename }}</p>
                     }
                     <p><strong>Version:</strong> {{ basicInfo.version }}</p>
+                    @if (basicInfo.kernel) {
+                        <p><strong>Kernel:</strong> {{ basicInfo.kernel }}</p>
+                    }
                     <p><strong>User Agent:</strong> {{ basicInfo.userAgent }}</p>
                     <p><strong>Unmasked Vendor:</strong> {{ basicInfo.unmaskedVendor }}</p>
                     <p><strong>Unmasked Renderer:</strong> {{ basicInfo.unmaskedRenderer }}</p>

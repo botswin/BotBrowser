@@ -20,7 +20,7 @@ import { cloneDeep } from 'lodash-es';
 import { v4 as uuidv4 } from 'uuid';
 import { CloneBrowserProfileComponent } from './clone-browser-profile.component';
 import { AppName } from './const';
-import { extractMajorVersion, getRequiredKernelMajor, isWebKitProfile } from './data/bot-profile';
+import { extractMajorVersion, getKernelMajorFromKernelField, getRequiredKernelMajor, isWebKitProfile } from './data/bot-profile';
 import { BrowserProfileStatus, type BrowserProfile } from './data/browser-profile';
 import { EditBrowserProfileComponent } from './edit-browser-profile.component';
 import { KernelManagementComponent } from './kernel-management/kernel-management.component';
@@ -154,9 +154,11 @@ export class AppComponent implements AfterViewInit {
             const parsed = JSON.parse(info.content);
             const userAgent = parsed.userAgent || '';
             const version = parsed.version || '';
-            // Mirrors browser-launcher.service.ts run() — Chrome UA → WebKit map → WebKit fallback
-            // (latest installed) → version field.
-            result = extractMajorVersion(userAgent) ?? getRequiredKernelMajor(userAgent);
+            // Mirrors browser-launcher.service.ts run().
+            result =
+                getKernelMajorFromKernelField(parsed.kernel) ??
+                extractMajorVersion(userAgent) ??
+                getRequiredKernelMajor(userAgent);
             if (result == null) {
                 if (isWebKitProfile({ userAgent, version, unmaskedVendor: '', unmaskedRenderer: '' })) {
                     result = this.#latestInstalledKernelMajor;

@@ -3,6 +3,7 @@ export type BotProfileBasicInfo = {
     userAgent: string;
     unmaskedVendor: string;
     unmaskedRenderer: string;
+    kernel?: string; // e.g. "official_153"
 };
 
 export function tryParseBotProfile(data: string): BotProfileBasicInfo | null {
@@ -14,12 +15,22 @@ export function tryParseBotProfile(data: string): BotProfileBasicInfo | null {
                 userAgent: info.userAgent,
                 unmaskedVendor: info.unmaskedVendor ?? '',
                 unmaskedRenderer: info.unmaskedRenderer ?? '',
+                kernel: typeof info.kernel === 'string' ? info.kernel : '',
             };
         }
         return null;
     } catch {
         return null;
     }
+}
+
+// Extract the kernel major from a profile's `kernel` field, e.g. "official_153" -> 153.
+export function getKernelMajorFromKernelField(kernel: string | undefined | null): number | null {
+    if (!kernel) return null;
+    const m = String(kernel).match(/(\d+)/);
+    if (!m) return null;
+    const n = parseInt(m[1]!, 10);
+    return Number.isInteger(n) && n >= 1 && n <= 999 ? n : null;
 }
 
 export function extractMajorVersion(versionOrUserAgent: string): number | null {
