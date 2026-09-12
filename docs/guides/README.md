@@ -62,6 +62,7 @@ Configuration, deployment, and verification guides. Each guide includes prerequi
 | [Navigator Properties](fingerprint/NAVIGATOR_PROPERTIES.md) | Keep navigator properties aligned across pages, workers, and headers. |
 | [Permission State Consistency](fingerprint/PERMISSIONS.md) | Keep permission queries and browser-side permission decisions aligned with the active profile and BrowserContext. |
 | [Screen and Window Fingerprinting](fingerprint/SCREEN_WINDOW.md) | Normalize screen/window metrics to avoid display-identity mismatches. |
+| [Device Pixel Ratio Policy](fingerprint/DEVICE_PIXEL_RATIO.md) | Choose profile, host, or compatibility display-scale behavior. |
 | [Speech Synthesis Fingerprinting](fingerprint/SPEECH_SYNTHESIS.md) | Control speech voice lists and TTS metadata exposure. |
 | [MIME and Codec Fingerprinting](fingerprint/MIME_CODEC.md) | Configure MIME/codec capability surfaces to match target identity. |
 | [Noise Seed Reproducibility](fingerprint/NOISE_SEED_REPRODUCIBILITY.md) | Use deterministic noise seeds for repeatable fingerprint behavior. |

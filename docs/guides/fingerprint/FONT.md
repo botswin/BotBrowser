@@ -36,17 +36,17 @@ Font availability and rendering behavior differ across operating systems, locale
 
 ### Font Mode
 
-Control font behavior with the `--bot-config-fonts` flag:
+Control font behavior with the `--bot-fonts` flag:
 
 ```bash
 # Use profile's embedded fonts (default)
---bot-config-fonts=profile
+--bot-fonts=profile
 
 # Use profile fonts with system font fallback
---bot-config-fonts=expand
+--bot-fonts=expand
 
 # Use real system fonts (no protection)
---bot-config-fonts=real
+--bot-fonts=real
 ```
 
 ### ClientRects and Text Metrics Noise
@@ -55,10 +55,10 @@ BotBrowser applies deterministic noise to font measurement APIs:
 
 ```bash
 # Enable ClientRects noise (disabled by default)
---bot-config-noise-client-rects=true
+--bot-noise-client-rects=true
 
 # Enable text rects noise (disabled by default)
---bot-config-noise-text-rects=true
+--bot-noise-text-rects=true
 ```
 
 ### Noise Seed
@@ -93,7 +93,7 @@ BotBrowser addresses cross-platform font consistency through built-in font libra
 
 BotBrowser 150 improves profile-backed font handling for `FontFace` local sources, request-by-name loading, and multilingual fallback. Windows-target profiles also keep their font renderer preferences with the active BrowserContext, including per-context sessions running on another host platform.
 
-Keep `--bot-config-fonts=profile` when the profile font inventory and fallback policy should remain authoritative. Use `expand` only when the workflow intentionally allows host fallback beyond the profile bundle.
+Keep `--bot-fonts=profile` when the profile font inventory and fallback policy should remain authoritative. Use `expand` only when the workflow intentionally allows host fallback beyond the profile bundle.
 
 ---
 
@@ -115,9 +115,9 @@ To verify protection is active:
 
 | Problem | Solution |
 |---------|----------|
-| Font list shows host system fonts | Ensure `--bot-config-fonts=profile` is set. The `real` mode disables font protection. |
+| Font list shows host system fonts | Ensure `--bot-fonts=profile` is set. The `real` mode disables font protection. |
 | CJK text renders with missing glyphs | Verify the profile includes appropriate CJK fonts. Windows and macOS profiles include CJK support by default. |
-| A local FontFace name resolves differently across hosts | Use `--bot-config-fonts=profile` and a BotBrowser 150 profile package so local and request-by-name font handling follows the profile inventory. |
+| A local FontFace name resolves differently across hosts | Use `--bot-fonts=profile` and a BotBrowser 150 profile package so local and request-by-name font handling follows the profile inventory. |
 | Font metrics differ between headless and headful mode | Both modes should produce identical metrics with a profile loaded. Check that the same profile and flags are used. |
 | ClientRects values vary between sessions | Use `--bot-noise-seed` for reproducible measurements. Without a fixed seed, noise varies per session. |
 

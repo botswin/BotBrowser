@@ -57,9 +57,9 @@ const browser = await chromium.launch({
   args: [
     "--bot-profile=/path/to/windows-profile.enc",
     "--proxy-server=socks5://user:pass@jp-proxy.example.com:1080",
-    "--bot-config-timezone=Asia/Tokyo",
-    "--bot-config-locale=ja-JP",
-    "--bot-config-languages=ja-JP,en-US,en",
+    "--bot-timezone=Asia/Tokyo",
+    "--bot-locale=ja-JP",
+    "--bot-languages=ja-JP,en-US,en",
   ],
 });
 
@@ -81,9 +81,9 @@ const browser = await chromium.launch({
   args: [
     "--bot-profile=/path/to/macos-profile.enc",
     "--proxy-server=socks5://user:pass@cn-proxy.example.com:1080",
-    "--bot-config-timezone=Asia/Shanghai",
-    "--bot-config-locale=zh-CN",
-    "--bot-config-languages=zh-CN,zh,en-US,en",
+    "--bot-timezone=Asia/Shanghai",
+    "--bot-locale=zh-CN",
+    "--bot-languages=zh-CN,zh,en-US,en",
   ],
 });
 ```

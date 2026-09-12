@@ -21,7 +21,7 @@ Architecture and capability reference for BotBrowser fingerprint protection. For
 
 BotBrowser offers three configuration interfaces with a clear priority order:
 
-1. **CLI `--bot-config-*` flags** (highest priority): [CLI Flag Directory](CLI_FLAGS.md#flag-directory)
+1. **CLI `--bot-*` flags** (highest priority): [CLI Flag Directory](CLI_FLAGS.md#flag-directory)
 2. **Profile `configs` JSON** (medium priority): [Profile Configuration Guide](profiles/PROFILE_CONFIGS.md)
 3. **CDP commands** (runtime, per-context): [Per-Context Fingerprint](PER_CONTEXT_FINGERPRINT.md) | [CDP Quick Reference](#cdp-quick-reference)
 
@@ -262,7 +262,7 @@ Comprehensive hardware emulation and fingerprint management.
 - Device pixel ratio emulation
 - Screen resolution and color depth control
 - Multi-monitor configuration simulation
-- Refresh rate and orientation control via [`--bot-config-orientation`](CLI_FLAGS.md#flag-bot-config-orientation) for mobile profiles, covering all orientation APIs and CSS media queries
+- Refresh rate and orientation control via [`--bot-orientation`](CLI_FLAGS.md#flag-bot-orientation) for mobile profiles, covering all orientation APIs and CSS media queries
 - Opt-in mobile keyboard visual viewport behavior via [`--bot-mobile-keyboard`](CLI_FLAGS.md#flag-bot-mobile-keyboard) for Android and WebKit-family mobile profiles
 
 **Device-Behavior Simulation:**

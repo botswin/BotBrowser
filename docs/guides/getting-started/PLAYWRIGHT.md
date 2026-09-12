@@ -77,9 +77,9 @@ const browser = await chromium.launch({
   args: [
     `--bot-profile=${process.env.BOT_PROFILE_PATH}`,
     "--proxy-server=socks5://user:pass@proxy.example.com:1080",
-    "--bot-config-timezone=Europe/Berlin",
-    "--bot-config-locale=de-DE",
-    "--bot-config-languages=de-DE,de,en-US,en",
+    "--bot-timezone=Europe/Berlin",
+    "--bot-locale=de-DE",
+    "--bot-languages=de-DE,de,en-US,en",
   ],
 });
 ```

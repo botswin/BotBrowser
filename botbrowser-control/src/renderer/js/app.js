@@ -1015,7 +1015,7 @@
       locale: 'auto', timezone: 'auto', languages: 'auto', location: 'auto',
       startUrl: '', proxyServer: '', proxyIp: '', proxyBypassRgx: '',
       profileFilePath: '', profileDirPath: '',
-      windowSize: 'real', screenSize: 'real', orientation: 'profile',
+      windowSize: 'real', screenSize: 'real', dprMode: '', orientation: 'profile',
       disableDeviceScaleFactorOnGUI: false,
       noiseCanvas: true, noiseWebglImage: true, noiseAudioContext: true,
       noiseClientRects: false, noiseTextRects: true,
@@ -1243,6 +1243,13 @@
           <div class="form-group">
             <label class="form-label">Screen Size</label>
             <input class="form-input" id="f-screenSize" placeholder="real" value="${esc(d.screenSize||'real')}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Device Pixel Ratio</label>
+            <select class="form-select" id="f-dprMode">
+              <option value=""${!d.dprMode?' selected':''}>Default</option>
+              ${['profile','real','advanced'].map(o=>`<option value="${o}"${d.dprMode===o?' selected':''}>${o}</option>`).join('')}
+            </select>
           </div>
           <div class="form-group">
             <label class="form-label">Orientation</label>
@@ -1588,6 +1595,7 @@
       mobile: selVal('f-mobile') === '' ? '' : selVal('f-mobile') === 'true',
       windowSize: val('f-windowSize') || 'real',
       screenSize: val('f-screenSize') || 'real',
+      dprMode: selVal('f-dprMode'),
       orientation: selVal('f-orientation'),
       keyboard: selVal('f-keyboard'),
       fonts: selVal('f-fonts'),

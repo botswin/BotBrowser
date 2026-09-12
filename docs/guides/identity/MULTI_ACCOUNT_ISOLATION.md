@@ -59,9 +59,9 @@ await client.send("BotBrowser.setBrowserContextFlags", {
   botbrowserFlags: [
     "--bot-profile=path/to/us-profile.enc",
     "--proxy-server=socks5://user:pass@us-proxy.example.com:1080",
-    "--bot-config-timezone=America/New_York",
-    "--bot-config-languages=en-US,en",
-    "--bot-config-locale=en-US",
+    "--bot-timezone=America/New_York",
+    "--bot-languages=en-US,en",
+    "--bot-locale=en-US",
   ],
 });
 // 5. Now create the page and navigate
@@ -79,9 +79,9 @@ await client.send("BotBrowser.setBrowserContextFlags", {
   botbrowserFlags: [
     "--bot-profile=/path/to/de-profile.enc",
     "--proxy-server=socks5://user:pass@de-proxy.example.com:1080",
-    "--bot-config-timezone=Europe/Berlin",
-    "--bot-config-languages=de-DE,de,en-US,en",
-    "--bot-config-locale=de-DE",
+    "--bot-timezone=Europe/Berlin",
+    "--bot-languages=de-DE,de,en-US,en",
+    "--bot-locale=de-DE",
   ],
 });
 
@@ -276,8 +276,8 @@ for (const loc of locations) {
     botbrowserFlags: [
       "--bot-profile=/path/to/profile.enc",
       `--proxy-server=${loc.proxy}`,
-      `--bot-config-timezone=${loc.tz}`,
-      `--bot-config-languages=${loc.lang}`,
+      `--bot-timezone=${loc.tz}`,
+      `--bot-languages=${loc.lang}`,
     ],
   });
 

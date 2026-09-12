@@ -7,7 +7,7 @@ Profiles define the browser identity and protected environment used by BotBrowse
 
 | Channel | Release line | Access |
 |---------|--------------|--------|
-| [stable](stable/) | v150-v151 subscription profiles; v148-v149 legacy demos | BotBrowser 150 and newer packages are available through subscription or support. |
+| [stable](stable/) | v150-v152 subscription profiles; v148-v149 legacy demos | BotBrowser 150 and newer packages are available through subscription or support. |
 | [canary](canary/) | None published | Reserved for explicitly published pre-stable packages. |
 | [archive](archive/) | v135-v147 | Older public demo packages outside the current support window. |
 

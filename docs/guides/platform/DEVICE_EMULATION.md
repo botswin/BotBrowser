@@ -21,8 +21,8 @@ Device metrics are a core part of browser fingerprinting. Screen resolution, win
 
 Two key flags control the primary display metrics:
 
-- **`--bot-config-window`**: Controls window dimensions, position, and device pixel ratio.
-- **`--bot-config-screen`**: Controls screen resolution, available area, and color depth.
+- **`--bot-window`**: Controls window dimensions, position, and device pixel ratio.
+- **`--bot-screen`**: Controls screen resolution, available area, and color depth.
 
 ---
 
@@ -45,8 +45,8 @@ In headless mode, BotBrowser defaults to `profile` for both window and screen se
 ```bash
 chromium-browser \
   --bot-profile="/path/to/profile.enc" \
-  --bot-config-window=1920x1080 \
-  --bot-config-screen=2560x1440
+  --bot-window=1920x1080 \
+  --bot-screen=2560x1440
 ```
 
 ---
@@ -55,7 +55,7 @@ chromium-browser \
 
 ## How It Works
 
-### Window Dimensions (`--bot-config-window`)
+### Window Dimensions (`--bot-window`)
 
 | Value | Behavior |
 |-------|----------|
@@ -67,10 +67,10 @@ chromium-browser \
 **JSON format example:**
 
 ```bash
---bot-config-window='{"innerWidth":1920,"innerHeight":1080,"outerWidth":1936,"outerHeight":1152,"screenX":0,"screenY":0,"devicePixelRatio":2}'
+--bot-window='{"innerWidth":1920,"innerHeight":1080,"outerWidth":1936,"outerHeight":1152,"screenX":0,"screenY":0,"devicePixelRatio":2}'
 ```
 
-### Screen Dimensions (`--bot-config-screen`)
+### Screen Dimensions (`--bot-screen`)
 
 | Value | Behavior |
 |-------|----------|
@@ -82,12 +82,14 @@ chromium-browser \
 **JSON format example:**
 
 ```bash
---bot-config-screen='{"width":2560,"height":1440,"availWidth":2560,"availHeight":1400,"colorDepth":24,"pixelDepth":24}'
+--bot-screen='{"width":2560,"height":1440,"availWidth":2560,"availHeight":1400,"colorDepth":24,"pixelDepth":24}'
 ```
 
 ### Device Pixel Ratio
 
-Device pixel ratio (DPR) is set through the window configuration. Common values:
+Device pixel ratio (DPR) is controlled by the display-scale policy. Use `--bot-dpr` to choose `profile`, `real`, or `advanced` behavior. See [Device Pixel Ratio Policy](../fingerprint/DEVICE_PIXEL_RATIO.md) for mode selection and per-context setup. For a direct numeric DPR, keep using the JSON form of `--bot-window`.
+
+Common profile values:
 
 | Device Type | Typical DPR |
 |------------|-------------|
@@ -96,7 +98,7 @@ Device pixel ratio (DPR) is set through the window configuration. Common values:
 | macOS Retina | 2 |
 | Modern mobile phones | 2 or 3 |
 
-DPR affects the `DPR` Client Hints header and `window.devicePixelRatio`.
+DPR affects the `DPR` Client Hints header and `window.devicePixelRatio`. Set the policy before the first page or worker in a BrowserContext.
 
 ### Touch Emulation
 
@@ -138,8 +140,8 @@ To apply profile dimensions in headful mode, explicitly set both flags:
 ```bash
 chromium-browser \
   --bot-profile="/path/to/profile.enc" \
-  --bot-config-window=profile \
-  --bot-config-screen=profile
+  --bot-window=profile \
+  --bot-screen=profile
 ```
 
 ---
@@ -158,8 +160,8 @@ const browser = await chromium.launch({
   headless: true,
   args: [
     "--bot-profile=/path/to/profile.enc",
-    "--bot-config-window=1920x1080",
-    "--bot-config-screen=2560x1440",
+    "--bot-window=1920x1080",
+    "--bot-screen=2560x1440",
   ],
 });
 
@@ -178,8 +180,8 @@ const browser = await chromium.launch({
   headless: true,
   args: [
     "--bot-profile=/path/to/android-profile.enc",
-    '--bot-config-window={"innerWidth":412,"innerHeight":915,"devicePixelRatio":2.625}',
-    '--bot-config-screen={"width":412,"height":915,"colorDepth":24}',
+    '--bot-window={"innerWidth":412,"innerHeight":915,"devicePixelRatio":2.625}',
+    '--bot-screen={"width":412,"height":915,"colorDepth":24}',
     "--bot-mobile-force-touch",
   ],
 });
@@ -215,8 +217,8 @@ await client.send("BotBrowser.setBrowserContextFlags", {
   browserContextId: context._contextId,
   botbrowserFlags: [
     "--bot-profile=/path/to/profile.enc",
-    "--bot-config-window=1366x768",
-    "--bot-config-screen=1920x1080",
+    "--bot-window=1366x768",
+    "--bot-screen=1920x1080",
   ],
 });
 
@@ -245,9 +247,9 @@ To verify device emulation is working correctly:
 
 | Problem | Solution |
 |---------|----------|
-| Window size does not match profile | In headful mode, window defaults to `real`. Set `--bot-config-window=profile` explicitly. |
-| Screen dimensions show host values | In headful mode, screen defaults to `real`. Set `--bot-config-screen=profile` explicitly. |
-| DPR is wrong | Set DPR via the JSON format of `--bot-config-window` (include `devicePixelRatio` in the JSON object). |
+| Window size does not match profile | In headful mode, window defaults to `real`. Set `--bot-window=profile` explicitly. |
+| Screen dimensions show host values | In headful mode, screen defaults to `real`. Set `--bot-screen=profile` explicitly. |
+| DPR does not match the intended profile | Select `--bot-dpr=profile`. For a numeric override, include `devicePixelRatio` in the JSON form of `--bot-window`. |
 | Playwright overrides dimensions | Do not set explicit viewport options in Playwright. Let the profile control viewport dimensions. |
 | Touch events not available | Use `--bot-mobile-force-touch` or ensure the profile is an Android/mobile profile. |
 | Mobile keyboard does not change the visual viewport | Add `--bot-mobile-keyboard`, use a mobile profile, and focus an editable field through a trusted user action. |

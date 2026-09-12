@@ -2,6 +2,24 @@
 
 > **Research scope:** Entries in this changelog describe features evaluated in authorized labs and defensive benchmarking programs. Follow the [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md). We work with security vendors to investigate any misuse, so report concerns to [support@botbrowser.io](mailto:support@botbrowser.io).
 
+## [2026-09-12]
+### Major
+- **Chromium Core -> 152.0.7977.76**: Updated the BotBrowser 152 release line with upstream Web Platform, rendering, and security updates.
+
+### New
+- **Device Pixel Ratio Policy (`--bot-dpr`)**: Added profile-backed and host-backed display-scale policies, plus an experimental compatibility mode for selected layout needs.
+- **Unified CLI Names**: Profile override controls now use concise `--bot-*` names across the CLI reference, guides, launcher, and desktop control surface. Existing `--bot-config-*` commands remain supported for incremental migration.
+
+### Improvements
+- **Per-Context Identity and Display Consistency**: Improved profile-backed browser identity, window, viewport, and display-scale consistency across desktop and mobile contexts.
+- **Profile Media Capability Consistency**: Improved browser-family media, codec, and authentication capability behavior for supported profile workflows.
+- **Cross-Platform Rendering Consistency**: Improved profile-backed font and graphics behavior across supported host platforms.
+- **Browser Startup and Network Stability**: Improved startup window handling and resource stability for proxy-backed workloads.
+- **Proxy IP Family Declarations**: `--proxy-ip` now accepts `ipv4_none` and `ipv6_none`, so single-family proxy exits can declare the unavailable family without triggering an unnecessary lookup.
+- **WebRTC Candidate Consistency**: Improved candidate lifecycle and reported address consistency when proxy IP information is pending or limited to one address family.
+- **Media and Font Compatibility**: Improved profile-backed WebCodecs and codec matching, plus cross-platform font metrics for supported browser-family profiles.
+- **WebKit-Family Network Consistency**: Updated WebKit-family profiles in the 152.0.7977.76 release line with current TLS and HTTP/2 behavior across supported hosts.
+
 ## [2026-09-02]
 ### Major
 - **Chromium Core -> 152.0.7977.54**: Started the BotBrowser 152 release line with upstream Web Platform, rendering, and security updates.

@@ -121,9 +121,9 @@ await client.send('BotBrowser.setBrowserContextFlags', {
   browserContextId: context._contextId,
   botbrowserFlags: [
     '--bot-profile=/path/to/android-profile.enc',
-    '--bot-config-timezone=Asia/Tokyo',
-    '--bot-config-languages=ja-JP,en-US',
-    '--bot-config-locale=ja-JP'
+    '--bot-timezone=Asia/Tokyo',
+    '--bot-languages=ja-JP,en-US',
+    '--bot-locale=ja-JP'
   ]
 });
 
@@ -143,8 +143,8 @@ const client = await browser.target().createCDPSession();
 const { browserContextId } = await client.send('Target.createBrowserContext', {
   botbrowserFlags: [
     '--bot-profile=/path/to/windows-profile.enc',
-    '--bot-config-timezone=America/New_York',
-    '--bot-config-languages=en-US'
+    '--bot-timezone=America/New_York',
+    '--bot-languages=en-US'
   ]
 });
 
@@ -177,8 +177,8 @@ await client.send('BotBrowser.setBrowserContextFlags', {
   browserContextId: ctx1._contextId,
   botbrowserFlags: [
     '--bot-profile=/path/to/windows-profile.enc',
-    '--bot-config-timezone=America/Chicago',
-    '--bot-config-languages=en-US'
+    '--bot-timezone=America/Chicago',
+    '--bot-languages=en-US'
   ]
 });
 const page1 = await ctx1.newPage();
@@ -189,8 +189,8 @@ await client.send('BotBrowser.setBrowserContextFlags', {
   browserContextId: ctx2._contextId,
   botbrowserFlags: [
     '--bot-profile=/path/to/macos-profile.enc',
-    '--bot-config-timezone=Europe/London',
-    '--bot-config-languages=en-GB'
+    '--bot-timezone=Europe/London',
+    '--bot-languages=en-GB'
   ]
 });
 const page2 = await ctx2.newPage();
@@ -204,7 +204,7 @@ await Promise.all([
 
 ### Per-Context Proxy with Known IP
 
-Pass the proxy via context creation options, and set `--proxy-ip` via CDP to skip IP lookups. The value can be IPv4, IPv6, or a comma-separated pair containing one address from each family.
+Pass the proxy via context creation options, and set `--proxy-ip` via CDP to skip IP lookups. The value can be IPv4, IPv6, or a comma-separated pair containing one address from each family. Use `ipv4_none` or `ipv6_none` to declare an unavailable family and suppress its lookup.
 
 > **Note**: Puppeteer uses `proxyServer`, Playwright uses `proxy: { server }`. See [examples/](examples/) for framework-specific syntax. `--proxy-ip` only updates the exit IP for geo-detection. When calling `setBrowserContextFlags` with only `--proxy-ip` (no `--proxy-server`), the proxy routing set via `createBrowserContext({ proxyServer })` is preserved.
 
@@ -262,7 +262,7 @@ await client.send('BotBrowser.setBrowserContextFlags', {
     '--proxy-server=socks5://user:pass@us-proxy.example.com:1080',
     '--proxy-ip=203.0.113.1',
     '--proxy-bypass-list=localhost;127.0.0.1',
-    '--bot-config-timezone=America/Chicago'
+    '--bot-timezone=America/Chicago'
   ]
 });
 const page1 = await ctx1.newPage();
@@ -276,7 +276,7 @@ await client.send('BotBrowser.setBrowserContextFlags', {
     '--proxy-server=socks5://user:pass@uk-proxy.example.com:1080',
     '--proxy-ip=198.51.100.1',
     '--proxy-bypass-rgx=\\.static\\.example\\.com$',
-    '--bot-config-timezone=Europe/London'
+    '--bot-timezone=Europe/London'
   ]
 });
 const page2 = await ctx2.newPage();
@@ -302,16 +302,17 @@ Most `--bot-*` flags from [CLI_FLAGS.md](CLI_FLAGS.md) work with per-context con
 | Noise Seed | [`--bot-noise-seed`](CLI_FLAGS.md#flag-bot-noise-seed) for deterministic fingerprint variance |
 | Timing | [`--bot-time-scale`](CLI_FLAGS.md#flag-bot-time-scale) for performance timing control, [`--bot-time-seed`](CLI_FLAGS.md#flag-bot-time-seed) for deterministic timing diversity, [`--bot-stack-seed`](CLI_FLAGS.md#flag-bot-stack-seed) for stack depth variation, [`--bot-fps`](CLI_FLAGS.md#flag-bot-fps) for frame rate control |
 | Storage and Memory | [`--bot-js-heap-size-limit`](CLI_FLAGS.md#flag-bot-js-heap-size-limit) and [`--bot-storage-quota`](CLI_FLAGS.md#flag-bot-storage-quota) for profile, real, or explicit byte-value policy |
+| Display Scale | [`--bot-dpr`](CLI_FLAGS.md#flag-bot-dpr) for real, profile, or advanced device-pixel-ratio policy; see [Device Pixel Ratio Policy](docs/guides/fingerprint/DEVICE_PIXEL_RATIO.md) |
 | Network | [`--bot-network-info-override`](CLI_FLAGS.md#flag-bot-network-info-override) for profile, native, or custom JSON network information policy, [`--bot-local-dns`](CLI_FLAGS.md#flag-bot-local-dns) for context DNS policy |
 | WebRTC | [`--bot-webrtc-ice`](ADVANCED_FEATURES.md#webrtc-leak-protection) for ICE endpoint control |
-| Screen and Window | [`--bot-config-window`](docs/guides/fingerprint/SCREEN_WINDOW.md) and [`--bot-config-screen`](docs/guides/fingerprint/SCREEN_WINDOW.md) for profile-backed desktop and mobile display settings, [`--bot-always-active`](ADVANCED_FEATURES.md#active-window-emulation) to maintain active window state |
+| Screen and Window | [`--bot-window`](docs/guides/fingerprint/SCREEN_WINDOW.md) and [`--bot-screen`](docs/guides/fingerprint/SCREEN_WINDOW.md) for profile-backed desktop and mobile display settings, [`--bot-always-active`](ADVANCED_FEATURES.md#active-window-emulation) to maintain active window state |
 | Session | `--bot-inject-random-history` for session authenticity (supports precise count, e.g., `=15`), `--bot-cookies` for context-scoped cookie import at creation time |
 | Automation | [`--bot-cdp-coalesce`](CLI_FLAGS.md#flag-bot-cdp-coalesce) for context-scoped CDP hover movement, `--bot-script` for framework-less automation bootstrap at creation time |
 | Diagnostics | [`--bot-v8-log-exclude-api`](CLI_FLAGS.md#flag-bot-v8-log-exclude-api) for context-scoped V8Log API filters |
 | Google Headers | [`--bot-enable-variations-in-context`](CLI_FLAGS.md#flag-bot-enable-variations-in-context) for `X-Client-Data` consistency in incognito contexts (ENT Tier2) |
 | Proxy | [`--proxy-server`](CLI_FLAGS.md#flag-proxy-server) (configure proxy per-context via `botbrowserFlags`), [`--proxy-ip`](CLI_FLAGS.md#flag-proxy-ip) to skip IP lookups |
 | HTTP | [`--bot-custom-headers`](CLI_FLAGS.md#flag-bot-custom-headers) for custom HTTP request headers per context |
-| Config | [`--bot-config-platform`, `--bot-config-timezone`, `--bot-config-noise-canvas`, `--bot-config-webgl=disabled`, `--bot-config-webgpu=disabled`, etc.](CLI_FLAGS.md#profile-configuration-override-flags) |
+| Config | [`--bot-platform`, `--bot-timezone`, `--bot-noise-canvas`, `--bot-webgl=disabled`, `--bot-webgpu=disabled`, etc.](CLI_FLAGS.md#profile-configuration-override-flags) |
 
 See [CLI_FLAGS.md](CLI_FLAGS.md) for the complete flag reference.
 
@@ -350,7 +351,7 @@ Supported live session controls remain available after identity sealing when the
 
 ⚠️ UDP proxy support requires an eligible profile. Use `--bot-udp-proxy=true` or `false` in a context to choose its UDP and HTTP/3 policy; process-level `--disable-quic` still takes priority. LocalDNS policy can be assigned per context and remains a supported live-safe policy after identity sealing.
 
-⚠️ Each context can load a completely different profile (`--bot-profile`), or use `--bot-config-*` flags to override specific settings from the browser's base profile.
+⚠️ Each context can load a completely different profile (`--bot-profile`), or use `--bot-*` flags to override specific settings from the browser's base profile.
 
 ⚠️ A process-level `--bot-script` runs once at browser startup and is not replayed when new BrowserContexts are created. Pass `--bot-script` explicitly in a context's `botbrowserFlags` when that context needs its own automation bootstrap.
 

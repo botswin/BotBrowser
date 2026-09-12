@@ -21,7 +21,7 @@
 
 Android WebView is the embedded browser component that Android apps use to display web content. It differs from regular Chrome in several ways: the User-Agent string includes a `wv` token, Client Hints report different brand values, and certain JavaScript APIs expose app-specific objects like `window.android`. Each of these differences is a fingerprint surface that must remain internally consistent to prevent identity mismatches.
 
-BotBrowser can emulate WebView identity using the `--bot-config-browser-brand=webview` flag. This changes the User-Agent, `navigator.userAgentData.brands`, Client Hints headers, and other surfaces to match a real WebView environment.
+BotBrowser can emulate WebView identity using the `--bot-browser-brand=webview` flag. This changes the User-Agent, `navigator.userAgentData.brands`, Client Hints headers, and other surfaces to match a real WebView environment.
 
 ---
 
@@ -32,11 +32,11 @@ BotBrowser can emulate WebView identity using the `--bot-config-browser-brand=we
 ```bash
 chromium-browser \
   --bot-profile="/path/to/android-profile.enc" \
-  --bot-config-browser-brand=webview \
-  --bot-config-platform=Android \
-  --bot-config-platform-version=13 \
-  --bot-config-model=SM-G991B \
-  --bot-config-mobile=true \
+  --bot-browser-brand=webview \
+  --bot-platform=Android \
+  --bot-platform-version=13 \
+  --bot-model=SM-G991B \
+  --bot-mobile=true \
   --user-agent="Mozilla/5.0 (Linux; Android {platform-version}; {model} Build/TP1A.220624.021; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/{ua-full-version} Mobile Safari/537.36"
 ```
 
@@ -52,7 +52,7 @@ WebView differs from regular Chrome in several identity surfaces: the User-Agent
 
 ### What BotBrowser Configures
 
-When you set `--bot-config-browser-brand=webview`:
+When you set `--bot-browser-brand=webview`:
 
 1. **Brand identity.** `navigator.userAgentData.brands` includes `"Android WebView"` instead of `"Google Chrome"`.
 2. **Client Hints.** All Client Hints headers reflect the WebView brand.
@@ -69,7 +69,7 @@ Many Android apps inject an `X-Requested-With` header containing their package n
 ```bash
 chromium-browser \
   --bot-profile="/path/to/android-profile.enc" \
-  --bot-config-browser-brand=webview \
+  --bot-browser-brand=webview \
   --bot-custom-headers='{"X-Requested-With":"com.example.app"}'
 ```
 
@@ -98,13 +98,13 @@ const browser = await chromium.launch({
   headless: true,
   args: [
     "--bot-profile=/path/to/android-profile.enc",
-    "--bot-config-browser-brand=webview",
-    "--bot-config-platform=Android",
-    "--bot-config-platform-version=13",
-    "--bot-config-model=SM-G991B",
-    "--bot-config-mobile=true",
-    "--bot-config-architecture=arm",
-    "--bot-config-bitness=64",
+    "--bot-browser-brand=webview",
+    "--bot-platform=Android",
+    "--bot-platform-version=13",
+    "--bot-model=SM-G991B",
+    "--bot-mobile=true",
+    "--bot-architecture=arm",
+    "--bot-bitness=64",
     '--user-agent=Mozilla/5.0 (Linux; Android {platform-version}; {model} Build/TP1A.220624.021; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/{ua-full-version} Mobile Safari/537.36',
     '--bot-custom-headers={"X-Requested-With":"com.example.app"}',
     "--proxy-server=socks5://user:pass@proxy.example.com:1080",
@@ -136,9 +136,9 @@ const browser = await chromium.launch({
   headless: true,
   args: [
     "--bot-profile=/path/to/android-profile.enc",
-    "--bot-config-browser-brand=webview",
-    "--bot-config-platform=Android",
-    "--bot-config-mobile=true",
+    "--bot-browser-brand=webview",
+    "--bot-platform=Android",
+    "--bot-mobile=true",
     '--bot-custom-headers={"X-Requested-With":"com.example.app"}',
   ],
 });
@@ -152,7 +152,7 @@ const browser = await chromium.launch({
 
 | Problem | Solution |
 |---------|----------|
-| Brands still show "Google Chrome" | Ensure `--bot-config-browser-brand=webview` is in the `args` array. WebView brand requires ENT Tier3. |
+| Brands still show "Google Chrome" | Ensure `--bot-browser-brand=webview` is in the `args` array. WebView brand requires ENT Tier3. |
 | User-Agent missing `wv` token | Set `--user-agent` with the WebView UA format. BotBrowser does not auto-modify the UA string for WebView. |
 | Custom headers not sent | Use `--bot-custom-headers` (CLI) or `BotBrowser.setCustomHeaders` (CDP on browser-level session). |
 

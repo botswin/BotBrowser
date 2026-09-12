@@ -90,7 +90,7 @@ BotBrowser configures all platform-related surfaces to report Android identity: 
 
 - **Mobile viewport.** The viewport matches the Android device's screen dimensions from the profile.
 - **Device pixel ratio.** Reflects the profile's DPR (commonly 2.0 or 3.0 for mobile devices).
-- **Screen orientation.** Reports the profile-defined orientation. Use `--bot-config-orientation=landscape|portrait` to control orientation at launch for both phone and tablet profiles.
+- **Screen orientation.** Reports the profile-defined orientation. Use `--bot-orientation=landscape|portrait` to control orientation at launch for both phone and tablet profiles.
 - **Virtual keyboard viewport.** Use `--bot-mobile-keyboard` when editable-field focus should reduce the mobile visual viewport. The layout viewport remains unchanged.
 
 ### DevTools Interface
@@ -109,18 +109,18 @@ Android-target contexts prevent unsupported external URL schemes from opening ap
 
 The key difference between phone and tablet emulation is the mobile flag. Phones report `true`, tablets report `false`. This flag affects both JavaScript values and Client Hints headers.
 
-Use `--bot-config-mobile` to override this value:
+Use `--bot-mobile` to override this value:
 
 ```bash
 # Phone emulation
 chromium-browser \
   --bot-profile="/path/to/android-profile.enc" \
-  --bot-config-mobile=true
+  --bot-mobile=true
 
 # Tablet emulation
 chromium-browser \
   --bot-profile="/path/to/android-profile.enc" \
-  --bot-config-mobile=false
+  --bot-mobile=false
 ```
 
 ---
@@ -138,9 +138,9 @@ const browser = await chromium.launch({
   args: [
     "--bot-profile=/path/to/android-profile.enc",
     "--proxy-server=socks5://user:pass@proxy.example.com:1080",
-    "--bot-config-model=SM-G991B",
-    "--bot-config-platform-version=14",
-    "--bot-config-mobile=true",
+    "--bot-model=SM-G991B",
+    "--bot-platform-version=14",
+    "--bot-mobile=true",
   ],
 });
 ```
@@ -151,12 +151,12 @@ const browser = await chromium.launch({
 chromium-browser \
   --bot-profile="/path/to/android-profile.enc" \
   --user-agent="Mozilla/5.0 (Linux; Android {platform-version}; {model}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/{ua-full-version} Mobile Safari/537.36" \
-  --bot-config-platform=Android \
-  --bot-config-platform-version=13 \
-  --bot-config-model=SM-G991B \
-  --bot-config-mobile=true \
-  --bot-config-architecture=arm \
-  --bot-config-bitness=64
+  --bot-platform=Android \
+  --bot-platform-version=13 \
+  --bot-model=SM-G991B \
+  --bot-mobile=true \
+  --bot-architecture=arm \
+  --bot-bitness=64
 ```
 
 ### Android tablet in landscape mode
@@ -167,7 +167,7 @@ const browser = await chromium.launch({
   headless: true,
   args: [
     "--bot-profile=/path/to/android-tablet-profile.enc",
-    "--bot-config-orientation=landscape",
+    "--bot-orientation=landscape",
   ],
 });
 ```
@@ -212,12 +212,12 @@ Trusted user focus on an editable field reduces `visualViewport.height` while ke
 
 | Problem | Solution |
 |---------|----------|
-| `navigator.userAgentData.mobile` is `false` | Use `--bot-config-mobile=true` to force phone mode, or verify the profile is configured for phone (not tablet). |
+| `navigator.userAgentData.mobile` is `false` | Use `--bot-mobile=true` to force phone mode, or verify the profile is configured for phone (not tablet). |
 | Touch events not firing | Ensure the profile is an Android profile and `--bot-mobile-force-touch` is set if needed. |
 | Viewport too large for mobile | Do not set explicit viewport options in Playwright. Let the Android profile control dimensions. |
 | Editable-field focus does not resize the visual viewport | Add `--bot-mobile-keyboard` and confirm the loaded profile is mobile. The feature is disabled by default and does not apply to desktop profiles. |
 | Android profile not loading | Verify your license supports PRO features. Android profiles require PRO or higher. |
-| Tablet orientation not changing | Use `--bot-config-orientation=landscape` or `portrait`. This works for both phone and tablet Android profiles. |
+| Tablet orientation not changing | Use `--bot-orientation=landscape` or `portrait`. This works for both phone and tablet Android profiles. |
 
 ---
 

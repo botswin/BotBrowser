@@ -380,6 +380,16 @@
 
                 <div class="form-row margin-top">
                     <mat-form-field class="flex-1">
+                        <mat-label>Device Pixel Ratio</mat-label>
+                        <mat-select formControlName="botDpr">
+                            <mat-option [value]="null">Default</mat-option>
+                            @for (mode of dprModes; track mode) {
+                                <mat-option [value]="mode">{{ mode }}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="flex-1">
                         <mat-label>Keyboard Layout</mat-label>
                         <mat-select formControlName="botConfigKeyboard">
                             <mat-option [value]="null">Default</mat-option>

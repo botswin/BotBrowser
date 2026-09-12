@@ -42,10 +42,10 @@ Canvas noise is enabled by default. To control it explicitly:
 
 ```bash
 # Enable canvas noise (default)
---bot-config-noise-canvas=true
+--bot-noise-canvas=true
 
 # Disable canvas noise
---bot-config-noise-canvas=false
+--bot-noise-canvas=false
 ```
 
 ### Noise Seed for Reproducibility
@@ -98,7 +98,7 @@ To verify protection is active:
 | Problem | Solution |
 |---------|----------|
 | Canvas fingerprint changes between sessions with same profile | Verify you are using the same `--bot-noise-seed` value. Without a fixed seed, noise varies per session by design. |
-| Canvas fingerprint differs between headless and headful mode | Ensure `--bot-config-noise-canvas=true` is set. Check that the same profile is used in both modes. |
+| Canvas fingerprint differs between headless and headful mode | Ensure `--bot-noise-canvas=true` is set. Check that the same profile is used in both modes. |
 | Canvas output matches raw system output (no noise) | Confirm the profile is loaded correctly with `--bot-profile`. Check for error messages at startup. |
 | Different fingerprint on different host OS | This is expected without a profile. With a BotBrowser profile, Canvas output should be identical across hosts. |
 | Wide-gamut canvas behaves differently from standard canvas | Use BotBrowser 150.0.7871.46 or newer with a matching profile package. Canvas protection covers both standard and `display-p3` Canvas 2D workflows. |

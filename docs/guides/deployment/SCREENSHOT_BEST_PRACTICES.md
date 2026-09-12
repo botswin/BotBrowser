@@ -147,7 +147,7 @@ To override the profile's DPI for a specific use case:
 ```bash
 chromium-browser \
     --bot-profile="/path/to/profile.enc" \
-    --bot-config-disable-device-scale-factor=true
+    --bot-disable-device-scale-factor=true
 ```
 
 ### Screenshots on headless Linux

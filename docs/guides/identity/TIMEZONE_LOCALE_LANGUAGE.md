@@ -49,9 +49,9 @@ chromium-browser \
 chromium-browser \
   --bot-profile="/path/to/profile.enc" \
   --proxy-server=socks5://user:pass@proxy.example.com:1080 \
-  --bot-config-timezone=Europe/Berlin \
-  --bot-config-locale=de-DE \
-  --bot-config-languages=de-DE,de,en-US,en
+  --bot-timezone=Europe/Berlin \
+  --bot-locale=de-DE \
+  --bot-languages=de-DE,de,en-US,en
 ```
 
 ---
@@ -60,7 +60,7 @@ chromium-browser \
 
 ## How It Works
 
-### Timezone (`--bot-config-timezone`)
+### Timezone (`--bot-timezone`)
 
 Controls how the browser reports time zone information across all APIs.
 
@@ -85,7 +85,7 @@ All date/time formatting and timezone reporting APIs reflect the configured time
 | Australia Eastern | `Australia/Sydney` |
 | Brazil | `America/Sao_Paulo` |
 
-### Locale (`--bot-config-locale`)
+### Locale (`--bot-locale`)
 
 Controls the browser's locale for number formatting, date formatting, and other internationalization APIs.
 
@@ -96,7 +96,7 @@ Controls the browser's locale for number formatting, date formatting, and other 
 
 All internationalization formatting APIs use the configured locale as their default.
 
-### Languages (`--bot-config-languages`)
+### Languages (`--bot-languages`)
 
 Controls the browser's reported language preferences.
 
@@ -111,7 +111,7 @@ All language-related JavaScript properties and HTTP headers reflect the configur
 
 Settings are resolved in this order (highest priority first):
 
-1. **CLI flags** (`--bot-config-timezone`, `--bot-config-locale`, `--bot-config-languages`)
+1. **CLI flags** (`--bot-timezone`, `--bot-locale`, `--bot-languages`)
 2. **Profile `configs`** (`timezone`, `locale`, `languages` fields in the profile JSON)
 3. **Auto-detected** from proxy IP (default behavior)
 
@@ -134,9 +134,9 @@ const browser = await chromium.launch({
   args: [
     "--bot-profile=/path/to/profile.enc",
     "--proxy-server=socks5://user:pass@de-proxy.example.com:1080",
-    "--bot-config-timezone=Europe/Berlin",
-    "--bot-config-locale=de-DE",
-    "--bot-config-languages=de-DE,de,en-US,en",
+    "--bot-timezone=Europe/Berlin",
+    "--bot-locale=de-DE",
+    "--bot-languages=de-DE,de,en-US,en",
   ],
 });
 
@@ -157,9 +157,9 @@ const browser = await chromium.launch({
   args: [
     "--bot-profile=/path/to/profile.enc",
     "--proxy-server=socks5://user:pass@jp-proxy.example.com:1080",
-    "--bot-config-timezone=Asia/Tokyo",
-    "--bot-config-locale=ja-JP",
-    "--bot-config-languages=ja-JP,en-US,en",
+    "--bot-timezone=Asia/Tokyo",
+    "--bot-locale=ja-JP",
+    "--bot-languages=ja-JP,en-US,en",
   ],
 });
 ```
@@ -197,9 +197,9 @@ await client.send("BotBrowser.setBrowserContextFlags", {
   botbrowserFlags: [
     "--bot-profile=/path/to/profile.enc",
     "--proxy-server=socks5://user:pass@br-proxy.example.com:1080",
-    "--bot-config-timezone=America/Sao_Paulo",
-    "--bot-config-locale=pt-BR",
-    "--bot-config-languages=pt-BR,pt,en-US,en",
+    "--bot-timezone=America/Sao_Paulo",
+    "--bot-locale=pt-BR",
+    "--bot-languages=pt-BR,pt,en-US,en",
   ],
 });
 
@@ -216,8 +216,8 @@ await page.goto("https://example.com");
 | Problem | Solution |
 |---------|----------|
 | Timezone shows host system time | Use `--proxy-server` in `args`, not Playwright's `proxy` option. Auto-detection requires BotBrowser to handle the proxy. |
-| `navigator.language` not matching | Set `--bot-config-languages` with the desired language first in the list (e.g., `de-DE,de,en-US,en`). |
-| Locale formatting is wrong | Set `--bot-config-locale` to a valid BCP 47 tag (e.g., `de-DE`, not `de_DE`). |
+| `navigator.language` not matching | Set `--bot-languages` with the desired language first in the list (e.g., `de-DE,de,en-US,en`). |
+| Locale formatting is wrong | Set `--bot-locale` to a valid BCP 47 tag (e.g., `de-DE`, not `de_DE`). |
 | Auto-detection picks wrong timezone | The proxy IP may geolocate to a different region than expected. Use manual overrides. |
 
 ---

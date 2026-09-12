@@ -20,7 +20,7 @@
 
 Different Chromium-based browsers report different brand identities through their Client Hints values, HTTP headers, and User-Agent string. Each brand also follows its own version cadence. For example, Microsoft Edge releases on a different schedule than Google Chrome, so their full version numbers diverge even when they share the same Chromium major version.
 
-BotBrowser lets you switch between brand identities at launch time using the `--bot-config-browser-brand` flag. When you set a brand, BotBrowser automatically adjusts the User-Agent string, `navigator.userAgentData` brands list, Client Hints headers, and all related API surfaces to match that brand's identity consistently.
+BotBrowser lets you switch between brand identities at launch time using the `--bot-browser-brand` flag. When you set a brand, BotBrowser automatically adjusts the User-Agent string, `navigator.userAgentData` brands list, Client Hints headers, and all related API surfaces to match that brand's identity consistently.
 
 ---
 
@@ -32,8 +32,8 @@ BotBrowser lets you switch between brand identities at launch time using the `--
 # Launch as Microsoft Edge
 chromium-browser \
   --bot-profile="/path/to/profile.enc" \
-  --bot-config-browser-brand=edge \
-  --bot-config-brand-full-version=142.0.3595.65
+  --bot-browser-brand=edge \
+  --bot-brand-full-version=142.0.3595.65
 ```
 
 ```javascript
@@ -44,8 +44,8 @@ const browser = await chromium.launch({
   headless: true,
   args: [
     "--bot-profile=/path/to/profile.enc",
-    "--bot-config-browser-brand=edge",
-    "--bot-config-brand-full-version=142.0.3595.65",
+    "--bot-browser-brand=edge",
+    "--bot-brand-full-version=142.0.3595.65",
   ],
 });
 
@@ -67,7 +67,7 @@ await browser.close();
 
 ## How It Works
 
-When you set `--bot-config-browser-brand`, BotBrowser modifies the following surfaces:
+When you set `--bot-browser-brand`, BotBrowser modifies the following surfaces:
 
 1. **User-Agent string.** The browser name and version in the UA string change to match the selected brand.
 
@@ -75,7 +75,7 @@ When you set `--bot-config-browser-brand`, BotBrowser modifies the following sur
 
 3. **Client Hints headers.** All Client Hints headers reflect the selected brand and its version.
 
-4. **Full version list.** When `--bot-config-brand-full-version` is provided, the brand-specific version appears in high-entropy Client Hints results, separate from the base Chromium version.
+4. **Full version list.** When `--bot-brand-full-version` is provided, the brand-specific version appears in high-entropy Client Hints results, separate from the base Chromium version.
 
 These changes apply consistently across the main thread, Workers, and HTTP request headers.
 
@@ -103,15 +103,15 @@ For example, when Chromium is at version 142:
 - **Edge** might be `142.0.3595.65`
 - **Opera** might be `142.0.5481.40`
 
-Use `--bot-config-brand-full-version` to set the brand-specific version, and `--bot-config-ua-full-version` to set the Chromium version. Both should share the same major version number.
+Use `--bot-brand-full-version` to set the brand-specific version, and `--bot-ua-full-version` to set the Chromium version. Both should share the same major version number.
 
 ```bash
 # Edge with correct version cadence
 chromium-browser \
   --bot-profile="/path/to/profile.enc" \
-  --bot-config-browser-brand=edge \
-  --bot-config-ua-full-version=142.0.7444.60 \
-  --bot-config-brand-full-version=142.0.3595.65
+  --bot-browser-brand=edge \
+  --bot-ua-full-version=142.0.7444.60 \
+  --bot-brand-full-version=142.0.3595.65
 ```
 
 ---
@@ -128,8 +128,8 @@ const browser = await chromium.launch({
   headless: true,
   args: [
     "--bot-profile=/path/to/profile.enc",
-    "--bot-config-browser-brand=edge",
-    "--bot-config-brand-full-version=142.0.3595.65",
+    "--bot-browser-brand=edge",
+    "--bot-brand-full-version=142.0.3595.65",
     "--proxy-server=socks5://user:pass@proxy.example.com:1080",
   ],
 });
@@ -143,7 +143,7 @@ const browser = await chromium.launch({
   headless: true,
   args: [
     "--bot-profile=/path/to/profile.enc",
-    "--bot-config-browser-brand=brave",
+    "--bot-browser-brand=brave",
   ],
 });
 ```
@@ -167,7 +167,7 @@ const { browserContextIds: after1 } = await client.send("Target.getBrowserContex
 const ctxId1 = after1.filter((id) => !before1.includes(id))[0];
 await client.send("BotBrowser.setBrowserContextFlags", {
   browserContextId: ctxId1,
-  botbrowserFlags: ["--bot-config-browser-brand=chrome"],
+  botbrowserFlags: ["--bot-browser-brand=chrome"],
 });
 const page1 = await ctx1.newPage();
 
@@ -179,8 +179,8 @@ const ctxId2 = after2.filter((id) => !before2.includes(id))[0];
 await client.send("BotBrowser.setBrowserContextFlags", {
   browserContextId: ctxId2,
   botbrowserFlags: [
-    "--bot-config-browser-brand=edge",
-    "--bot-config-brand-full-version=142.0.3595.65",
+    "--bot-browser-brand=edge",
+    "--bot-brand-full-version=142.0.3595.65",
   ],
 });
 const page2 = await ctx2.newPage();
@@ -194,8 +194,8 @@ const page2 = await ctx2.newPage();
 
 | Problem | Solution |
 |---------|----------|
-| Brand not reflected in UA string | Ensure `--bot-config-browser-brand` is passed in `args`, not as a Playwright option. |
-| Version mismatch in Client Hints | Set `--bot-config-brand-full-version` to the brand-specific version, not the Chromium version. |
+| Brand not reflected in UA string | Ensure `--bot-browser-brand` is passed in `args`, not as a Playwright option. |
+| Version mismatch in Client Hints | Set `--bot-brand-full-version` to the brand-specific version, not the Chromium version. |
 | WebView brand not working | WebView requires ENT Tier3. See [Android WebView](../platform/ANDROID_WEBVIEW.md). |
 
 ---

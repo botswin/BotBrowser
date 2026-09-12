@@ -143,9 +143,9 @@ By default, BotBrowser auto-detects these from the proxy IP. Override when you n
 chromium-browser \
   --bot-profile="/path/to/profile.enc" \
   --proxy-server=socks5://user:pass@proxy.example.com:1080 \
-  --bot-config-timezone=Europe/Berlin \
-  --bot-config-locale=de-DE \
-  --bot-config-languages=de-DE,de,en-US,en \
+  --bot-timezone=Europe/Berlin \
+  --bot-locale=de-DE \
+  --bot-languages=de-DE,de,en-US,en \
   --user-data-dir="$(mktemp -d)"
 ```
 
@@ -155,7 +155,7 @@ chromium-browser \
 ```bash
 chromium-browser \
   --bot-profile="/path/to/profile.enc" \
-  --bot-config-timezone=real \
+  --bot-timezone=real \
   --user-data-dir="$(mktemp -d)"
 ```
 
@@ -185,9 +185,9 @@ Turn off canvas noise while keeping other noise active:
 ```bash
 chromium-browser \
   --bot-profile="/path/to/profile.enc" \
-  --bot-config-noise-canvas=false \
-  --bot-config-noise-webgl-image=true \
-  --bot-config-noise-audio-context=true \
+  --bot-noise-canvas=false \
+  --bot-noise-webgl-image=true \
+  --bot-noise-audio-context=true \
   --user-data-dir="$(mktemp -d)"
 ```
 
@@ -226,7 +226,7 @@ Prevent all WebRTC activity, including ICE candidate gathering:
 ```bash
 chromium-browser \
   --bot-profile="/path/to/profile.enc" \
-  --bot-config-webrtc=disabled \
+  --bot-webrtc=disabled \
   --user-data-dir="$(mktemp -d)"
 ```
 
@@ -254,8 +254,8 @@ chromium-browser \
 ```bash
 chromium-browser \
   --bot-profile="/path/to/profile.enc" \
-  --bot-config-window=1920x1080 \
-  --bot-config-screen=2560x1440 \
+  --bot-window=1920x1080 \
+  --bot-screen=2560x1440 \
   --user-data-dir="$(mktemp -d)"
 ```
 
@@ -267,8 +267,8 @@ Desktop profiles default to using real system dimensions in headful mode. To use
 ```bash
 chromium-browser \
   --bot-profile="/path/to/profile.enc" \
-  --bot-config-window=profile \
-  --bot-config-screen=profile \
+  --bot-window=profile \
+  --bot-screen=profile \
   --user-data-dir="$(mktemp -d)"
 ```
 
@@ -284,8 +284,8 @@ chromium-browser \
 ```bash
 chromium-browser \
   --bot-profile="/path/to/profile.enc" \
-  --bot-config-browser-brand=edge \
-  --bot-config-brand-full-version=142.0.3595.65 \
+  --bot-browser-brand=edge \
+  --bot-brand-full-version=142.0.3595.65 \
   --user-data-dir="$(mktemp -d)"
 ```
 
@@ -296,13 +296,13 @@ chromium-browser \
 chromium-browser \
   --bot-profile="/path/to/android-profile.enc" \
   --user-agent="Mozilla/5.0 (Linux; Android {platform-version}; {model} Build/TP1A.220624.021; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/{ua-full-version} Mobile Safari/537.36" \
-  --bot-config-browser-brand=webview \
-  --bot-config-platform=Android \
-  --bot-config-platform-version=13 \
-  --bot-config-model=SM-G991B \
-  --bot-config-mobile=true \
-  --bot-config-architecture=arm \
-  --bot-config-bitness=64 \
+  --bot-browser-brand=webview \
+  --bot-platform=Android \
+  --bot-platform-version=13 \
+  --bot-model=SM-G991B \
+  --bot-mobile=true \
+  --bot-architecture=arm \
+  --bot-bitness=64 \
   --user-data-dir="$(mktemp -d)"
 ```
 
@@ -417,10 +417,10 @@ For Per-Context Fingerprint, pass the same flag through `botbrowserFlags` when c
 
 | Problem | Solution |
 |---------|----------|
-| Flags have no effect | Ensure `--bot-config-*` flags use the correct format. Check for typos in flag names. |
+| Flags have no effect | Ensure `--bot-*` flags use the correct format. Check for typos in flag names. |
 | Proxy not working | Verify the full URL format: `scheme://user:pass@host:port`. Test the proxy independently first. |
-| Timezone mismatch | Use `--bot-config-timezone` to override. Ensure the IANA timezone name is correct (e.g., `America/New_York`, not `EST`). |
-| Window size ignored in headful | Desktop profiles default to `real` system dimensions. Set `--bot-config-window=profile` explicitly. |
+| Timezone mismatch | Use `--bot-timezone` to override. Ensure the IANA timezone name is correct (e.g., `America/New_York`, not `EST`). |
+| Window size ignored in headful | Desktop profiles default to `real` system dimensions. Set `--bot-window=profile` explicitly. |
 | JSON parse errors in cookies/bookmarks | Ensure JSON is valid. On Windows CMD, use double quotes for the outer string and escape inner quotes. |
 
 ---

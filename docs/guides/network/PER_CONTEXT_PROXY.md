@@ -122,7 +122,7 @@ Explicit geographic settings are resolved independently for each context and eac
 
 ### Using --proxy-ip to Skip Detection
 
-When you know the exit IP for each proxy, pass it via `--proxy-ip` to skip the auto-detection step. This eliminates the one-time IP lookup overhead per context. The proxy routing set via `createBrowserContext({ proxyServer })` is preserved:
+When you know the exit IP for each proxy, pass it via `--proxy-ip` to skip the auto-detection step. Use a comma-separated value with `ipv4_none` or `ipv6_none` when the proxy has no exit address in one family. This eliminates the one-time IP lookup overhead per context. The proxy routing set via `createBrowserContext({ proxyServer })` is preserved:
 
 ```javascript
 const ctx = await browser.createBrowserContext({

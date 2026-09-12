@@ -42,7 +42,7 @@ By default, BotBrowser uses the profile's WebGPU adapter data. No extra flags ne
 
 ## Configuration
 
-The `--bot-config-webgpu` flag controls WebGPU behavior:
+The `--bot-webgpu` flag controls WebGPU behavior:
 
 | Value | Behavior |
 |-------|----------|
@@ -54,17 +54,17 @@ The `--bot-config-webgpu` flag controls WebGPU behavior:
 # Use profile GPU identity (default)
 chromium-browser \
     --bot-profile="/path/to/profile.enc" \
-    --bot-config-webgpu=profile
+    --bot-webgpu=profile
 
 # Use host GPU directly
 chromium-browser \
     --bot-profile="/path/to/profile.enc" \
-    --bot-config-webgpu=real
+    --bot-webgpu=real
 
 # Disable WebGPU
 chromium-browser \
     --bot-profile="/path/to/profile.enc" \
-    --bot-config-webgpu=disabled
+    --bot-webgpu=disabled
 ```
 
 ---
@@ -106,7 +106,7 @@ If your workload does not require WebGPU, disable it to reduce resource usage:
 ```bash
 chromium-browser \
     --bot-profile="/path/to/profile.enc" \
-    --bot-config-webgpu=disabled \
+    --bot-webgpu=disabled \
     --user-data-dir="$(mktemp -d)"
 ```
 
@@ -119,7 +119,7 @@ chromium-browser \
 | Problem | Solution |
 |---------|----------|
 | `requestAdapter()` returns `null` | On headless Linux servers, ensure GPU emulation is active (default). If you set `--bot-gpu-emulation=false`, use `--use-angle=gl` with `libgl1-mesa-dri` installed so ANGLE picks up Mesa llvmpipe. Do not add `--disable-gpu`: it disables WebGPU adapter discovery on current Chromium. Full backend matrix in [Linux GPU Backend Selection](../deployment/LINUX_GPU_BACKEND.md). |
-| WebGPU shows host GPU info | Check that `--bot-config-webgpu` is set to `profile` (default) and not `real`. |
+| WebGPU shows host GPU info | Check that `--bot-webgpu` is set to `profile` (default) and not `real`. |
 | High CPU during WebGPU operations | Expected on software-rendered environments. See [Linux GPU Backend Selection](../deployment/LINUX_GPU_BACKEND.md#cpu-profile) for CPU behavior across SwiftShader, Mesa llvmpipe, and lavapipe. |
 
 ---
@@ -132,7 +132,7 @@ chromium-browser \
 - [Canvas Fingerprint Protection](CANVAS.md). Deterministic noise for Canvas 2D rendering.
 - [Linux GPU Backend Selection](../deployment/LINUX_GPU_BACKEND.md). Pick and migrate between Mesa llvmpipe, SwiftShader, and lavapipe software rendering backends on Linux servers.
 - [Performance Optimization](../deployment/PERFORMANCE_OPTIMIZATION.md). General performance tuning for production workloads.
-- [`--bot-config-webgpu`](../../../CLI_FLAGS.md#flag-bot-config-webgpu). CLI values and availability.
+- [`--bot-webgpu`](../../../CLI_FLAGS.md#flag-bot-webgpu). CLI values and availability.
 
 ---
 

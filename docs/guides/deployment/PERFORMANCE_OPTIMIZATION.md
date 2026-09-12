@@ -97,6 +97,8 @@ Trimmed Build is not on the public [Releases](https://github.com/botswin/BotBrow
 
 When you know the proxy's exit IP, provide it directly to save one HTTP request per launch:
 
+If the proxy has no address in one family, use `ipv4_none` or `ipv6_none` in the comma-separated value so BotBrowser does not wait for that family's lookup.
+
 ```javascript
 const browser = await chromium.launch({
     executablePath: BOTBROWSER_EXEC_PATH,
@@ -116,9 +118,9 @@ args: [
     `--bot-profile=${BOT_PROFILE_PATH}`,
     "--proxy-server=socks5://user:pass@proxy.example.com:1080",
     "--proxy-ip=203.0.113.1",
-    "--bot-config-timezone=Europe/London",
-    "--bot-config-locale=en-GB",
-    "--bot-config-languages=en-GB,en",
+    "--bot-timezone=Europe/London",
+    "--bot-locale=en-GB",
+    "--bot-languages=en-GB,en",
 ],
 ```
 

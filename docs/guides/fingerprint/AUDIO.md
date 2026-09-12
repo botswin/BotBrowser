@@ -40,10 +40,10 @@ AudioContext noise is enabled by default. To control it explicitly:
 
 ```bash
 # Enable audio context noise (default)
---bot-config-noise-audio-context=true
+--bot-noise-audio-context=true
 
 # Disable audio context noise
---bot-config-noise-audio-context=false
+--bot-noise-audio-context=false
 ```
 
 ### Noise Seed for Reproducibility
@@ -90,7 +90,7 @@ To verify protection is active:
 | Problem | Solution |
 |---------|----------|
 | Audio fingerprint changes between sessions | Use `--bot-noise-seed` with a fixed value for reproducible output. Without a fixed seed, noise varies per session by design. |
-| Audio fingerprint matches raw system output | Verify the profile is loaded with `--bot-profile`. Check for startup errors. Confirm `--bot-config-noise-audio-context` is not set to `false`. |
+| Audio fingerprint matches raw system output | Verify the profile is loaded with `--bot-profile`. Check for startup errors. Confirm `--bot-noise-audio-context` is not set to `false`. |
 | Different audio hash in Worker vs main thread | This should not happen with BotBrowser. Check that the profile is loaded and noise is enabled. Report the issue if it persists. |
 | AudioContext not available | Some headless configurations may not initialize audio. Ensure the BotBrowser binary supports audio in your deployment mode. |
 

@@ -61,9 +61,9 @@ Use one Windows profile in both environments to keep deployment identity stable.
 ```bash
 --bot-profile="/path/to/windows-profile.enc" \
 --proxy-server=socks5://user:pass@de-proxy.example.com:1080 \
---bot-config-timezone=Europe/Berlin \
---bot-config-locale=de-DE \
---bot-config-languages=de-DE,de,en-US,en
+--bot-timezone=Europe/Berlin \
+--bot-locale=de-DE \
+--bot-languages=de-DE,de,en-US,en
 ```
 
 ### Multiple Windows identities per browser (ENT Tier3)

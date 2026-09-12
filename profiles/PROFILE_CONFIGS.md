@@ -53,15 +53,15 @@ Availability applies to custom values or behavior where noted. `Core` fields are
 
 | Field | Values | Default |
 |-------|--------|---------|
-| [`languages`](../CLI_FLAGS.md#flag-bot-config-languages) | `auto`, or a language list such as `en-US,en` (ENT Tier1 custom) | `auto` |
-| [`locale`](../CLI_FLAGS.md#flag-bot-config-locale) | `auto`, or a locale such as `en-US` (ENT Tier1 custom) | `auto` |
-| [`timezone`](../CLI_FLAGS.md#flag-bot-config-timezone) | `auto`, `real`, or an IANA timezone (ENT Tier1 custom) | `auto` |
-| [`location`](../CLI_FLAGS.md#flag-bot-config-location) | `auto`, `real`, or coordinates (ENT Tier1 custom) | `auto` |
-| [`browserBrand`](../CLI_FLAGS.md#flag-bot-config-browser-brand) | `chromium`, `chrome`, `edge`, `brave`, `opera` (ENT Tier2); `webview` (ENT Tier3) | `chrome` |
-| [`brandFullVersion`](../CLI_FLAGS.md#flag-bot-config-brand-full-version) | Browser-family full version (ENT Tier2) | Empty |
-| [`uaFullVersion`](../CLI_FLAGS.md#flag-bot-config-ua-full-version) | Chromium full version matching the active major (ENT Tier2) | Empty |
-| [`colorScheme`](../CLI_FLAGS.md#flag-bot-config-color-scheme) | `light`, `dark` | `light` |
-| [`disableDeviceScaleFactorOnGUI`](../CLI_FLAGS.md#flag-bot-config-disable-device-scale-factor) | `true`, `false` | `false` |
+| [`languages`](../CLI_FLAGS.md#flag-bot-languages) | `auto`, or a language list such as `en-US,en` (ENT Tier1 custom) | `auto` |
+| [`locale`](../CLI_FLAGS.md#flag-bot-locale) | `auto`, or a locale such as `en-US` (ENT Tier1 custom) | `auto` |
+| [`timezone`](../CLI_FLAGS.md#flag-bot-timezone) | `auto`, `real`, or an IANA timezone (ENT Tier1 custom) | `auto` |
+| [`location`](../CLI_FLAGS.md#flag-bot-location) | `auto`, `real`, or coordinates (ENT Tier1 custom) | `auto` |
+| [`browserBrand`](../CLI_FLAGS.md#flag-bot-browser-brand) | `chromium`, `chrome`, `edge`, `brave`, `opera` (ENT Tier2); `webview` (ENT Tier3) | `chrome` |
+| [`brandFullVersion`](../CLI_FLAGS.md#flag-bot-brand-full-version) | Browser-family full version (ENT Tier2) | Empty |
+| [`uaFullVersion`](../CLI_FLAGS.md#flag-bot-ua-full-version) | Chromium full version matching the active major (ENT Tier2) | Empty |
+| [`colorScheme`](../CLI_FLAGS.md#flag-bot-color-scheme) | `light`, `dark` | `light` |
+| [`disableDeviceScaleFactorOnGUI`](../CLI_FLAGS.md#flag-bot-disable-device-scale-factor) | `true`, `false` | `false` |
 
 Timezone, locale, and languages derive from the proxy IP when set to `auto`.
 
@@ -73,7 +73,7 @@ Timezone, locale, and languages derive from the proxy IP when set to `auto`.
 | [`injectRandomHistory`](../CLI_FLAGS.md#flag-bot-inject-random-history) | `true`, `false`, or a history count (PRO) | `false` |
 | [`enableVariationsInContext`](../CLI_FLAGS.md#flag-bot-enable-variations-in-context) | `true`, `false` (ENT Tier2) | `false` |
 | [`disableDebugger`](../CLI_FLAGS.md#flag-bot-disable-debugger) | `true`, `false` | `true` |
-| [`keyboard`](../CLI_FLAGS.md#flag-bot-config-keyboard) | `profile`, `real` | `profile` |
+| [`keyboard`](../CLI_FLAGS.md#flag-bot-keyboard) | `profile`, `real` | `profile` |
 | [`alwaysActive`](../CLI_FLAGS.md#flag-bot-always-active) | `true`, `false` (PRO) | `true` |
 | [`mobileForceTouch`](../CLI_FLAGS.md#flag-bot-mobile-force-touch) | `true`, `false` | `false` |
 | [`portProtection`](../CLI_FLAGS.md#flag-bot-port-protection) | `true`, `false` (PRO) | `false` |
@@ -96,23 +96,25 @@ Use `--proxy-server` for per-session proxy credentials. For SOCKS5 UDP and QUIC 
 
 | Field | Values | Default |
 |-------|--------|---------|
-| [`window`](../CLI_FLAGS.md#flag-bot-config-window) | `profile`, `real`, `WxH`, or a window object | Mode-dependent |
-| [`screen`](../CLI_FLAGS.md#flag-bot-config-screen) | `profile`, `real`, `WxH`, or a screen object | Mode-dependent |
+| [`window`](../CLI_FLAGS.md#flag-bot-window) | `profile`, `real`, `WxH`, or a window object | Mode-dependent |
+| [`screen`](../CLI_FLAGS.md#flag-bot-screen) | `profile`, `real`, `WxH`, or a screen object | Mode-dependent |
 
 Headless and mobile profiles default to profile-backed dimensions. Desktop headful sessions default to real dimensions. Configure `window` and `screen` together when overriding either value.
+
+For display-scale policy, use [`--bot-dpr`](../CLI_FLAGS.md#flag-bot-dpr) at launch or when creating a browser context. It overrides the profile's DPR policy; do not add a `dpr` field to `configs`. See [Device Pixel Ratio Policy](../docs/guides/fingerprint/DEVICE_PIXEL_RATIO.md).
 
 <a id="engine--device-simulation"></a>
 ### Rendering and Media
 
 | Field | Values | Default |
 |-------|--------|---------|
-| [`webrtc`](../CLI_FLAGS.md#flag-bot-config-webrtc) | `profile`, `real`, `disabled` | `profile` |
-| [`fonts`](../CLI_FLAGS.md#flag-bot-config-fonts) | `profile`, `expand`, `real` | `profile` |
-| [`webgl`](../CLI_FLAGS.md#flag-bot-config-webgl) | `profile`, `real`, `disabled` | `profile` |
-| [`webgpu`](../CLI_FLAGS.md#flag-bot-config-webgpu) | `profile`, `real`, `disabled` | `profile` |
-| [`mediaDevices`](../CLI_FLAGS.md#flag-bot-config-media-devices) | `profile`, `real` | `profile` |
-| [`speechVoices`](../CLI_FLAGS.md#flag-bot-config-speech-voices) | `profile`, `real` | `profile` |
-| [`mediaTypes`](../CLI_FLAGS.md#flag-bot-config-media-types) | `expand`, `profile`, `real` | `expand` |
+| [`webrtc`](../CLI_FLAGS.md#flag-bot-webrtc) | `profile`, `real`, `disabled` | `profile` |
+| [`fonts`](../CLI_FLAGS.md#flag-bot-fonts) | `profile`, `expand`, `real` | `profile` |
+| [`webgl`](../CLI_FLAGS.md#flag-bot-webgl) | `profile`, `real`, `disabled` | `profile` |
+| [`webgpu`](../CLI_FLAGS.md#flag-bot-webgpu) | `profile`, `real`, `disabled` | `profile` |
+| [`mediaDevices`](../CLI_FLAGS.md#flag-bot-media-devices) | `profile`, `real` | `profile` |
+| [`speechVoices`](../CLI_FLAGS.md#flag-bot-speech-voices) | `profile`, `real` | `profile` |
+| [`mediaTypes`](../CLI_FLAGS.md#flag-bot-media-types) | `expand`, `profile`, `real` | `expand` |
 
 <a id="noise-toggles"></a>
 <a id="timing--deterministic-noise-controls"></a>
@@ -120,11 +122,11 @@ Headless and mobile profiles default to profile-backed dimensions. Desktop headf
 
 | Field | Values | Default |
 |-------|--------|---------|
-| [`noiseCanvas`](../CLI_FLAGS.md#flag-bot-config-noise-canvas) | `true`, `false` | `true` |
-| [`noiseWebglImage`](../CLI_FLAGS.md#flag-bot-config-noise-webgl-image) | `true`, `false` | `true` |
-| [`noiseAudioContext`](../CLI_FLAGS.md#flag-bot-config-noise-audio-context) | `true`, `false` | `true` |
-| [`noiseClientRects`](../CLI_FLAGS.md#flag-bot-config-noise-client-rects) | `true`, `false` | `false` |
-| [`noiseTextRects`](../CLI_FLAGS.md#flag-bot-config-noise-text-rects) | `true`, `false` | `false` |
+| [`noiseCanvas`](../CLI_FLAGS.md#flag-bot-noise-canvas) | `true`, `false` | `true` |
+| [`noiseWebglImage`](../CLI_FLAGS.md#flag-bot-noise-webgl-image) | `true`, `false` | `true` |
+| [`noiseAudioContext`](../CLI_FLAGS.md#flag-bot-noise-audio-context) | `true`, `false` | `true` |
+| [`noiseClientRects`](../CLI_FLAGS.md#flag-bot-noise-client-rects) | `true`, `false` | `false` |
+| [`noiseTextRects`](../CLI_FLAGS.md#flag-bot-noise-text-rects) | `true`, `false` | `false` |
 | [`fps`](../CLI_FLAGS.md#flag-bot-fps) | `profile`, `real`, or a number (ENT Tier2) | `profile` |
 | [`timeScale`](../CLI_FLAGS.md#flag-bot-time-scale) | `1.0`, or a number greater than `0` and below `1` (ENT Tier2) | `1.0` |
 | [`noiseSeed`](../CLI_FLAGS.md#flag-bot-noise-seed) | `0`, or an integer from 1 to UINT32_MAX (ENT Tier2) | Profile default |
@@ -151,12 +153,12 @@ Use these fields together with a `--user-agent` template:
 
 | Field | Values | Default |
 |-------|--------|---------|
-| [`platform`](../CLI_FLAGS.md#flag-bot-config-platform) | `Windows`, `Android`, `macOS`, `Linux` | Profile value |
-| [`platformVersion`](../CLI_FLAGS.md#flag-bot-config-platform-version) | OS version | Profile value |
-| [`model`](../CLI_FLAGS.md#flag-bot-config-model) | Device model | Profile value |
-| [`architecture`](../CLI_FLAGS.md#flag-bot-config-architecture) | `x86`, `arm`, `arm64` | Profile value |
-| [`bitness`](../CLI_FLAGS.md#flag-bot-config-bitness) | `32`, `64` | Profile value |
-| [`mobile`](../CLI_FLAGS.md#flag-bot-config-mobile) | `true`, `false` | Profile value |
+| [`platform`](../CLI_FLAGS.md#flag-bot-platform) | `Windows`, `Android`, `macOS`, `Linux` | Profile value |
+| [`platformVersion`](../CLI_FLAGS.md#flag-bot-platform-version) | OS version | Profile value |
+| [`model`](../CLI_FLAGS.md#flag-bot-model) | Device model | Profile value |
+| [`architecture`](../CLI_FLAGS.md#flag-bot-architecture) | `x86`, `arm`, `arm64` | Profile value |
+| [`bitness`](../CLI_FLAGS.md#flag-bot-bitness) | `32`, `64` | Profile value |
+| [`mobile`](../CLI_FLAGS.md#flag-bot-mobile) | `true`, `false` | Profile value |
 
 The browser keeps the User-Agent string, Client Hints, main thread, workers, and request headers aligned with these values.
 

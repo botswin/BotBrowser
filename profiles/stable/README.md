@@ -4,7 +4,7 @@ BotBrowser 150 and newer profiles are delivered through subscription or support 
 
 | Release line | Matching BotBrowser build | Profile files |
 |--------------|---------------------------|---------------|
-| v152 | 152.0.7977.54 | Subscription profiles: [support@botbrowser.io](mailto:support@botbrowser.io), [@botbrowser_support](https://t.me/botbrowser_support) |
+| v152 | 152.0.7977.76 | Subscription profiles: [support@botbrowser.io](mailto:support@botbrowser.io), [@botbrowser_support](https://t.me/botbrowser_support) |
 | v151 | 151.0.7922.174 | Subscription profiles: [support@botbrowser.io](mailto:support@botbrowser.io), [@botbrowser_support](https://t.me/botbrowser_support) |
 | v150 | [150.0.7871.182](https://github.com/botswin/BotBrowser/releases/tag/150.0.7871.182) | Subscription profiles: [support@botbrowser.io](mailto:support@botbrowser.io), [@botbrowser_support](https://t.me/botbrowser_support) |
 | v149 | [149.0.7827.200](https://github.com/botswin/BotBrowser/releases/tag/149.0.7827.200) | Legacy public demo files: `chrome149_*.enc`, `webkit26_*.enc` |

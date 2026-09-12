@@ -65,7 +65,7 @@ Each entry shows availability and the primary guide. The guide documents startup
 - [`--bot-port-protection`](#flag-bot-port-protection) (PRO): [Port Protection](docs/guides/network/PORT_PROTECTION.md)
 - [`--bot-local-dns`](#flag-bot-local-dns) (ENT Tier1): [DNS Leak Prevention](docs/guides/network/DNS_LEAK_PREVENTION.md)
 - [`--bot-ip-service`](#flag-bot-ip-service) (Core): [Proxy and Geolocation](docs/guides/network/PROXY_GEOLOCATION_ALIGNMENT.md)
-- [`--bot-config-webrtc`](#flag-bot-config-webrtc) (Core): [WebRTC Leak Prevention](docs/guides/network/WEBRTC_LEAK_PREVENTION.md)
+- [`--bot-webrtc`](#flag-bot-webrtc) (Core): [WebRTC Leak Prevention](docs/guides/network/WEBRTC_LEAK_PREVENTION.md)
 - [`--bot-webrtc-ice`](#flag-bot-webrtc-ice) (ENT Tier1): [WebRTC Leak Prevention](docs/guides/network/WEBRTC_LEAK_PREVENTION.md)
 
 <a id="flag-group-session"></a>
@@ -90,46 +90,47 @@ Each entry shows availability and the primary guide. The guide documents startup
 <a id="flag-group-identity"></a>
 ### Identity, Locale and Platform
 
-- [`--bot-config-browser-brand`](#flag-bot-config-browser-brand) (ENT Tier2 / WebView ENT Tier3): [Browser Brand Alignment](docs/guides/identity/BROWSER_BRAND_ALIGNMENT.md)
-- [`--bot-config-brand-full-version`](#flag-bot-config-brand-full-version) (ENT Tier2): [Browser Brand Alignment](docs/guides/identity/BROWSER_BRAND_ALIGNMENT.md)
-- [`--bot-config-ua-full-version`](#flag-bot-config-ua-full-version) (ENT Tier2): [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md)
-- [`--bot-config-languages`](#flag-bot-config-languages) (ENT Tier1): [Timezone, Locale and Language](docs/guides/identity/TIMEZONE_LOCALE_LANGUAGE.md)
-- [`--bot-config-locale`](#flag-bot-config-locale) (ENT Tier1): [Timezone, Locale and Language](docs/guides/identity/TIMEZONE_LOCALE_LANGUAGE.md)
-- [`--bot-config-timezone`](#flag-bot-config-timezone) (ENT Tier1): [Timezone, Locale and Language](docs/guides/identity/TIMEZONE_LOCALE_LANGUAGE.md)
-- [`--bot-config-location`](#flag-bot-config-location) (ENT Tier1): [Timezone, Locale and Language](docs/guides/identity/TIMEZONE_LOCALE_LANGUAGE.md)
-- [`--bot-config-platform`](#flag-bot-config-platform) (ENT Tier3): [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md)
-- [`--bot-config-platform-version`](#flag-bot-config-platform-version) (ENT Tier3): [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md)
-- [`--bot-config-model`](#flag-bot-config-model) (ENT Tier3): [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md)
-- [`--bot-config-architecture`](#flag-bot-config-architecture) (ENT Tier3): [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md)
-- [`--bot-config-bitness`](#flag-bot-config-bitness) (ENT Tier3): [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md)
-- [`--bot-config-mobile`](#flag-bot-config-mobile) (ENT Tier3): [Device Emulation](docs/guides/platform/DEVICE_EMULATION.md)
+- [`--bot-browser-brand`](#flag-bot-browser-brand) (ENT Tier2 / WebView ENT Tier3): [Browser Brand Alignment](docs/guides/identity/BROWSER_BRAND_ALIGNMENT.md)
+- [`--bot-brand-full-version`](#flag-bot-brand-full-version) (ENT Tier2): [Browser Brand Alignment](docs/guides/identity/BROWSER_BRAND_ALIGNMENT.md)
+- [`--bot-ua-full-version`](#flag-bot-ua-full-version) (ENT Tier2): [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md)
+- [`--bot-languages`](#flag-bot-languages) (ENT Tier1): [Timezone, Locale and Language](docs/guides/identity/TIMEZONE_LOCALE_LANGUAGE.md)
+- [`--bot-locale`](#flag-bot-locale) (ENT Tier1): [Timezone, Locale and Language](docs/guides/identity/TIMEZONE_LOCALE_LANGUAGE.md)
+- [`--bot-timezone`](#flag-bot-timezone) (ENT Tier1): [Timezone, Locale and Language](docs/guides/identity/TIMEZONE_LOCALE_LANGUAGE.md)
+- [`--bot-location`](#flag-bot-location) (ENT Tier1): [Timezone, Locale and Language](docs/guides/identity/TIMEZONE_LOCALE_LANGUAGE.md)
+- [`--bot-platform`](#flag-bot-platform) (ENT Tier3): [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md)
+- [`--bot-platform-version`](#flag-bot-platform-version) (ENT Tier3): [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md)
+- [`--bot-model`](#flag-bot-model) (ENT Tier3): [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md)
+- [`--bot-architecture`](#flag-bot-architecture) (ENT Tier3): [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md)
+- [`--bot-bitness`](#flag-bot-bitness) (ENT Tier3): [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md)
+- [`--bot-mobile`](#flag-bot-mobile) (ENT Tier3): [Device Emulation](docs/guides/platform/DEVICE_EMULATION.md)
 
 <a id="flag-group-display"></a>
 ### Display, Input and Appearance
 
-- [`--bot-config-window`](#flag-bot-config-window) (Core): [Screen and Window](docs/guides/fingerprint/SCREEN_WINDOW.md)
-- [`--bot-config-screen`](#flag-bot-config-screen) (Core): [Screen and Window](docs/guides/fingerprint/SCREEN_WINDOW.md)
-- [`--bot-config-keyboard`](#flag-bot-config-keyboard) (Core): [Device Emulation](docs/guides/platform/DEVICE_EMULATION.md)
-- [`--bot-config-fonts`](#flag-bot-config-fonts) (Core): [Font Fingerprinting](docs/guides/fingerprint/FONT.md)
+- [`--bot-window`](#flag-bot-window) (Core): [Screen and Window](docs/guides/fingerprint/SCREEN_WINDOW.md)
+- [`--bot-screen`](#flag-bot-screen) (Core): [Screen and Window](docs/guides/fingerprint/SCREEN_WINDOW.md)
+- [`--bot-dpr`](#flag-bot-dpr) (Core): [Device Pixel Ratio Policy](docs/guides/fingerprint/DEVICE_PIXEL_RATIO.md)
+- [`--bot-keyboard`](#flag-bot-keyboard) (Core): [Device Emulation](docs/guides/platform/DEVICE_EMULATION.md)
+- [`--bot-fonts`](#flag-bot-fonts) (Core): [Font Fingerprinting](docs/guides/fingerprint/FONT.md)
 - [`--bot-mobile-keyboard`](#flag-bot-mobile-keyboard) (Profile-dependent): [Device Emulation](docs/guides/platform/DEVICE_EMULATION.md#mobile-keyboard-visual-viewport)
-- [`--bot-config-orientation`](#flag-bot-config-orientation) (Core): [Device Emulation](docs/guides/platform/DEVICE_EMULATION.md)
-- [`--bot-config-color-scheme`](#flag-bot-config-color-scheme) (Core): [CSS Signal Consistency](docs/guides/fingerprint/CSS_SIGNAL_CONSISTENCY.md)
-- [`--bot-config-disable-device-scale-factor`](#flag-bot-config-disable-device-scale-factor) (Core): [Screen and Window](docs/guides/fingerprint/SCREEN_WINDOW.md)
+- [`--bot-orientation`](#flag-bot-orientation) (Core): [Device Emulation](docs/guides/platform/DEVICE_EMULATION.md)
+- [`--bot-color-scheme`](#flag-bot-color-scheme) (Core): [CSS Signal Consistency](docs/guides/fingerprint/CSS_SIGNAL_CONSISTENCY.md)
+- [`--bot-disable-device-scale-factor`](#flag-bot-disable-device-scale-factor) (Core): [Screen and Window](docs/guides/fingerprint/SCREEN_WINDOW.md)
 - [`--bot-mobile-force-touch`](#flag-bot-mobile-force-touch) (Core): [Device Emulation](docs/guides/platform/DEVICE_EMULATION.md)
 
 <a id="flag-group-rendering"></a>
 ### Rendering, Media and Protection
 
-- [`--bot-config-webgl`](#flag-bot-config-webgl) (Core): [WebGL Fingerprinting](docs/guides/fingerprint/WEBGL.md)
-- [`--bot-config-webgpu`](#flag-bot-config-webgpu) (Core): [WebGPU Fingerprint Protection](docs/guides/fingerprint/WEBGPU.md)
-- [`--bot-config-noise-webgl-image`](#flag-bot-config-noise-webgl-image) (Core): [WebGL Fingerprinting](docs/guides/fingerprint/WEBGL.md)
-- [`--bot-config-noise-canvas`](#flag-bot-config-noise-canvas) (Core): [Canvas Fingerprinting](docs/guides/fingerprint/CANVAS.md)
-- [`--bot-config-noise-audio-context`](#flag-bot-config-noise-audio-context) (Core): [Audio Fingerprinting](docs/guides/fingerprint/AUDIO.md)
-- [`--bot-config-noise-client-rects`](#flag-bot-config-noise-client-rects) (Core): [Font Fingerprinting](docs/guides/fingerprint/FONT.md)
-- [`--bot-config-noise-text-rects`](#flag-bot-config-noise-text-rects) (Core): [Font Fingerprinting](docs/guides/fingerprint/FONT.md)
-- [`--bot-config-speech-voices`](#flag-bot-config-speech-voices) (Core): [Speech Synthesis](docs/guides/fingerprint/SPEECH_SYNTHESIS.md)
-- [`--bot-config-media-devices`](#flag-bot-config-media-devices) (Core): [Media Devices Privacy](docs/guides/fingerprint/MEDIA_DEVICES.md)
-- [`--bot-config-media-types`](#flag-bot-config-media-types) (Core): [MIME and Codec](docs/guides/fingerprint/MIME_CODEC.md)
+- [`--bot-webgl`](#flag-bot-webgl) (Core): [WebGL Fingerprinting](docs/guides/fingerprint/WEBGL.md)
+- [`--bot-webgpu`](#flag-bot-webgpu) (Core): [WebGPU Fingerprint Protection](docs/guides/fingerprint/WEBGPU.md)
+- [`--bot-noise-webgl-image`](#flag-bot-noise-webgl-image) (Core): [WebGL Fingerprinting](docs/guides/fingerprint/WEBGL.md)
+- [`--bot-noise-canvas`](#flag-bot-noise-canvas) (Core): [Canvas Fingerprinting](docs/guides/fingerprint/CANVAS.md)
+- [`--bot-noise-audio-context`](#flag-bot-noise-audio-context) (Core): [Audio Fingerprinting](docs/guides/fingerprint/AUDIO.md)
+- [`--bot-noise-client-rects`](#flag-bot-noise-client-rects) (Core): [Font Fingerprinting](docs/guides/fingerprint/FONT.md)
+- [`--bot-noise-text-rects`](#flag-bot-noise-text-rects) (Core): [Font Fingerprinting](docs/guides/fingerprint/FONT.md)
+- [`--bot-speech-voices`](#flag-bot-speech-voices) (Core): [Speech Synthesis](docs/guides/fingerprint/SPEECH_SYNTHESIS.md)
+- [`--bot-media-devices`](#flag-bot-media-devices) (Core): [Media Devices Privacy](docs/guides/fingerprint/MEDIA_DEVICES.md)
+- [`--bot-media-types`](#flag-bot-media-types) (Core): [MIME and Codec](docs/guides/fingerprint/MIME_CODEC.md)
 - [`--bot-noise-seed`](#flag-bot-noise-seed) (ENT Tier2): [Noise Seed Reproducibility](docs/guides/fingerprint/NOISE_SEED_REPRODUCIBILITY.md)
 - [`--bot-fps`](#flag-bot-fps) (ENT Tier2): [FPS Control](docs/guides/fingerprint/FPS_CONTROL.md)
 - [`--bot-video-fps`](#flag-bot-video-fps) (ENT Tier2): [FPS Control](docs/guides/fingerprint/FPS_CONTROL.md#video-fps-control)
@@ -293,7 +294,7 @@ Use this when request-aware policy should stay in PAC routing instead of CDP-lev
 
 <a id="flag-proxy-ip"></a>
 ### `--proxy-ip` (ENT Tier1)
-Specify the proxy's public exit IP to optimize geo setup. Provide one IPv4 address, one IPv6 address, or a comma-separated pair containing one address from each family. When both are supplied, the first address is used for geo setup and each network family keeps its matching exit identity.
+Specify the proxy's public exit IP to optimize geo setup. Provide one IPv4 address, one IPv6 address, or a comma-separated pair containing one address from each family. Use `ipv4_none` or `ipv6_none` to declare that an address family is unavailable and prevent a lookup for that family.
 
 **Primary guide:** [Proxy and Geolocation](docs/guides/network/PROXY_GEOLOCATION_ALIGNMENT.md)
 
@@ -303,12 +304,15 @@ This skips per-page IP lookups and speeds up navigation.
 --proxy-ip="203.0.113.1"
 --proxy-ip="2001:db8::1009"
 --proxy-ip="203.0.113.1,2001:db8::1009"
+--proxy-ip="203.0.113.1,ipv6_none"
+--proxy-ip="ipv4_none,2001:db8::1009"
+--proxy-ip="ipv4_none,ipv6_none"
 ```
 
 **Benefits:**
 - Eliminates IP detection overhead on each page load
 - Faster browsing when using proxies
-- Combine with `--bot-config-timezone` for protected region emulation
+- Combine with `--bot-timezone` for protected region emulation
 
 
 ⚠️ Important:
@@ -641,30 +645,41 @@ await cdpSession.send('BotBrowser.setCustomHeaders', {
 
 High-priority configuration overrides: these CLI flags supersede profile settings.
 
-BotBrowser supports command-line flags that override profile configuration values with the highest priority. These flags start with `--bot-config-` and directly map to profile `configs` properties.
+Most flags in this section override profile `configs` properties. Display-scale policy is selected separately with `--bot-dpr`; it has no corresponding `configs.dpr` field.
 
 > Recommended: Use CLI flags instead of modifying profiles. They carry the highest priority and don’t require editing encrypted files. License tiers are indicated in parentheses where applicable.
 
-### Bot Configuration Overrides (`--bot-config-*`)
+### Profile Overrides
 
-Flags that directly map to profile `configs` and override them at runtime.
+Flags that override profile-backed settings at runtime.
+
+#### Compatibility
+
+The `--bot-*` names in this guide are canonical. Existing commands that use the corresponding `--bot-config-*` spelling remain supported, so integrations can migrate incrementally. Use one spelling per option in a launch command.
 
 **Identity & Locale**
 
 <a id="flag-bot-config-browser-brand"></a>
-- `--bot-config-browser-brand=chrome` (ENT Tier2, webview requires ENT Tier3): Browser brand: chrome, chromium, edge, brave, opera, webview. WebKit-family identities are delivered through ENT Tier4 premium profiles. Guide: [Browser Brand Alignment](docs/guides/identity/BROWSER_BRAND_ALIGNMENT.md).
+<a id="flag-bot-browser-brand"></a>
+- `--bot-browser-brand=chrome` (ENT Tier2, webview requires ENT Tier3): Browser brand: chrome, chromium, edge, brave, opera, webview. WebKit-family identities are delivered through ENT Tier4 premium profiles. Guide: [Browser Brand Alignment](docs/guides/identity/BROWSER_BRAND_ALIGNMENT.md).
 <a id="flag-bot-config-brand-full-version"></a>
-- `--bot-config-brand-full-version=142.0.3595.65` (ENT Tier2): Brand-specific full version for UA-CH consistency. Guide: [Browser Brand Alignment](docs/guides/identity/BROWSER_BRAND_ALIGNMENT.md).
+<a id="flag-bot-brand-full-version"></a>
+- `--bot-brand-full-version=142.0.3595.65` (ENT Tier2): Brand-specific full version for UA-CH consistency. Guide: [Browser Brand Alignment](docs/guides/identity/BROWSER_BRAND_ALIGNMENT.md).
 <a id="flag-bot-config-ua-full-version"></a>
-- `--bot-config-ua-full-version=142.0.7444.60` (ENT Tier2): User agent version matching the Chromium major. Guide: [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md).
+<a id="flag-bot-ua-full-version"></a>
+- `--bot-ua-full-version=142.0.7444.60` (ENT Tier2): User agent version matching the Chromium major. Guide: [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md).
 <a id="flag-bot-config-languages"></a>
-- `--bot-config-languages=auto`: Languages: `auto` (IP-based, default) or a value such as `en-US,fr-FR` (ENT Tier1). Guide: [Timezone, Locale and Language](docs/guides/identity/TIMEZONE_LOCALE_LANGUAGE.md).
+<a id="flag-bot-languages"></a>
+- `--bot-languages=auto`: Languages: `auto` (IP-based, default) or a value such as `en-US,fr-FR` (ENT Tier1). Guide: [Timezone, Locale and Language](docs/guides/identity/TIMEZONE_LOCALE_LANGUAGE.md).
 <a id="flag-bot-config-locale"></a>
-- `--bot-config-locale=auto`: Browser locale: `auto` (derived from IP/language, default) or a value such as `en-US` or `fr-FR` (ENT Tier1). Guide: [Timezone, Locale and Language](docs/guides/identity/TIMEZONE_LOCALE_LANGUAGE.md).
+<a id="flag-bot-locale"></a>
+- `--bot-locale=auto`: Browser locale: `auto` (derived from IP/language, default) or a value such as `en-US` or `fr-FR` (ENT Tier1). Guide: [Timezone, Locale and Language](docs/guides/identity/TIMEZONE_LOCALE_LANGUAGE.md).
 <a id="flag-bot-config-timezone"></a>
-- `--bot-config-timezone=auto`: Timezone: `auto` (IP-based, default), `real` (system), or an IANA timezone such as `America/New_York` (ENT Tier1). Guide: [Timezone, Locale and Language](docs/guides/identity/TIMEZONE_LOCALE_LANGUAGE.md).
+<a id="flag-bot-timezone"></a>
+- `--bot-timezone=auto`: Timezone: `auto` (IP-based, default), `real` (system), or an IANA timezone such as `America/New_York` (ENT Tier1). Guide: [Timezone, Locale and Language](docs/guides/identity/TIMEZONE_LOCALE_LANGUAGE.md).
 <a id="flag-bot-config-location"></a>
-- `--bot-config-location=auto`: Location: `auto` (IP-based, default), `real` (system GPS), or coordinates such as `40.7128,-74.0060` (ENT Tier1). Guide: [Timezone, Locale and Language](docs/guides/identity/TIMEZONE_LOCALE_LANGUAGE.md).
+<a id="flag-bot-location"></a>
+- `--bot-location=auto`: Location: `auto` (IP-based, default), `real` (system GPS), or coordinates such as `40.7128,-74.0060` (ENT Tier1). Guide: [Timezone, Locale and Language](docs/guides/identity/TIMEZONE_LOCALE_LANGUAGE.md).
 
 <a id="custom-user-agent-with-webview-ent-tier3"></a>
 **Custom User-Agent (ENT Tier3)**
@@ -672,17 +687,23 @@ Flags that directly map to profile `configs` and override them at runtime.
 Build any browser identity with full userAgentData control. These flags work together with `--user-agent` to construct a complete, internally consistent browser identity.
 
 <a id="flag-bot-config-platform"></a>
-- `--bot-config-platform=Android`: Platform name: Windows, Android, macOS, Linux. Guide: [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md).
+<a id="flag-bot-platform"></a>
+- `--bot-platform=Android`: Platform name: Windows, Android, macOS, Linux. Guide: [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md).
 <a id="flag-bot-config-platform-version"></a>
-- `--bot-config-platform-version=13`: OS version string. Guide: [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md).
+<a id="flag-bot-platform-version"></a>
+- `--bot-platform-version=13`: OS version string. Guide: [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md).
 <a id="flag-bot-config-model"></a>
-- `--bot-config-model=SM-G991B`: Device model, primarily for mobile profiles. Guide: [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md).
+<a id="flag-bot-model"></a>
+- `--bot-model=SM-G991B`: Device model, primarily for mobile profiles. Guide: [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md).
 <a id="flag-bot-config-architecture"></a>
-- `--bot-config-architecture=arm`: CPU architecture: x86, arm, arm64. Guide: [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md).
+<a id="flag-bot-architecture"></a>
+- `--bot-architecture=arm`: CPU architecture: x86, arm, arm64. Guide: [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md).
 <a id="flag-bot-config-bitness"></a>
-- `--bot-config-bitness=64`: System bitness: 32, 64. Guide: [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md).
+<a id="flag-bot-bitness"></a>
+- `--bot-bitness=64`: System bitness: 32, 64. Guide: [Custom User-Agent](docs/guides/identity/CUSTOM_USER_AGENT.md).
 <a id="flag-bot-config-mobile"></a>
-- `--bot-config-mobile=true`: Mobile device flag. Guide: [Device Emulation](docs/guides/platform/DEVICE_EMULATION.md).
+<a id="flag-bot-mobile"></a>
+- `--bot-mobile=true`: Mobile device flag. Guide: [Device Emulation](docs/guides/platform/DEVICE_EMULATION.md).
 
 The `--user-agent` flag supports placeholders that get replaced at runtime:
 - `{platform}`, `{platform-version}`, `{model}` for device info
@@ -692,65 +713,86 @@ The `--user-agent` flag supports placeholders that get replaced at runtime:
 
 BotBrowser auto-generates matching `navigator.userAgentData` (brands, fullVersionList with proper GREASE) and all Sec-CH-UA-* headers. Values stay consistent across main thread, workers, and HTTP requests.
 
-> **Note: UA/Engine Congruence:** Keep `--bot-config-ua-full-version` aligned with your Chromium major version, and use `--bot-config-brand-full-version` when a vendor's cadence (Edge, Opera, Brave) diverges so UA-CH metadata stays internally protected.
+> **Note: UA/Engine Congruence:** Keep `--bot-ua-full-version` aligned with your Chromium major version, and use `--bot-brand-full-version` when a vendor's cadence (Edge, Opera, Brave) diverges so UA-CH metadata stays internally protected.
 
 **Display & Input**
 
 <a id="flag-bot-config-window"></a>
-- `--bot-config-window=<value>`: Window dimensions with multiple formats. Guide: [Screen and Window](docs/guides/fingerprint/SCREEN_WINDOW.md).
+<a id="flag-bot-window"></a>
+- `--bot-window=<value>`: Window dimensions with multiple formats. Guide: [Screen and Window](docs/guides/fingerprint/SCREEN_WINDOW.md).
   - `profile` - Use profile's window settings (default for headless and Android profiles)
   - `real` - Use actual system window dimensions (default for desktop headful)
   - `WxH` - Direct size specification (e.g., `1920x1080`), sets innerWidth/innerHeight with outerWidth/outerHeight auto-derived from profile borders
   - `JSON` - Full customization (e.g., `'{"innerWidth":1920,"innerHeight":1080,"devicePixelRatio":2}'`)
 <a id="flag-bot-config-screen"></a>
-- `--bot-config-screen=<value>`: Screen properties with multiple formats. Guide: [Screen and Window](docs/guides/fingerprint/SCREEN_WINDOW.md).
+<a id="flag-bot-screen"></a>
+- `--bot-screen=<value>`: Screen properties with multiple formats. Guide: [Screen and Window](docs/guides/fingerprint/SCREEN_WINDOW.md).
   - `profile` - Use profile's screen settings (default for headless and Android profiles)
   - `real` - Use actual system screen dimensions (default for desktop headful)
   - `WxH` - Direct size specification (e.g., `2560x1440`), sets width/height with availWidth/availHeight auto-derived from profile
   - `JSON` - Full customization (e.g., `'{"width":2560,"height":1440,"availWidth":2560,"availHeight":1400}'`)
 
-> **Headful note:** Desktop profiles default to `real` in headful mode, meaning the browser uses the actual system window and screen dimensions. To apply profile-defined dimensions in headful, set both `--bot-config-window=profile` and `--bot-config-screen=profile` explicitly.
+> **Headful note:** Desktop profiles default to `real` in headful mode, meaning the browser uses the actual system window and screen dimensions. To apply profile-defined dimensions in headful, set both `--bot-window=profile` and `--bot-screen=profile` explicitly.
+
+<a id="flag-bot-dpr"></a>
+- `--bot-dpr=<mode>`: Select the device-pixel-ratio policy. `profile` uses the profile value and is the default; `real` exposes the host display value. `advanced` is an experimental compatibility mode that retains the profile DPR with limited layout adjustments, not full-page rescaling. Guide: [Device Pixel Ratio Policy](docs/guides/fingerprint/DEVICE_PIXEL_RATIO.md).
 
 <a id="flag-bot-config-keyboard"></a>
-- `--bot-config-keyboard=profile`: Keyboard settings: profile (emulated), real (system keyboard). Guide: [Device Emulation](docs/guides/platform/DEVICE_EMULATION.md).
+<a id="flag-bot-keyboard"></a>
+- `--bot-keyboard=profile`: Keyboard settings: profile (emulated), real (system keyboard). Guide: [Device Emulation](docs/guides/platform/DEVICE_EMULATION.md).
 <a id="flag-bot-config-fonts"></a>
-- `--bot-config-fonts=profile`: Font settings: profile (embedded), expand (profile + fallback), real (system fonts). Guide: [Font Fingerprinting](docs/guides/fingerprint/FONT.md).
+<a id="flag-bot-fonts"></a>
+- `--bot-fonts=profile`: Font settings: profile (embedded), expand (profile + fallback), real (system fonts). Guide: [Font Fingerprinting](docs/guides/fingerprint/FONT.md).
 <a id="flag-bot-mobile-keyboard"></a>
 - `--bot-mobile-keyboard[=true|false]`: Opt-in mobile keyboard visual viewport behavior. When enabled for a mobile profile, trusted user focus on an editable field reduces `visualViewport.height` while leaving the layout viewport unchanged. Default: false. Guide: [Device Emulation](docs/guides/platform/DEVICE_EMULATION.md#mobile-keyboard-visual-viewport).
 <a id="flag-bot-config-orientation"></a>
-- `--bot-config-orientation=<value>`: Screen orientation for mobile profiles. Desktop profiles ignore this flag. Guide: [Device Emulation](docs/guides/platform/DEVICE_EMULATION.md).
+<a id="flag-bot-orientation"></a>
+- `--bot-orientation=<value>`: Screen orientation for mobile profiles. Desktop profiles ignore this flag. Guide: [Device Emulation](docs/guides/platform/DEVICE_EMULATION.md).
   - `profile` - Auto-detect from profile dimensions (default)
   - `landscape` / `portrait` - Force orientation, automatically adjusting all related dimensions to match
   - `landscape-primary`, `landscape-secondary`, `portrait-primary`, `portrait-secondary` - Explicit orientation with specific angle
 <a id="flag-bot-config-color-scheme"></a>
-- `--bot-config-color-scheme=light`: Color scheme: light, dark. Guide: [CSS Signal Consistency](docs/guides/fingerprint/CSS_SIGNAL_CONSISTENCY.md).
+<a id="flag-bot-color-scheme"></a>
+- `--bot-color-scheme=light`: Color scheme: light, dark. Guide: [CSS Signal Consistency](docs/guides/fingerprint/CSS_SIGNAL_CONSISTENCY.md).
 <a id="flag-bot-config-disable-device-scale-factor"></a>
-- `--bot-config-disable-device-scale-factor`: Disable device scale factor: true, false. Guide: [Screen and Window](docs/guides/fingerprint/SCREEN_WINDOW.md).
+<a id="flag-bot-disable-device-scale-factor"></a>
+- `--bot-disable-device-scale-factor`: Disable device scale factor: true, false. Guide: [Screen and Window](docs/guides/fingerprint/SCREEN_WINDOW.md).
 
 **Rendering, Noise & Media/RTC**
 
 <a id="flag-bot-config-webgl"></a>
-- `--bot-config-webgl=profile`: WebGL: profile (use profile), real (system), disabled (off). Guide: [WebGL Fingerprinting](docs/guides/fingerprint/WEBGL.md).
+<a id="flag-bot-webgl"></a>
+- `--bot-webgl=profile`: WebGL: profile (use profile), real (system), disabled (off). Guide: [WebGL Fingerprinting](docs/guides/fingerprint/WEBGL.md).
 <a id="flag-bot-config-webgpu"></a>
-- `--bot-config-webgpu=profile`: WebGPU: profile (use profile), real (system), disabled (off). Guide: [WebGPU Fingerprint Protection](docs/guides/fingerprint/WEBGPU.md).
+<a id="flag-bot-webgpu"></a>
+- `--bot-webgpu=profile`: WebGPU: profile (use profile), real (system), disabled (off). Guide: [WebGPU Fingerprint Protection](docs/guides/fingerprint/WEBGPU.md).
 <a id="flag-bot-config-noise-webgl-image"></a>
-- `--bot-config-noise-webgl-image`: WebGL image noise: true, false. Guide: [WebGL Fingerprinting](docs/guides/fingerprint/WEBGL.md).
+<a id="flag-bot-noise-webgl-image"></a>
+- `--bot-noise-webgl-image`: WebGL image noise: true, false. Guide: [WebGL Fingerprinting](docs/guides/fingerprint/WEBGL.md).
 <a id="flag-bot-config-noise-canvas"></a>
-- `--bot-config-noise-canvas`: Canvas fingerprint noise: true, false. Guide: [Canvas Fingerprinting](docs/guides/fingerprint/CANVAS.md).
+<a id="flag-bot-noise-canvas"></a>
+- `--bot-noise-canvas`: Canvas fingerprint noise: true, false. Guide: [Canvas Fingerprinting](docs/guides/fingerprint/CANVAS.md).
 <a id="flag-bot-config-noise-audio-context"></a>
-- `--bot-config-noise-audio-context`: Audio context noise: true, false. Guide: [Audio Fingerprinting](docs/guides/fingerprint/AUDIO.md).
+<a id="flag-bot-noise-audio-context"></a>
+- `--bot-noise-audio-context`: Audio context noise: true, false. Guide: [Audio Fingerprinting](docs/guides/fingerprint/AUDIO.md).
 <a id="flag-bot-config-noise-client-rects"></a>
-- `--bot-config-noise-client-rects`: Client rects noise: true, false. Guide: [Font Fingerprinting](docs/guides/fingerprint/FONT.md).
+<a id="flag-bot-noise-client-rects"></a>
+- `--bot-noise-client-rects`: Client rects noise: true, false. Guide: [Font Fingerprinting](docs/guides/fingerprint/FONT.md).
 <a id="flag-bot-config-noise-text-rects"></a>
-- `--bot-config-noise-text-rects`: Text rects noise: true, false. Guide: [Font Fingerprinting](docs/guides/fingerprint/FONT.md).
+<a id="flag-bot-noise-text-rects"></a>
+- `--bot-noise-text-rects`: Text rects noise: true, false. Guide: [Font Fingerprinting](docs/guides/fingerprint/FONT.md).
 <a id="flag-bot-config-speech-voices"></a>
-- `--bot-config-speech-voices=profile`: Speech voices: profile (profile-backed), real (system). Guide: [Speech Synthesis](docs/guides/fingerprint/SPEECH_SYNTHESIS.md).
+<a id="flag-bot-speech-voices"></a>
+- `--bot-speech-voices=profile`: Speech voices: profile (profile-backed), real (system). Guide: [Speech Synthesis](docs/guides/fingerprint/SPEECH_SYNTHESIS.md).
 <a id="flag-bot-config-media-devices"></a>
-- `--bot-config-media-devices=profile`: Media devices: profile (profile-backed devices), real (system devices). Guide: [Media Devices Privacy](docs/guides/fingerprint/MEDIA_DEVICES.md).
+<a id="flag-bot-media-devices"></a>
+- `--bot-media-devices=profile`: Media devices: profile (profile-backed devices), real (system devices). Guide: [Media Devices Privacy](docs/guides/fingerprint/MEDIA_DEVICES.md).
 <a id="flag-bot-config-media-types"></a>
-- `--bot-config-media-types=expand`: Media types: expand (default), profile, real. Guide: [MIME and Codec](docs/guides/fingerprint/MIME_CODEC.md).
+<a id="flag-bot-media-types"></a>
+- `--bot-media-types=expand`: Media types: expand (default), profile, real. Guide: [MIME and Codec](docs/guides/fingerprint/MIME_CODEC.md).
 <a id="flag-bot-config-webrtc"></a>
-- `--bot-config-webrtc=profile`: WebRTC: profile (use profile), real (native), disabled (off). Guide: [WebRTC Leak Prevention](docs/guides/network/WEBRTC_LEAK_PREVENTION.md).
+<a id="flag-bot-webrtc"></a>
+- `--bot-webrtc=profile`: WebRTC: profile (use profile), real (native), disabled (off). Guide: [WebRTC Leak Prevention](docs/guides/network/WEBRTC_LEAK_PREVENTION.md).
 
 <a id="behavior--protection-toggles"></a>
 ### Behavior & Protection Toggles

@@ -34,6 +34,8 @@ chromium-browser \
   --proxy-ip=203.0.113.1
 ```
 
+For a single-family proxy, include `ipv4_none` or `ipv6_none` in the comma-separated value to declare the unavailable family and avoid an unnecessary lookup. See [Proxy and Geolocation Alignment](PROXY_GEOLOCATION_ALIGNMENT.md) for the supported formats.
+
 ---
 
 <a id="how-it-works"></a>
@@ -57,7 +59,7 @@ BotBrowser uses a local GeoIP database to translate proxy exit IP into geographi
 - Approximate coordinates
 
 4. **Override priority**
-- Manual flags (`--bot-config-timezone`, `--bot-config-locale`, `--bot-config-languages`, `--bot-config-location`) override lookup-derived values.
+- Manual flags (`--bot-timezone`, `--bot-locale`, `--bot-languages`, `--bot-location`) override lookup-derived values.
 
 For end-to-end usage strategy and practical configuration recipes, see [Proxy and Geolocation](PROXY_GEOLOCATION_ALIGNMENT.md).
 
@@ -83,10 +85,10 @@ For end-to-end usage strategy and practical configuration recipes, see [Proxy an
 
 ```bash
 --proxy-ip=203.0.113.1 \
---bot-config-timezone=Asia/Tokyo \
---bot-config-locale=ja-JP \
---bot-config-languages=ja-JP,ja,en-US,en \
---bot-config-location=35.6762,139.6503
+--bot-timezone=Asia/Tokyo \
+--bot-locale=ja-JP \
+--bot-languages=ja-JP,ja,en-US,en \
+--bot-location=35.6762,139.6503
 ```
 
 ### Accuracy boundary handling
@@ -121,9 +123,9 @@ If city-level mapping is not precise enough for your use case, keep GeoIP for ba
 
 | Problem | Solution |
 |---------|----------|
-| Wrong timezone/locale after startup | Set explicit `--bot-config-timezone` / `--bot-config-locale`. |
+| Wrong timezone/locale after startup | Set explicit `--bot-timezone` / `--bot-locale`. |
 | IP resolution fails | Provide `--proxy-ip` directly or replace IP services via `--bot-ip-service`. |
-| City/coordinates look off | Expected for some IP ranges. Use `--bot-config-location` for exact coordinates. |
+| City/coordinates look off | Expected for some IP ranges. Use `--bot-location` for exact coordinates. |
 | Slow context activation | Use `--proxy-ip` to skip the initial IP-resolution request. |
 
 ---

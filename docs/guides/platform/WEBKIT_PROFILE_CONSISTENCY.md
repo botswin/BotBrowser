@@ -6,7 +6,7 @@
 
 WebKit-family Profile Consistency is profile-backed. The encrypted profile carries the browser-family data, and the browser loads it before the page starts.
 
-The profile coordinates selected WebKit-family browser surfaces, TLS ClientHello behavior, and HTTP/2 behavior so the selected browser-family identity remains consistent across supported hosts. BotBrowser 150.0.7871.46 expands this coverage across worker identity, runtime behavior, CSS and system UI values, font loading, canvas output, permission states, property ordering, and mobile profile surfaces.
+The profile coordinates selected WebKit-family browser surfaces, TLS ClientHello behavior, and HTTP/2 behavior so the selected browser-family identity remains consistent across supported hosts. BotBrowser 150.0.7871.46 expands this coverage across worker identity, runtime behavior, CSS and system UI values, font loading, canvas output, media capabilities, permission states, property ordering, and mobile profile surfaces. BotBrowser 152.0.7977.76 further aligns WebKit-family TLS and HTTP/2 behavior with current platform expectations.
 
 Use this profile line for desktop and mobile WebKit-family bundles. Use Chromium-family profiles for Chrome, Chromium, Edge, Brave, Opera, Android, and Android WebView.
 
