@@ -51,6 +51,8 @@ const page = await context.newPage();
 
 Permission decisions made by the site or automation framework still apply normally. The profile controls browser-family consistency; it does not grant a site access that the user or automation policy has denied.
 
+Profile-backed keyboard behavior follows the same rule. It is available only when the page and browser permission policy allow the relevant input capability; the profile does not override a denied Permissions Policy.
+
 ---
 
 <a id="troubleshooting"></a>

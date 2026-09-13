@@ -120,6 +120,8 @@ const ctxB = await browser.createBrowserContext({
 
 Explicit geographic settings are resolved independently for each context and each setting. Settings left on `auto` continue to derive from that context's proxy.
 
+When a context has no independent proxy route, it inherits the launch profile's proxy route and geographic identity. Wait for context proxy and geographic updates to complete before creating dependent pages or navigating.
+
 ### Using --proxy-ip to Skip Detection
 
 When you know the exit IP for each proxy, pass it via `--proxy-ip` to skip the auto-detection step. Use a comma-separated value with `ipv4_none` or `ipv6_none` when the proxy has no exit address in one family. This eliminates the one-time IP lookup overhead per context. The proxy routing set via `createBrowserContext({ proxyServer })` is preserved:

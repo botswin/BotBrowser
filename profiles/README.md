@@ -7,13 +7,13 @@ Profiles define the browser identity and protected environment used by BotBrowse
 
 | Channel | Release line | Access |
 |---------|--------------|--------|
-| [stable](stable/) | v150-v152 subscription profiles; v148-v149 legacy demos | BotBrowser 150 and newer packages are available through subscription or support. |
+| [stable](stable/) | v150-v153 subscription profiles; v148-v149 legacy demos | BotBrowser 150 and newer packages are available through subscription or support. |
 | [canary](canary/) | None published | Reserved for explicitly published pre-stable packages. |
 | [archive](archive/) | v135-v147 | Older public demo packages outside the current support window. |
 
 BotBrowser 150 and newer profile packages are not published as public demos. Contact [support@botbrowser.io](mailto:support@botbrowser.io) or [@botbrowser_support](https://t.me/botbrowser_support) for access.
 
-The BotBrowser binary and profile package must use the same major version. A v151 binary requires a v151 profile package.
+The BotBrowser binary and profile package must use the same major version. A v153 binary requires a v153 profile package.
 
 <a id="what-are-profiles"></a>
 <a id="understanding-botbrowser-profiles"></a>

@@ -65,6 +65,8 @@ When you call `BotBrowser.setBrowserContextProxy`, BotBrowser:
 
 Pages already loaded in the context continue to function. Await the command before starting a new navigation that depends on the updated proxy location.
 
+Keep proxy changes, context flag updates, and proxy clearing on the same BrowserContext serialized. Wait for each CDP command to resolve before sending the next update or starting dependent navigation.
+
 ### CDP Command Parameters
 
 | Parameter | Required | Description |

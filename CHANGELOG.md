@@ -2,6 +2,19 @@
 
 > **Research scope:** Entries in this changelog describe features evaluated in authorized labs and defensive benchmarking programs. Follow the [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md). We work with security vendors to investigate any misuse, so report concerns to [support@botbrowser.io](mailto:support@botbrowser.io).
 
+## [2026-09-13]
+### Major
+- **Chromium Core -> 153.0.8010.12**: Started the BotBrowser 153 release line with upstream Web Platform, rendering, and security updates.
+
+### Improvements
+- **WebKit-Family Network Consistency**: Improved TLS and HTTP/2 consistency for WebKit-family profiles across supported hosts.
+- **Browser-Family Profile Consistency**: Improved profile handling across WebKit, WebView, Android, and related browser-family workflows, including isolation of browser-specific web platform behavior.
+- **Browser-Family Web Platform Isolation**: Kept browser-specific origin-trial behavior isolated to compatible profile families.
+- **Geo-Aware Startup Readiness**: Improved startup and first-page readiness so profile-backed geographic identity is available before dependent navigation work begins.
+- **Per-Context Proxy Route Inheritance**: Improved route and geographic identity inheritance for contexts that use the browser-level proxy configuration.
+- **Pinned-Window Display Consistency**: Improved display and viewport consistency for pinned browser windows.
+- **Keyboard Permission Consistency**: Kept profile-backed keyboard behavior aligned with normal page permission policy decisions.
+
 ## [2026-09-12]
 ### Major
 - **Chromium Core -> 152.0.7977.76**: Updated the BotBrowser 152 release line with upstream Web Platform, rendering, and security updates.

@@ -8,7 +8,7 @@ Profile-backed browser-family identity for desktop and mobile WebKit-family prof
 
 Some workloads need a WebKit-family browser identity while keeping BotBrowser's profile, automation, and Per-Context Fingerprint model. This profile line carries that identity in an encrypted profile bundle.
 
-When a WebKit-family profile is loaded, BotBrowser treats the profile as the authority for browser-family behavior. The profile coordinates selected WebKit-family browser surfaces, TLS ClientHello behavior, and HTTP/2 behavior so the selected browser-family identity stays consistent across supported hosts. BotBrowser 150.0.7871.46 expands coverage for desktop and mobile runtime, worker, CSS, font, canvas, permission, and property-order behavior. BotBrowser 152.0.7977.76 further aligns WebKit-family TLS and HTTP/2 behavior with current platform expectations.
+When a WebKit-family profile is loaded, BotBrowser treats the profile as the authority for browser-family behavior. The profile coordinates selected WebKit-family browser surfaces, TLS behavior, and HTTP/2 behavior so the selected browser-family identity stays consistent across supported hosts. BotBrowser 150.0.7871.46 expands coverage for desktop and mobile runtime, worker, CSS, font, canvas, permission, and property-order behavior. BotBrowser 153.0.8010.12 further aligns WebKit-family network behavior with current platform expectations.
 
 The exact profile contents stay inside the `.enc` file. Customers choose the profile, proxy, user data directory, and normal launch options.
 
@@ -20,7 +20,7 @@ Use this profile line when the workflow requires:
 
 - Desktop or mobile WebKit-family profile bundles.
 - Browser-family identity consistency across supported BotBrowser hosts.
-- Alignment across selected WebKit-family browser API surfaces, TLS ClientHello behavior, and HTTP/2 behavior without hand-built overrides.
+- Alignment across selected WebKit-family browser API surfaces, TLS behavior, and HTTP/2 behavior without hand-built overrides.
 - Per-context runs that mix WebKit-family and Chromium-family profiles in one browser process.
 
 Use standard Chromium-family profiles for Chrome, Chromium, Edge, Brave, Opera, Android, or Android WebView workflows.
