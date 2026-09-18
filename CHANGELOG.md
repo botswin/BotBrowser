@@ -2,6 +2,17 @@
 
 > **Research scope:** Entries in this changelog describe features evaluated in authorized labs and defensive benchmarking programs. Follow the [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md). We work with security vendors to investigate any misuse, so report concerns to [support@botbrowser.io](mailto:support@botbrowser.io).
 
+## [2026-09-18]
+### Major
+- **Chromium Core -> 154.0.8037.17**: Started the BotBrowser 154 release line with upstream Web Platform, rendering, and security updates.
+
+### New
+- **QUIC Proxy Routing (`quic://`)**: Added authenticated QUIC proxy routes for launch and per-context workflows, including HTTPS tunnels and MASQUE CONNECT-UDP for HTTP/3 traffic.
+
+### Improvements
+- **Proxy Authentication Stability**: Improved failure handling for invalid embedded credentials across HTTP and QUIC proxy routes.
+- **SOCKS5 UDP Reliability**: Improved HTTP/3 readiness and relay compatibility for UDP-over-SOCKS5 routes.
+
 ## [2026-09-13]
 ### Major
 - **Chromium Core -> 153.0.8010.12**: Started the BotBrowser 153 release line with upstream Web Platform, rendering, and security updates.

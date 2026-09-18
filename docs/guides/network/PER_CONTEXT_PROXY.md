@@ -259,6 +259,7 @@ See [UDP over SOCKS5](UDP_OVER_SOCKS5.md) for the full per-context UDP policy.
 - [Dynamic Proxy Switching](DYNAMIC_PROXY_SWITCHING.md). Change proxy at runtime without recreating the context.
 - [Proxy and Geolocation](PROXY_GEOLOCATION_ALIGNMENT.md). How auto-detection derives timezone, locale, and language.
 - [Proxy Configuration](PROXY_CONFIGURATION.md). Supported protocols and credential formats.
+- [QUIC Proxy Routing](QUIC_PROXY.md). Route HTTPS and HTTP/3 traffic through a `quic://` proxy.
 - [Proxy Selective Routing](PROXY_SELECTIVE_ROUTING.md). Selectively route requests through or around the proxy.
 - [Per-Context Fingerprint](../../../PER_CONTEXT_FINGERPRINT.md). Full per-context fingerprint documentation.
 

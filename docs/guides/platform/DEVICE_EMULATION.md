@@ -113,6 +113,14 @@ chromium-browser \
   --bot-mobile-force-touch
 ```
 
+<a id="profile-backed-keyboard-layout"></a>
+
+### Profile-Backed Keyboard Layout
+
+`--bot-keyboard=profile` is the default and uses the keyboard layout from the active profile. Use `--bot-keyboard=real` only when the session should use the host keyboard layout.
+
+Set the policy before the first page or worker starts. Profile-backed keyboard behavior still follows the page's normal Permissions Policy and does not grant access when the page is denied.
+
 <a id="mobile-keyboard-visual-viewport"></a>
 
 ### Mobile Keyboard Visual Viewport

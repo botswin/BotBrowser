@@ -40,6 +40,8 @@ await browser.close();
 
 If your deployment should avoid QUIC/HTTP/3, add the standard `--disable-quic` flag. In BotBrowser 149.0.7827.102 and newer, UDP-over-SOCKS5 keeps SOCKS5 proxying active while this flag opts out of QUIC/HTTP/3. The SOCKS5 proxy setting stays the same.
 
+BotBrowser 154 improves first-navigation readiness and relay compatibility for HTTP/3 over SOCKS5. No new flag is required.
+
 ---
 
 <a id="how-it-works"></a>

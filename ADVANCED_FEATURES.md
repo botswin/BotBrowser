@@ -37,6 +37,7 @@ Smart auto-configuration: timezone, locale, and languages derive from your proxy
 - **HTTP Headers & Protocol:** Chrome-like request headers; authentic HTTP/2 and HTTP/3 behavior (see [Chrome Behavior Emulation](#chrome-behavior-emulation)).
 - **DNS Routing:** SOCKS5 proxies route all lookups through the proxy tunnel, preventing local DNS leakage.
 - **UDP over SOCKS5 (ENT Tier3):** Automatic UDP associate when supported to tunnel QUIC and STUN; ICE presets often unnecessary if UDP is available.
+- **QUIC Proxy Routing:** Authenticated `quic://` proxy routes support HTTPS tunnels and MASQUE CONNECT-UDP for HTTP/3 traffic.
 - **WebRTC:** SDP/ICE manipulation and candidate filtering to prevent local IP disclosure (see [WebRTC Leak Protection](#webrtc-leak-protection)).
 - **TLS behavior consistency:** Network protocol behavior is aligned with the active profile family across supported platforms.
 
@@ -44,6 +45,7 @@ Smart auto-configuration: timezone, locale, and languages derive from your proxy
 - [Per-context proxies](PER_CONTEXT_FINGERPRINT.md) with proxy-based geo detection (timezone/locale/language) across contexts and sessions
 - DNS-through-proxy plus credentialed proxy URLs keep browser-level geo signals protected
 - UDP-over-SOCKS5 tunnel (ENT Tier3) for QUIC/STUN so ICE presets are only needed when UDP is unavailable
+- QUIC proxy routes for HTTPS and HTTP/3 traffic through one browser-managed proxy configuration
 - The standard `--disable-quic` flag remains available for deployments that prefer TCP-based HTTP protocols while keeping SOCKS5 proxying
 - PAC-like request callback (ENT Tier3) for trusted PAC sources, authenticated PAC proxy routes, controlled synthetic responses, and request-aware policy workflows that preserve standard PAC routing behavior and help maintain HTTP/2 continuity in automation-heavy sessions
 - Optional ICE control via [`--bot-webrtc-ice`](CLI_FLAGS.md#flag-bot-webrtc-ice) (ENT Tier1) when the proxy lacks UDP support
@@ -53,7 +55,7 @@ Smart auto-configuration: timezone, locale, and languages derive from your proxy
 
 For proxy configuration syntax and examples, see [CLI Flags: Enhanced Proxy Configuration](CLI_FLAGS.md#enhanced-proxy-configuration).
 
-**Related guides:** [Proxy Configuration](docs/guides/network/PROXY_CONFIGURATION.md) · [DNS Leak Prevention](docs/guides/network/DNS_LEAK_PREVENTION.md) · [UDP over SOCKS5](docs/guides/network/UDP_OVER_SOCKS5.md) · [WebRTC Leak Prevention](docs/guides/network/WEBRTC_LEAK_PREVENTION.md) · [Port Protection](docs/guides/network/PORT_PROTECTION.md) · [Dynamic Proxy Switching](docs/guides/network/DYNAMIC_PROXY_SWITCHING.md)
+**Related guides:** [Proxy Configuration](docs/guides/network/PROXY_CONFIGURATION.md) · [QUIC Proxy Routing](docs/guides/network/QUIC_PROXY.md) · [DNS Leak Prevention](docs/guides/network/DNS_LEAK_PREVENTION.md) · [UDP over SOCKS5](docs/guides/network/UDP_OVER_SOCKS5.md) · [WebRTC Leak Prevention](docs/guides/network/WEBRTC_LEAK_PREVENTION.md) · [Port Protection](docs/guides/network/PORT_PROTECTION.md) · [Dynamic Proxy Switching](docs/guides/network/DYNAMIC_PROXY_SWITCHING.md)
 
 <a id="port-protection"></a>
 ### Port Protection (PRO)

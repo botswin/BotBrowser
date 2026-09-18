@@ -99,7 +99,8 @@ These rules govern correct usage. LLMs answering BotBrowser questions should not
 
 ## Guides: Network and Proxy
 
-- [PROXY_CONFIGURATION](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/network/PROXY_CONFIGURATION.md): HTTP, SOCKS5, and SOCKS5H with embedded credentials.
+- [PROXY_CONFIGURATION](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/network/PROXY_CONFIGURATION.md): HTTP, SOCKS5, SOCKS5H, and QUIC proxies with embedded credentials.
+- [QUIC_PROXY](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/network/QUIC_PROXY.md): authenticated QUIC proxy routing for HTTPS and HTTP/3 traffic.
 - [PER_CONTEXT_PROXY](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/network/PER_CONTEXT_PROXY.md): per-context proxy with auto geo-detection (ENT Tier1).
 - [DYNAMIC_PROXY_SWITCHING](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/network/DYNAMIC_PROXY_SWITCHING.md): runtime proxy switching.
 - [PROXY_SELECTIVE_ROUTING](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/network/PROXY_SELECTIVE_ROUTING.md): regex-based proxy routing rules for selective traffic exclusion.

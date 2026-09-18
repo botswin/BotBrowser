@@ -210,9 +210,12 @@ BotBrowser extends the standard `--proxy-server` flag to accept embedded credent
 --proxy-server=socks5://username:password@proxy.example.com:1080
 # SOCKS5H proxy with credentials (hostname resolution stays within tunnel)
 --proxy-server=socks5h://username:password@proxy.example.com:1080
+
+# QUIC proxy with credentials and MASQUE CONNECT-UDP support
+--proxy-server=quic://username:password@proxy.example.com:443
 ```
 
-**Supported Protocols:** HTTP, HTTPS, SOCKS5, SOCKS5H.
+**Supported Protocols:** HTTP, HTTPS, SOCKS5, SOCKS5H, QUIC.
 
 **Proxy auth usernames:** Structured proxy usernames can include additional separators such as `,` and `|`. This is useful for providers that encode routing hints inside the username, for example:
 
@@ -739,7 +742,7 @@ BotBrowser auto-generates matching `navigator.userAgentData` (brands, fullVersio
 
 <a id="flag-bot-config-keyboard"></a>
 <a id="flag-bot-keyboard"></a>
-- `--bot-keyboard=profile`: Keyboard settings: profile (emulated), real (system keyboard). Guide: [Device Emulation](docs/guides/platform/DEVICE_EMULATION.md).
+- `--bot-keyboard=<profile|real>`: `profile` is the default and uses the active profile keyboard layout. `real` uses the host keyboard layout. Guide: [Device Emulation](docs/guides/platform/DEVICE_EMULATION.md#profile-backed-keyboard-layout).
 <a id="flag-bot-config-fonts"></a>
 <a id="flag-bot-fonts"></a>
 - `--bot-fonts=profile`: Font settings: profile (embedded), expand (profile + fallback), real (system fonts). Guide: [Font Fingerprinting](docs/guides/fingerprint/FONT.md).

@@ -34,7 +34,8 @@ Configuration, deployment, and verification guides. Each guide includes prerequi
 
 | Guide | Description |
 |-------|-------------|
-| [Proxy Configuration](network/PROXY_CONFIGURATION.md) | Configure HTTP/SOCKS proxy routing for stable browser identity and network privacy. |
+| [Proxy Configuration](network/PROXY_CONFIGURATION.md) | Configure HTTP, SOCKS, and QUIC proxy routing for stable browser identity and network privacy. |
+| [QUIC Proxy Routing](network/QUIC_PROXY.md) | Route HTTPS and HTTP/3 traffic through an authenticated QUIC proxy. |
 | [Proxy and Geolocation](network/PROXY_GEOLOCATION_ALIGNMENT.md) | Align proxy IP, timezone, locale, and language for consistent geolocation signals. |
 | [Dynamic Proxy Switching](network/DYNAMIC_PROXY_SWITCHING.md) | Switch proxies at runtime per BrowserContext without restarting sessions. |
 | [WebRTC Leak Prevention](network/WEBRTC_LEAK_PREVENTION.md) | Prevent WebRTC IP leaks by controlling ICE behavior and candidate exposure. |

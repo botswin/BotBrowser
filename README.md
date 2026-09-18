@@ -156,7 +156,8 @@ Product overview, engineering design, FAQ: [TRIMMED_BUILD.md](TRIMMED_BUILD.md).
 
 | Feature | Reference | Guide |
 |---------|-----------|-------|
-| Proxy with embedded credentials (HTTP/SOCKS5/SOCKS5H) | [--proxy-server](CLI_FLAGS.md#flag-proxy-server) | [Guide](docs/guides/network/PROXY_CONFIGURATION.md) |
+| Proxy with embedded credentials (HTTP/HTTPS/SOCKS5/SOCKS5H/QUIC) | [--proxy-server](CLI_FLAGS.md#flag-proxy-server) | [Guide](docs/guides/network/PROXY_CONFIGURATION.md) |
+| QUIC proxy routing with MASQUE CONNECT-UDP | [--proxy-server](CLI_FLAGS.md#flag-proxy-server) | [Guide](docs/guides/network/QUIC_PROXY.md) |
 | Regex-based proxy routing rules | [--proxy-bypass-rgx](CLI_FLAGS.md#flag-proxy-bypass-rgx) | [Guide](docs/guides/network/PROXY_SELECTIVE_ROUTING.md) |
 | Per-context proxy with auto geo-detection | [Per-Context Fingerprint](PER_CONTEXT_FINGERPRINT.md) | [Guide](docs/guides/network/PER_CONTEXT_PROXY.md) |
 | Dynamic proxy switching at runtime | [Dynamic Proxy Switching](ADVANCED_FEATURES.md#dynamic-proxy-switching) | [Guide](docs/guides/network/DYNAMIC_PROXY_SWITCHING.md) |

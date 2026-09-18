@@ -1,6 +1,6 @@
 # Proxy Configuration
 
-> Configure HTTP/SOCKS proxies correctly for stable browser identity and network privacy.
+> Configure HTTP, SOCKS, and QUIC proxies for stable browser identity and network privacy.
 
 ---
 
@@ -11,7 +11,7 @@
 - **BotBrowser binary** installed on your system. See [INSTALLATION.md](../../../INSTALLATION.md) for platform-specific setup.
 - **Node.js** 18 or later (for Playwright/Puppeteer examples).
 - **A profile file** (`.enc` for production, `.json` for local development).
-- **A proxy server** with HTTP, HTTPS, SOCKS5, or SOCKS5H support.
+- **A proxy server** with HTTP, HTTPS, SOCKS5, SOCKS5H, or QUIC proxy support.
 
 ---
 
@@ -61,6 +61,7 @@ BotBrowser extends the standard `--proxy-server` flag with two key enhancements:
 | HTTPS | `https://` | TLS-encrypted proxy connection |
 | SOCKS5 | `socks5://` | SOCKS5 proxy with local DNS resolution |
 | SOCKS5H | `socks5h://` | SOCKS5 proxy with remote DNS resolution (hostname resolution stays within the tunnel) |
+| QUIC | `quic://` | QUIC proxy with HTTPS tunneling and MASQUE CONNECT-UDP support |
 
 ### Credential Format
 
@@ -81,6 +82,9 @@ Examples:
 
 # SOCKS5H with credentials (DNS resolved through the proxy)
 --proxy-server=socks5h://myuser:mypass@proxy.example.com:1080
+
+# QUIC proxy with credentials
+--proxy-server=quic://myuser:mypass@proxy.example.com:443
 ```
 
 ### Structured Usernames
@@ -210,6 +214,7 @@ The PAC callback guide documents the full parameter list, URL-based proxy exampl
 | Special characters in password | URL-encode special characters (e.g., `@` becomes `%40`, `#` becomes `%23`). |
 | DNS leaking to local resolver | Switch from `socks5://` to `socks5h://` so DNS resolves through the proxy. |
 | Structured username not working | Ensure commas and pipes are in the username portion, not the password. |
+| QUIC proxy does not carry HTTP/3 traffic | Confirm the proxy supports MASQUE CONNECT-UDP and that QUIC is not disabled for the browser session. |
 
 ---
 
@@ -220,6 +225,7 @@ The PAC callback guide documents the full parameter list, URL-based proxy exampl
 - [Proxy and Geolocation](PROXY_GEOLOCATION_ALIGNMENT.md). How BotBrowser auto-detects geographic signals from your proxy IP.
 - [Per-Context Proxy](PER_CONTEXT_PROXY.md). Assign different proxies to different BrowserContexts.
 - [Dynamic Proxy Switching](DYNAMIC_PROXY_SWITCHING.md). Change proxy at runtime without restarting.
+- [QUIC Proxy Routing](QUIC_PROXY.md). Route HTTPS and HTTP/3 traffic through a `quic://` proxy.
 - [PAC-Like Request Callback](PAC_REQUEST_POLICY.md). Use trusted PAC scripts for routing and enterprise request callback workflows.
 - [WebRTC Leak Prevention](WEBRTC_LEAK_PREVENTION.md). Protect against IP disclosure through WebRTC.
 - [DNS Leak Prevention](DNS_LEAK_PREVENTION.md). Prevent DNS queries from leaking outside the proxy tunnel.
