@@ -149,9 +149,6 @@ Product overview, engineering design, FAQ: [TRIMMED_BUILD.md](TRIMMED_BUILD.md).
 
 > Configuration priority: [CLI flags](CLI_FLAGS.md) (highest) > [Profile configs](profiles/PROFILE_CONFIGS.md) > defaults. Timezone, locale, and language auto-derive from your proxy IP.
 
-<details>
-<summary><strong>Browse full feature catalog</strong></summary>
-
 ### Network & Proxy
 
 | Feature | Reference | Guide |
@@ -229,10 +226,7 @@ Product overview, engineering design, FAQ: [TRIMMED_BUILD.md](TRIMMED_BUILD.md).
 | Mobile screen orientation control | [--bot-orientation](CLI_FLAGS.md#flag-bot-orientation) | [Guide](docs/guides/platform/DEVICE_EMULATION.md) |
 | Mobile keyboard visual viewport control | [--bot-mobile-keyboard](CLI_FLAGS.md#flag-bot-mobile-keyboard) | [Guide](docs/guides/platform/DEVICE_EMULATION.md#mobile-keyboard-visual-viewport) |
 
-</details>
-
-<details>
-<summary><strong>Fingerprint Protection Implementation: Privacy Controls → Technical Design → Validation</strong></summary>
+## Fingerprint Protection Implementation: Privacy Controls → Technical Design → Validation
 
 This reference maps privacy protection goals to BotBrowser implementation details and validation evidence.
 
@@ -264,9 +258,6 @@ This reference maps privacy protection goals to BotBrowser implementation detail
 | **Network** | WebRTC SDP configuration, proxy auth, connection management |
 | **Platform** | Font fallback chains, cross-worker protection, OS-specific features |
 | **Performance** | FPS simulation, memory timing, animation frame optimization |
-
-</details>
-
 
 **[Advanced Features (architecture & design) →](ADVANCED_FEATURES.md)** | **[CLI Flags (all options) →](CLI_FLAGS.md)**
 
