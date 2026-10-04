@@ -199,8 +199,6 @@ function BotBrowserFindProxyForRequest(url, host, method, headersB64, bodyB64, b
 
 Standard and request-aware PAC routes can include proxy credentials. Approved request callbacks loaded from `file:` or `data:` PAC sources can also return `RESPONSE <raw_http_response_b64>` or `RESPONSE_FILE <path>` for controlled synthetic responses. Keep PAC sources explicit and controlled. Use PAC auto-detect/WPAD only for standard routing. See [PAC-Like Request Callback](PAC_REQUEST_POLICY.md).
 
-The PAC callback guide documents the full parameter list, URL-based proxy examples, routing fallback behavior, response rules, and trusted-source requirements.
-
 ---
 
 <a id="troubleshooting"></a>
@@ -229,6 +227,7 @@ The PAC callback guide documents the full parameter list, URL-based proxy exampl
 - [PAC-Like Request Callback](PAC_REQUEST_POLICY.md). Use trusted PAC scripts for routing and enterprise request callback workflows.
 - [WebRTC Leak Prevention](WEBRTC_LEAK_PREVENTION.md). Protect against IP disclosure through WebRTC.
 - [DNS Leak Prevention](DNS_LEAK_PREVENTION.md). Prevent DNS queries from leaking outside the proxy tunnel.
+- [IPv4-Only Proxy Compatibility](IPV4_ONLY_PROXY_COMPATIBILITY.md). Check destination address-family support and tunnel rejections.
 - [CLI Flags Reference](../../../CLI_FLAGS.md). Complete list of all available flags.
 
 ---

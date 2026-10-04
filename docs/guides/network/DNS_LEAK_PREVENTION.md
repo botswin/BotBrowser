@@ -43,25 +43,25 @@ await browser.close();
 
 ## How It Works
 
-### How BotBrowser Prevents DNS Leaks
+### DNS Resolution Paths
 
-When using a proxy, DNS queries can leak outside the tunnel and expose browsing activity. BotBrowser prevents this across all DNS resolution paths, including prefetch queries.
+When using a proxy, DNS queries can leak outside the tunnel and expose browsing activity. The resolution path depends on the proxy protocol and the LocalDNS setting.
 
 BotBrowser provides two layers of DNS leak protection:
 
-**SOCKS5H protocol.** When you use `socks5h://` as the proxy protocol, all DNS resolution happens on the proxy server side. The hostname is sent through the tunnel and resolved remotely. This is the simplest way to prevent DNS leaks:
+**SOCKS5H protocol.** When you use `socks5h://` as the proxy protocol, the proxy server resolves the hostname. The hostname is sent through the tunnel instead of to the local resolver:
 
 ```bash
 --proxy-server=socks5h://user:pass@proxy.example.com:1080
 ```
 
-**Local DNS resolver (`--bot-local-dns`, ENT Tier1).** This flag enables BotBrowser's built-in DNS resolver that keeps DNS resolution local instead of relying on the proxy provider's DNS behavior. This is useful when:
+**Local DNS resolver (`--bot-local-dns`, ENT Tier1).** This flag enables BotBrowser's built-in DNS resolver. It keeps name resolution on the local resolver path instead of relying on the proxy provider's DNS behavior. This is useful when:
 
 - The proxy provider blocks or rewrites DNS lookups.
 - You want to control DNS resolution behavior independently from the proxy.
 - You need consistent DNS behavior across different proxy providers.
 
-For supported proxy connections, LocalDNS keeps dual-stack target selection aligned with the active proxy route. No additional flag is required.
+For supported proxy connections, LocalDNS prefers destination addresses matching the active proxy connection. This is not a strict IPv4-only policy. See [IPv4-Only Proxy Compatibility](IPV4_ONLY_PROXY_COMPATIBILITY.md) for destination support and troubleshooting.
 
 ```bash
 --bot-local-dns
@@ -78,7 +78,7 @@ Accepted values:
 
 When a custom DNS server is configured, BotBrowser does not use the system resolver if the chosen DNS returns no answer.
 
-**DNS prefetch protection.** BotBrowser routes DNS prefetch queries through the same proxy tunnel to prevent leaking outside the configured path.
+**DNS prefetch handling.** Supported proxy and resolver configurations apply the selected resolution path to DNS prefetch requests as well.
 
 ---
 
@@ -100,15 +100,9 @@ The simplest approach. Switch from `socks5://` to `socks5h://`:
 
 With `socks5h`, the target hostname is never visible to your local DNS resolver. The proxy server handles all name resolution.
 
-### Combining with local DNS resolver
+### Choosing a DNS resolution path
 
-For maximum control, combine `socks5h` with `--bot-local-dns`:
-
-```bash
---proxy-server=socks5h://user:pass@proxy.example.com:1080 --bot-local-dns
-```
-
-This gives you local DNS resolution behavior while keeping queries within the proxy tunnel.
+Choose one resolution path for each proxy configuration. Use `socks5h://` when the proxy should resolve target hostnames. Use `--bot-local-dns` with a proxy mode that supports local target resolution when BotBrowser should resolve those targets locally. For `socks5h://`, proxy-side target resolution takes precedence; adding `--bot-local-dns` does not switch that target to local resolution.
 
 ### HTTP proxy DNS behavior
 
@@ -124,7 +118,7 @@ HTTP and HTTPS proxies use the CONNECT method for tunneling. DNS resolution for 
 
 ## Verifying DNS Protection
 
-To verify protection is active, visit [BrowserLeaks DNS test](https://browserleaks.com/dns) or [DNS Leak Test](https://www.dnsleaktest.com) and confirm that all reported DNS servers match your proxy region, not your local ISP.
+To verify the selected path, inspect the browser's network diagnostics or the proxy provider's DNS records while loading a controlled hostname. For remote resolution, the provider should report the lookup. For local resolution, the lookup should remain on the configured local resolver path.
 
 ---
 
@@ -134,10 +128,10 @@ To verify protection is active, visit [BrowserLeaks DNS test](https://browserlea
 
 | Problem | Solution |
 |---------|----------|
-| DNS test shows local ISP servers | Switch from `socks5://` to `socks5h://` to resolve DNS through the proxy. |
-| DNS queries slow through proxy | Use `--bot-local-dns` for local DNS resolution that stays protected. |
+| The provider does not report DNS lookups | Switch from `socks5://` to `socks5h://` when the proxy should resolve DNS. |
+| DNS queries slow through proxy | Use `--bot-local-dns` when local resolution is allowed by your network policy. |
 | Proxy blocks certain domains via DNS | Use `--bot-local-dns` to control DNS independently from the proxy provider. |
-| DNS leak only on certain domains | Check for DNS prefetch. BotBrowser prevents prefetch leaks, but verify your configuration. |
+| DNS behavior differs on certain domains | Check DNS prefetch and confirm that the selected proxy and resolver configuration applies to those requests. |
 
 ---
 
@@ -146,6 +140,7 @@ To verify protection is active, visit [BrowserLeaks DNS test](https://browserlea
 ## Next Steps
 
 - [Proxy Configuration](PROXY_CONFIGURATION.md). Supported protocols including SOCKS5H.
+- [IPv4-Only Proxy Compatibility](IPV4_ONLY_PROXY_COMPATIBILITY.md). Distinguish proxy endpoint and destination support.
 - [WebRTC Leak Prevention](WEBRTC_LEAK_PREVENTION.md). Prevent real IP disclosure through WebRTC.
 - [Port Protection](PORT_PROTECTION.md). Protect local service ports from being scanned.
 - [UDP over SOCKS5](UDP_OVER_SOCKS5.md). Tunnel UDP traffic through the proxy.
