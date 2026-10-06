@@ -2,6 +2,13 @@
 
 > **Research scope:** Entries in this changelog describe features evaluated in authorized labs and defensive benchmarking programs. Follow the [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md). We work with security vendors to investigate any misuse, so report concerns to [support@botbrowser.io](mailto:support@botbrowser.io).
 
+## [2026-10-06]
+### Improvements
+- **Startup Identity Readiness**: Improved first-page startup behavior so profile-backed geographic identity is ready before dependent navigation work begins.
+- **Speech Voice Consistency**: Improved profile-backed speech voice selection and ordering across supported locales and host platforms.
+- **WebGL Capability Consistency**: Improved profile-backed WebGL and WebGL2 capability behavior across supported rendering paths, including compressed texture workflows.
+- **Cross-Path Graphics Consistency**: Improved profile-backed graphics readback consistency across supported canvas, video, and image export paths on macOS and other host platforms.
+
 ## [2026-10-01]
 ### Major
 - **Chromium Core -> 154.0.8037.59**: Updated the BotBrowser 154 release line with the latest validated minor-release maintenance changes.

@@ -80,6 +80,8 @@ target platform represented by the active profile. This keeps shader-language ou
 with the profile instead of exposing the host operating system or graphics backend. The same
 profile policy applies when the page runs in a separate BrowserContext.
 
+WebGL and WebGL2 capability checks also follow the active profile across supported rendering paths. Compressed texture operations use the same profile-backed capability policy as the corresponding WebGL format queries.
+
 ---
 
 <a id="how-botbrowser-protects"></a>

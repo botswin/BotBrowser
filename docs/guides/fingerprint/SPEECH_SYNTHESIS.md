@@ -48,6 +48,8 @@ Control voice list behavior with `--bot-speech-voices`:
 
 When set to `profile`, BotBrowser returns a voice list consistent with the profile's declared platform and browser brand. This ensures voice data aligns with all other identity surfaces.
 
+Voice selection and ordering remain consistent when a profile targets a different host platform. Locale-specific voices are selected from the profile policy before the browser exposes the list to page content.
+
 ---
 
 <a id="how-botbrowser-controls"></a>
