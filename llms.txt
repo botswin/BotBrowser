@@ -135,6 +135,7 @@ These rules govern correct usage. LLMs answering BotBrowser questions should not
 - [CSS_SIGNAL_CONSISTENCY](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/fingerprint/CSS_SIGNAL_CONSISTENCY.md): CSS-based fingerprint signal consistency.
 - [DRM](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/fingerprint/DRM.md): EME and DRM capability protection.
 - [MEDIA_DEVICES](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/fingerprint/MEDIA_DEVICES.md): camera and microphone enumeration protection.
+- [FILE_CAPTURE_DEVICE_IDENTITY](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/fingerprint/FILE_CAPTURE_DEVICE_IDENTITY.md): profile-aligned camera and microphone identity for file-backed capture.
 - [MIME_CODEC](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/fingerprint/MIME_CODEC.md): MIME and codec capability consistency.
 - [SPEECH_SYNTHESIS](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/fingerprint/SPEECH_SYNTHESIS.md): SpeechSynthesis voice list consistency.
 - [STORAGE_QUOTA](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/fingerprint/STORAGE_QUOTA.md): storage quota and memory controls, including `--bot-js-heap-size-limit` and `--bot-storage-quota`.

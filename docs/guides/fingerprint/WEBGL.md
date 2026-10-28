@@ -42,12 +42,17 @@ Control WebGL behavior with the `--bot-webgl` flag:
 # Use profile-defined WebGL settings (default)
 --bot-webgl=profile
 
+# Keep reported limits within what the host can actually deliver
+--bot-webgl=min
+
 # Use real system WebGL (no protection)
 --bot-webgl=real
 
 # Disable WebGL entirely
 --bot-webgl=disabled
 ```
+
+`min` serves the lower of the profile's claim and what the host can really allocate, while `profile` serves the profile's numbers as-is.
 
 ### WebGL Image Noise
 

@@ -48,6 +48,10 @@ Web Audio API output can be used as a tracking identifier because it varies acro
 
 In `profile` mode, audio node structure and analyser parameters follow the profile, together with the noise controls described below. In `real` mode the host audio stack passes through and profile audio values, including audio noise, do not apply. The behavior mirrors `--bot-webgl` and `--bot-webgpu`. The legacy alias `--bot-config-audio` is still accepted.
 
+### Audio Buffer and Latency Preference
+
+In `profile` mode the buffer the profile declares is served per the page's latency preference, so requests that ask for a different latency profile get correspondingly different buffer sizes rather than one fixed value. If the page requests an explicit duration, that request outranks the profile value.
+
 ### Enabling/Disabling Audio Noise
 
 AudioContext noise is enabled by default. To control it explicitly:

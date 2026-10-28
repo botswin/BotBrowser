@@ -259,7 +259,7 @@ Comprehensive hardware emulation and fingerprint management.
 **CPU-Architecture Emulation:**
 - x86/x64/ARM architecture simulation
 - Authentic CPU core count and timing
-- Hardware concurrency simulation
+- Hardware concurrency simulation, with [`--bot-cores`](CLI_FLAGS.md#flag-bot-cores) choosing between the profile claim, the host count, the lower of the two, or an explicit number
 - JavaScript & WebAssembly parity across baseline, Turbo, and SIMD pipelines
 
 **Screen and Display Control:**
@@ -420,7 +420,7 @@ See [WebKit-family Profile Consistency](WEBKIT_PROFILE_CONSISTENCY.md) for the f
 | Component | Capabilities |
 |-----------|-------------|
 | **Canvas** | 2D context noise, standard and wide-gamut color-space consistency, consistent image data, cross-worker consistency |
-| **WebGL** | Precision GPU micro-benchmarks, driver-specific behavior, extension simulation |
+| **WebGL** | Precision GPU micro-benchmarks, driver-specific behavior, extension simulation, profile-served limits that remain allocatable (`--bot-webgl=min`) |
 | **WebGPU** | Modern GPU API support, compute shader capabilities, buffer management |
 | **Text Rendering** | HarfBuzz text shaping, cross-platform fonts, emoji rendering consistency |
 | **Performance** | Precise FPS simulation, texture hash fidelity, render timing control |
@@ -429,10 +429,10 @@ See [WebKit-family Profile Consistency](WEBKIT_PROFILE_CONSISTENCY.md) for the f
 
 | Component | Capabilities |
 |-----------|-------------|
-| **Proxy** | Authentication embedding, credential management, geo-detection, authenticated PAC routing, PAC-like request callback, controlled synthetic responses |
+| **Proxy** | Authentication embedding, credential management, geo-detection, authenticated PAC routing, PAC-like request callback, controlled synthetic responses, and failure without process abort when credentials exceed protocol limits |
 | **WebRTC** | SDP control, ICE candidate filtering, media stream simulation |
 | **HTTP Headers** | Google-specific headers (ENT Tier2), Chrome behavior patterns, request timing |
-| **Media Devices** | AudioContext simulation, speech synthesis, device enumeration |
+| **Media Devices** | AudioContext simulation with latency-aware buffer sizing, speech synthesis, device enumeration, and file-backed capture identity |
 | **Codecs** | Extended media types, WebCodecs APIs, hardware acceleration simulation, video FPS control |
 | **Widevine DRM** | Persistent license support, platform-appropriate license negotiation, EME capability fingerprinting prevention |
 | **WebAuthn** | Platform-specific client capabilities, Touch ID/Bluetooth/payment authenticator detection prevention |

@@ -2,6 +2,25 @@
 
 > **Research scope:** Entries in this changelog describe features evaluated in authorized labs and defensive benchmarking programs. Follow the [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md). We work with security vendors to investigate any misuse, so report concerns to [support@botbrowser.io](mailto:support@botbrowser.io).
 
+## [2026-10-29]
+### Major
+- **Chromium Core -> 157.0.8103.14**: BotBrowser 157 is available, bringing the full profile surface to the new Chromium milestone. Existing protection, identity, and automation workflows carry over without configuration changes.
+
+### New
+- **Core Count Control (`--bot-cores`)**: Choose the core count reported to pages with `profile`, `real`, `min`, or an explicit number. Reported and observable parallelism now stay aligned.
+
+### Improvements
+- **Graphics Limit Consistency**: `--bot-webgl` gains a `min` value that keeps declared graphics limits within what the host can deliver.
+- **Audio Device Timing**: Audio buffer behaviour now follows the page's latency preference.
+- **Text Selection Appearance**: Profile-declared selection colours now apply to the rendered selection band.
+- **Profile-Driven Feature Exposure**: Profile-declared capabilities stay effective across surfaces the new milestone changed upstream.
+- **Proxy Authentication Robustness**: Proxy authentication now fails cleanly instead of aborting when credentials exceed protocol limits.
+- **Sandboxed Frame Identity**: Improved geographic identity consistency in isolated frames.
+
+### Fixes
+- **Cross-Line Consistency**: The core-count, graphics, audio, and selection improvements are also available on the other maintained release lines.
+- **Proxy Session Startup**: Improved startup speed and identity reliability for fresh proxy sessions.
+
 ## [2026-10-23]
 ### Major
 - **Chromium Core -> 156.0.8078.47**: Updated the BotBrowser 156 release line with the completed porting round and the latest validated profile, media-device, and browser-surface alignment changes.

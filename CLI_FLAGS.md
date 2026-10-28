@@ -768,7 +768,7 @@ BotBrowser auto-generates matching `navigator.userAgentData` (brands, fullVersio
 
 <a id="flag-bot-config-webgl"></a>
 <a id="flag-bot-webgl"></a>
-- `--bot-webgl=profile`: WebGL: profile (use profile), real (system), disabled (off). Guide: [WebGL Fingerprinting](docs/guides/fingerprint/WEBGL.md).
+- `--bot-webgl=profile`: WebGL: profile (use profile), min (lower of profile and host), real (system), disabled (off). Guide: [WebGL Fingerprinting](docs/guides/fingerprint/WEBGL.md).
 <a id="flag-bot-config-webgpu"></a>
 <a id="flag-bot-webgpu"></a>
 - `--bot-webgpu=profile`: WebGPU: profile (use profile), real (system), disabled (off). Guide: [WebGPU Fingerprint Protection](docs/guides/fingerprint/WEBGPU.md).
@@ -796,6 +796,8 @@ BotBrowser auto-generates matching `navigator.userAgentData` (brands, fullVersio
 <a id="flag-bot-config-media-devices"></a>
 <a id="flag-bot-media-devices"></a>
 - `--bot-media-devices=profile`: Media devices: profile (profile-backed devices), real (system devices). Guide: [Media Devices Privacy](docs/guides/fingerprint/MEDIA_DEVICES.md).
+<a id="flag-bot-cores"></a>
+- `--bot-cores=profile`: Reported core count: profile (profile claim, default), real (host count), min (lower of the two), or an explicit number. Guide: [CPU Core Scaling Protection](docs/guides/fingerprint/CPU_CORE_SCALING.md).
 <a id="flag-bot-config-media-types"></a>
 <a id="flag-bot-media-types"></a>
 - `--bot-media-types=expand`: Media types: expand (default), profile, real. Guide: [MIME and Codec](docs/guides/fingerprint/MIME_CODEC.md).

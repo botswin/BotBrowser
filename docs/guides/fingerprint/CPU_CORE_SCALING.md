@@ -36,6 +36,33 @@ chromium-browser \
 
 No extra flags needed. When the profile sets `navigator.hardwareConcurrency`, BotBrowser automatically applies CPU affinity to Worker threads.
 
+### Choosing the reported core count
+
+`--bot-cores` selects which core count `navigator.hardwareConcurrency` reports. The default keeps the profile's claim.
+
+| Value | Reported count |
+|-------|----------------|
+| `profile` (default) | The profile's claimed count. |
+| `real` | The host's actual core count. |
+| `min` | The lower of the profile claim and the host count. |
+| A number | That number exactly, as given. |
+
+```bash
+# Report the profile claim (default)
+--bot-cores=profile
+
+# Report the host's real core count
+--bot-cores=real
+
+# Never claim more cores than the host actually has
+--bot-cores=min
+
+# Report an explicit count
+--bot-cores=8
+```
+
+Thread pools size themselves from the same resolved value, so the parallelism a page can observe stays consistent with the count it was told. An unparsable value falls back to the profile behavior rather than reporting a bogus count.
+
 ---
 
 <a id="how-it-works"></a>
@@ -98,7 +125,7 @@ Each browser instance is constrained independently based on its profile. A 4-cor
 
 | Problem | Solution |
 |---------|----------|
-| `hardwareConcurrency` shows wrong value | Ensure your profile contains the correct core count. The value comes from the profile, not from a CLI flag. |
+| `hardwareConcurrency` shows wrong value | Check `--bot-cores` first. With the default `profile` value the count comes from the profile, so also verify the profile contains the intended core count. |
 | Parallel benchmark still fast on macOS | macOS does not support CPU affinity. Consider running on Linux for full protection. |
 | Workers seem slow | Expected when the profile claims fewer cores than the host. Workers are intentionally constrained. |
 

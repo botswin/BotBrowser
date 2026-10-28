@@ -143,7 +143,7 @@ BotBrowser controls all navigator properties at the browser engine level. Identi
 | navigator.webdriver returns true | Verify BotBrowser profile is loaded correctly. BotBrowser handles this automatically when a profile is active. |
 | Language doesn't match proxy location | Use `--proxy-server` (not framework proxy) for auto-detection, or set `--bot-languages` manually. |
 | UA-CH headers don't match JavaScript values | This should not happen with BotBrowser. Verify profile is loaded and no external extensions modify headers. |
-| hardwareConcurrency shows host value | Ensure profile defines the CPU core count and is loaded correctly. |
+| hardwareConcurrency shows host value | Ensure profile defines the CPU core count and is loaded correctly, and check `--bot-cores`: `real` reports the host count by design, while the default `profile` uses the profile's claim. |
 | A custom network policy is rejected | Check the JSON syntax, field names, value types, and any `profile` selectors. The policy is applied atomically. |
 
 ---

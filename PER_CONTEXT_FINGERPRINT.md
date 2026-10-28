@@ -298,6 +298,7 @@ Most `--bot-*` flags from [CLI_FLAGS.md](CLI_FLAGS.md) work with per-context con
 | Noise Seed | [`--bot-noise-seed`](CLI_FLAGS.md#flag-bot-noise-seed) for deterministic fingerprint variance |
 | Timing | [`--bot-time-scale`](CLI_FLAGS.md#flag-bot-time-scale) for performance timing control, [`--bot-time-seed`](CLI_FLAGS.md#flag-bot-time-seed) for deterministic timing diversity, [`--bot-stack-seed`](CLI_FLAGS.md#flag-bot-stack-seed) for stack depth variation, [`--bot-fps`](CLI_FLAGS.md#flag-bot-fps) for frame rate control |
 | Storage and Memory | [`--bot-js-heap-size-limit`](CLI_FLAGS.md#flag-bot-js-heap-size-limit) and [`--bot-storage-quota`](CLI_FLAGS.md#flag-bot-storage-quota) for profile, real, or explicit byte-value policy |
+| Hardware Concurrency | [`--bot-cores`](CLI_FLAGS.md#flag-bot-cores) for profile, real, min, or an explicit core count per context |
 | Display Scale | [`--bot-dpr`](CLI_FLAGS.md#flag-bot-dpr) for real, profile, or advanced device-pixel-ratio policy; see [Device Pixel Ratio Policy](docs/guides/fingerprint/DEVICE_PIXEL_RATIO.md) |
 | Network | [`--bot-network-info-override`](CLI_FLAGS.md#flag-bot-network-info-override) for profile, native, or custom JSON network information policy, [`--bot-local-dns`](CLI_FLAGS.md#flag-bot-local-dns) for context DNS policy |
 | WebRTC | [`--bot-webrtc-ice`](ADVANCED_FEATURES.md#webrtc-leak-protection) for ICE endpoint control |
