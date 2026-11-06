@@ -53,6 +53,8 @@ BotBrowser implements protection at the browser engine level:
 
 **ICE Candidate Control.** ICE candidates present a consistent network topology. Local IP addresses are not exposed through `RTCPeerConnection` events.
 
+When a proxy cannot carry datagrams, the default mode keeps unproxied traffic from leaving the host and presents the proxy address in candidate data. Use `--bot-webrtc=real` only when direct traffic is intended. This behavior is verified on BotBrowser 156; other release lines carry the same source change but were not compiled for this verification.
+
 <a id="why-no-loopback-candidates-appear"></a>
 #### Why no loopback (127.0.0.1 / ::1) candidates appear
 

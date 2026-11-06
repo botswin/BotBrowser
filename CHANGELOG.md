@@ -2,6 +2,27 @@
 
 > **Research scope:** Entries in this changelog describe features evaluated in authorized labs and defensive benchmarking programs. Follow the [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md). We work with security vendors to investigate any misuse, so report concerns to [support@botbrowser.io](mailto:support@botbrowser.io).
 
+## [2026-11-06]
+### Major
+- **Chromium Core -> 157.0.8103.38**: BotBrowser 157 now runs on the latest validated Chromium build. Existing profiles, automation setup, and per-context workflows stay compatible.
+
+### New
+- **Speech Playback Completeness**: Profile-backed speech now starts and completes consistently across supported hosts.
+- **Extended Color-Scheme Control (`--bot-color-scheme`)**: Added `profile` and `real` values. `profile` keeps the profile's declared scheme, `real` passes the host setting through, and the existing `light` and `dark` values still force a scheme.
+
+### Improvements
+- **Mac ARM Audio Profile Consistency**: Mac ARM profiles now produce the same audio results on other supported hosts.
+- **Regional Typography Consistency**: Regional text and emoji rendering now follow the profile's target platform across hosts.
+- **Verified Color-Scheme System Colors**: System colors now follow the active color scheme on the validated Chromium-family paths.
+- **On-Device Capability Consistency**: Profile-declared on-device capability now remains aligned with the browser family and host context.
+- **Automation Behavior Consistency**: Browser automation setup now presents a cleaner runtime surface to page scripts.
+- **Network Path Consistency**: Proxy-backed network paths now remain consistent across supported configurations.
+
+### Fixes
+- **Battery Reporting Consistency**: Profile-declared battery values now remain authoritative across supported hosts.
+- **Sharing Behavior Consistency**: Cross-platform profiles now follow the expected platform behavior when sharing is unavailable.
+- **WebKit-Family Network Consistency**: WebKit-family network behavior now follows the profile's target.
+
 ## [2026-10-29]
 ### Major
 - **Chromium Core -> 157.0.8103.14**: BotBrowser 157 is available, bringing the full profile surface to the new Chromium milestone. Existing protection, identity, and automation workflows carry over without configuration changes.

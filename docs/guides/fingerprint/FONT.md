@@ -89,6 +89,8 @@ BotBrowser addresses cross-platform font consistency through built-in font libra
 
 **Result:** Profile-backed font inventory and rendering controls support cross-platform consistency without guaranteeing identical output for every text measurement or glyph. Keep `--bot-fonts=profile` for profile font policy; `expand` permits host font fallback, and `real` uses host-system fonts.
 
+Regional CJK text, emoji rendering, and system UI typography use the profile's target-platform defaults across supported hosts. Compare exact measurements with the profile and host pair you deploy.
+
 <a id="fontface-fallback"></a>
 
 ### FontFace and Fallback Behavior

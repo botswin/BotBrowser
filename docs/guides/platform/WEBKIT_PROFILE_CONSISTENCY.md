@@ -8,6 +8,8 @@ WebKit-family Profile Consistency is profile-backed. The encrypted profile carri
 
 The profile coordinates WebKit-family browser surfaces, Worker identity, runtime behavior, CSS and system UI values, font loading, canvas output, media capabilities, permission states, property ordering, mobile profile surfaces, TLS, and HTTP/2 behavior so the selected browser-family identity remains consistent across supported hosts. Profile-aware notification and accessibility preferences remain isolated from Chromium-family services.
 
+Network behavior follows the platform behind the profile's WebKit-family version. Keep the profile and binary on the same release line when comparing HTTPS and HTTP/2 behavior.
+
 Use this profile line for desktop and mobile WebKit-family bundles. Use Chromium-family profiles for Chrome, Chromium, Edge, Brave, Opera, Android, and Android WebView.
 
 For the product page, see [WebKit-family Profile Consistency](../../../WEBKIT_PROFILE_CONSISTENCY.md).

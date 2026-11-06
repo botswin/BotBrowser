@@ -95,6 +95,8 @@ Many proxy providers encode routing information in the username using commas or 
 --proxy-server=socks5://user_abc,type_mobile,country_GB,session_1234:password@portal.proxy.example.com:1080
 ```
 
+Proxy credentials stay out of operational diagnostics and crash reports. Keep credentials in the profile or launch environment, and do not paste live credentials into public reports.
+
 ---
 
 <a id="common-scenarios"></a>

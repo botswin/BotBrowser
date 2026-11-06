@@ -67,6 +67,8 @@ BotBrowser supports SOCKS5 UDP ASSOCIATE, tunneling QUIC and STUN traffic throug
 
 This happens transparently. No external proxy chains, no additional software, no configuration beyond specifying the SOCKS5 proxy.
 
+When the proxy rejects UDP, the default mode does not send unproxied datagrams. Pages continue with proxy-consistent candidate data. Use `--bot-webrtc=real` only when direct WebRTC traffic is intended. This behavior is verified on BotBrowser 156; other release lines carry the same source change but were not compiled for this verification.
+
 ### Relationship with WebRTC ICE Presets
 
 When UDP-over-SOCKS5 is active, STUN responses already reflect the proxy's IP. This means `--bot-webrtc-ice` presets are often unnecessary, since ICE candidates are already consistent with your proxy identity. ICE presets are still useful when your proxy does not support UDP.

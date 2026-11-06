@@ -759,7 +759,7 @@ BotBrowser auto-generates matching `navigator.userAgentData` (brands, fullVersio
   - `landscape-primary`, `landscape-secondary`, `portrait-primary`, `portrait-secondary` - Explicit orientation with specific angle
 <a id="flag-bot-config-color-scheme"></a>
 <a id="flag-bot-color-scheme"></a>
-- `--bot-color-scheme=light`: Color scheme: light, dark. Guide: [CSS Signal Consistency](docs/guides/fingerprint/CSS_SIGNAL_CONSISTENCY.md).
+- `--bot-color-scheme=profile`: Color scheme: profile (use the profile's declared scheme, default), real (pass the host setting through), light, dark. Guide: [CSS Signal Consistency](docs/guides/fingerprint/CSS_SIGNAL_CONSISTENCY.md).
 <a id="flag-bot-config-disable-device-scale-factor"></a>
 <a id="flag-bot-disable-device-scale-factor"></a>
 - `--bot-disable-device-scale-factor`: Disable device scale factor: true, false. Guide: [Screen and Window](docs/guides/fingerprint/SCREEN_WINDOW.md).

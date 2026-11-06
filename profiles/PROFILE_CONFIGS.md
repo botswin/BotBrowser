@@ -60,7 +60,7 @@ Availability applies to custom values or behavior where noted. `Core` fields are
 | [`browserBrand`](../CLI_FLAGS.md#flag-bot-browser-brand) | `chromium`, `chrome`, `edge`, `brave`, `opera` (ENT Tier2); `webview` (ENT Tier3) | `chrome` |
 | [`brandFullVersion`](../CLI_FLAGS.md#flag-bot-brand-full-version) | Browser-family full version (ENT Tier2) | Empty |
 | [`uaFullVersion`](../CLI_FLAGS.md#flag-bot-ua-full-version) | Chromium full version matching the active major (ENT Tier2) | Empty |
-| [`colorScheme`](../CLI_FLAGS.md#flag-bot-color-scheme) | `light`, `dark` | `light` |
+| [`colorScheme`](../CLI_FLAGS.md#flag-bot-color-scheme) | `real`, `light`, `dark`; `profile` is the CLI-only default meaning no override | `light` |
 | [`disableDeviceScaleFactorOnGUI`](../CLI_FLAGS.md#flag-bot-disable-device-scale-factor) | `true`, `false` | `false` |
 
 Timezone, locale, and languages derive from the proxy IP when set to `auto`.

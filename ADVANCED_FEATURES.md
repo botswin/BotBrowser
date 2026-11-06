@@ -186,6 +186,7 @@ Consistent Chrome-compatible behaviors and standardized API responses.
 **API Standardization:**
 - Chrome-compatible API implementations
 - Standardized JavaScript API responses matching Chrome specifications
+- Profile-aligned on-device AI availability across supported browser families and host hardware
 
 **Widevine CDM Integration (ENT Tier2):**
 > Note: BotBrowser does not distribute proprietary modules (e.g., Widevine). End users must obtain playback components via official channels.

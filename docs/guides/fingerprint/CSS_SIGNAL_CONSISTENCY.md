@@ -39,9 +39,20 @@ CSS provides several mechanisms that reveal information about the user's operati
 Control the reported color scheme:
 
 ```bash
+# Use the profile's declared scheme (default)
+--bot-color-scheme=profile
+
+# Use the host's real system setting
+--bot-color-scheme=real
+
+# Force a light color scheme
 --bot-color-scheme=light
+
+# Force a dark color scheme
 --bot-color-scheme=dark
 ```
+
+`--bot-color-scheme` accepts `profile`, `real`, `light`, and `dark`; values are case-insensitive. With `profile`, the scheme comes from the profile's declared setting. Use `real` when the host operating system setting should pass through without profile color protection. A page's own color-scheme declaration still selects the matching light or dark system colors at render time. Selection, form-control, and other system color keywords follow the active scheme.
 
 ### Font System
 
@@ -89,7 +100,7 @@ Profile-backed browser-family consistency covers CSS interface shape, supported 
 | Problem | Solution |
 |---------|----------|
 | System font renders as host OS font | Verify `--bot-fonts=profile` is set. |
-| Color scheme doesn't match expectation | Set explicitly with `--bot-color-scheme=light` or `dark`. |
+| Color scheme doesn't match expectation | Check whether `--bot-color-scheme` is set explicitly. Use `profile` for the profile's declared scheme, `real` for the host setting, or `light`/`dark` to force one. |
 | @supports query reveals wrong platform | Check that the profile matches your intended platform. Feature availability follows the profile. |
 | CSS system colors expose host theme | Ensure profile is loaded. System colors are controlled at the engine level. |
 
