@@ -82,6 +82,10 @@ The separate GUI scaling control does not select a DPR policy:
 --bot-disable-device-scale-factor=true
 ```
 
+### Scrollbar Layout
+
+The profile's target scrollbar metrics determine whether the profile uses overlay or classic scrollbars. A zero width selects overlay scrollbars; a positive width selects classic scrollbars. This keeps CSS layout and element measurements aligned when a profile runs on a host with a different scrollbar style.
+
 ### Headful Mode Note
 
 Desktop profiles default to `real` in headful mode, meaning the browser uses actual system window and screen dimensions. To apply profile-defined dimensions in headful mode, set both flags explicitly:

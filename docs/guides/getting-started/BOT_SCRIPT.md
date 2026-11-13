@@ -323,3 +323,7 @@ For the full list of CDP commands you can send via `chrome.debugger.sendCommand(
 ---
 
 **[Legal Disclaimer & Terms of Use](https://github.com/botswin/BotBrowser/blob/main/DISCLAIMER.md) • [Responsible Use Guidelines](https://github.com/botswin/BotBrowser/blob/main/RESPONSIBLE_USE.md)**. BotBrowser is for authorized fingerprint protection and privacy research only.
+
+---
+
+**Related BotBrowser blog:** [Browser Automation Signals and Consistency in Playwright](https://botbrowser.io/en/blog/automation-detection-prevention/)

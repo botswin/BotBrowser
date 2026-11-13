@@ -126,6 +126,8 @@ Android-target contexts prevent unsupported external URL schemes from opening ap
 
 The key difference between phone and tablet emulation is the mobile flag. Phones report `true`, tablets report `false`. This flag affects both JavaScript values and Client Hints headers.
 
+For Android identities, the reported form factors follow that mobile setting across page APIs, Workers, iframes, and request headers. A phone identity reports Mobile, and a tablet identity reports Desktop. Explicit tablet selection from a separate platform-specific control remains independent of this rule.
+
 Use `--bot-mobile` to override this value:
 
 ```bash

@@ -116,7 +116,7 @@ These rules govern correct usage. LLMs answering BotBrowser questions should not
 ## Guides: Fingerprint and Rendering
 
 - [CANVAS](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/fingerprint/CANVAS.md): Canvas 2D deterministic noise.
-- [WEBGL](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/fingerprint/WEBGL.md): WebGL parameter and rendering protection.
+- [WEBGL](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/fingerprint/WEBGL.md): WebGL parameter, capability, rendering, and shader compilation protection.
 - [WEBGPU](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/fingerprint/WEBGPU.md): WebGPU adapter and rendering protection.
 - [AUDIO](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/fingerprint/AUDIO.md): AudioContext noise calibration.
 - [FONT](https://raw.githubusercontent.com/botswin/BotBrowser/main/docs/guides/fingerprint/FONT.md): cross-platform font engine and text metrics noise.

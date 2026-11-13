@@ -87,6 +87,8 @@ Note: `navigator.gpu` (the property) is present on all five rows. The column abo
 
 **SwiftShader** remains functional on current Chromium but only through `--enable-unsafe-swiftshader`, which Chromium has publicly labelled as a deprecation-gated path. If that flag is removed in a future Chromium release, pipelines that still rely on SwiftShader will lose WebGL altogether. Migrating to Mesa llvmpipe ahead of any such change avoids a forced cutover.
 
+When the browser starts in profile WebGL mode on SwiftShader, it compiles and links shaders in parallel. This shortens shader-heavy page startup and keeps completion checks from occupying the renderer. Real WebGL mode keeps the host driver's native scheduling.
+
 **Mesa lavapipe** is the Vulkan software rasterizer. On Ubuntu 22.04 the packaged Mesa (23.2) does not ship every Vulkan extension ANGLE needs for WebGL2, so WebGL2 context creation fails on bare metal (WebGL1 still works, but `navigator.gpu.requestAdapter()` returns null). Inside Docker containers Vulkan ICD loading is additionally fragile, and lavapipe commonly fails to come up at all, so WebGL1 also stops working. On Ubuntu 24.04 with Mesa 24.2 or later the bare-metal story improves, but the container behavior is still unreliable today.
 
 **Bare `--disable-gpu`** without any other flags disables WebGPU adapter discovery and both WebGL contexts on current Chromium. If you had a working `--disable-gpu` based setup before, it was only working because SwiftShader unsafe-gated flags were present alongside it.

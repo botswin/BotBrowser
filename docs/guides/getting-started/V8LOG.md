@@ -73,6 +73,8 @@ Use [`--bot-v8-log-exclude-api`](../../../CLI_FLAGS.md#flag-bot-v8-log-exclude-a
 
 The value is a comma-separated list of exact API names. Whitespace around names is ignored. Excluded calls are not written and do not consume the trace event budget. Other APIs and events without an API name remain in the trace.
 
+Exclusion is applied before an event is built, so a high-volume API does not pay serialization cost before it is discarded. The file write path allows concurrent writers without serializing them behind one process-wide lock. This keeps large captures responsive while preserving one complete JSONL record per line.
+
 Apply a separate list to each BrowserContext when concurrent validation sessions need different evidence scopes.
 
 ---

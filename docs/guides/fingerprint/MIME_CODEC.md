@@ -35,6 +35,8 @@ BotBrowser controls MIME type and codec responses at the browser engine level to
 
 Profile-backed media capability checks preserve codec spelling and support ordering across browser contexts. Use the profile policy when validating WebCodecs or HEVC capability behavior.
 
+When profile entries differ only by optional parameters, the entry that contains measured `mediaCapabilities` data is retained. A parameter-only duplicate does not replace a measured capability result.
+
 ### Configuration
 
 The default configuration uses `expand` mode, which prioritizes local decoders while extending the list with profile-defined types. This can be configured via the `--bot-media-types` flag:

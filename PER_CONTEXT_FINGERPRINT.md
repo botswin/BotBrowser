@@ -311,6 +311,8 @@ Most `--bot-*` flags from [CLI_FLAGS.md](CLI_FLAGS.md) work with per-context con
 | HTTP | [`--bot-custom-headers`](CLI_FLAGS.md#flag-bot-custom-headers) for custom HTTP request headers per context |
 | Config | [`--bot-platform`, `--bot-timezone`, `--bot-noise-canvas`, `--bot-webgl=disabled`, `--bot-webgpu=disabled`, etc.](CLI_FLAGS.md#profile-configuration-override-flags) |
 
+WebGL capability claims are context-scoped, but the shader compile model is selected when the browser starts. On a software-rendered host, launch with profile WebGL mode when you need parallel shader compilation. Sibling contexts in a mixed launch follow the compile model chosen at startup.
+
 See [CLI_FLAGS.md](CLI_FLAGS.md) for the complete flag reference.
 
 ## Context Identity Lifecycle

@@ -67,6 +67,10 @@ chromium-browser \
     --bot-webgpu=disabled
 ```
 
+In `profile` mode, adapter limits and features come from the active BrowserContext's profile. Requests made through `requestDevice()` are checked against that profile's declared limits and features. A value outside the profile claim is rejected. A claimed capability that the host cannot provide is withheld from the device request rather than being reported as usable.
+
+Use `real` when the host adapter should be returned without profile-backed capability claims. Use `disabled` when page code should not see the WebGPU entry point at all. Apply the mode before the context creates its first page.
+
 ---
 
 <a id="common-scenarios"></a>
@@ -120,6 +124,8 @@ chromium-browser \
 |---------|----------|
 | `requestAdapter()` returns `null` | On headless Linux servers, ensure GPU emulation is active (default). If you set `--bot-gpu-emulation=false`, use `--use-angle=gl` with `libgl1-mesa-dri` installed so ANGLE picks up Mesa llvmpipe. Do not add `--disable-gpu`: it disables WebGPU adapter discovery on current Chromium. Full backend matrix in [Linux GPU Backend Selection](../deployment/LINUX_GPU_BACKEND.md). |
 | WebGPU shows host GPU info | Check that `--bot-webgpu` is set to `profile` (default) and not `real`. |
+| `requestDevice()` rejects a limit that the page requested | Compare the request with the active profile's declared limit. In `profile` mode, the profile claim is the upper bound even when the host can provide more. |
+| One context sees another context's adapter limits | Set `--bot-webgpu` in each context's `botbrowserFlags` before its first page is created. WebGPU claims are per-context. |
 | High CPU during WebGPU operations | Expected on software-rendered environments. See [Linux GPU Backend Selection](../deployment/LINUX_GPU_BACKEND.md#cpu-profile) for CPU behavior across SwiftShader, Mesa llvmpipe, and lavapipe. |
 
 ---

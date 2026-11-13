@@ -2,6 +2,24 @@
 
 > **Research scope:** Entries in this changelog describe features evaluated in authorized labs and defensive benchmarking programs. Follow the [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md). We work with security vendors to investigate any misuse, so report concerns to [support@botbrowser.io](mailto:support@botbrowser.io).
 
+## [2026-11-13]
+### New
+- **Profile-Backed Graphics Capability Control**: Graphics capability values now travel with the active browser context and are checked before they are served to page code. Profile limits, precision values, and feature availability stay aligned with what the active context can actually use. WebGPU adapter and device requests are validated against the same profile claims.
+
+### Improvements
+- **Software-Renderer Shader Compilation**: Software-rendered hosts now compile and link WebGL shaders in parallel when the browser starts in profile-backed WebGL mode. Shader-heavy pages start sooner, and sustained completion checks no longer crowd out renderer work.
+- **Cross-Host Numeric Consistency**: Floating-point, special-value, and vector-operation behavior now follows the profile's target architecture across supported host combinations while leaving same-architecture sessions on their native path.
+- **Profile Identity Request Consistency**: Requests that carry profile-backed identity data now use one consistent identity source, and contradictory profile data is rejected instead of being sent in a mixed state. Brand-scoped request behavior follows the active profile rather than another context's browser family.
+- **Desktop Profile Typography**: Generic font families and font-weight selection now follow the target desktop profile more closely, including regional text and system UI typography.
+- **Android Form-Factor Consistency**: Android phone and tablet profiles now report form factors from the profile's mobile setting consistently across page APIs, Workers, and request headers.
+- **Media Capability Consistency**: Measured codec capability data is preserved when equivalent media type entries are consolidated, so capability answers remain consistent across contexts.
+- **Profile-Driven Scrollbar Layout**: The profile's scrollbar geometry now determines classic or overlay scrollbar behavior, keeping layout measurements aligned when a profile runs on another host platform.
+- **Diagnostic Logging Efficiency**: Runtime logging now applies API exclusions before event construction and reduces write-path contention, keeping validation sessions responsive while evidence is collected.
+- **Automation Runtime Consistency**: Protected sessions now keep automation-related runtime differences out of page-visible behavior while preserving normal debugging and evaluation access.
+
+### Fixes
+- **Custom New-Tab Rendering**: The BotBrowser custom new-tab page now initializes reliably on the 157 release line, including its location, network, user-agent, and graphics summary panels.
+
 ## [2026-11-06]
 ### Major
 - **Chromium Core -> 157.0.8103.38**: BotBrowser 157 now runs on the latest validated Chromium build. Existing profiles, automation setup, and per-context workflows stay compatible.

@@ -54,6 +54,10 @@ Control WebGL behavior with the `--bot-webgl` flag:
 
 `min` serves the lower of the profile's claim and what the host can really allocate, while `profile` serves the profile's numbers as-is.
 
+WebGL capability claims are scoped to the BrowserContext that created the context. Limits and shader precision values follow that context's profile, including contexts that share one browser process. Use `profile` when the profile claim should be authoritative, and `min` when reported values must stay within what the host can allocate. A claim outside the range the host graphics stack can represent is discarded so the page receives a usable value.
+
+When BotBrowser starts in `profile` WebGL mode on a software-rendered host, it compiles and links shaders in parallel. Shader-heavy pages reach a usable state sooner, and tight completion checks do not monopolize the renderer while compilation is pending. This is a launch-level setting. In a mixed launch, sibling contexts use the compile model selected at browser startup.
+
 ### WebGL Image Noise
 
 Enable deterministic noise on WebGL image readback:

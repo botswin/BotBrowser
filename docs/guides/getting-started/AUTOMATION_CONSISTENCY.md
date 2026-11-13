@@ -147,6 +147,8 @@ Some runtime consistency checks can infer CDP connections from changes that auto
 
 When a protected profile is used, connecting Playwright or Puppeteer and enabling the Runtime domain does not add a page-visible Error-stack timing signal. Keep the flag enabled for routine automation. Diagnostic sessions that intentionally disable the protection should be treated as a separate compatibility run.
 
+The protected path also keeps automation attachment from changing how error values are serialized and keeps the local debugging endpoint from becoming a page-visible availability signal. Normal evaluation and exception propagation remain available to the automation client.
+
 <a id="cdp-mouse-move-coalescing"></a>
 ### CDP mouse move coalescing
 

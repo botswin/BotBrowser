@@ -402,7 +402,7 @@ See [WebKit-family Profile Consistency](WEBKIT_PROFILE_CONSISTENCY.md) for the f
 | **Screen Properties** | Resolution, color depth, orientation, pixel density |
 | **Window Dimensions** | Size control, viewport management, responsive behavior |
 | **Color Schemes** | matchMedia queries, prefers-color-scheme, system colors |
-| **UI Elements** | System colors, scrollbar styling, form control appearance |
+| **UI Elements** | System colors, profile-driven classic or overlay scrollbar layout, form control appearance |
 
 ### Input & Navigation Systems
 
@@ -421,8 +421,8 @@ See [WebKit-family Profile Consistency](WEBKIT_PROFILE_CONSISTENCY.md) for the f
 | Component | Capabilities |
 |-----------|-------------|
 | **Canvas** | 2D context noise, standard and wide-gamut color-space consistency, consistent image data, cross-worker consistency |
-| **WebGL** | Precision GPU micro-benchmarks, driver-specific behavior, extension simulation, profile-served limits that remain allocatable (`--bot-webgl=min`) |
-| **WebGPU** | Modern GPU API support, compute shader capabilities, buffer management |
+| **WebGL** | Precision GPU micro-benchmarks, driver-specific behavior, extension simulation, per-context capability claims, profile-served limits that remain allocatable (`--bot-webgl=min`), and parallel shader compilation on software-rendered hosts |
+| **WebGPU** | Modern GPU API support, compute shader capabilities, buffer management, and profile-validated adapter and device limits |
 | **Text Rendering** | HarfBuzz text shaping, cross-platform fonts, emoji rendering consistency |
 | **Performance** | Precise FPS simulation, texture hash fidelity, render timing control |
 

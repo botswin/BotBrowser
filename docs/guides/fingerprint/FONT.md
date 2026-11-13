@@ -30,6 +30,8 @@ Font availability and rendering behavior differ across operating systems, locale
 
 WebKit-family profiles also preserve profile-backed local font behavior, generic font defaults, and platform-appropriate emoji fallback when they run across supported hosts.
 
+Desktop profiles resolve generic `monospace` and `fantasy` families from their target desktop font buckets. Mobile profile buckets keep their own values. Font weight selection uses the recorded face weight rather than the host's bold trait, which keeps named weights and variable faces aligned across hosts.
+
 ---
 
 <a id="configuration"></a>
