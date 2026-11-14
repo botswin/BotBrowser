@@ -4,11 +4,11 @@
 
 ## [2026-11-13]
 ### New
-- **Profile-Backed Graphics Capability Control**: Graphics capability values now travel with the active browser context and are checked before they are served to page code. Profile limits, precision values, and feature availability stay aligned with what the active context can actually use. WebGPU adapter and device requests are validated against the same profile claims.
+- **Profile-Backed Graphics Capability Control**: Graphics capability reporting now stays tied to the active browser context across WebGL and WebGPU. Profile-backed limits, features, and device requests remain internally consistent.
 
 ### Improvements
 - **Software-Renderer Shader Compilation**: Software-rendered hosts now compile and link WebGL shaders in parallel when the browser starts in profile-backed WebGL mode. Shader-heavy pages start sooner, and sustained completion checks no longer crowd out renderer work.
-- **Cross-Host Numeric Consistency**: Floating-point, special-value, and vector-operation behavior now follows the profile's target architecture across supported host combinations while leaving same-architecture sessions on their native path.
+- **Cross-Host Numeric Consistency**: Improved numeric consistency across supported host architectures while preserving native behavior for same-architecture sessions.
 - **Profile Identity Request Consistency**: Requests that carry profile-backed identity data now use one consistent identity source, and contradictory profile data is rejected instead of being sent in a mixed state. Brand-scoped request behavior follows the active profile rather than another context's browser family.
 - **Desktop Profile Typography**: Generic font families and font-weight selection now follow the target desktop profile more closely, including regional text and system UI typography.
 - **Android Form-Factor Consistency**: Android phone and tablet profiles now report form factors from the profile's mobile setting consistently across page APIs, Workers, and request headers.
