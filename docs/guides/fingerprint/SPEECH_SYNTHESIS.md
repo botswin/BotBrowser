@@ -50,6 +50,8 @@ When set to `profile`, BotBrowser returns a voice list consistent with the profi
 
 Voice selection and ordering remain consistent when a profile targets a different host platform. Locale-specific voices are selected from the profile policy before the browser exposes the list to page content.
 
+For Android profiles, the short voice-load delay starts when page code first uses the speech API. The list does not wait for a host speech engine response, so pages that poll immediately after `getVoices()` still receive the complete profile list.
+
 When the selected voice cannot be served directly, playback uses an available local voice for the same language. The page receives normal start and completion events.
 
 ---

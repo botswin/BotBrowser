@@ -421,7 +421,7 @@ See [WebKit-family Profile Consistency](WEBKIT_PROFILE_CONSISTENCY.md) for the f
 | Component | Capabilities |
 |-----------|-------------|
 | **Canvas** | 2D context noise, standard and wide-gamut color-space consistency, consistent image data, cross-worker consistency |
-| **WebGL** | Precision GPU micro-benchmarks, driver-specific behavior, extension simulation, per-context capability claims, profile-served limits that remain allocatable (`--bot-webgl=min`), and parallel shader compilation on software-rendered hosts |
+| **WebGL** | Precision GPU micro-benchmarks, driver-specific behavior, extension simulation, per-context capability claims, WebGL2 sample-count and renderbuffer consistency, profile-served limits that remain allocatable (`--bot-webgl=min`), and parallel shader compilation on software-rendered hosts |
 | **WebGPU** | Modern GPU API support, compute shader capabilities, buffer management, and profile-validated adapter and device limits |
 | **Text Rendering** | HarfBuzz text shaping, cross-platform fonts, emoji rendering consistency |
 | **Performance** | Precise FPS simulation, texture hash fidelity, render timing control |
@@ -431,7 +431,7 @@ See [WebKit-family Profile Consistency](WEBKIT_PROFILE_CONSISTENCY.md) for the f
 | Component | Capabilities |
 |-----------|-------------|
 | **Proxy** | Authentication embedding, credential management, geo-detection, authenticated PAC routing, PAC-like request callback, controlled synthetic responses, and failure without process abort when credentials exceed protocol limits |
-| **WebRTC** | SDP control, ICE candidate filtering, media stream simulation |
+| **WebRTC** | Profile-backed codec negotiation, consistent candidate types, ICE server control, and media stream simulation |
 | **HTTP Headers** | Google-specific headers (ENT Tier2), Chrome behavior patterns, request timing |
 | **Media Devices** | AudioContext simulation with latency-aware buffer sizing, speech synthesis, device enumeration, and file-backed capture identity |
 | **Codecs** | Extended media types, WebCodecs APIs, hardware acceleration simulation, video FPS control |

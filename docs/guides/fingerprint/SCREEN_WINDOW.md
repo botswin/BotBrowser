@@ -86,6 +86,8 @@ The separate GUI scaling control does not select a DPR policy:
 
 The profile's target scrollbar metrics determine whether the profile uses overlay or classic scrollbars. A zero width selects overlay scrollbars; a positive width selects classic scrollbars. This keeps CSS layout and element measurements aligned when a profile runs on a host with a different scrollbar style.
 
+When the screen comes from the profile or from an explicit `--bot-screen` value, a headed window cannot grow beyond that screen. The limit applies to default and requested sizes, maximization, and programmatic resizing. A `real` screen policy keeps the host display limit, and pinned windows keep their configured geometry.
+
 ### Headful Mode Note
 
 Desktop profiles default to `real` in headful mode, meaning the browser uses actual system window and screen dimensions. To apply profile-defined dimensions in headful mode, set both flags explicitly:

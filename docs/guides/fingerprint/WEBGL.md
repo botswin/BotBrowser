@@ -91,6 +91,8 @@ profile policy applies when the page runs in a separate BrowserContext.
 
 WebGL and WebGL2 capability checks also follow the active profile across supported rendering paths. Compressed texture operations use the same profile-backed capability policy as the corresponding WebGL format queries.
 
+WebGL2 multisample support also follows the profile. Per-format sample counts, `MAX_SAMPLES`, renderbuffer allocation, and context-loss recovery use the same default or high-performance capability tier. If a profile does not record a format's sample counts, that format keeps the host behavior.
+
 ---
 
 <a id="how-botbrowser-protects"></a>

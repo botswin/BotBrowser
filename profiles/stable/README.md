@@ -4,7 +4,7 @@ BotBrowser 150 and newer profiles are delivered through subscription or support 
 
 | Release line | Matching BotBrowser build | Profile files |
 |--------------|---------------------------|---------------|
-| v157 | 157.0.8103.38 | Subscription profiles: [support@botbrowser.io](mailto:support@botbrowser.io), [@botbrowser_support](https://t.me/botbrowser_support) |
+| v157 | 157.0.8103.78 | Subscription profiles: [support@botbrowser.io](mailto:support@botbrowser.io), [@botbrowser_support](https://t.me/botbrowser_support) |
 | v156 | 156.0.8078.47 | Subscription profiles: [support@botbrowser.io](mailto:support@botbrowser.io), [@botbrowser_support](https://t.me/botbrowser_support) |
 | v155 | 155.0.8059.79 | Subscription profiles: [support@botbrowser.io](mailto:support@botbrowser.io), [@botbrowser_support](https://t.me/botbrowser_support) |
 | v154 | 154.0.8037.99 | Subscription profiles: [support@botbrowser.io](mailto:support@botbrowser.io), [@botbrowser_support](https://t.me/botbrowser_support) |

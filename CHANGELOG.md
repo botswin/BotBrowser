@@ -2,6 +2,18 @@
 
 > **Research scope:** Entries in this changelog describe features evaluated in authorized labs and defensive benchmarking programs. Follow the [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md). We work with security vendors to investigate any misuse, so report concerns to [support@botbrowser.io](mailto:support@botbrowser.io).
 
+## [2026-11-16]
+### Major
+- **Chromium Core -> 157.0.8103.78**: BotBrowser 157 now runs on the latest validated Chromium build. Existing profiles, per-context workflows, and automation setup remain compatible.
+
+### Improvements
+- **Graphics Capability Fidelity**: Improved consistency between profile-backed graphics capabilities and browser behavior across rendering paths and browser contexts.
+- **WebRTC Negotiation Stability**: Improved call setup, media negotiation, candidate reporting, and ICE behavior across supported network paths.
+- **Canvas Text Consistency**: Improved cross-platform canvas text rendering while keeping same-host rendering unchanged.
+- **Window and Screen Consistency**: Headed windows now stay within the active profile's reported screen bounds when profile-backed display dimensions are used.
+- **Browser-Family Compatibility**: Improved URL parsing, history behavior, and page-runtime compatibility for supported browser-family profiles.
+- **Automation Privacy Consistency**: Improved automation runtime consistency while preserving normal debugging, evaluation, and exception delivery.
+
 ## [2026-11-13]
 ### New
 - **Profile-Backed Graphics Capability Control**: Graphics capability reporting now stays tied to the active browser context across WebGL and WebGPU. Profile-backed limits, features, and device requests remain internally consistent.
