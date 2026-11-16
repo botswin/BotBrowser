@@ -7,7 +7,7 @@
 - **Chromium Core -> 157.0.8103.78**: BotBrowser 157 now runs on the latest validated Chromium build. Existing profiles, per-context workflows, and automation setup remain compatible.
 
 ### Improvements
-- **Graphics Capability Fidelity**: Improved consistency between profile-backed graphics capabilities and browser behavior across rendering paths and browser contexts.
+- **Graphics Capability Fidelity**: Improved WebGL2 multisample capability consistency across rendering paths and browser contexts.
 - **WebRTC Negotiation Stability**: Improved call setup, media negotiation, candidate reporting, and ICE behavior across supported network paths.
 - **Canvas Text Consistency**: Improved cross-platform canvas text rendering while keeping same-host rendering unchanged.
 - **Window and Screen Consistency**: Headed windows now stay within the active profile's reported screen bounds when profile-backed display dimensions are used.
