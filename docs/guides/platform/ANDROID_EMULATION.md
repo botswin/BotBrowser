@@ -108,6 +108,8 @@ console.log({
 - **Mobile viewport.** The viewport matches the Android device's screen dimensions from the profile.
 - **Device pixel ratio.** Reflects the profile's DPR (commonly 2.0 or 3.0 for mobile devices).
 - **Screen orientation.** Reports the profile-defined orientation. Use `--bot-orientation=landscape|portrait` to control orientation at launch for both phone and tablet profiles.
+
+Media queries and orientation follow the profile's mobile geometry. A portrait or landscape override updates the screen, viewport, and window together, and the selected orientation type and angle remain in place after a document reload.
 - **Virtual keyboard viewport.** Use `--bot-mobile-keyboard` when editable-field focus should reduce the mobile visual viewport. The layout viewport remains unchanged.
 
 ### DevTools Interface

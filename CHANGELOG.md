@@ -2,6 +2,16 @@
 
 > **Research scope:** Entries in this changelog describe features evaluated in authorized labs and defensive benchmarking programs. Follow the [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md). We work with security vendors to investigate any misuse, so report concerns to [support@botbrowser.io](mailto:support@botbrowser.io).
 
+## [2026-11-17]
+### Major
+- **Chromium Core -> 158.0.8127.18**: BotBrowser 158 is now available on the validated Chromium 158 build. Existing profile-major workflows and per-context automation remain compatible.
+
+### Improvements
+- **Typography Consistency**: Improved font fallback and text shaping for desktop, Android, WebKit-family, and regional profiles.
+- **Responsive Media Consistency**: Improved media-query and orientation behavior across headed, headless, and per-context sessions.
+- **WebRTC and Proxy Consistency**: Improved candidate reporting and SDP identity handling for proxy-backed sessions.
+- **Graphics Consistency**: Improved profile-backed graphics behavior on the Chromium 158 release line.
+
 ## [2026-11-16]
 ### Major
 - **Chromium Core -> 157.0.8103.78**: BotBrowser 157 now runs on the latest validated Chromium build. Existing profiles, per-context workflows, and automation setup remain compatible.

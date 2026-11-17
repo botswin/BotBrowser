@@ -32,6 +32,8 @@ WebKit-family profiles also preserve profile-backed local font behavior, generic
 
 Desktop profiles resolve generic `monospace` and `fantasy` families from their target desktop font buckets. Mobile profile buckets keep their own values. Font weight selection uses the recorded face weight rather than the host's bold trait, which keeps named weights and variable faces aligned across hosts.
 
+Chrome macOS profiles use the target system's CoreText fallback order when they run on another host. Mobile WebKit profiles use their own platform fallback lists. This covers default, common, symbol, emoji, and regional font selection, not only the family names in the profile.
+
 ---
 
 <a id="configuration"></a>

@@ -57,6 +57,8 @@ The profile supplies WebRTC codec capabilities; the browser still generates the 
 
 When a proxy cannot carry datagrams, the default mode keeps unproxied traffic from leaving the host and presents the proxy address in candidate data. Use `--bot-webrtc=real` only when direct traffic is intended.
 
+WebRTC offers use the profile's codec table, but normal browser negotiation still builds the SDP. Host candidates keep type `host`. A proxied server-reflexive candidate uses the owning context's proxy address. SOCKS5 UDP associate failures and successful relays each complete once, so the renderer receives either the requested relay address or the controlled fallback state without a duplicate resolution path.
+
 <a id="why-no-loopback-candidates-appear"></a>
 #### Why no loopback (127.0.0.1 / ::1) candidates appear
 

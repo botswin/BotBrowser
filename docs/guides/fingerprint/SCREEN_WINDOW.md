@@ -88,6 +88,10 @@ The profile's target scrollbar metrics determine whether the profile uses overla
 
 When the screen comes from the profile or from an explicit `--bot-screen` value, a headed window cannot grow beyond that screen. The limit applies to default and requested sizes, maximization, and programmatic resizing. A `real` screen policy keeps the host display limit, and pinned windows keep their configured geometry.
 
+Orientation changes update the window and screen geometry together. A mobile profile with an explicit orientation keeps the corresponding orientation type and angle after a document reload.
+
+When `alwaysActive` is enabled, moving focus to another application does not deactivate the page. Browser contexts using the same active-window policy remain active when another context receives focus. Focus changes inside the same context, such as a new tab or popup, still follow the normal blur and visibility behavior.
+
 ### Headful Mode Note
 
 Desktop profiles default to `real` in headful mode, meaning the browser uses actual system window and screen dimensions. To apply profile-defined dimensions in headful mode, set both flags explicitly:
