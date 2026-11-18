@@ -7,10 +7,11 @@
 - **Chromium Core -> 158.0.8127.18**: BotBrowser 158 is now available on the validated Chromium 158 build. Existing profile-major workflows and per-context automation remain compatible.
 
 ### Improvements
-- **Typography Consistency**: Improved font fallback and text shaping for desktop, Android, WebKit-family, and regional profiles.
+- **Font Catalog Consistency**: Cross-host profiles now report the target platform's font catalog and fallback ordering instead of deriving names from the host.
 - **Responsive Media Consistency**: Improved media-query and orientation behavior across headed, headless, and per-context sessions.
-- **WebRTC and Proxy Consistency**: Improved candidate reporting and SDP identity handling for proxy-backed sessions.
-- **Graphics Consistency**: Improved profile-backed graphics behavior on the Chromium 158 release line.
+- **Window Focus Consistency**: Improved always-active window behavior so focus moving to another browser context leaves the page active while in-context focus changes behave normally.
+- **UDP Relay Consistency**: Improved SOCKS5 UDP relay completion so each request resolves once with the requested relay address or the controlled fallback.
+- **Profile Lifecycle Consistency**: Improved profile state handling across renderer reloads and expired-profile fallback.
 
 ## [2026-11-16]
 ### Major
