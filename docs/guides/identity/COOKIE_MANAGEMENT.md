@@ -56,7 +56,7 @@ The file should contain a JSON array of cookie objects.
 
 1. **Cookie parsing.** At launch, BotBrowser reads the `--bot-cookies` value. If it starts with `@`, the remainder is treated as a file path. Otherwise, the value is parsed as inline JSON.
 
-2. **Cookie injection.** Cookies are injected into the browser's cookie store before any page navigation occurs. This means the first HTTP request already includes the injected cookies.
+2. **Cookie injection.** Cookies are added to the browser's cookie store before the first page navigation, so the initial HTTP request includes them.
 
 3. **Domain matching.** Each cookie must include a `url` field. The browser uses it to set the cookie origin and only sends cookies to matching domains, following standard cookie rules.
 

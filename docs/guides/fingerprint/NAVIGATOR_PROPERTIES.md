@@ -1,6 +1,6 @@
 # Navigator Properties Protection
 
-> The `navigator` object is one of the most information-rich API surfaces in the browser. BotBrowser controls every property through its profile system to ensure internal consistency.
+> The `navigator` object is one of the most information-rich API surfaces in the browser. BotBrowser applies the active profile to supported navigator properties and related request headers.
 
 ---
 
@@ -22,11 +22,9 @@ chromium-browser \
   --bot-profile="/path/to/profile.enc"
 ```
 
-Start with this launch to establish a clean baseline before adding extra overrides.
-
 ## Overview
 
-The `navigator` object is one of the most information-rich API surfaces in the browser. BotBrowser controls every `navigator` property through its profile system, ensuring internal consistency across JavaScript values, HTTP headers, and Worker contexts.
+The `navigator` object is one of the most information-rich API surfaces in the browser. BotBrowser applies supported profile-backed identity, hardware, locale, network, and media values consistently across JavaScript and related HTTP headers. Host browser capabilities outside that policy remain native.
 
 ---
 
@@ -55,7 +53,7 @@ The `navigator` object is one of the most information-rich API surfaces in the b
 
 ### Custom User-Agent (ENT Tier3)
 
-Build a complete, internally consistent browser identity:
+Configure a custom browser identity:
 
 ```bash
 --user-agent="Mozilla/5.0 (Linux; Android {platform-version}; {model}) ..."
@@ -124,17 +122,11 @@ The resolved policy is scoped to the active BrowserContext and remains consisten
 
 ## How BotBrowser Provides Protection
 
-BotBrowser controls all navigator properties at the browser engine level. Identity, hardware, locale, network, and media device information are all defined by the profile. JavaScript values, HTTP headers, and Worker contexts return identical, internally consistent values.
+BotBrowser applies the active profile at the browser engine level for supported identity, hardware, locale, network, and media-device surfaces. These values stay aligned between JavaScript and related HTTP or Worker paths when those platforms expose the same signal. Unsupported or host-owned capabilities keep their native behavior.
 
 ---
 
 <a id="troubleshooting"></a>
-
-## Common Scenarios
-
-- Capture a baseline result using the Quick Start setup.
-- Change one relevant setting at a time and compare the new output.
-- Keep your final launch command documented so future checks are reproducible.
 
 ## Troubleshooting / FAQ
 

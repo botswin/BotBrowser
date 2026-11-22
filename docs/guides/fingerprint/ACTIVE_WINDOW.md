@@ -1,6 +1,6 @@
 # Active Window Emulation
 
-> Prevent focus-based tracking by keeping windows in an always-active state, even when the host window is unfocused.
+> Keep the active page in each context focused while the application is unfocused. Use a profile that supports active-window protection.
 
 ---
 
@@ -17,19 +17,20 @@
 
 ## Quick Start
 
-Active window emulation is enabled by default on PRO and above. No additional configuration is needed:
+Active window emulation is opt-in. Set `alwaysActive` to `true` in a supported profile, or pass the PRO launch flag with that profile. A profile that does not support active-window protection keeps the option inactive.
 
 ```bash
 chromium-browser \
     --headless \
     --bot-profile="/path/to/profile.enc" \
-    --proxy-server=socks5://user:pass@proxy.example.com:1080
+    --proxy-server=socks5://user:pass@proxy.example.com:1080 \
+    --bot-always-active
 ```
 
 To explicitly control it:
 
 ```bash
-# Enabled by default on PRO; pass =false to disable
+# Enable explicitly on PRO
 chromium-browser \
     --bot-profile="/path/to/profile.enc" \
     --bot-always-active
@@ -48,7 +49,7 @@ chromium-browser \
 
 Browser window focus and visibility state can be used as a privacy signal to distinguish automated sessions from real user activity.
 
-When `--bot-always-active` is enabled (the default on PRO), BotBrowser maintains consistent window state across all tabs and execution modes. Focus-related APIs and events behave as if the user is actively present, regardless of the actual host window state.
+When `alwaysActive` or `--bot-always-active` is enabled, BotBrowser keeps the active page in focus while another browser context or application receives focus. The foreground tab in each context remains active. Switching among tabs inside the same context still produces normal blur and visibility transitions.
 
 This protection works in both headless and headful modes.
 
@@ -58,9 +59,9 @@ This protection works in both headless and headful modes.
 
 ## Common Scenarios
 
-### Production deployment (default behavior)
+### Production deployment
 
-In production, keep active window emulation enabled. This is the default on PRO and above:
+In production, enable active window emulation explicitly when the workflow needs it:
 
 ```javascript
 const browser = await chromium.launch({
@@ -84,16 +85,16 @@ await browser.close();
 
 ### Multi-tab with consistent active state
 
-When opening multiple tabs, all tabs report as active:
+When opening multiple tabs, the active tab in each context stays active. Inactive tabs in the same context follow normal visibility behavior:
 
 ```javascript
 const page1 = await browser.newPage();
 const page2 = await browser.newPage();
 
-// Both tabs report as visible
+// The newly created active tab becomes visible; the previous tab becomes hidden
 const hidden1 = await page1.evaluate(() => document.hidden);
 const hidden2 = await page2.evaluate(() => document.hidden);
-console.log(hidden1, hidden2); // false, false
+console.log(hidden1, hidden2); // typically true, false
 ```
 
 ### Disabling for debugging
@@ -116,7 +117,7 @@ chromium-browser \
 |---------|----------|
 | Page detects background state despite emulation | Verify your license is PRO or above. The flag is not available on lower tiers. |
 | Need to test real focus/blur events | Disable with `--bot-always-active=false`. Remember that this changes the browser's behavior for tracking-sensitive pages. |
-| `visibilitychange` listener never fires | This is expected. The emulation prevents the browser from reporting visibility changes. |
+| `visibilitychange` listener never fires | Confirm that the page uses a supported profile and passes `--bot-always-active`. Tab changes within one context still produce normal visibility transitions. |
 
 ---
 

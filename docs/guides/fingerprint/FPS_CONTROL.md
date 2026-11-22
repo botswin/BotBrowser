@@ -20,8 +20,6 @@ chromium-browser \
   --bot-profile="/path/to/profile.enc"
 ```
 
-Start with this launch to establish a clean baseline before adding extra overrides.
-
 ## Overview
 
 Frame rate is a privacy-relevant signal tied to display hardware, compositor timing, and media playback. BotBrowser provides two ENT Tier2 controls:

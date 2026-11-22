@@ -45,7 +45,7 @@ await browser.close();
 
 ### How BotBrowser Protects Against WebRTC Leaks
 
-WebRTC can expose your real IP addresses even when using a proxy. BotBrowser prevents this at the browser engine level.
+WebRTC can expose network addresses even when other HTTP traffic uses a proxy. BotBrowser applies profile-backed SDP and ICE policy at the browser engine level.
 
 BotBrowser implements protection at the browser engine level:
 
@@ -84,7 +84,7 @@ If `loopback leaked` prints `true`, the page is not running with the proxy you e
 
 **STUN/TURN Consistency.** STUN and TURN responses reflect your configured network identity. When combined with UDP-over-SOCKS5 (ENT Tier3), STUN probes themselves are tunneled through the proxy.
 
-When a proxy has only one public address family, declare the unavailable family with `--proxy-ip=ipv4_none,<ipv6>` or `--proxy-ip=<ipv4>,ipv6_none`. This keeps WebRTC candidate handling aligned with the declared proxy identity.
+When a proxy has only one public address family, declare the unavailable family with `--proxy-ip=ipv4_none,<ipv6>` or `--proxy-ip=<ipv4>,ipv6_none`.
 
 ### ICE Server Control
 
@@ -128,7 +128,7 @@ If your use case does not require WebRTC, you can disable it:
 --bot-webrtc=disabled
 ```
 
-This prevents all WebRTC-related API calls from functioning, which eliminates any possibility of IP disclosure through this channel.
+This prevents WebRTC APIs and their related media paths from functioning in that context. Other network channels are unaffected.
 
 ### Per-context WebRTC configuration
 
@@ -161,7 +161,7 @@ await client.send("BotBrowser.setBrowserContextFlags", {
 
 ### Combined with UDP-over-SOCKS5
 
-With ENT Tier3, STUN probes are automatically tunneled through the SOCKS5 proxy when it supports UDP. This means ICE presets are often unnecessary because STUN responses already reflect the proxy's IP:
+With ENT Tier3, STUN probes are tunneled through the SOCKS5 proxy when it supports UDP. ICE presets are often unnecessary in that setup:
 
 ```bash
 # UDP (QUIC/STUN) auto-tunneled when the SOCKS5 proxy supports UDP associate
@@ -176,7 +176,7 @@ See [UDP over SOCKS5](UDP_OVER_SOCKS5.md) for details.
 
 ## Verifying WebRTC Protection
 
-To verify protection is active, visit [BrowserLeaks WebRTC test](https://browserleaks.com/webrtc) and confirm that only the proxy IP (or no IP) is visible, and no local or real IPs appear in the results.
+To verify protection is active, visit [BrowserLeaks WebRTC test](https://browserleaks.com/webrtc) and compare the reported candidate identity with the intended proxy or no-candidate policy.
 
 ---
 

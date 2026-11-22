@@ -116,7 +116,7 @@ Running BotBrowser in Docker provides process isolation and reproducible environ
 
 3. **Shared memory.** The `--disable-dev-shm-usage` flag tells Chrome to write shared memory files to `/tmp` instead of `/dev/shm`, which is limited to 64 MB by default in Docker containers.
 
-4. **Profile mounting.** Profiles are mounted as read-only volumes. This keeps profile files outside the container image, allows switching profiles without rebuilding, and ensures fingerprint properties are controlled by the profile rather than the container host.
+4. **Profile mounting.** Profiles are mounted as read-only volumes. The image stays unchanged when profiles change, and supported fingerprint values come from the profile instead of the container host.
 
 5. **Remote debugging.** Port 9222 is exposed for CDP (Chrome DevTools Protocol) connections from automation frameworks running on the host or other containers.
 

@@ -82,7 +82,7 @@ Screenshots in BotBrowser use the same rendering pipeline as a regular Chrome in
 
 2. **Viewport vs. full page.** A viewport screenshot captures only the visible area. A full page screenshot scrolls the entire page and stitches the result. The viewport dimensions come from the profile.
 
-3. **Rendering consistency.** Canvas noise, font rendering, and WebGL output are all determined by the profile. Screenshots taken with the same profile produce identical visual output across different host systems.
+3. **Rendering consistency.** Canvas noise, font rendering, and WebGL output follow the profile. Screenshots taken with the same profile and launch flags produce stable output on the same rendering path. Text rasterization and software-backend pixel output can differ across hosts.
 
 4. **Headless Linux.** On servers without a monitor, Xvfb provides the virtual display that Chrome's compositor needs. Without it, screenshots time out or produce blank images.
 
@@ -196,7 +196,7 @@ await element.screenshot({ path: "element.png" });
 | Full page image has blank or displaced sections | Keep the original profile viewport and use the full-page API directly. Do not set the viewport to the document height before capture. |
 | A very tall capture hangs in Docker | Increase the container's `/dev/shm` allocation and verify the returned image contains a bottom marker. Shared memory alone does not fix layout changes. |
 | Fonts look different than expected | BotBrowser uses the profile's embedded font bundle. Verify the profile matches your expected platform (Windows, macOS, etc.). |
-| Colors appear different across runs | This is expected. Canvas noise produces deterministic but session-unique visual output. Use the same profile and noise seed for identical results. |
+| Colors appear different across runs | Confirm the same profile, noise seed, launch flags, host, and rendering backend are in use. Canvas noise is repeatable only while those inputs stay constant. |
 
 ---
 

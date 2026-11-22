@@ -10,7 +10,7 @@ CanvasLab records every Canvas 2D, WebGL, and WebGL2 API call so you can review 
 
 - **Review graphics signals** - inspect every Canvas and WebGL API call a page makes
 - **Validate protections** - verify that BotBrowser's protections produce the expected protected behavior
-- **Check consistency** - make sure privacy defenses work the same across Windows, macOS, and Linux
+- **Check consistency** - compare supported graphics behavior across Windows, macOS, and Linux
 - **Document privacy risk** - understand which graphics surfaces need protection
 
 ---
@@ -124,7 +124,7 @@ Close BotBrowser. Your recording is saved to `/tmp/canvaslab.jsonl`. You can now
 | **Privacy Defense Development** | Review how pages use Canvas surfaces and build stronger protections |
 | **Signal Review** | Document which Canvas API calls appear during a session so you know which surfaces need protection |
 | **Source Code Attribution** | Find which scripts are calling which Canvas APIs by looking at source locations |
-| **Privacy Protection Validation** | Make sure BotBrowser's defenses work the same way on all platforms: Windows, macOS, Linux |
+| **Privacy Protection Validation** | Compare profile-backed graphics behavior across supported Windows, macOS, and Linux hosts |
 | **Privacy Testing** | Verify that privacy protections keep working after BotBrowser updates |
 | **Privacy Research** | Study real-world graphics signal collection with complete records and source information for fingerprint protection research |
 

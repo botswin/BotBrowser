@@ -30,8 +30,6 @@ chromium-browser \
   --bot-profile="/path/to/profile.enc"
 ```
 
-Start with this launch to establish a clean baseline before adding extra overrides.
-
 ---
 
 <a id="configuration"></a>
@@ -108,7 +106,7 @@ To verify protection is active:
 
 1. Launch BotBrowser with a profile and visit a fingerprint testing site such as [BrowserLeaks](https://browserleaks.com/) or [CreepJS](https://abrahamjuliot.github.io/creepjs/).
 2. Confirm that the reported stack depth values match the profile configuration, not the host machine.
-3. To verify reproducibility, launch two sessions with the same `--bot-stack-seed` and confirm that the stack depth output is identical across main thread, Web Workers, and WASM contexts.
+3. To verify reproducibility, launch two sessions with the same profile and `--bot-stack-seed`, then compare stack depth across the main thread, Web Workers, and WASM contexts.
 
 ---
 

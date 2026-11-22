@@ -1,6 +1,6 @@
 # Android Emulation
 
-> Emulate Android Chrome on desktop with full fingerprint protection, including consistent mobile identity, touch events, and device metrics.
+> Emulate Android Chrome on desktop with profile-backed mobile identity, touch events, and device metrics.
 
 ---
 
@@ -18,9 +18,9 @@
 
 ## Overview
 
-BotBrowser can emulate Android Chrome on a desktop machine. When you load an Android profile, the browser reports Android-specific platform information, enables touch event support, adjusts the viewport to mobile dimensions, and configures all related API surfaces to match a real Android device.
+BotBrowser can emulate Android Chrome on a desktop machine. When you load an Android profile, the browser reports the profile's Android platform information, enables touch event support, and adjusts supported viewport and device surfaces to the mobile target.
 
-This emulation happens at the browser engine level. JavaScript APIs, HTTP headers, and Client Hints all reflect the Android identity consistently, preventing cross-surface mismatches that would undermine identity consistency.
+This emulation happens at the browser engine level. Supported JavaScript APIs, HTTP headers, and Client Hints use the same Android identity policy. Host graphics and unsupported capabilities remain outside that policy.
 
 ---
 
@@ -77,7 +77,7 @@ When running an Android profile, BotBrowser configures the following:
 
 ### Platform Identity
 
-BotBrowser configures all platform-related surfaces to report Android identity: platform strings, Client Hints headers, mobile/tablet flags, and the User-Agent string. All values are internally consistent across JavaScript APIs and HTTP headers.
+BotBrowser applies the Android identity to supported platform strings, Client Hints headers, mobile/tablet flags, and the User-Agent. These values stay aligned on the paths that expose the corresponding signal.
 
 <a id="why-navigator-platform-reports-linux-armv81"></a>
 #### Why `navigator.platform` reports `Linux armv81`

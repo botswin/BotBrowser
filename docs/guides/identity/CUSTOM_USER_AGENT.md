@@ -1,6 +1,6 @@
 # Custom User-Agent
 
-> Configure custom User-Agent and userAgentData/Client Hints while keeping all identity surfaces internally consistent to prevent fingerprint mismatches.
+> Configure a custom User-Agent and userAgentData/Client Hints policy across supported identity surfaces.
 
 ---
 
@@ -18,7 +18,7 @@
 
 ## Overview
 
-Browser identity extends far beyond the User-Agent string. It includes Client Hints, platform information, device properties, and other API surfaces, all of which must remain internally consistent.
+Browser identity extends beyond the User-Agent string. Client Hints, platform values, and supported device properties should use the same profile policy.
 
 BotBrowser provides a set of flags that work together to construct a unified browser identity. When you configure these flags, BotBrowser auto-generates matching Client Hints values (including brands, fullVersionList, and proper GREASE tokens) and all corresponding HTTP headers. Values stay consistent across the main thread, Workers, and HTTP requests.
 
@@ -97,7 +97,7 @@ When you set these flags, BotBrowser automatically produces:
 
 ### Client Hints Alignment
 
-BotBrowser ensures that all Client Hints HTTP headers match their JavaScript-visible counterparts, including display, memory, and identity properties.
+BotBrowser aligns supported Client Hints HTTP headers with their JavaScript-visible counterparts, including display, memory, and identity values.
 
 ---
 

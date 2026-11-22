@@ -1,6 +1,6 @@
 # DRM Fingerprint Consistency
 
-> DRM capabilities expose platform identity. BotBrowser controls DRM-related responses to maintain consistent privacy protection.
+> DRM capabilities expose platform identity. BotBrowser applies the profile's DRM policy to supported EME queries.
 
 ---
 
@@ -8,7 +8,7 @@
 
 ## Overview
 
-Digital Rights Management (DRM) capabilities vary by platform. The Encrypted Media Extensions (EME) API reports different supported configurations, robustness levels, and key systems depending on the operating system. BotBrowser ensures that DRM capability responses are consistent with the profile's platform identity.
+Digital Rights Management (DRM) capabilities vary by platform. The Encrypted Media Extensions (EME) API reports different configurations, robustness levels, and key systems by operating system. BotBrowser applies the profile's DRM policy to supported EME responses.
 
 ---
 
@@ -16,7 +16,7 @@ Digital Rights Management (DRM) capabilities vary by platform. The Encrypted Med
 
 ## Configuration
 
-DRM behavior is controlled through the profile. The profile defines which key systems are reported as available, supported robustness levels, session type capabilities, and codec support within DRM contexts. No separate CLI flag is needed for DRM fingerprint consistency.
+DRM behavior is controlled through the profile. The profile defines supported key systems, robustness levels, session types, and codec support in DRM contexts.
 
 For Widevine CDM setup, playback configuration, and platform-specific details, see the [Widevine DRM Setup Guide](../platform/WIDEVINE_DRM_SETUP.md).
 

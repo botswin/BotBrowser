@@ -19,8 +19,6 @@ chromium-browser \
   --bot-profile="/path/to/profile.enc"
 ```
 
-Start with this launch to establish a clean baseline before adding extra overrides.
-
 ## Overview
 
 Every browser reports which media formats it can play. The combination of supported MIME types and codecs varies by operating system, installed libraries, hardware decoders, and browser build configuration. BotBrowser normalizes these responses at the browser engine level so that reported media capabilities match the loaded profile's platform identity.
@@ -58,19 +56,13 @@ chromium-browser \
   --bot-media-types=real
 ```
 
-All media type and codec query APIs return platform-consistent results matching the profile. Responses remain identical across all execution contexts (main page, Workers, Service Workers, iframes).
+Supported media type and codec queries use the active profile's capability policy. The same BrowserContext applies that policy across the main page, Workers, Service Workers, and iframes on supported paths.
 
 For video-heavy workloads, media capability reporting and actual video playback cadence can be controlled separately with [`--bot-video-fps`](../../../CLI_FLAGS.md#flag-bot-video-fps). See [FPS Control](FPS_CONTROL.md#video-fps-control).
 
 ---
 
 <a id="related-docs"></a>
-
-## Common Scenarios
-
-- Capture a baseline result using the Quick Start setup.
-- Change one relevant setting at a time and compare the new output.
-- Keep your final launch command documented so future checks are reproducible.
 
 ## Troubleshooting / FAQ
 

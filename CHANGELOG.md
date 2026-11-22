@@ -2,6 +2,18 @@
 
 > **Research scope:** Entries in this changelog describe features evaluated in authorized labs and defensive benchmarking programs. Follow the [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md). We work with security vendors to investigate any misuse, so report concerns to [support@botbrowser.io](mailto:support@botbrowser.io).
 
+## [2026-11-23]
+### Major
+- **Chromium Core -> 158.0.8127.36**: Updated the BotBrowser 158 line to the latest validated Chromium build. Existing profile-major workflows and per-context automation remain compatible.
+
+### Improvements
+- **Cross-Host Typography Fidelity**: Improved font selection, synthetic weight behavior, fallback choice, and text measurement across desktop and mobile targets. Generic families, CJK script fallback, Canvas text, DOM text bounds, and variable font instances now follow the selected target more consistently.
+- **WebGPU Rendering Completeness**: Improved WebGPU capability coverage on software-rendered hosts so profile-declared texture format capabilities remain usable through rendering, blending, and multisample paths.
+- **GPU Backend Consistency**: Improved Windows software GPU selection for headless, windowless, and interactive sessions. WebGPU Canvas readback and WebGL availability now remain consistent when the host has no hardware GPU.
+- **SOCKS5 UDP Compatibility**: Improved HTTP/3 over SOCKS5 on Chromium 158 by keeping the default QUIC packet-read path compatible with BotBrowser's UDP relay.
+- **Speech Playback Resilience**: Improved speech synthesis when the profile voice cannot be served by the host or the machine has no available audio output. Playback events and pause/resume behavior remain consistent.
+- **Always-Active Policy Clarity**: Active-window protection is now opt-in and applies only to supported profiles when the context or `--bot-always-active` flag requests it.
+
 ## [2026-11-17]
 ### Major
 - **Chromium Core -> 158.0.8127.18**: BotBrowser 158 is now available on the validated Chromium 158 build. Existing profile-major workflows and per-context automation remain compatible.

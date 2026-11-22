@@ -1,6 +1,6 @@
 # Performance Fingerprinting
 
-> Performance timing and execution speed create a hardware-level fingerprint. BotBrowser provides comprehensive protection against timing-based tracking.
+> Performance timing and execution speed create a hardware-level fingerprint. BotBrowser provides profile-backed controls for supported timing surfaces.
 
 ---
 
@@ -22,11 +22,9 @@ chromium-browser \
   --bot-profile="/path/to/profile.enc"
 ```
 
-Start with this launch to establish a clean baseline before adding extra overrides.
-
 ## Overview
 
-Performance and timing data can serve as a hardware-level fingerprint. BotBrowser provides comprehensive protection across all timing-related surfaces.
+Performance and timing data can serve as a hardware-level fingerprint. BotBrowser applies profile-backed controls across supported timing surfaces.
 
 ---
 
@@ -128,23 +126,17 @@ Control JavaScript recursive call stack depth with `--bot-stack-seed` (ENT Tier2
 
 ## How BotBrowser Provides Protection
 
-BotBrowser provides protection across all performance and timing surfaces: operation timing, navigation timing, display frame rate, video playback cadence, network connection properties, stack depth, and CPU core scaling. The flags listed above can be combined for comprehensive coverage. `--bot-time-seed` and `--bot-time-scale` protect against different aspects of timing and can be used together.
+BotBrowser applies profile-backed controls to supported operation timing, navigation timing, display frame rate, video playback cadence, network connection properties, stack depth, and CPU core scaling. The flags listed above can be combined where the active profile supports those surfaces. `--bot-time-seed` and `--bot-time-scale` address separate timing layers and can be used together.
 
 ---
 
 <a id="troubleshooting"></a>
 
-## Common Scenarios
-
-- Capture a baseline result using the Quick Start setup.
-- Change one relevant setting at a time and compare the new output.
-- Keep your final launch command documented so future checks are reproducible.
-
 ## Troubleshooting / FAQ
 
 | Problem | Solution |
 |---------|----------|
-| Timing profile identical across instances | Use different `--bot-time-seed` values for each instance. |
+| Timing profile is the same across instances | Use different `--bot-time-seed` values for each instance. |
 | Frame rate doesn't match profile | Set `--bot-fps=profile` or specify a target rate like `--bot-fps=60`. |
 | Video workload uses too much CPU | Use `--bot-video-fps=<actual>[:<reported>]`, such as `--bot-video-fps=1:30`, with a profile that has Video FPS Control enabled when lower visual video cadence is acceptable. |
 | Network connection info shows real values | Enable `--bot-network-info-override` to use profile-defined values. |

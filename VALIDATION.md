@@ -1,8 +1,8 @@
 # BotBrowser Fingerprint Protection Validation
 
-Fingerprint Protection Validation Across Platforms and Deployment Scenarios.
+Fingerprint protection validation across supported platforms and deployment scenarios.
 
-Research data demonstrating how BotBrowser prevents tracking systems from collecting and correlating fingerprints across real-world deployment contexts.
+Research data showing how BotBrowser applies profile-backed protection across tested deployment contexts.
 
 ---
 
@@ -11,7 +11,7 @@ Research data demonstrating how BotBrowser prevents tracking systems from collec
 We validate fingerprint protection across platforms and scenarios using repeatable scientific testing.
 
 ### What We Validate
-- Same profile on Windows, macOS, and Linux: can it prevent fingerprint collection across platforms?
+- Same profile on Windows, macOS, and Linux: which supported fingerprint surfaces stay aligned across hosts?
 - Mobile profiles on desktop: do they simulate realistic mobile APIs?
 - Long-term stability: do fingerprints prevent cross-session user identification?
 - Deployment scenarios: how effectively does BotBrowser prevent fingerprint-based user tracking?
@@ -26,7 +26,7 @@ We validate fingerprint protection across platforms and scenarios using repeatab
 
 ## Research Results
 
-> ⚠️ **Authorization & Compliance:** All research validation occurs in authorized test environments with explicit approval. This research prevents tracking data collection for privacy, not unauthorized access. All validation was conducted with proper authorization agreements.
+> ⚠️ **Authorization & Compliance:** All research validation occurs in authorized test environments with explicit approval. This work evaluates privacy protection rather than unauthorized access. Review the project [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md) before reproducing any test.
 >
 > ⚠️ **Synthetic Data:** All tests use synthetic or non-existent data (random usernames, invalid identifiers). No real user data, credentials, or tracking information is collected in validation.
 >
@@ -111,26 +111,26 @@ BotBrowser's cross-platform capabilities enable comprehensive Android device emu
 
 **Android Profile Emulation Results:**
 - [▶️ CreepJS Android Test](//botswin.github.io/BotBrowser/video_player/index.html?video=antibots-creepjs-creepjs-Android) - Desktop simulation of Android fingerprint
-- [▶️ Iphey Android Test](//botswin.github.io/BotBrowser/video_player/index.html?video=antibots-iphey-iphey-Android) - Complete mobile device simulation
+- [▶️ Iphey Android Test](//botswin.github.io/BotBrowser/video_player/index.html?video=antibots-iphey-iphey-Android) - Android mobile profile test
 - [▶️ Pixelscan Android Test](//botswin.github.io/BotBrowser/video_player/index.html?video=antibots-pixelscan-pixelscan-Android) - Cross-platform compatibility demonstration
 
 **Key Findings:**
 - **Touch Simulation:** Authentic mobile touch event patterns
 - **Device Metrics Accuracy:** Accurate screen dimensions, pixel density, orientation
-- **Mobile API Support:** Complete mobile-specific JavaScript API responses
+- **Mobile API Support:** Supported mobile-specific JavaScript API responses
 - **Font Rendering Accuracy:** Android font stack reproduced on desktop
 
 ### Platform-Specific Test Results
 
 **Windows Host Testing:**
 - macOS profile emulation: Full compatibility
-- Android profile emulation: Complete mobile simulation
+- Android profile emulation: Mobile profile test
 - Linux profile behavior: Authentic rendering consistency
 
 **macOS Host Testing:**
 - Windows profile emulation: Fingerprint protection
 - Android touch simulation: Mobile gesture recognition
-- Cross-platform font consistency: Identical text rendering
+- Cross-platform font consistency: Profile-backed font selection and measurement, with pixel comparison on the target host pair
 
 **Linux Host Testing:**
 - Windows/macOS profile support: Full compatibility
@@ -144,7 +144,7 @@ BotBrowser's cross-platform capabilities enable comprehensive Android device emu
 ### Long-Term Stability Testing
 
 **Session Consistency:**
-- Identical fingerprints across multiple browser restarts
+- Reproducible profile-backed output across browser restarts with the same profile, seed, host, and rendering path
 - Protected behavior in headless vs GUI modes
 - Profile integrity maintained across host reboots
 
@@ -156,14 +156,14 @@ BotBrowser's cross-platform capabilities enable comprehensive Android device emu
 **Noise Algorithm Validation:**
 - Per-session protection with cross-session variation
 - Realistic randomization patterns
-- No distinctive noise algorithm signatures
+- Noise behavior was evaluated within the recorded test scope
 
 ### Automation Detection Vector Analysis
 
 **Chrome DevTools Protocol (CDP) Artifacts:**
-- Complete CDP leak blocking
+- CDP-related surfaces were evaluated as part of the protection tests
 - No framework-specific API responses
-- Authentic Chrome behavior in all contexts
+- Browser behavior was evaluated across the configured test contexts
 
 **WebDriver Detection Resistance:**
 - No webdriver property exposure
@@ -171,8 +171,7 @@ BotBrowser's cross-platform capabilities enable comprehensive Android device emu
 - Realistic error message patterns
 
 **Framework-Specific Detection:**
-- No Playwright-specific signatures
-- No Puppeteer artifact detection
+- Framework integration was evaluated through the recorded test paths
 - Clean framework integration
 
 ---
@@ -188,7 +187,7 @@ Measured with Speedometer 3.0 and per-API micro-benchmarks across macOS, Linux, 
 - Headed: 42.1 vs 41.8 stock (+0.7%), within run-to-run variance
 
 **Fingerprint API Overhead:**
-- Canvas, WebGL, Navigator, Screen, Font APIs: zero measurable overhead across all platforms
+- Canvas, WebGL, Navigator, Screen, and Font API paths: no added latency above the benchmark's displayed resolution on the tested platforms
 - AudioContext offline render: within normal fluctuation
 
 **Scale Performance (Per-Context vs Multi-Instance at 50 profiles):**
@@ -282,14 +281,14 @@ Detection System Tests
 ## Protection Metrics
 
 **Cross-Platform Protection:**
-- Session-to-session: Consistent fingerprints across browser restarts
-- Cross-platform behavior: Unified across Windows, macOS, Linux, and Android profiles
+- Session-to-session: Reproducible profile-backed output across browser restarts with the same profile, seed, host, and rendering path
+- Cross-platform behavior: The selected platform profile controls supported browser surfaces while host-dependent rendering remains measurable
 - Long-term stability: Profile integrity maintained across host reboots
 
 **Performance Metrics:**
 For detailed, measured performance data, see [BENCHMARK.md](BENCHMARK.md). Key findings:
 - Speedometer 3.0: <1% difference between Stock Chrome and BotBrowser
-- Fingerprint API overhead: Zero measurable latency added on Canvas, WebGL, Navigator, Screen, and Font APIs
+- Fingerprint API overhead: No added latency above the benchmark's displayed resolution on the tested Canvas, WebGL, Navigator, Screen, and Font API paths
 - Scale performance: Per-Context Fingerprint uses 29% less memory than Multi-Instance at 50 concurrent profiles
 
 ---

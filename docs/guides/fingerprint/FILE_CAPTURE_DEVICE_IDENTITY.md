@@ -1,6 +1,6 @@
 # File-Backed Capture Device Identity
 
-> Keep camera and microphone identity consistent with the active profile when capture devices are supplied by a file or a fake device backend.
+> Keep profile-backed camera and microphone names and identifiers when capture uses Chromium's fake-device backend and a file fixture.
 
 ---
 
@@ -18,11 +18,11 @@
 
 ## Overview
 
-Sites that request a camera or microphone can read more than the video frames. They also read how the device describes itself: the track label, the device and group identifiers, the enumerated device list, the advertised capabilities, and the facing direction. When capture is supplied by a file instead of physical hardware, all of those descriptors are normally produced by the capture backend, so they reflect the backing implementation rather than the identity the profile claims.
+Sites that request a camera or microphone can read more than the frames. They also read the track label, device and group identifiers, and the enumerated device list. Chromium's file capture backend normally exposes its fixture path or a generic fake-device name instead of the identity carried by the profile.
 
-BotBrowser aligns that identity layer with the profile's target platform. The page still receives the real frames from the file; only the identity descriptors follow the profile, so a session does not announce a different platform through its camera and microphone names than through the rest of its signals.
+BotBrowser aligns the supported naming and identifier layer with the profile's target platform. The page still receives the frames from the fixture.
 
-This applies to the identity layer only. Frame content, frame rate, and resolution come from the fixture and the capture path.
+Frame content, frame rate, resolution, and the track's actual settings come from the fixture and Chromium's capture path. They are not replaced by profile-valued capabilities.
 
 ---
 
@@ -51,7 +51,7 @@ With these flags, `getUserMedia({ video: true })` receives the frames from the f
 
 | Flag | Effect | Identity gate |
 |------|--------|---------------|
-| `--use-fake-device-for-media-stream` | Replaces the capture device set with the built-in fake/file backend. Physical devices are not enumerated in that process. | **Yes.** This is the only switch that enables profile-based naming. |
+| `--use-fake-device-for-media-stream` | Replaces the capture device set with Chromium's fake/file backend. Physical devices are not enumerated in that process. | **Yes.** This is the enablement boundary for profile-backed naming and identifiers. |
 | `--use-file-for-fake-video-capture=<file>` | Selects the fixture file the fake backend plays. It only picks a parser inside the fake backend. | No. On its own it does not replace real devices. |
 | `--use-fake-ui-for-media-stream` | Skips the permission prompt. | No. It does not affect device descriptors. |
 
@@ -72,10 +72,9 @@ When the fake device backend is active, the profile target platform drives the r
 - `MediaStreamTrack.label` for camera and microphone tracks.
 - `deviceId` and `groupId` reported by the track and by enumeration.
 - `enumerateDevices()` entries for audio and video inputs.
-- Advertised capabilities, including the value ranges reported for video tracks.
-- Facing direction for mobile profile targets.
+- The roster entries added for supported camera and microphone kinds.
 
-The same descriptors stay stable between repeated calls inside one browser context, so a second sample of the same track returns the same values.
+The track's actual settings and capabilities still come from the fixture and Chromium's capture path.
 
 ### Keeping real devices intact
 
@@ -115,11 +114,11 @@ chromium-browser \
 
 ### Microphone identity alongside file-backed video
 
-Audio input identity follows the same profile when the fake device backend is active, so a video fixture session does not report an unnamed or generic microphone. Launch with the fake device flag and request audio in the page as usual.
+Audio input naming follows the same profile when the fake device backend is active. Launch with the fake device flag and request audio in the page as usual. This mode aligns identity; it does not synthesize audio or validate a WAV waveform.
 
 ### Mobile profile targets
 
-Mobile profile targets report a mobile-facing capture identity, including facing direction, so a mobile profile does not present a desktop-style camera description.
+Mobile profile targets use their platform naming policy instead of the host machine's device names.
 
 ---
 

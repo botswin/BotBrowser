@@ -22,8 +22,6 @@ chromium-browser \
   --bot-profile="/path/to/profile.enc"
 ```
 
-Start with this launch to establish a clean baseline before adding extra overrides.
-
 ## Overview
 
 CSS provides several mechanisms that reveal information about the user's operating system, display hardware, and browser configuration. Media queries, `@supports` rules, system colors, and CSS function behavior all contribute platform-specific signals. BotBrowser normalizes all of these at the browser engine level so that reported values match the loaded profile, regardless of the host system.
@@ -88,12 +86,6 @@ Profile-backed browser-family consistency covers CSS interface shape, supported 
 ---
 
 <a id="troubleshooting"></a>
-
-## Common Scenarios
-
-- Capture a baseline result using the Quick Start setup.
-- Change one relevant setting at a time and compare the new output.
-- Keep your final launch command documented so future checks are reproducible.
 
 ## Troubleshooting / FAQ
 

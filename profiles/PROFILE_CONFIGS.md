@@ -74,7 +74,7 @@ Timezone, locale, and languages derive from the proxy IP when set to `auto`.
 | [`enableVariationsInContext`](../CLI_FLAGS.md#flag-bot-enable-variations-in-context) | `true`, `false` (ENT Tier2) | `false` |
 | [`disableDebugger`](../CLI_FLAGS.md#flag-bot-disable-debugger) | `true`, `false` | `true` |
 | [`keyboard`](../CLI_FLAGS.md#flag-bot-keyboard) | `profile`, `real` | `profile` |
-| [`alwaysActive`](../CLI_FLAGS.md#flag-bot-always-active) | `true`, `false` (PRO) | `true` |
+| [`alwaysActive`](../CLI_FLAGS.md#flag-bot-always-active) | `true`, `false` (PRO) | `false` |
 | [`mobileForceTouch`](../CLI_FLAGS.md#flag-bot-mobile-force-touch) | `true`, `false` | `false` |
 | [`portProtection`](../CLI_FLAGS.md#flag-bot-port-protection) | `true`, `false` (PRO) | `false` |
 

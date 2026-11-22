@@ -245,7 +245,7 @@ To verify device emulation is working correctly:
 
 1. Launch BotBrowser with your device profile and visit [BrowserLeaks](https://browserleaks.com/) or [CreepJS](https://abrahamjuliot.github.io/creepjs/).
 2. Confirm that screen dimensions, DPR, touch support, and hardware values match the profile's target device.
-3. Run the same profile on a different host machine and verify identical results.
+3. Run the same profile and launch flags on another supported host. Compare the profile-controlled device fields, and account for host-dependent rendering where applicable.
 
 ---
 

@@ -248,7 +248,7 @@ docker run --rm --shm-size=2g your-botbrowser-image
 `--bot-gpu-emulation=false` turns off BotBrowser's internal WebGL noise layers, but it does not disable the global noise RNG or Canvas 2D noise. `--bot-noise-seed` continues to produce deterministic, seed-dependent output for Canvas 2D, WebGL readback, text metrics, ClientRect measurements, and offline audio hashes:
 
 ```bash
-# Same seed across runs: identical hashes for Canvas 2D and WebGL readback
+# Same seed and backend: repeatable hashes for Canvas 2D and WebGL readback
 chromium-browser --use-angle=gl --bot-gpu-emulation=false \
     --bot-noise-seed=100 --bot-profile="/path/to/profile.enc" ...
 

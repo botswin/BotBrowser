@@ -10,7 +10,7 @@ This repository contains a Docker setup for validating fingerprint protection on
 2. Performs compatibility validation on WizzAir's interface over a date range.
 3. Analyzes API responses for compatibility assessment.
 4. Saves analysis data to `flight_data/` and screenshots to `screenshots/` for privacy research review.
-5. The target site is protected by **Kasada**, and this workflow demonstrates how BotBrowser prevents fingerprint collection in real-world tracking scenarios.
+5. The target site is protected by **Kasada**, and this workflow exercises BotBrowser in an authorized compatibility scenario.
 
 ---
 

@@ -214,7 +214,7 @@ await client.send("BotBrowser.setBrowserContextFlags", {
 const page2 = await ctx2.newPage();
 ```
 
-Each seed produces a unique, reproducible fingerprint. The same seed always produces the same noise output, making sessions consistent across restarts.
+Each seed selects a separate reproducible noise field. The same profile, seed, host, and rendering path produce the same affected noise output across restarts. Distinct seed values can still collide for an individual input.
 
 ---
 

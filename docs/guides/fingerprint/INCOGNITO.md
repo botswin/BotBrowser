@@ -28,7 +28,7 @@ Use this baseline first, then verify that regular and incognito contexts return 
 
 ## Overview
 
-Incognito (private browsing) mode changes several browser behaviors that can create measurable differences. BotBrowser maintains consistent fingerprint protection across both regular and incognito modes. The fingerprint values produced in incognito are identical to those in a regular session with the same profile.
+Incognito (private browsing) changes storage lifetime and several storage-related behaviors. BotBrowser keeps the profile-backed identity policy consistent across regular and private contexts, while preserving storage isolation and the host browser's extension rules.
 
 ---
 
@@ -40,9 +40,9 @@ BotBrowser normalizes incognito-related differences at the browser engine level:
 
 1. **Storage quota consistency.** Storage quota values remain consistent regardless of browsing mode. The profile defines the quota values, and BotBrowser enforces them in both modes.
 
-2. **API behavior alignment.** APIs that behave differently in incognito mode are normalized to produce identical responses. This includes storage-related APIs and file system access patterns.
+2. **API behavior alignment.** APIs whose capability values follow the profile use the same values in regular and private contexts. Storage contents, persistence, and access boundaries remain isolated by context.
 
-3. **Fingerprint surface parity.** All fingerprint surfaces (Canvas, WebGL, AudioContext, fonts, screen metrics, etc.) produce identical values in both regular and incognito modes when using the same profile.
+3. **Fingerprint policy parity.** Profile-backed Canvas, WebGL, WebGPU, font, screen, and device policies remain active in private contexts. Output depending on host graphics, storage state, or user configuration can still differ.
 
 4. **Timing consistency.** Storage operation timing is normalized to match profile expectations across both browsing modes.
 
@@ -92,11 +92,11 @@ await context.close();
 
 ### Verifying consistency
 
-To verify that regular and incognito modes produce identical fingerprints:
+To verify that the profile-backed policy remains active in both modes:
 
 1. Launch BotBrowser with a profile and open a fingerprint testing site such as [BrowserLeaks](https://browserleaks.com/) or [CreepJS](https://abrahamjuliot.github.io/creepjs/) in a regular context.
 2. Open the same site in a new (incognito-like) context using `browser.newContext()`.
-3. Compare the reported fingerprint values between both contexts. All values (Canvas, WebGL, storage quota, etc.) should be identical when using the same profile.
+3. Compare the reported configuration values on the same host and rendering path. Account for private-mode storage isolation and any context-specific overrides.
 
 ---
 
@@ -106,7 +106,7 @@ To verify that regular and incognito modes produce identical fingerprints:
 
 | Problem | Solution |
 |---------|----------|
-| Storage quota differs between modes | Ensure you are using the same profile for both sessions. Different profiles may define different quota values. |
+| Storage values differ between modes | Private contexts have separate storage contents. Compare quota policy and supported capability values separately from stored data. |
 | Extensions not loading in incognito | This is standard browser behavior. BotBrowser does not modify extension loading policies. |
 | Fingerprint values differ between modes | Verify both sessions use the same `--bot-profile` and identical `--bot-*` flags. |
 

@@ -1,6 +1,6 @@
 # WebGL Fingerprinting
 
-> WebGL is a privacy-relevant surface. BotBrowser provides comprehensive, profile-driven protection across all WebGL fingerprint surfaces.
+> WebGL is a privacy-relevant surface. BotBrowser provides profile-driven protection across supported WebGL capability and rendering paths.
 
 ---
 
@@ -22,11 +22,9 @@ chromium-browser \
   --bot-profile="/path/to/profile.enc"
 ```
 
-Start with this launch to establish a clean baseline before adding extra overrides.
-
 ## Overview
 
-WebGL is a privacy-relevant API surface. BotBrowser provides profile-driven control over all WebGL output, ensuring consistent results regardless of the host GPU.
+WebGL is a privacy-relevant API surface. BotBrowser applies profile-driven capability and noise policies to supported WebGL output. Pixel-level results can still depend on the rendering backend selected on the host.
 
 ---
 
@@ -99,7 +97,7 @@ WebGL2 multisample support also follows the profile. Per-format sample counts, `
 
 ## How BotBrowser Provides Protection
 
-BotBrowser controls all WebGL output surfaces at the browser engine level: GPU identity strings, parameter values, shader output, image readback, extension availability, and precision formats. WebGL2 receives the same protections. All values are returned through the same code paths as a native browser, not through JavaScript interception.
+BotBrowser applies its profile policy to supported WebGL capability and output surfaces, including GPU identity strings, parameter values, shader language, image readback, extension availability, and precision formats. WebGL2 uses the same profile-backed capability model. Supported values are returned through browser paths rather than JavaScript interception.
 
 ---
 
@@ -111,7 +109,7 @@ To verify protection is active:
 
 1. Launch BotBrowser with a profile and visit a fingerprint testing site such as [BrowserLeaks](https://browserleaks.com/) or [CreepJS](https://abrahamjuliot.github.io/creepjs/).
 2. Confirm that the reported WebGL vendor, renderer, and parameter values match the profile configuration, not the host GPU.
-3. To verify reproducibility, launch two sessions with the same `--bot-noise-seed` and confirm that the WebGL image fingerprint output is identical.
+3. To verify reproducibility, launch two sessions with the same profile and `--bot-noise-seed` on the same graphics backend, then compare the WebGL image fingerprint output.
 
 ---
 
@@ -135,7 +133,7 @@ To verify protection is active:
 
 - [Canvas Fingerprinting](CANVAS.md). 2D Canvas as a fingerprint surface.
 - [Performance Fingerprinting](PERFORMANCE.md). GPU timing as a tracking vector.
-- [CLI Flags Reference](../../../CLI_FLAGS.md). All WebGL and noise configuration flags.
+- [CLI Flags Reference](../../../CLI_FLAGS.md). WebGL and noise configuration flags.
 
 ---
 

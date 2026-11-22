@@ -1,13 +1,13 @@
 # Mirror: Distributed Privacy Consistency (ENT Tier3)
 
-Ensure your privacy defenses work effectively across platforms and networks. A controller instance captures your clicks, keyboard input, and scroll events and broadcasts them to clients on other machines or platforms so you can verify that all instances maintain identical privacy protection against tracking.
+Ensure your privacy defenses work effectively across platforms and networks. A controller instance captures your clicks, keyboard input, and scroll events and broadcasts them to clients on other machines or platforms so you can compare profile-backed behavior across supported hosts.
 
 ## What Is Mirror?
 
-Mirror enables distributed privacy consistency verification: assure that browser profiles maintain identical privacy protection across Windows, macOS, Linux, and remote deployment environments. By running a controller (your primary instance) and clients (on different machines/platforms), you can watch all instances respond identically to your actions, verifying that privacy protections remain protected across geographies and configurations.
+Mirror enables distributed privacy consistency verification across Windows, macOS, Linux, and remote deployment environments. By running a controller and clients with the same profile, you can replay one input sequence and compare the supported browser surfaces under different hosts and network paths.
 
 Use Mirror for:
-- **Cross-platform privacy assurance**: Verify Windows and macOS profiles maintain identical privacy protection on the same website
+- **Cross-platform privacy comparison**: Compare how the same profile applies its privacy policy on Windows and macOS
 - **Multi-geography privacy verification**: Assure privacy protection across geographically distributed deployment nodes
 - **Profile protection assurance**: Ensure multiple privacy profiles maintain protected behavior across versions
 - **Distributed privacy validation**: Verify privacy protection across multiple machines and OS environments simultaneously
@@ -141,7 +141,7 @@ Mirror operates with minimal latency. Events flow from user input on the control
 
 ### Coordinate System
 
-All coordinates transmitted over the network are relative to the browser window's bounds, not absolute screen coordinates. This ensures that the same click location works correctly regardless of where the window is positioned on the screen or how many monitors are connected.
+Mirror sends window-relative coordinates, not absolute screen coordinates. The same click location works wherever the window is positioned and across multi-monitor layouts.
 
 ## Troubleshooting
 

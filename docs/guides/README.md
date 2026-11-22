@@ -79,7 +79,7 @@ Configuration, deployment, and verification guides. Each guide includes prerequi
 | [Storage Quota Fingerprinting](fingerprint/STORAGE_QUOTA.md) | Control storage and memory quota surfaces, including runtime policy overrides. |
 | [Incognito Fingerprinting](fingerprint/INCOGNITO.md) | Keep fingerprint surfaces consistent between regular and private browsing sessions. |
 | [Console Suppression](fingerprint/CONSOLE_SUPPRESSION.md) | Suppress CDP-forwarded console artifacts that can affect runtime consistency checks. |
-| [Active Window Emulation](fingerprint/ACTIVE_WINDOW.md) | Prevent focus-based tracking by keeping windows in an always-active state. |
+| [Active Window Emulation](fingerprint/ACTIVE_WINDOW.md) | Keep active pages focused while the application is unfocused with a supported profile. |
 | [WebGPU Fingerprint Protection](fingerprint/WEBGPU.md) | Control WebGPU adapter information and rendering behavior across platforms. |
 | [Media Devices Privacy](fingerprint/MEDIA_DEVICES.md) | Control device enumeration to return consistent audio/video device lists. |
 | [File-Backed Capture Device Identity](fingerprint/FILE_CAPTURE_DEVICE_IDENTITY.md) | Keep camera and microphone identity aligned with the profile when capture comes from a file fixture. |
@@ -92,7 +92,7 @@ Configuration, deployment, and verification guides. Each guide includes prerequi
 |-------|-------------|
 | [Multi-Account Isolation](identity/MULTI_ACCOUNT_ISOLATION.md) | Run multi-account browser isolation with per-context fingerprints and reduced cross-account linkability. |
 | [Browser Brand Alignment](identity/BROWSER_BRAND_ALIGNMENT.md) | Present as Chrome, Edge, Brave, Opera, or WebView with consistent UA-CH metadata. |
-| [Custom User-Agent](identity/CUSTOM_USER_AGENT.md) | Configure User-Agent and Client Hints with internally consistent browser identity. |
+| [Custom User-Agent](identity/CUSTOM_USER_AGENT.md) | Configure User-Agent and Client Hints values across supported identity paths. |
 | [Timezone, Locale, and Language](identity/TIMEZONE_LOCALE_LANGUAGE.md) | Configure timezone, locale, and language for consistent geographic identity APIs. |
 | [Cookie Management](identity/COOKIE_MANAGEMENT.md) | Inject, persist, and restore cookies for pre-authenticated session state. |
 | [Bookmark Seeding](identity/BOOKMARK_SEEDING.md) | Inject realistic bookmarks to strengthen cross-session browser state consistency. |
@@ -123,7 +123,7 @@ Configuration, deployment, and verification guides. Each guide includes prerequi
 | [Linux GPU Backend Selection](deployment/LINUX_GPU_BACKEND.md) | Choose the right Linux software rendering backend to keep WebGL1/WebGL2/WebGPU available with stable performance. |
 | [Performance Optimization](deployment/PERFORMANCE_OPTIMIZATION.md) | Tune startup speed, memory usage, and throughput for high-scale workloads. Includes guidance on when to choose [Trimmed Build (ENT Tier3)](deployment/PERFORMANCE_OPTIMIZATION.md#when-to-consider-trimmed-build) for short-session automation (-62% wall time, -85% per-context creation on Linux x64). |
 | [Screenshot Best Practices](deployment/SCREENSHOT_BEST_PRACTICES.md) | Capture stable screenshots across headless and headful environments. |
-| [Mirror Distributed](deployment/MIRROR_DISTRIBUTED.md) | Run distributed sessions with synchronized actions and consistent fingerprint output. |
+| [Mirror Distributed](deployment/MIRROR_DISTRIBUTED.md) | Replay the same actions across distributed sessions and compare profile-backed output. |
 
 ---
 

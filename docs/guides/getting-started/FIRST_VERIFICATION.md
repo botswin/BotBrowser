@@ -36,7 +36,7 @@ Open one of the following URLs in the browser:
 
 ### 3. Check for a passing result
 
-Each tool reports either a trust score or detailed signal output. A properly configured BotBrowser instance should show consistent fingerprint data across all reported properties.
+Each tool reports either a trust score or detailed signal output. Review the profile-controlled values first, then record any host-dependent rendering or capability output separately.
 
 ---
 
@@ -44,9 +44,9 @@ Each tool reports either a trust score or detailed signal output. A properly con
 
 ## How It Works
 
-Fingerprint verification tools check browser properties for internal consistency.
+Fingerprint verification tools compare browser properties and related headers.
 
-BotBrowser profiles define all of these properties consistently at the browser engine level, so verification tools should see a unified, authentic browser environment.
+BotBrowser profiles apply the supported identity, hardware, locale, network, and media policy at the browser engine level. Compare the result with the selected profile rather than expecting every host-dependent value to be identical.
 
 ---
 
@@ -89,7 +89,7 @@ If a framework-based run fails consistency checks:
 
 CreepJS is one of the most comprehensive fingerprint analysis tools. It displays a trust score and consistency status across many browser properties.
 
-Look for a high trust score and zero inconsistencies. All sections should show consistent data without "undefined" or error values.
+Review the trust score and consistency sections against the selected profile. Ignore only output explained by host rendering or an unsupported browser capability; other mismatches need investigation.
 
 **Automation verification:**
 
@@ -126,7 +126,7 @@ await browser.close();
 
 BrowserLeaks is useful for drilling into individual fingerprint surfaces such as Canvas, WebGL, fonts, WebRTC, timezone, and headers.
 
-Look for values that match your loaded profile and proxy configuration with no obvious contradictions between sections.
+Look for values that match your loaded profile and proxy configuration, and record any host-dependent output separately.
 
 ---
 
@@ -134,7 +134,7 @@ Look for values that match your loaded profile and proxy configuration with no o
 
 ## What to Check
 
-When reviewing verification tool results, confirm that all reported properties are internally consistent and match the loaded profile. BotBrowser handles this alignment automatically when a profile is loaded correctly. If you see any mismatch, check the troubleshooting table below.
+When reviewing verification results, start with the profile-controlled properties and related headers. Host-owned rendering, storage state, and unsupported capabilities can differ. If a supported profile-backed value does not match, check the troubleshooting table below.
 
 ---
 
@@ -211,7 +211,7 @@ console.log("Verification complete. Review the screenshots.");
 | Problem | Solution |
 |---|---|
 | Quick Start works but advanced setup fails | Add one option at a time from this guide and verify after each change. |
-| Same config behaves differently on another machine | Verify BotBrowser version, profile file, and full launch args are identical. |
+| Same config behaves differently on another machine | Verify BotBrowser version, profile file, and full launch args match, then compare the host rendering path separately. |
 | I need strict comparability between runs | Keep proxy/locale/timezone fixed and avoid changing profile or seed values mid-test. |
 
 <a id="next-steps"></a>

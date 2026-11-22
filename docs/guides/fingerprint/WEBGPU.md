@@ -71,6 +71,8 @@ In `profile` mode, adapter limits and features come from the active BrowserConte
 
 Use `real` when the host adapter should be returned without profile-backed capability claims. Use `disabled` when page code should not see the WebGPU entry point at all. Apply the mode before the context creates its first page.
 
+On software-rendered hosts, profile mode also provides the backing needed by the capabilities it reports. Texture format tiers, rendering, blending, multisample resolve, and Canvas readback remain usable within the active context's declared capability policy. `real` keeps the host backend and does not add profile-only software support. Disabling GPU emulation returns host support to the native path while leaving the selected profile mode's capability policy unchanged.
+
 ---
 
 <a id="common-scenarios"></a>

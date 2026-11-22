@@ -53,7 +53,7 @@ Navigate, click, and interact with the controller instance. All actions are repl
 
 ## How It Works
 
-Mirror provides remote browser control for distributed setups where multiple BotBrowser instances must maintain identical behavior:
+Mirror provides remote browser control for distributed setups that replay the same browser actions across multiple BotBrowser instances:
 
 1. **Controller instance.** One BotBrowser instance acts as the controller. It captures user interactions (navigation, clicks, keyboard input, scrolling) and broadcasts them to all connected clients.
 
@@ -61,7 +61,7 @@ Mirror provides remote browser control for distributed setups where multiple Bot
 
 3. **Fingerprint consistency.** Every node loads the same profile and receives the same sequence of actions, allowing profile-backed output to be compared across platforms and networks. Input synchronization alone does not guarantee identical rendering or fingerprint values.
 
-4. **Cross-platform verification.** Run the controller on Windows, with clients on macOS and Ubuntu. Compare the resulting signals to verify consistency; text layout and glyph rendering can retain platform-specific differences.
+4. **Cross-platform verification.** Run the controller on Windows, with clients on macOS and Ubuntu. Compare the profile-controlled values, then inspect host-dependent text layout, glyph rendering, and graphics output separately.
 
 ---
 
@@ -92,7 +92,7 @@ chromium-browser \
 
 ### Cross-platform consistency verification
 
-Verify that a profile produces identical fingerprints on different operating systems:
+Verify that a profile keeps its supported privacy policy aligned on different operating systems:
 
 ```bash
 # Controller on Windows
@@ -105,7 +105,7 @@ chrome.exe --bot-profile="C:\profiles\profile.enc" --bot-mirror-controller-endpo
 chromium-browser --bot-profile="profiles/profile.enc" --bot-mirror-client-endpoint=windows-machine:9333
 ```
 
-Navigate to a fingerprint testing site on the controller and compare the fingerprint values reported by each client.
+Navigate to a fingerprint testing site on the controller, compare the profile-controlled values reported by each client, and record host-dependent output separately.
 
 ### CDP-based Mirror control
 

@@ -20,7 +20,7 @@ Use this profile line when the workflow requires:
 
 - Desktop or mobile WebKit-family profile bundles.
 - Browser-family identity consistency across supported BotBrowser hosts.
-- Alignment across selected WebKit-family browser API surfaces, TLS behavior, and HTTP/2 behavior without hand-built overrides.
+- Alignment across selected WebKit-family browser API surfaces. For supported HTTPS paths, Chromium's network stack executes the profile family's TLS and HTTP/2 policy.
 - Per-context runs that mix WebKit-family and Chromium-family profiles in one browser process.
 
 Use standard Chromium-family profiles for Chrome, Chromium, Edge, Brave, Opera, Android, or Android WebView workflows.

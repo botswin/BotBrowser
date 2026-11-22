@@ -1,6 +1,6 @@
 # Audio Fingerprinting
 
-> The Web Audio API exposes device-specific audio processing characteristics. BotBrowser provides deterministic noise protection for all AudioContext-based tracking surfaces.
+> The Web Audio API exposes device-specific audio processing characteristics. BotBrowser provides profile-backed noise protection for supported AudioContext output paths.
 
 ---
 
@@ -22,11 +22,9 @@ chromium-browser \
   --bot-profile="/path/to/profile.enc"
 ```
 
-Start with this launch to establish a clean baseline before adding extra overrides.
-
 ## Overview
 
-Web Audio API output can be used as a tracking identifier because it varies across devices and platforms. BotBrowser's profile-driven noise ensures the reported audio output matches the declared platform, maintaining consistent identity across sessions.
+Web Audio API output can be used as a tracking identifier because it varies across devices and platforms. BotBrowser applies profile-driven audio values and noise to supported output paths.
 
 ---
 
@@ -81,7 +79,7 @@ The noise seed affects AudioContext output alongside Canvas, WebGL, and other su
 
 ### Cross-Worker Consistency
 
-BotBrowser ensures that AudioContext fingerprints remain consistent across the main thread, Web Workers, and Service Workers within the same session.
+The same BrowserContext applies its audio policy across supported main-thread, Web Worker, and Service Worker paths.
 
 ---
 
@@ -89,7 +87,7 @@ BotBrowser ensures that AudioContext fingerprints remain consistent across the m
 
 ## How BotBrowser Provides Protection
 
-BotBrowser applies deterministic noise to all Web Audio API output at the browser engine level. Audio properties, processing results, and frequency data all receive consistent noise controlled by the profile. Protection covers all execution contexts including Workers. API call patterns and timing remain consistent with native browser behavior.
+BotBrowser applies profile-controlled noise to supported Web Audio output at the browser engine level. The policy covers supported audio properties, processing results, and frequency data. The same BrowserContext applies it across supported page and Worker paths.
 
 ---
 
@@ -101,7 +99,7 @@ To verify protection is active:
 
 1. Launch BotBrowser with a profile and visit a fingerprint testing site such as [BrowserLeaks](https://browserleaks.com/) or [CreepJS](https://abrahamjuliot.github.io/creepjs/).
 2. Confirm that the reported AudioContext hash and audio processing values match the profile configuration, not the host machine.
-3. To verify reproducibility, launch two sessions with the same `--bot-noise-seed` and confirm that the audio fingerprint output is identical.
+3. To verify reproducibility, launch two sessions with the same profile and `--bot-noise-seed` on the same host path, then compare the audio fingerprint output.
 
 ---
 

@@ -21,7 +21,7 @@
 
 Widevine is Google's Digital Rights Management (DRM) system used by streaming services and other sites to protect video content. When a site requires DRM playback, the browser must have a Widevine Content Decryption Module (CDM) installed. Without it, the site may show errors, refuse to play content, or detect that DRM is unavailable.
 
-DRM capability reporting varies across platforms. The order of `MediaKeySystemAccess` results and the specific configurations supported differ by OS. BotBrowser ensures that DRM capability results are consistent with the profile's platform identity.
+DRM capability reporting varies across platforms. The order of `MediaKeySystemAccess` results and the supported configurations differ by OS. BotBrowser applies the profile's platform policy to supported DRM queries.
 
 ### License-challenge policy
 
@@ -34,7 +34,7 @@ Use `--bot-widevine` when a BrowserContext needs an explicit policy for Widevine
 --bot-widevine=no-cdm   # Disable CDM exposure for the context
 ```
 
-The policy is entitlement and profile dependent. Apply it before the first page or worker starts. `stub` is the default when the profile enables the Widevine capability.
+The policy depends on the license tier and profile. Apply it before the first page or worker starts. `stub` is the default when the profile includes Widevine support.
 
 ---
 
@@ -52,7 +52,7 @@ The Widevine CDM handles:
 
 ### DRM Capability Consistency
 
-BotBrowser ensures that DRM capability result ordering and reporting are consistent with the profile's platform. A Windows profile reports Windows-appropriate DRM capabilities, an Android profile reports Android-appropriate capabilities.
+A Windows profile applies Windows DRM policy, and an Android profile applies Android DRM policy.
 
 ### Platform Consistency
 
@@ -213,7 +213,7 @@ console.log("widevine cdm config:", supported);
 
 A Widevine device file (`.wvd` or the older `.prd` form) carries a client ID and device key that a license server can recognize. BotBrowser does not distribute device files, and loading one is not a configuration step for BotBrowser: the Widevine capability comes from the CDM binary plus the loaded profile. Profiles are `.enc` or `.json` files loaded with `--bot-profile`, and the DRM capability set they report is what a page sees. If a provider rejects playback while the CDM reports support, the cause is normally license authorization for that account or device class, not a missing `.wvd`.
 
-Do not place a `.wvd` or `.prd` path in `--bot-profile`, and do not copy a device file into a profile directory as an attempted fix. Treat device files as provider credentials: obtain them only from the provider or an authorized device-management process, restrict their permissions, and redact their contents from issue logs. For the browser-side setup path, see [DRM fingerprinting and EME signals](../../fingerprint/drm/); for headless-specific failure boundaries, see [Widevine headless troubleshooting](https://botbrowser.io/en/blog/widevine-headless-boundaries/).
+Do not place a `.wvd` or `.prd` path in `--bot-profile`, and do not copy a device file into a profile directory as an attempted fix. Treat device files as provider credentials: obtain them only from the provider or an authorized device-management process, restrict their permissions, and redact their contents from issue logs. For the browser-side setup path, see [DRM fingerprinting and EME signals](../fingerprint/DRM.md); for headless-specific failure boundaries, see [Widevine headless troubleshooting](https://botbrowser.io/en/blog/widevine-headless-boundaries/).
 
 ---
 

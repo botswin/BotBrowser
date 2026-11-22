@@ -22,8 +22,6 @@ chromium-browser \
   --bot-profile="/path/to/profile.enc"
 ```
 
-Start with this launch to establish a clean baseline before adding extra overrides.
-
 ## Overview
 
 Font availability and rendering behavior differ across operating systems, locales, and installations. Font metrics, glyph shapes, and sub-pixel positioning all vary across platforms. BotBrowser provides consistent font behavior through built-in font bundles and cross-platform rendering at the browser engine level.
@@ -33,6 +31,8 @@ WebKit-family profiles also preserve profile-backed local font behavior, generic
 Desktop profiles resolve generic `monospace` and `fantasy` families from their target desktop font buckets. Mobile profile buckets keep their own values. Font weight selection uses the recorded face weight rather than the host's bold trait, which keeps named weights and variable faces aligned across hosts.
 
 Chrome macOS profiles use the target system's CoreText fallback order when they run on another host. Mobile WebKit profiles use their own platform fallback lists. This covers default, common, symbol, emoji, and regional font selection, not only the family names in the profile.
+
+Text measurement follows the target browser engine as well. DOM and Canvas measurements use the target's font-size precision, intrinsic-size rounding, synthetic weight behavior, and variable-font instance selection. A desktop or mobile target can therefore return different fractional bounds for the same family and text without exposing the host renderer. Profiles using `--bot-fonts=real` keep the host browser's font and measurement path.
 
 ---
 
@@ -113,7 +113,7 @@ To verify protection is active:
 
 1. Launch BotBrowser with a profile and visit a fingerprint testing site such as [BrowserLeaks](https://browserleaks.com/) or [CreepJS](https://abrahamjuliot.github.io/creepjs/).
 2. Confirm that the reported font list and text metrics match the profile configuration, not the host machine.
-3. To verify reproducibility, launch two sessions with the same `--bot-noise-seed` and confirm that the font measurement output is identical.
+3. To verify reproducibility, launch two sessions with the same profile and `--bot-noise-seed` on the same host path, then compare the affected font measurements.
 
 ---
 
@@ -126,7 +126,7 @@ To verify protection is active:
 | Font list shows host system fonts | Ensure `--bot-fonts=profile` is set. The `real` mode disables font protection. |
 | CJK text renders with missing glyphs | Verify the profile includes appropriate CJK fonts. Windows and macOS profiles include CJK support by default. |
 | A local FontFace name resolves differently across hosts | Use `--bot-fonts=profile` and a BotBrowser 150 profile package so local and request-by-name font handling follows the profile inventory. |
-| Font metrics differ between headless and headful mode | Both modes should produce identical metrics with a profile loaded. Check that the same profile and flags are used. |
+| Font metrics differ between headless and headful mode | Compare the same profile and flags first. Layout mode and host rendering can still change some pixel or fractional metrics. |
 | ClientRects values vary between sessions | Use `--bot-noise-seed` for reproducible measurements. Without a fixed seed, noise varies per session. |
 
 ---

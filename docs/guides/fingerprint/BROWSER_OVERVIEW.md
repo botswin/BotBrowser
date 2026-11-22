@@ -1,6 +1,6 @@
 # Browser Fingerprinting Overview
 
-> What browser fingerprinting is, why it matters for privacy, and how BotBrowser provides comprehensive protection.
+> What browser fingerprinting is, why it matters for privacy, and how BotBrowser applies profile-backed protection.
 
 ---
 
@@ -20,8 +20,6 @@ No technical prerequisites. This guide provides an overview of fingerprint-based
 chromium-browser \
   --bot-profile="/path/to/profile.enc"
 ```
-
-Start with this launch to establish a clean baseline before adding extra overrides.
 
 ## Overview
 
@@ -53,7 +51,7 @@ For the full list of references and citations, see [Browser Fingerprinting: A Re
 
 ## What BotBrowser Protects
 
-BotBrowser provides protection across every major fingerprint surface. Each area is controlled through the profile system at the browser engine level.
+BotBrowser applies the active profile at the browser engine level across the fingerprint surfaces listed below. Coverage depends on the profile and platform.
 
 | Surface | Description | Guide |
 |---------|-------------|-------|
@@ -80,7 +78,7 @@ BotBrowser addresses fingerprint tracking through browser engine level protectio
 
 - **Deterministic noise.** Canvas, WebGL, AudioContext, and other rendering surfaces receive controlled noise that remains consistent within a session while varying across sessions.
 - **Cross-platform consistency.** Built-in font libraries and text shaping align profile-backed signals across supported hosts. Text layout and glyph rendering can retain platform-specific differences; see [Font Fingerprinting](FONT.md).
-- **Complete surface coverage.** Navigator properties, screen dimensions, speech synthesis voices, WebAuthn capabilities, and other API surfaces are controlled through the profile system.
+- **Profile-controlled surfaces.** Supported navigator properties, screen dimensions, speech synthesis voices, and WebAuthn capabilities follow the active profile.
 - **Privacy-first design.** All protection operates at the browser engine level, through native API paths, not JavaScript injection or page-context modifications.
 
 For configuration details, see the [CLI Flags Reference](../../../CLI_FLAGS.md) and [Advanced Features](../../../ADVANCED_FEATURES.md).
@@ -88,12 +86,6 @@ For configuration details, see the [CLI Flags Reference](../../../CLI_FLAGS.md) 
 ---
 
 <a id="common-scenarios"></a>
-
-## Common Scenarios
-
-- Capture a baseline result using the Quick Start setup.
-- Change one relevant setting at a time and compare the new output.
-- Keep your final launch command documented so future checks are reproducible.
 
 ## Troubleshooting / FAQ
 

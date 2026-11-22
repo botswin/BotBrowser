@@ -19,11 +19,9 @@ chromium-browser \
   --bot-profile="/path/to/profile.enc"
 ```
 
-Start with this launch to establish a clean baseline before adding extra overrides.
-
 ## How It Works
 
-BotBrowser applies controlled noise to fingerprint surfaces like Canvas, WebGL, AudioContext, and text measurements to prevent cross-session correlation. The `--bot-noise-seed` flag (ENT Tier2) gives you deterministic control over this noise: the same seed always produces the same fingerprint, while different seeds produce distinct identities.
+BotBrowser applies controlled noise to supported Canvas, WebGL, WebGPU, AudioContext, and text measurement surfaces. The `--bot-noise-seed` flag (ENT Tier2) makes that noise deterministic for the same profile and implementation. Different seeds produce different noise fields.
 
 ---
 
@@ -31,7 +29,7 @@ BotBrowser applies controlled noise to fingerprint surfaces like Canvas, WebGL, 
 
 ## What Is a Noise Seed?
 
-A noise seed is an integer value that initializes BotBrowser's deterministic random number generator. This generator controls the variance applied to fingerprint-sensitive APIs. Because the RNG is seeded, the output is reproducible: identical inputs with the same seed always produce identical outputs.
+A noise seed is an integer value that initializes BotBrowser's deterministic random number generator. This generator controls the variance applied to fingerprint-sensitive APIs. With the same profile, seed, host, rendering path, and inputs, the affected outputs are reproducible.
 
 ```bash
 # Set a noise seed for deterministic fingerprinting
@@ -42,8 +40,8 @@ chromium-browser \
 
 **Key properties:**
 
-- **Same seed = same fingerprint.** A session launched with `--bot-noise-seed=42` produces identical Canvas hashes, WebGL readbacks, and audio fingerprints every time.
-- **Different seed = different fingerprint.** Changing the seed to `43` produces a completely different but equally stable identity.
+- **Same seed, same protected output.** On the same implementation and rendering path, a session launched with `--bot-noise-seed=42` reproduces its affected Canvas hashes, WebGL readbacks, and audio fingerprints.
+- **Different seed, different noise field.** Changing the seed to `43` selects a different deterministic field. Some values can collide in edge cases.
 - **Seed value `0`** keeps noise active using profile defaults (no deterministic seeding).
 
 ---
@@ -52,7 +50,7 @@ chromium-browser \
 
 ## Seed Range
 
-The `--bot-noise-seed` flag accepts integer values from `1` to `UINT32_MAX` (4,294,967,295). Each value produces a unique, stable noise pattern.
+The `--bot-noise-seed` flag accepts integer values from `1` to `UINT32_MAX` (4,294,967,295). Each value selects a stable noise field for the same profile, implementation, and rendering path. Distinct fields can still produce the same final value for a particular API and input.
 
 ---
 
@@ -62,7 +60,7 @@ The `--bot-noise-seed` flag accepts integer values from `1` to `UINT32_MAX` (4,2
 
 The noise seed controls variance across all major fingerprint surfaces:
 
-The seed controls noise across Canvas 2D, WebGL, WebGPU, AudioContext, ClientRects, and TextRects. All rendering and measurement output from these surfaces remains consistent per seed across sessions and restarts.
+The seed controls noise across Canvas 2D, WebGL, WebGPU, AudioContext, ClientRects, and TextRects. The affected output is reproducible per seed when the profile, BotBrowser implementation, host rendering path, and measurement inputs stay the same.
 
 ---
 
@@ -70,7 +68,7 @@ The seed controls noise across Canvas 2D, WebGL, WebGPU, AudioContext, ClientRec
 
 ## Per-Context Noise Seed
 
-When using per-context fingerprinting (ENT Tier3), each `BrowserContext` can have its own noise seed. This allows multiple isolated identities within a single browser process, each with deterministic and independent noise.
+With Per-Context Fingerprint (ENT Tier3), each `BrowserContext` can use its own noise seed.
 
 ```javascript
 // Puppeteer
@@ -93,7 +91,7 @@ await client.send("BotBrowser.setBrowserContextFlags", {
 const page = await context.newPage();
 ```
 
-A second context with `--bot-noise-seed=200` produces an entirely different fingerprint while both remain reproducible across restarts.
+A second context with `--bot-noise-seed=200` selects a different noise field. Compare the affected outputs rather than assuming that every reported fingerprint value must differ.
 
 ---
 
@@ -103,7 +101,7 @@ A second context with `--bot-noise-seed=200` produces an entirely different fing
 
 ### Multi-Tenant Isolation
 
-Assign a unique seed per tenant or account. Each seed produces a distinct fingerprint identity that remains stable over time.
+Assign a separate seed per tenant or account. On the same implementation and rendering path, each seed gives a stable protected profile that can be reproduced across restarts.
 
 ### Reproducible Testing
 
@@ -144,18 +142,12 @@ To verify noise seed reproducibility:
 
 1. Launch BotBrowser with a profile and `--bot-noise-seed=42`, then visit a fingerprint testing site such as [BrowserLeaks](https://browserleaks.com/) or [CreepJS](https://abrahamjuliot.github.io/creepjs/).
 2. Record the reported Canvas, WebGL, and AudioContext fingerprint values.
-3. Launch a second session with the same profile and seed, and confirm the values are identical.
-4. Change the seed to a different value (e.g., `--bot-noise-seed=43`) and confirm the fingerprint values differ.
+3. Launch a second session with the same profile, seed, host, and rendering path, then compare the recorded values.
+4. Change the seed to a different value (e.g., `--bot-noise-seed=43`) and check which affected outputs change.
 
 ---
 
 <a id="common-scenarios"></a>
-
-## Common Scenarios
-
-- Capture a baseline result using the Quick Start setup.
-- Change one relevant setting at a time and compare the new output.
-- Keep your final launch command documented so future checks are reproducible.
 
 ## Troubleshooting / FAQ
 

@@ -1,6 +1,6 @@
 # Browser Brand Alignment
 
-> Switch browser brand identity (Chrome, Edge, Brave, Opera, Chromium, WebView) with consistent fingerprint protection across all identity surfaces.
+> Switch browser brand identity (Chrome, Edge, Brave, Opera, Chromium, WebView) with the selected brand applied across supported identity surfaces.
 
 ---
 
@@ -20,7 +20,7 @@
 
 Different Chromium-based browsers report different brand identities through their Client Hints values, HTTP headers, and User-Agent string. Each brand also follows its own version cadence. For example, Microsoft Edge releases on a different schedule than Google Chrome, so their full version numbers diverge even when they share the same Chromium major version.
 
-BotBrowser lets you switch between brand identities at launch time using the `--bot-browser-brand` flag. When you set a brand, BotBrowser automatically adjusts the User-Agent string, `navigator.userAgentData` brands list, Client Hints headers, and all related API surfaces to match that brand's identity consistently.
+BotBrowser lets you switch between brand identities at launch time using the `--bot-browser-brand` flag. When you set a brand, BotBrowser applies that brand to the User-Agent string, `navigator.userAgentData` brands list, and supported Client Hints paths.
 
 ---
 
@@ -77,7 +77,7 @@ When you set `--bot-browser-brand`, BotBrowser modifies the following surfaces:
 
 4. **Full version list.** When `--bot-brand-full-version` is provided, the brand-specific version appears in high-entropy Client Hints results, separate from the base Chromium version.
 
-These changes apply consistently across the main thread, Workers, and HTTP request headers.
+These changes apply across the main thread, supported Worker paths, and related HTTP request headers.
 
 ### Supported Brands
 

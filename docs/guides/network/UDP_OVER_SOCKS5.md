@@ -52,9 +52,9 @@ HTTP/3 over SOCKS5 supports first-navigation readiness and relay compatibility w
 
 Modern web traffic relies on two key UDP protocols:
 
-**QUIC (HTTP/3).** Chrome uses QUIC for faster connections to supported servers (Google and many others). QUIC traffic uses UDP instead of TCP. Without UDP tunneling, QUIC connections go outside the proxy tunnel, revealing your real IP to the destination server.
+**QUIC (HTTP/3).** Chrome uses QUIC for connections to supported servers (Google and many others). QUIC traffic uses UDP instead of TCP. Without UDP tunneling, QUIC does not use the SOCKS5 UDP relay.
 
-**STUN (WebRTC).** STUN servers help browsers discover their public IP for peer-to-peer connections. STUN requests use UDP. Without UDP tunneling, STUN probes reveal your real IP even when HTTP traffic goes through the proxy.
+**STUN (WebRTC).** STUN servers help browsers discover their public IP for peer-to-peer connections. STUN requests use UDP. Without UDP tunneling, STUN does not use the SOCKS5 UDP relay even when HTTP traffic is proxied.
 
 ### How BotBrowser Tunnels UDP
 
@@ -116,7 +116,7 @@ Set the process default on the main command line, then override it per context t
 If the proxy does not support UDP ASSOCIATE, BotBrowser falls back gracefully:
 
 - QUIC connections fall back to HTTP/2 over TCP (which is proxied normally).
-- STUN probes may reveal your real IP. Use `--bot-webrtc-ice=google` to control ICE endpoints.
+- STUN probes no longer use the SOCKS5 UDP relay. Use `--bot-webrtc-ice=google` to control ICE endpoints.
 
 ```bash
 # Proxy without UDP support - add ICE control for WebRTC protection
@@ -165,7 +165,7 @@ const page = await ctx.newPage();
 |---------|----------|
 | QUIC connections not going through proxy | Verify your SOCKS5 proxy supports UDP ASSOCIATE. Not all providers do. |
 | I do not want QUIC traffic | Add `--disable-quic`. SOCKS5 proxying remains active for TCP traffic. |
-| WebRTC still shows real IP | Confirm UDP support. If unavailable, use `--bot-webrtc-ice=google` for ICE control. |
+| WebRTC results do not use the expected relay identity | Confirm UDP support. If unavailable, use `--bot-webrtc-ice=google` for ICE control. |
 | Increased latency on some sites | UDP tunneling adds overhead. This is expected. For sites that support both QUIC and HTTP/2, performance should be comparable. |
 | Feature not available | UDP-over-SOCKS5 requires an ENT Tier3 license. |
 

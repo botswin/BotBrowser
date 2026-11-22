@@ -168,7 +168,7 @@ chromium-browser \
 <a id="recipe-deterministic-noise"></a>
 ### 11. Deterministic noise with a fixed seed (ENT Tier2)
 
-Produce identical fingerprint noise across runs using the same seed value:
+Make supported fingerprint noise reproducible across runs with the same profile, seed, host, and rendering path:
 
 ```bash
 chromium-browser \

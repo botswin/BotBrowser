@@ -1,6 +1,6 @@
 # Trimmed Build (ENT Tier3)
 
-A purpose-built browser core for short-session, high-concurrency privacy testing and automation workloads. Same fingerprint protection model as Standard Build. Faster context spin-up, lower CPU peak, lower shared memory footprint, identical profile and CLI behavior.
+A purpose-built browser core for short-session, high-concurrency privacy testing and automation workloads. It uses the same fingerprint protection model, profile format, and CLI surface as Standard Build, with faster context spin-up and lower CPU and shared-memory overhead.
 
 > Trimmed Build is distributed through the [enterprise channel](https://botbrowser.io/enterprise/). Standard Build remains the public download on [Releases](https://github.com/botswin/BotBrowser/releases) and is what the installation guide describes.
 
@@ -26,9 +26,9 @@ What "reduced runtime cost around the protection model" means in practice:
 - **Startup work that does not affect short sessions is deferred or removed.** Browser-level subsystems that are useful for long interactive sessions but irrelevant for short-session privacy workloads are not initialized eagerly.
 - **Per-context spin-up work is shortened.** Each new BrowserContext spends less time in setup before the first navigation can begin.
 - **Memory shared across contexts is reduced.** Resident memory used by background subsystems is lower, returning headroom to the renderer processes that actually run the workload.
-- **The protection surface is held constant.** Fingerprint protection, Per-Context Fingerprint behavior, profile loading, CLI flag surface, and CDP commands all behave exactly the same as Standard Build.
+- **The protection surface is held constant.** Fingerprint protection, Per-Context Fingerprint behavior, profile loading, CLI flag surface, and CDP commands share the same behavior as Standard Build.
 
-The goal is a build that pays less startup cost and less per-context cost without changing the browser's privacy posture. The fingerprint a Trimmed Build session presents is the fingerprint a Standard Build session presents when loaded with the same profile.
+The goal is a build that pays less startup cost and less per-context cost without changing the browser's privacy policy. A Trimmed Build and Standard Build comparison is meaningful when both runs use the same profile, launch flags, host, and rendering path.
 
 <a id="what-stays-the-same"></a>
 ## What Stays the Same
@@ -37,19 +37,19 @@ Trimmed Build is a drop-in performance variant. If you have code that runs on St
 
 | Layer | Standard vs Trimmed |
 |---|---|
-| Fingerprint protection model | Same |
+| Fingerprint protection model | Same policy |
 | Profile format (`.enc` / `.json`) | Same |
 | Profile compatibility | Same |
 | CLI flag surface (`--bot-*` and standard browser flags) | Same |
 | CDP commands (`BotBrowser.*`) | Same |
-| Per-Context Fingerprint behavior | Same |
+| Per-Context Fingerprint behavior | Same interface and isolation model |
 | Per-context proxy and dynamic proxy switching | Same |
-| Canvas, WebGL, WebGPU, Audio noise | Same |
-| Font fallback, Client Hints, navigator properties | Same |
+| Canvas, WebGL, WebGPU, Audio noise | Same policy |
+| Font fallback, Client Hints, navigator properties | Same supported profile policy |
 | Browser version cadence | Same |
 | Profile downloaded from one channel works in the other | Yes |
 
-This means you can build and test against Standard Build locally, then run Trimmed Build in production without changing automation code, profiles, or deployment configuration except for the binary itself.
+You can build and test against Standard Build locally, then run Trimmed Build in production without changing automation code, profiles, or deployment inputs except the binary.
 
 <a id="when-to-choose-trimmed-build"></a>
 ## When to Choose Trimmed Build
@@ -105,7 +105,7 @@ The two effects are independent and stack.
 
 **Does Trimmed Build change the fingerprint a page sees?**
 
-No. Profile loading, Canvas / WebGL / WebGPU / Audio noise, font fallback, Client Hints, and all profile-controlled signals are identical to Standard Build. A profile that produces a given fingerprint under Standard Build produces the same fingerprint under Trimmed Build.
+No. Profile loading, Canvas / WebGL / WebGPU / Audio noise, font fallback, Client Hints, and the profile-controlled signal policy use the same behavior as Standard Build. The builds share the same Chromium release line, so a profile produces the same protected browser surface under the same host and rendering path.
 
 **Will sites see Trimmed Build differently from Standard Build?**
 
@@ -117,7 +117,7 @@ No. Profiles are interchangeable. The same `.enc` profile file works on both bui
 
 **Do I need to change automation code when switching from Standard to Trimmed Build?**
 
-No. CLI flags, CDP commands, Playwright and Puppeteer integration, `--bot-script`, and all configuration paths are identical.
+No. CLI flags, CDP commands, Playwright and Puppeteer integration, `--bot-script`, and the documented configuration paths are shared.
 
 **Is Trimmed Build a different Chromium version?**
 

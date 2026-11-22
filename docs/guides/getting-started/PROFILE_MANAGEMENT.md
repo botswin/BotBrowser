@@ -39,7 +39,7 @@ Visit [CreepJS](https://abrahamjuliot.github.io/creepjs/) or [BrowserLeaks](http
 
 ## How It Works
 
-A BotBrowser profile is an encrypted file that defines the complete browser environment. Think of it as a device model: it specifies the hardware, software, and rendering characteristics that make up a browser fingerprint.
+A BotBrowser profile is an encrypted file that defines the supported browser identity, hardware policy, and rendering controls used by a session.
 
 **What a profile contains:**
 
@@ -107,7 +107,7 @@ Premium profiles provide unique configurations designed for authorized fingerpri
 
 ## Profile Versions
 
-Profiles are versioned to match BotBrowser binary versions. The binary and profile Chrome versions must match.
+Profiles are versioned by Chrome major line. The profile major must match the BotBrowser binary major; patch and build values do not have to be identical.
 
 | Channel | Description |
 |---------|-------------|
@@ -129,7 +129,7 @@ BotBrowser distinguishes the main profile startup conditions:
 - **Legacy demo profile**: the package belongs to a published pre-150 evaluation line and keeps its documented limitations.
 - **Version mismatch**: the profile major version does not match the BotBrowser release line.
 
-Headful launches show user-facing guidance for these states. Headless BotBrowser 150 writes the guidance to terminal output without opening a visible window, then follows the startup failure path.
+Headful launches show user-facing guidance for these states. Current headless builds write the guidance to terminal output without opening a visible window, then follow the startup failure path.
 
 ### Checking available versions
 
@@ -237,14 +237,14 @@ chromium-browser \
 
 ### Cross-platform compatibility
 
-The same profile file works on Windows, macOS, and Linux. BotBrowser handles platform-specific differences at the engine level:
+The same profile file works on supported Windows, macOS, and Linux hosts. BotBrowser applies the target profile at the engine level:
 
-- **Windows host running a macOS profile:** BotBrowser renders fonts, graphics, and system properties as if running on macOS.
-- **macOS host running a Windows profile:** Navigator properties, screen metrics, and platform strings match a Windows environment.
-- **Linux host running an Android profile:** Touch events, mobile APIs, and device metrics match an Android device.
+- **Windows host running a macOS profile:** Supported font selection, graphics policy, and system-facing values follow the macOS target. Rendering can still depend on the host graphics backend.
+- **macOS host running a Windows profile:** Supported navigator properties, screen metrics, and platform strings follow the Windows target.
+- **Linux host running an Android profile:** Supported touch events, mobile APIs, and device metrics follow the Android target.
 
 Platform compatibility tiers:
-- Windows and macOS profiles work on all platforms.
+- Windows and macOS profiles work on supported desktop hosts.
 - Android profiles require a PRO subscription.
 - Ubuntu/Linux binaries require ENT Tier1.
 
@@ -257,7 +257,7 @@ Platform compatibility tiers:
 | Problem | Solution |
 |---------|----------|
 | "Profile not found" error | Use an absolute path for `--bot-profile`. Relative paths resolve from the browser binary's directory. |
-| Browser exits before navigation | Read the startup profile message and check for a missing, invalid, expired, or version-mismatched package. A v150 binary needs a v150 profile. |
+| Browser exits before navigation | Read the startup profile message and check for a missing, invalid, expired, or major-version-mismatched package. A v158 binary needs a v158 profile, not the same patch or build number. |
 | Cannot use `--bot-profile` and `--bot-profile-dir` together | `--bot-profile-dir` takes precedence. Use one or the other. |
 | Profile changes have no effect | CLI `--bot-*` flags override profile `configs`. Check if a CLI flag is overriding your change. |
 | "Profile is damaged" or parse errors | Re-download the profile. Ensure the file was not corrupted during transfer. |

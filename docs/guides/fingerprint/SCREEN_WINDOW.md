@@ -22,8 +22,6 @@ chromium-browser \
   --bot-profile="/path/to/profile.enc"
 ```
 
-Start with this launch to establish a clean baseline before adding extra overrides.
-
 ## Overview
 
 Screen and window properties vary across devices and monitor configurations. The combination of screen resolution, available dimensions, device pixel ratio, color depth, and window frame sizes creates a device-specific profile that is accessible without any permissions and stable across sessions. BotBrowser provides full control over these values at the browser engine level.
@@ -90,7 +88,7 @@ When the screen comes from the profile or from an explicit `--bot-screen` value,
 
 Orientation changes update the window and screen geometry together. A mobile profile with an explicit orientation keeps the corresponding orientation type and angle after a document reload.
 
-When `alwaysActive` is enabled, moving focus to another application does not deactivate the page. Browser contexts using the same active-window policy remain active when another context receives focus. Focus changes inside the same context, such as a new tab or popup, still follow the normal blur and visibility behavior.
+When `alwaysActive` is enabled, moving focus to another application does not deactivate the active page. Each BrowserContext with the same active-window policy remains active when another context receives focus. Switching among tabs inside one context still follows the normal blur and visibility behavior.
 
 ### Headful Mode Note
 
@@ -118,12 +116,6 @@ BotBrowser controls all screen and window properties at the browser engine level
 ---
 
 <a id="troubleshooting"></a>
-
-## Common Scenarios
-
-- Capture a baseline result using the Quick Start setup.
-- Change one relevant setting at a time and compare the new output.
-- Keep your final launch command documented so future checks are reproducible.
 
 ## Troubleshooting / FAQ
 

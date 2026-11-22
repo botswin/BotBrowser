@@ -90,7 +90,7 @@ docker-compose logs -f botbrowser
 ```javascript
 const { chromium } = require('playwright');
 (async () => {
-  const browser = await chromium.connectOverCDT('ws://localhost:9222');
+  const browser = await chromium.connectOverCDP('ws://localhost:9222');
   const page = await browser.newPage();
   // ...
 })();

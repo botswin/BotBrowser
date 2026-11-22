@@ -1,9 +1,9 @@
 <h1 align="center"><img src="docs/assets/logo-32.svg" alt="BotBrowser logo" width="32" height="32" /> BotBrowser</h1>
 
-<h4 align="center">Advanced Privacy Browser Core with Unified Fingerprint Defense 🚀</h4>
+<h4 align="center">Advanced Privacy Browser Core with Profile-Driven Fingerprint Protection</h4>
 
 <p align="center">
-  Identical privacy posture on any OS • Cross-platform & WebView simulation • Fingerprint protection validated across 31+ tracking scenarios
+  Profile-backed privacy policy across supported hosts • Cross-platform profiles and WebView control • Fingerprint protection validated across 31+ tracking scenarios
 </p>
 
 <p align="center">
@@ -42,7 +42,7 @@
 ---
 ## What Is BotBrowser?
 
-BotBrowser is a privacy-first browser core designed to protect users from browser fingerprinting, a technique recognized as a privacy threat by W3C, major browser vendors, privacy regulators, and academic research ([see references](FINGERPRINT_PRIVACY.md)). It keeps fingerprint signals uniform across every platform, preventing tracking systems from collecting and correlating data to identify users. Run the same profile on Windows, macOS, or Linux and the fingerprint posture stays identical each time.
+BotBrowser is a privacy-first browser core designed to protect users from browser fingerprinting, a technique recognized as a privacy threat by W3C, major browser vendors, privacy regulators, and academic research ([see references](FINGERPRINT_PRIVACY.md)). It applies the selected profile's browser and hardware identity to supported fingerprint surfaces, reducing host-derived differences while preserving normal browser APIs. Use the same profile and launch configuration to compare the protected posture across supported hosts.
 
 All engineering focuses on privacy research, cross-platform tracking-resistance validation, and maintaining protected environments for authorized defensive benchmarking. Review the project [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md) before using the software.
 
@@ -50,12 +50,12 @@ All engineering focuses on privacy research, cross-platform tracking-resistance 
 
 ## Why BotBrowser
 
-> **What makes BotBrowser different:** Cross-platform privacy browser core with unified fingerprint technology that prevents tracking data collection and device linkage.
+> **What makes BotBrowser different:** Cross-platform privacy browser core with profile-driven fingerprint controls and per-context isolation.
 
 <table cellspacing="0" cellpadding="8">
   <tr>
     <td width="50%"><strong>High-Fidelity, Always-Current Profiles</strong> including <a href="docs/guides/platform/ANDROID_WEBVIEW.md">Android WebView</a> and <a href="WEBKIT_PROFILE_CONSISTENCY.md">WebKit-family profile consistency</a>, built on the latest stable Chromium so fingerprints stay aligned with current browser behavior and reduce stale-engine correlation risk</td>
-    <td width="50%"><strong>Network Stack Parity</strong> with <a href="ADVANCED_FEATURES.md#network-fingerprint-control">Full-Proxy QUIC/STUN</a> (UDP over SOCKS5) delivers Chromium-level tunneling so geo metadata does not leak and privacy labs maintain clean transport parity</td>
+    <td width="50%"><strong>Network Stack Control</strong> with <a href="ADVANCED_FEATURES.md#network-fingerprint-control">proxied QUIC/STUN</a> (UDP over SOCKS5) keeps supported UDP traffic on the configured relay path</td>
   </tr>
   <tr>
     <td width="50%"><strong>Advanced Programmatic Control</strong> offers <a href="examples/">Playwright/Puppeteer integration</a> with CDP leak blocking so privacy tooling leaves no telemetry residue</td>
@@ -63,7 +63,7 @@ All engineering focuses on privacy research, cross-platform tracking-resistance 
   </tr>
   <tr>
     <td width="50%"><strong>Per-Context Fingerprint</strong> enables <a href="PER_CONTEXT_FINGERPRINT.md">independent fingerprint bundles per BrowserContext</a> without spawning new processes, with millisecond-level switching and reduced memory overhead</td>
-    <td width="50%"><strong>Zero-Overhead Performance</strong> adds <a href="BENCHMARK.md">no measurable latency</a>: Speedometer 3.0 within &lt;1% of stock Chrome, zero fingerprint API overhead across macOS/Linux/Windows, 29% memory savings at scale with Per-Context Fingerprint, and a <a href="BENCHMARK.md#trimmed-build">Trimmed Build</a> (ENT Tier3) delivering 62% lower wall time and 85% faster per-context spin-up on Linux x64</td>
+    <td width="50%"><strong>Low Measured Overhead</strong> includes <a href="BENCHMARK.md">benchmarked API latency</a> below the reported resolution on the tested paths, Speedometer 3.0 within run variance, 29% memory savings at scale with Per-Context Fingerprint, and a <a href="BENCHMARK.md#trimmed-build">Trimmed Build</a> (ENT Tier3) delivering 62% lower wall time and 85% faster per-context spin-up on Linux x64</td>
   </tr>
 </table>
 
@@ -92,7 +92,7 @@ All engineering focuses on privacy research, cross-platform tracking-resistance 
 - macOS/Linux commands follow the same pattern; see [INSTALLATION.md](INSTALLATION.md) for full instructions.
 
 **Step 3: Verify**
-- Visit [CreepJS](https://abrahamjuliot.github.io/creepjs/) or your preferred tracking observatory to confirm identical privacy posture.
+- Visit [CreepJS](https://abrahamjuliot.github.io/creepjs/) or your preferred tracking observatory to confirm the profile-backed privacy posture.
 - Timezone/locale/language auto-derive from your proxy/IP; override via CLI only when needed.
 
 
@@ -232,23 +232,23 @@ This reference maps privacy protection goals to BotBrowser implementation detail
 
 | Privacy Protection | Implementation | Reference |
 |---|---|---|
-| API standardization | navigator.webdriver standardized across all platforms so trackers cannot use API presence/absence as identification signal | [ADVANCED_FEATURES#Chrome Behavior Emulation](ADVANCED_FEATURES.md#chrome-behavior-emulation) |
-| Execution environment protection | Isolated execution context prevents framework artifacts from exposing privacy leaks | [ADVANCED_FEATURES#Playwright/Puppeteer Integration](ADVANCED_FEATURES.md#playwright-puppeteer-integration) |
-| Graphics rendering consistency | Deterministic noise across Canvas, WebGL, WebGPU, and audio ensures protected fingerprints even in GPU-dependent scenarios | [ADVANCED_FEATURES#Graphics & Rendering Engine](ADVANCED_FEATURES.md#graphics-rendering-engine) |
-| GPU fingerprint uniformity | Canvas and WebGPU rendering shares deterministic properties so GPU probes like [WebBrowserTools](https://webbrowsertools.com/webgpu-fingerprint/) return authentic results | [CHANGELOG#2025-12-08](CHANGELOG.md#2025-12-08) |
-| Typography consistency | Embedded font engines for Windows, macOS, Linux, and Android ensure text rendering remains identical across platforms | [ADVANCED_FEATURES#Cross-Platform Font Engine](ADVANCED_FEATURES.md#cross-platform-font-engine) |
-| Font availability uniformity | DOM queries return authentic font lists from embedded bundles so host system fonts cannot leak platform identity | [ADVANCED_FEATURES#Cross-Platform Font Engine](ADVANCED_FEATURES.md#cross-platform-font-engine) |
-| Device capabilities | Profile-based device properties maintain protected device claims across all platforms | [Profile Configs](profiles/PROFILE_CONFIGS.md) |
-| Network topology privacy | WebRTC signaling stays protected through SDP and ICE controls preventing network topology leakage | [ADVANCED_FEATURES#WebRTC Leak Protection](ADVANCED_FEATURES.md#webrtc-leak-protection) |
-| User agent coherence | Browser brand and version parity prevents UA string from revealing platform differences | [CLI_FLAGS#Profile Configuration Override Flags](CLI_FLAGS.md#profile-configuration-override-flags) |
-| Header to API parity | Client Hints headers DPR, device-memory, and UA-CH align with JavaScript reported values preventing header based identification | [ADVANCED_FEATURES#Browser & OS Fingerprinting](ADVANCED_FEATURES.md#browser-os-fingerprinting) |
-| Execution mode parity | GPU, WebGPU, and media signals remain identical whether running headless or in GUI mode | [ADVANCED_FEATURES#Headless & Incognito Compatibility](ADVANCED_FEATURES.md#headless-incognito-compatibility) |
+| API standardization | Profile-aware browser API behavior stays aligned with the selected browser family across supported platforms | [ADVANCED_FEATURES#Chrome Behavior Emulation](ADVANCED_FEATURES.md#chrome-behavior-emulation) |
+| Execution environment protection | Isolated execution context limits framework artifacts in page context | [ADVANCED_FEATURES#Playwright/Puppeteer Integration](ADVANCED_FEATURES.md#playwright-puppeteer-integration) |
+| Graphics rendering consistency | Deterministic noise across Canvas, WebGL, WebGPU, and audio protects supported graphics readback paths | [ADVANCED_FEATURES#Graphics & Rendering Engine](ADVANCED_FEATURES.md#graphics-rendering-engine) |
+| GPU fingerprint consistency | Canvas and WebGPU rendering apply profile-backed graphics policy across supported software and hardware paths | [CHANGELOG#2025-12-08](CHANGELOG.md#2025-12-08) |
+| Typography consistency | Embedded font engines apply the profile's target font selection, fallback order, and text measurement behavior across supported hosts | [ADVANCED_FEATURES#Cross-Platform Font Engine](ADVANCED_FEATURES.md#cross-platform-font-engine) |
+| Font availability consistency | Profile-backed font lookup applies the target platform's inventory and fallback policy across supported hosts | [ADVANCED_FEATURES#Cross-Platform Font Engine](ADVANCED_FEATURES.md#cross-platform-font-engine) |
+| Device capabilities | Profile-based device properties apply the selected device policy across supported hosts | [Profile Configs](profiles/PROFILE_CONFIGS.md) |
+| Network topology privacy | WebRTC signaling follows profile-backed SDP and ICE controls on supported paths | [ADVANCED_FEATURES#WebRTC Leak Protection](ADVANCED_FEATURES.md#webrtc-leak-protection) |
+| User agent coherence | Browser brand and version settings keep the User-Agent and Client Hints aligned with the selected profile policy | [CLI_FLAGS#Profile Configuration Override Flags](CLI_FLAGS.md#profile-configuration-override-flags) |
+| Header to API parity | Client Hints headers and JavaScript-visible values follow the active profile on supported surfaces | [ADVANCED_FEATURES#Browser & OS Fingerprinting](ADVANCED_FEATURES.md#browser-os-fingerprinting) |
+| Execution mode parity | GPU, WebGPU, and media policies remain active in both headless and headed modes on supported host paths | [ADVANCED_FEATURES#Headless & Incognito Compatibility](ADVANCED_FEATURES.md#headless-incognito-compatibility) |
 | DNS privacy | Use local DNS solver (ENT Tier1) for private resolution that avoids DNS leaks and provider restrictions, or use SOCKS5H to keep DNS within proxy tunnels | [CLI_FLAGS#Enhanced Proxy Configuration](CLI_FLAGS.md#enhanced-proxy-configuration) |
 | Public IP discovery | Customizable IP lookup backend for geo derivation via `--bot-ip-service`; comma-separated endpoints are tried one at a time, with fallback when the active endpoint is unavailable | [CLI_FLAGS#--bot-ip-service](CLI_FLAGS.md#flag-bot-ip-service) |
-| Protocol conformance | HTTP/2 and HTTP/3 behavior matches Chrome specifications preventing protocol based differentiation | [ADVANCED_FEATURES#Chrome Behavior Emulation](ADVANCED_FEATURES.md#chrome-behavior-emulation) |
+| Protocol behavior | Chromium's network stack executes the active profile's supported HTTP/2 and HTTP/3 policy | [ADVANCED_FEATURES#Chrome Behavior Emulation](ADVANCED_FEATURES.md#chrome-behavior-emulation) |
 | TLS behavior consistency | Network protocol behavior aligned with the active profile family across supported platforms | [CHANGELOG](CHANGELOG.md) |
-| DRM capability consistency | Widevine persistent license support with platform-appropriate license negotiation prevents tracking via EME capability fingerprinting | [ADVANCED_FEATURES](ADVANCED_FEATURES.md#complete-fingerprint-control) |
-| Authentication capability uniformity | WebAuthn client capabilities return platform-specific values preventing tracking via Touch ID, Bluetooth authenticator, and payment extension detection | [ADVANCED_FEATURES](ADVANCED_FEATURES.md#complete-fingerprint-control) |
+| DRM capability consistency | Profile-backed Widevine policy controls supported license-challenge and EME capability surfaces | [ADVANCED_FEATURES](ADVANCED_FEATURES.md#complete-fingerprint-control) |
+| Authentication capability consistency | WebAuthn client capabilities follow the profile's target platform on supported surfaces | [ADVANCED_FEATURES](ADVANCED_FEATURES.md#complete-fingerprint-control) |
 
 **Fingerprint Protection Matrix: Cross-Platform Coverage**
 
@@ -293,7 +293,7 @@ Fingerprint protection validated across 31+ tracking scenarios. See [DISCLAIMER]
 ### Cross-Platform Protection Validation
 - **Windows Profile on macOS:** Fingerprint protection maintained so privacy defenses remain effective across platforms
 - **Android Emulation on Desktop (PRO):** Mobile API parity enables fingerprint testing for cross-device privacy research
-- **Headless vs GUI Mode:** Identical fingerprint behavior ensures privacy validation results remain effective across execution contexts
+- **Headless vs GUI Mode:** Profile-backed fingerprint policies remain active in both execution modes on supported host paths
 
 **[Complete Validation Results & Research Data →](VALIDATION.md)**
 

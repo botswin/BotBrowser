@@ -91,7 +91,7 @@ await client.send("BotBrowser.setBrowserContextFlags", {
 | Problem | Solution |
 |---|---|
 | `navigator.platform` does not match expected Windows value | Confirm BotBrowser binary and correct `--bot-profile` are used. |
-| Rendering/hash mismatch between hosts | Ensure BotBrowser version and profile file are identical across hosts. |
+| Rendering/hash mismatch between hosts | Match BotBrowser version, profile file, and launch flags first. Compare the host graphics backend and rendering path before treating the difference as a profile mismatch. |
 | Linux instance not available | ENT Tier1 is required on Linux/Ubuntu. |
 | CJK text differences | See [CJK Font Rendering](CJK_FONT_RENDERING.md). |
 

@@ -7,7 +7,7 @@ Performance data comparing BotBrowser fingerprint protection overhead against st
 | Question | Answer |
 |----------|--------|
 | **How much overhead does BotBrowser add?** | Near-zero. Speedometer 3.0 shows **<1% difference** in both headed and headless modes, within run-to-run variance. |
-| **Are fingerprint APIs slower?** | No. Canvas, WebGL, Navigator, Screen, and Font APIs show **identical latency** with or without fingerprint profiles on macOS, Linux, and Windows. |
+| **Are fingerprint APIs slower?** | The tested Canvas, WebGL, Navigator, Screen, and Font API paths stayed within the benchmark's measurement resolution with or without profile protection on macOS, Linux, and Windows. |
 | **Can video-heavy sessions lower CPU?** | Yes. In the tested Linux x64 video workload, `--bot-video-fps=1:30` reduced average CPU by **71-82%** where lower visual video cadence was acceptable. See [Video FPS Control](#video-fps-control). |
 | **How does Per-Context Fingerprint scale?** | At 50 concurrent profiles: **29% less memory**, **57% fewer processes**, **2x faster creation** vs launching 50 separate browser instances. Full fingerprint isolation verified. |
 | **How does Trimmed Build compare to Standard?** | On Linux x64 (400 official samples): **62% lower wall time**, **85% faster per-context creation**, **68% lower CPU peak**, **31% lower PSS peak** versus Standard, with **100% success rate** and **0 residual processes**. See [Trimmed Build](#trimmed-build). |
@@ -49,7 +49,7 @@ Individual API latency measured over 1,000 iterations each, median reported (mil
 | Font `measureText()` (50 fonts) | 0.0 | 0.0 | 0.0 | 0.0 |
 | Intl `DateTimeFormat.resolvedOptions` | 0.0 | 0.0 | 0.0 | 0.0 |
 
-> **Result**: Fingerprint protection adds **zero overhead** on all tested APIs. Canvas, WebGL, Navigator, Screen, and Font APIs show identical latency with or without a fingerprint profile. AudioContext variance (2.9-3.9ms) is within normal fluctuation.
+> **Result**: The measured overhead was below the displayed 0.1 ms resolution on the tested API paths. Canvas, WebGL, Navigator, Screen, and Font APIs reported the same median at that resolution with or without a profile. AudioContext variance (2.9-3.9 ms) is within normal fluctuation.
 
 ### Page Load Time
 
@@ -310,7 +310,7 @@ Tested in both headless and headed modes.
 | Font `measureText()` | 0.3 | 0.3 | 0.3 | 0.3 |
 | All other APIs | 0.0 | 0.0 | 0.0 | 0.0 |
 
-> **Note**: The Windows test environment uses software rendering (no discrete GPU), resulting in higher Canvas/WebGL baseline latency compared to macOS. The relative overhead between Stock and BotBrowser remains **zero**.
+> **Note**: The Windows test environment uses software rendering (no discrete GPU), resulting in higher Canvas/WebGL baseline latency compared to macOS. The measured Stock and BotBrowser values are equal after rounding to the table's 0.1 ms precision.
 
 ### Page Load: Windows Host
 
@@ -326,7 +326,7 @@ Tested in both headless and headed modes.
 | Headless | 7.4ms | 8.4ms (+1.0ms) |
 | Headed | 8.6ms | 6.9ms (-1.7ms) |
 
-> **Result**: Fingerprint protection overhead is **zero** for all core APIs across all three platforms and both rendering modes.
+> **Result**: The tested core API paths add no change above the table's displayed precision across the three tested platforms and both rendering modes.
 
 ---
 
@@ -336,7 +336,7 @@ Tested in both headless and headed modes.
 
 | Setting | Value |
 |---------|-------|
-| Chrome version | 145 |
+| Chromium line | BotBrowser 145 benchmark run |
 | Automation | Playwright (playwright-core) |
 | Benchmark deployment | Local HTTP server (no network dependency) |
 | Test categories | Speedometer 3.0, Fingerprint API micro-benchmarks (13 APIs), Page load timing, Per-Context vs Multi-Instance scale |
@@ -401,14 +401,14 @@ node scripts/bench-scale.js --mode headless --max-scale 50
 
 BotBrowser's fingerprint protection engine is designed for production workloads:
 
-1. **Zero measurable overhead** on Speedometer 3.0: headless 42.7 vs 42.8 (-0.2%), headed 42.1 vs 41.8 (+0.7%)
-2. **Zero fingerprint API overhead**. Canvas, WebGL, Navigator, Screen, Font APIs show identical latency on macOS, Linux, and Windows, in both headed and headless modes
+1. **No measurable change in Speedometer 3.0 beyond run variance**: headless 42.7 vs 42.8 (stock minus profile), headed 42.1 vs 41.8
+2. **No measured latency difference above display precision** for the tested Canvas, WebGL, Navigator, Screen, and Font API paths on macOS, Linux, and Windows
 3. **Per-Context Fingerprint** provides resource savings at scale with full fingerprint isolation:
    - 29% less memory at 50 concurrent profiles
    - 2x faster profile creation
    - 57% fewer OS processes
    - 100% canvas fingerprint isolation verified (each context produces a unique hash)
-4. **Consistent across platforms**, tested on macOS arm64, Linux x64, and Windows x64 with identical results
+4. **Consistent across platforms**, tested on macOS arm64, Linux x64, and Windows x64 with results inside the stated run-to-run variance
 
 For enterprise users running concurrent fingerprint profiles, Per-Context Fingerprint (ENT Tier 3) delivers the same privacy protection with lower infrastructure cost and verified fingerprint isolation between contexts.
 

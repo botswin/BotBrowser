@@ -690,7 +690,7 @@ The `--bot-*` names in this guide are canonical. Existing commands that use the 
 <a id="custom-user-agent-with-webview-ent-tier3"></a>
 **Custom User-Agent (ENT Tier3)**
 
-Build any browser identity with full userAgentData control. These flags work together with `--user-agent` to construct a complete, internally consistent browser identity.
+Build a custom browser identity with userAgentData control. These flags work with `--user-agent` to align supported identity surfaces.
 
 <a id="flag-bot-config-platform"></a>
 <a id="flag-bot-platform"></a>
@@ -823,7 +823,7 @@ Runtime toggles that don’t rely on profile `configs` but still override behavi
 <a id="flag-bot-enable-variations-in-context"></a>
 - `--bot-enable-variations-in-context` (ENT Tier2): Include `X-Client-Data` headers in incognito BrowserContexts. Disabled by default. Guide: [Incognito Fingerprinting](docs/guides/fingerprint/INCOGNITO.md).
 <a id="flag-bot-always-active"></a>
-- `--bot-always-active` (PRO, default true): Keep windows and tabs active when unfocused. Guide: [Active Window](docs/guides/fingerprint/ACTIVE_WINDOW.md).
+- `--bot-always-active` (PRO, default false): Keep the active page in each context active when the application loses focus. This option is supported only by profiles configured for active-window protection. Guide: [Active Window](docs/guides/fingerprint/ACTIVE_WINDOW.md).
 <a id="flag-bot-webrtc-ice"></a>
 - `--bot-webrtc-ice=google` (ENT Tier1): Configure ICE endpoints with a preset (`google`) or `custom:stun:...,turn:...`. Guide: [WebRTC Leak Prevention](docs/guides/network/WEBRTC_LEAK_PREVENTION.md).
 <a id="--bot-noise-seed"></a>

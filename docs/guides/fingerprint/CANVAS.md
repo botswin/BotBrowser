@@ -1,6 +1,6 @@
 # Canvas Fingerprinting
 
-> Canvas API output is a widely used tracking signal. BotBrowser provides deterministic, profile-driven protection for all Canvas readback surfaces.
+> Canvas API output is a widely used tracking signal. BotBrowser applies profile-driven protection to supported Canvas readback surfaces.
 
 ---
 
@@ -22,13 +22,11 @@ chromium-browser \
   --bot-profile="/path/to/profile.enc"
 ```
 
-Start with this launch to establish a clean baseline before adding extra overrides.
-
 ## Overview
 
 Canvas fingerprinting uses the HTML5 Canvas API to generate a device-specific identifier. The rendering output varies across devices and platforms, producing a stable tracking signal that can identify users across sessions without their knowledge or consent.
 
-Canvas fingerprinting is one of the most widely deployed tracking techniques. The Princeton Web Census found Canvas fingerprinting scripts on over 14,000 of the top 1 million websites. BotBrowser provides profile-driven protection across all Canvas readback surfaces.
+Canvas fingerprinting is one of the most widely deployed tracking techniques. The Princeton Web Census found Canvas fingerprinting scripts on over 14,000 of the top 1 million websites. BotBrowser applies profile-driven protection to supported Canvas readback paths.
 
 ---
 
@@ -75,7 +73,7 @@ BotBrowser 150 keeps Canvas 2D protection active for standard and wide-gamut can
 
 ## How BotBrowser Provides Protection
 
-BotBrowser applies deterministic noise to all Canvas 2D output at the rendering pipeline level, not through JavaScript injection. This covers all pixel readback and text measurement operations. Built-in rendering produces consistent results across hosts, and platform-appropriate emoji sets are loaded from the profile. API call patterns and timing remain consistent with native browser behavior.
+BotBrowser applies deterministic noise to supported Canvas 2D output in the rendering pipeline, not through JavaScript injection. The policy covers supported pixel readback and text measurement paths. Platform-specific rasterization can still affect pixels across hosts.
 
 ---
 
@@ -87,7 +85,7 @@ To verify protection is active:
 
 1. Launch BotBrowser with a profile and visit a fingerprint testing site such as [BrowserLeaks](https://browserleaks.com/) or [CreepJS](https://abrahamjuliot.github.io/creepjs/).
 2. Confirm that the reported Canvas hash and image data match the profile configuration, not the host machine.
-3. To verify reproducibility, launch two sessions with the same `--bot-noise-seed` and confirm that the Canvas fingerprint output is identical.
+3. To verify reproducibility, launch two sessions with the same profile and `--bot-noise-seed` on the same rendering path, then compare the Canvas fingerprint output.
 
 ### Checking a canvas fingerprint in the page
 
@@ -122,7 +120,7 @@ Compare two launches of the same profile rather than one page against itself. Wi
 |-------------|-----------------------|
 | Digest differs between two runs of the same profile | `--bot-noise-seed` is missing or different, or the profile did not load |
 | Digest matches the host browser | The profile is not loaded; check for `--bot-profile` errors at startup |
-| Digest matches across hosts with the same profile | Profile-backed output is being applied consistently |
+| Digest matches across hosts with the same profile | The profile-backed path is applied consistently for this measurement |
 | `getImageData` differs from `toDataURL` on the same canvas | Readback-path difference; compare the same API on both runs |
 
 ---
@@ -136,8 +134,8 @@ Compare two launches of the same profile rather than one page against itself. Wi
 | Canvas fingerprint changes between sessions with same profile | Verify you are using the same `--bot-noise-seed` value. Without a fixed seed, noise varies per session by design. |
 | Canvas fingerprint differs between headless and headful mode | Ensure `--bot-noise-canvas=true` is set. Check that the same profile is used in both modes. |
 | Canvas output matches raw system output (no noise) | Confirm the profile is loaded correctly with `--bot-profile`. Check for error messages at startup. |
-| Different fingerprint on different host OS | This is expected without a profile. With a BotBrowser profile, Canvas output should be identical across hosts. |
-| Wide-gamut canvas behaves differently from standard canvas | Use BotBrowser 150.0.7871.46 or newer with a matching profile package. Canvas protection covers both standard and `display-p3` Canvas 2D workflows. |
+| Different fingerprint on different host OS | This is expected without a profile. With the same BotBrowser profile and seed, compare the profile-supported Canvas surfaces; text rasterization and host graphics backends can still affect pixels. |
+| Wide-gamut canvas behaves differently from standard canvas | Use a current BotBrowser release with a matching profile package. Confirm that the active profile includes support for the `display-p3` Canvas 2D workflow. |
 
 ---
 

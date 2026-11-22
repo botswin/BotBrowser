@@ -22,8 +22,6 @@ chromium-browser \
   --bot-profile="/path/to/profile.enc"
 ```
 
-Start with this launch to establish a clean baseline before adding extra overrides.
-
 ## Overview
 
 The speech synthesis voice list varies by operating system, browser build, and installed language packs, making it a privacy-relevant surface. BotBrowser controls voice enumeration at the browser engine level to ensure consistent platform identity.
@@ -46,7 +44,7 @@ Control voice list behavior with `--bot-speech-voices`:
 --bot-speech-voices=real
 ```
 
-When set to `profile`, BotBrowser returns a voice list consistent with the profile's declared platform and browser brand. This ensures voice data aligns with all other identity surfaces.
+When set to `profile`, BotBrowser returns a voice list based on the profile's declared platform and browser brand.
 
 Voice selection and ordering remain consistent when a profile targets a different host platform. Locale-specific voices are selected from the profile policy before the browser exposes the list to page content.
 
@@ -54,23 +52,19 @@ For Android profiles, the short voice-load delay starts when page code first use
 
 When the selected voice cannot be served directly, playback uses an available local voice for the same language. The page receives normal start and completion events.
 
+On Windows, playback can also complete when no default audio output is available. The same utterance is synthesized to an in-memory stream and start, end, and progress events follow playback timing. Pause, resume, and cancellation preserve their normal event order. A machine with a working audio output keeps the standard host playback path.
+
 ---
 
 <a id="how-botbrowser-controls"></a>
 
 ## How BotBrowser Provides Protection
 
-BotBrowser generates a complete, platform-consistent voice list at the browser engine level. The voice list matches the profile's declared platform and browser brand. All voice properties and ordering are profile-appropriate. No JavaScript interception is used, so voice loading follows the standard browser pattern.
+BotBrowser generates the voice list at the browser engine level from the profile's declared platform and browser brand. Supported voice properties and ordering follow that profile policy. No JavaScript interception is used.
 
 ---
 
 <a id="troubleshooting"></a>
-
-## Common Scenarios
-
-- Capture a baseline result using the Quick Start setup.
-- Change one relevant setting at a time and compare the new output.
-- Keep your final launch command documented so future checks are reproducible.
 
 ## Troubleshooting / FAQ
 

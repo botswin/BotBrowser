@@ -34,11 +34,11 @@ Smart auto-configuration: timezone, locale, and languages derive from your proxy
 
 **Scope:** Network-layer traits that tracking systems often score.
 
-- **HTTP Headers & Protocol:** Chrome-like request headers; authentic HTTP/2 and HTTP/3 behavior (see [Chrome Behavior Emulation](#chrome-behavior-emulation)).
+- **HTTP Headers & Protocol:** Profile-aligned request headers and supported HTTP/2 and HTTP/3 behavior (see [Chrome Behavior Emulation](#chrome-behavior-emulation)).
 - **DNS Routing:** SOCKS5 proxies route all lookups through the proxy tunnel, preventing local DNS leakage.
 - **UDP over SOCKS5 (ENT Tier3):** Automatic UDP associate when supported to tunnel QUIC and STUN; ICE presets often unnecessary if UDP is available.
 - **QUIC Proxy Routing:** Authenticated `quic://` proxy routes support HTTPS tunnels and MASQUE CONNECT-UDP for HTTP/3 traffic.
-- **WebRTC:** SDP/ICE manipulation and candidate filtering to prevent local IP disclosure (see [WebRTC Leak Protection](#webrtc-leak-protection)).
+- **WebRTC:** Profile-backed SDP negotiation, ICE candidate handling, and controlled fallback paths (see [WebRTC Leak Protection](#webrtc-leak-protection)).
 - **TLS behavior consistency:** Network protocol behavior is aligned with the active profile family across supported platforms.
 
 **Stack differentiators:**
@@ -111,7 +111,7 @@ await page.goto('https://example.co.uk');
 <a id="multi-layer-fingerprint-noise"></a>
 ### Multi-Layer Fingerprint Noise
 
-Deterministic noise generation prevents fingerprint collection while maintaining session consistency.
+Deterministic noise generation changes supported fingerprint readbacks while maintaining session consistency.
 
 - **Canvas**: Controlled variance applied to Canvas 2D rendering
 - **Canvas Replay (ENT Tier4)**: Profile-backed deterministic Canvas responses for approved validation workflows
@@ -133,10 +133,10 @@ For noise configuration flags, see [CLI Flags: Rendering, Noise & Media/RTC](CLI
 <a id="active-window-emulation"></a>
 ### Active Window Emulation
 
-Maintains protected window state to prevent focus-based tracking even when the host window is unfocused.
+Applies the selected profile's active-window policy while the host window is unfocused.
 
-- [`--bot-always-active`](CLI_FLAGS.md#flag-bot-always-active) (PRO, default true) maintains protected `blur` and `visibilitychange` event patterns, keeping `document.hidden=false`
-- Protects against window-focus-based tracking heuristics that monitor caret blinking, FocusManager events, or inactive viewport throttling
+- [`--bot-always-active`](CLI_FLAGS.md#flag-bot-always-active) (PRO, opt-in) keeps the active page in each context in the foreground while the application is unfocused. Use a profile that supports active-window protection.
+- Keeps supported focus and visibility values aligned with the selected profile
 
 <a id="headless-incognito-compatibility"></a>
 ### Headless & Incognito Compatibility
@@ -150,14 +150,13 @@ Consistent behavior across execution modes.
 - Automatic GPU rendering backend selection on Linux via [`--bot-gpu-emulation`](CLI_FLAGS.md#flag-bot-gpu-emulation). Detects and prefers system GPU/GL drivers when available, with shader caching enabled by default. Optional `--bot-gpu-emulation=priority` adds prioritized GPU/WebGPU command-buffer scheduling for high-concurrency BrowserContext workloads. For backend choice and flag migration on Linux servers, see [Linux GPU Backend Selection](docs/guides/deployment/LINUX_GPU_BACKEND.md)
 
 **Incognito-Mode Consistency:**
-- Fingerprint protection maintained in incognito mode
-- Consistent fingerprint between normal and incognito modes
+- Profile-backed protection remains active in private contexts while storage contents and persistence remain isolated
 - `X-Client-Data` header consistency in incognito contexts via [`--bot-enable-variations-in-context`](CLI_FLAGS.md#flag-bot-enable-variations-in-context) (ENT Tier2)
 
 <a id="webrtc-leak-protection"></a>
 ### WebRTC Leak Protection
 
-Complete WebRTC fingerprint protection and network privacy.
+WebRTC fingerprint and network policy for supported profile and proxy paths.
 
 **SDP Control:**
 - IPv4 and IPv6 Session Description Protocol (SDP) standardization across platforms
@@ -176,16 +175,16 @@ Complete WebRTC fingerprint protection and network privacy.
 <a id="chrome-behavior-emulation"></a>
 ### Chrome Behavior Emulation
 
-Consistent Chrome-compatible behaviors and standardized API responses.
+Profile-aligned browser behavior and API responses.
 
 **Protocol Headers:**
-- Standard HTTP headers matching Chrome specifications
-- Consistent HTTP/2 and HTTP/3 behavior across platforms
-- Standardized request timing and protocol patterns
+- Profile-aligned HTTP headers on supported browser-family paths
+- HTTP/2 and HTTP/3 behavior executed through Chromium's network stack with the active profile policy
+- Request timing and protocol behavior aligned with the selected profile
 
 **API Standardization:**
-- Chrome-compatible API implementations
-- Standardized JavaScript API responses matching Chrome specifications
+- Support for the selected browser family's API shape on supported surfaces
+- JavaScript API responses aligned with the active browser-family profile
 - Profile-aligned on-device AI availability across supported browser families and host hardware
 
 **Widevine CDM Integration (ENT Tier2):**
@@ -210,7 +209,7 @@ Advanced font rendering with consistent results across hosts.
 - Windows fonts (Segoe UI, Arial, Times New Roman, etc.)
 - macOS fonts (San Francisco, Helvetica, Times, etc.)
 - Android fonts (Roboto, Noto, etc.) (PRO)
-- Complete emoji sets for all platforms
+- Profile-selected emoji sets for supported platforms
 
 **Accurate Font-Fallback Chains:**
 - Accurate CJK (Chinese, Japanese, Korean) font fallback
@@ -235,16 +234,16 @@ Advanced font rendering with consistent results across hosts.
 Maintains fingerprint and behavior consistency across different host systems.
 
 **Platform Profile Portability:**
-- Windows profile produces identical fingerprints on macOS and Linux (ENT Tier1) hosts
-- macOS profile maintains consistency across Windows and Linux (ENT Tier1) hosts
-- Android profile (PRO) operates identically when emulated on any desktop OS
+- Windows profiles follow the target platform's identity and browser behavior on supported macOS and Linux (ENT Tier1) hosts
+- macOS profiles apply their target platform policy across supported Windows and Linux (ENT Tier1) hosts
+- Android profiles (PRO) apply their mobile target policy when emulated on supported desktop hosts
 - Android DevTools interface (PRO) maintains readability during emulation because the inspector normalizes page zoom and font scaling
 
 **Behavioral Consistency:**
-- Eliminates host-OS-specific behavioral differences
-- Simulates platform-specific UI element behavior consistently
-- Maintains identical touch and mouse event patterns
-- Emulates authentic device behavior across platforms
+- Removes host-derived defaults from supported profile-backed surfaces
+- Applies platform-specific UI element behavior from the active profile
+- Keeps touch and mouse event behavior aligned with the selected profile policy
+- Applies device behavior from the active profile across supported hosts
 
 **Related guides:** [Cross-Platform Profiles](docs/guides/platform/CROSS_PLATFORM_PROFILES.md) · [Windows on Mac/Linux](docs/guides/platform/WINDOWS_ON_MAC_LINUX.md) · [Android Emulation](docs/guides/platform/ANDROID_EMULATION.md) · [Device Emulation](docs/guides/platform/DEVICE_EMULATION.md)
 
@@ -255,10 +254,10 @@ Maintains fingerprint and behavior consistency across different host systems.
 
 ### Hardware Fingerprint Control
 
-Comprehensive hardware emulation and fingerprint management.
+Profile-backed hardware controls and fingerprint management.
 
-**CPU-Architecture Emulation:**
-- x86/x64/ARM architecture simulation
+**CPU-Architecture Controls:**
+- Profile-backed x86/x64/ARM architecture reporting
 - Authentic CPU core count and timing
 - Hardware concurrency simulation, with [`--bot-cores`](CLI_FLAGS.md#flag-bot-cores) choosing between the profile claim, the host count, the lower of the two, or an explicit number
 - JavaScript & WebAssembly parity across baseline, Turbo, and SIMD pipelines
@@ -270,7 +269,7 @@ Comprehensive hardware emulation and fingerprint management.
 - Refresh rate and orientation control via [`--bot-orientation`](CLI_FLAGS.md#flag-bot-orientation) for mobile profiles, covering all orientation APIs and CSS media queries
 - Opt-in mobile keyboard visual viewport behavior via [`--bot-mobile-keyboard`](CLI_FLAGS.md#flag-bot-mobile-keyboard) for Android and WebKit-family mobile profiles
 
-**Device-Behavior Simulation:**
+**Device-Behavior Controls:**
 - Authentic device memory reporting
 - Battery status and charging simulation
 - Network connection type emulation
@@ -302,7 +301,7 @@ Comprehensive hardware emulation and fingerprint management.
 
 <a id="cpu-core-scaling"></a>
 
-**CPU Core Scaling Protection**: When `navigator.hardwareConcurrency` is set by the profile, Worker threads are automatically constrained to match the claimed core count via CPU affinity on Linux and Windows. This ensures parallel computation scaling curves align with the claimed value.
+**CPU Core Scaling Protection**: On Linux and Windows, Worker threads are constrained to the resolved `navigator.hardwareConcurrency` value through CPU affinity.
 
 <a id="video-fps-control"></a>
 
@@ -421,9 +420,9 @@ See [WebKit-family Profile Consistency](WEBKIT_PROFILE_CONSISTENCY.md) for the f
 | Component | Capabilities |
 |-----------|-------------|
 | **Canvas** | 2D context noise, standard and wide-gamut color-space consistency, consistent image data, cross-worker consistency |
-| **WebGL** | Precision GPU micro-benchmarks, driver-specific behavior, extension simulation, per-context capability claims, WebGL2 sample-count and renderbuffer consistency, profile-served limits that remain allocatable (`--bot-webgl=min`), and parallel shader compilation on software-rendered hosts |
+| **WebGL** | Precision GPU micro-benchmarks, driver-specific behavior, extension simulation, per-context capability claims, WebGL2 sample-count and renderbuffer consistency, profile-served limits that remain allocatable (`--bot-webgl=min`), and parallel shader compilation on supported software-rendered paths |
 | **WebGPU** | Modern GPU API support, compute shader capabilities, buffer management, and profile-validated adapter and device limits |
-| **Text Rendering** | HarfBuzz text shaping, cross-platform CoreText fallback order, font-name visibility, emoji rendering consistency |
+| **Text Rendering** | HarfBuzz text shaping, target-platform fallback order, profile-driven font weights and variable instances, and target-specific DOM and Canvas measurement precision |
 | **Performance** | Precise FPS simulation, texture hash fidelity, render timing control |
 
 ### Network & Media Subsystems
@@ -476,7 +475,7 @@ Documentation: [Bot Script Examples](examples/bot-script) · [Guide](docs/guides
 Privacy-preserving integration with popular frameworks.
 
 - Prevents CDP artifacts from appearing in page context
-- Maintains authentic browser behavior in all contexts
+- Keeps supported browser behavior aligned with the active profile
 - Eliminates framework-specific fingerprint signatures
 - ChromeDriver compatibility and Selenium Grid integration support
 
@@ -487,7 +486,7 @@ Privacy-preserving integration with popular frameworks.
 <a id="mirror-distributed-privacy-consistency"></a>
 ## Mirror: Distributed Privacy Consistency (ENT Tier3)
 
-Verify that privacy protection works consistently across platforms and networks. Run a controller instance and multiple clients to ensure all instances maintain identical privacy defenses.
+Verify that profile-backed privacy behavior stays aligned across platforms and networks. Run a controller instance and multiple clients with the same profile and compare the supported output surfaces.
 
 **[Complete Mirror documentation](tools/mirror/)** including setup, CLI flags, CDP examples, and troubleshooting. See also the [deployment guide](docs/guides/deployment/MIRROR_DISTRIBUTED.md).
 
