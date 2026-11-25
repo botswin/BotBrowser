@@ -4,6 +4,7 @@ BotBrowser 150 and newer profiles are delivered through subscription or support 
 
 | Release line | Matching BotBrowser build | Profile files |
 |--------------|---------------------------|---------------|
+| v159 | 159.0.8154.33 | Subscription profiles: [support@botbrowser.io](mailto:support@botbrowser.io), [@botbrowser_support](https://t.me/botbrowser_support) |
 | v158 | 158.0.8127.36 | Subscription profiles: [support@botbrowser.io](mailto:support@botbrowser.io), [@botbrowser_support](https://t.me/botbrowser_support) |
 | v157 | 157.0.8103.78 | Subscription profiles: [support@botbrowser.io](mailto:support@botbrowser.io), [@botbrowser_support](https://t.me/botbrowser_support) |
 | v156 | 156.0.8078.47 | Subscription profiles: [support@botbrowser.io](mailto:support@botbrowser.io), [@botbrowser_support](https://t.me/botbrowser_support) |
@@ -16,7 +17,7 @@ BotBrowser 150 and newer profiles are delivered through subscription or support 
 | v149 | [149.0.7827.200](https://github.com/botswin/BotBrowser/releases/tag/149.0.7827.200) | Legacy public demo files: `chrome149_*.enc`, `webkit26_*.enc` |
 | v148 | [148.0.7778.97](https://github.com/botswin/BotBrowser/releases/tag/148.0.7778.97) | Legacy public demo files: `chrome148_*.enc` |
 
-Use a profile package with the matching BotBrowser major version. For example, v151 profiles require a v151 BotBrowser binary, and v154-v158 profiles require the corresponding BotBrowser major version.
+Use a profile package with the matching BotBrowser major version. For example, v151 profiles require a v151 BotBrowser binary, and v154-v159 profiles require the corresponding BotBrowser major version. Patch and minor versions can differ.
 
 > **Access:** BotBrowser 150 and newer profile packages are available through subscription or support at [support@botbrowser.io](mailto:support@botbrowser.io) or [@botbrowser_support](https://t.me/botbrowser_support). Legacy demo profiles can still be launched via [CLI](../../INSTALLATION.md#download--installation) or [BotBrowser Control](https://github.com/botswin/BotBrowser-Control).
 

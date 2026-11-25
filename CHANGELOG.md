@@ -2,6 +2,19 @@
 
 > **Research scope:** Entries in this changelog describe features evaluated in authorized labs and defensive benchmarking programs. Follow the [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md). We work with security vendors to investigate any misuse, so report concerns to [support@botbrowser.io](mailto:support@botbrowser.io).
 
+## [2026-11-25]
+### Major
+- **Chromium Core -> 159.0.8154.33**: BotBrowser 159 is now available on the stable release line.
+
+### Improvements
+- **WebRTC SDP Consistency**: Improved SDP consistency when a profile-backed default candidate is omitted before its public address is available. The transport port and RTCP address now remain valid, while relay candidates and `webrtc=real` keep their stock values.
+- **Browser-Family Compatibility**: Updated supported browser-family profile behavior for Chromium 159, including permissions handling for the new Chromium interfaces and the profile-backed surfaces already carried by the prior release.
+
+### Compatibility Notes
+- Chromium 159 is an early stable release. BotBrowser 158 remains the recommended production line.
+- Profiles must match the BotBrowser Chrome major. Patch and minor versions can differ.
+- WebGL, WebGPU, WebRTC, and related context settings must be set before the first page in that BrowserContext is created.
+
 ## [2026-11-23]
 ### Major
 - **Chromium Core -> 158.0.8127.36**: Updated the BotBrowser 158 line to the latest validated Chromium build. Existing profile-major workflows and per-context automation remain compatible.
