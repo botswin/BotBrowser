@@ -210,7 +210,7 @@ await page.goto("https://example.com");
 | CDP consistency checks still show instrumentation state | Enable `--bot-disable-console-message` (enabled by default on ENT Tier1). |
 | Serial CDP hover movement is delivered one point at a time | Enable `--bot-cdp-coalesce` before the first page is created. |
 | Page title shows extension name | Use `--bot-title` to set a custom title when using `--bot-script`. |
-| Viewport size mismatch | Do not set `defaultViewport` in Puppeteer. Do not set viewport options in Playwright. Let the profile control dimensions. |
+| Viewport size mismatch | Profile-backed viewports ignore normal Playwright or Puppeteer viewport overrides without an error. Select the size with `--bot-window=WxH`. |
 | Framework artifacts remain despite flags | Use `--bot-script` for the smallest framework footprint. Framework-based automation always carries some artifacts. |
 
 ---

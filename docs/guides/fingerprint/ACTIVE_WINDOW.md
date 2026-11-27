@@ -17,7 +17,7 @@
 
 ## Quick Start
 
-Active window emulation is opt-in. Set `alwaysActive` to `true` in a supported profile, or pass the PRO launch flag with that profile. A profile that does not support active-window protection keeps the option inactive.
+Active window emulation is opt-in. Pass the PRO launch flag with a supported profile. A profile that does not support active-window protection keeps the option inactive.
 
 ```bash
 chromium-browser \
@@ -49,7 +49,7 @@ chromium-browser \
 
 Browser window focus and visibility state can be used as a privacy signal to distinguish automated sessions from real user activity.
 
-When `alwaysActive` or `--bot-always-active` is enabled, BotBrowser keeps the active page in focus while another browser context or application receives focus. The foreground tab in each context remains active. Switching among tabs inside the same context still produces normal blur and visibility transitions.
+When active-window protection is enabled, BotBrowser keeps the active page in focus while another browser context or application receives focus. The foreground tab in each context remains active. Switching among tabs inside the same context still produces normal blur and visibility transitions.
 
 This protection works in both headless and headful modes.
 

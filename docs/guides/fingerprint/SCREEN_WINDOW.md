@@ -52,6 +52,23 @@ Control window size with `--bot-window`:
 
 When using `WxH` format, `outerWidth` and `outerHeight` are auto-derived from the profile's border definitions to maintain consistent frame dimensions.
 
+### Viewport Overrides
+
+The loaded profile owns the page viewport. CDP `Emulation.setDeviceMetricsOverride`, Playwright `setViewportSize`, and Puppeteer `setViewport` do not replace that viewport:
+
+- Mobile profiles ignore the override.
+- Desktop profiles ignore an override when both the requested width and height fit inside the reported screen.
+- An override that expands beyond the reported screen is allowed for full-page capture.
+- Ignored overrides return success and do not raise an error.
+
+Use `--bot-window=WxH` to select the inner viewport size:
+
+```bash
+--bot-window=640x480
+```
+
+The example produces `innerWidth === 640` and `innerHeight === 480`; `outerWidth` and `outerHeight` include the profile's frame dimensions.
+
 ### Screen Properties
 
 Control screen dimensions with `--bot-screen`:
@@ -88,7 +105,7 @@ When the screen comes from the profile or from an explicit `--bot-screen` value,
 
 Orientation changes update the window and screen geometry together. A mobile profile with an explicit orientation keeps the corresponding orientation type and angle after a document reload.
 
-When `alwaysActive` is enabled, moving focus to another application does not deactivate the active page. Each BrowserContext with the same active-window policy remains active when another context receives focus. Switching among tabs inside one context still follows the normal blur and visibility behavior.
+When active-window protection is enabled for a supported profile, moving focus to another application does not deactivate the active page. Each BrowserContext with the same active-window policy remains active when another context receives focus. Switching among tabs inside one context still follows the normal blur and visibility behavior.
 
 ### Headful Mode Note
 
@@ -121,7 +138,7 @@ BotBrowser controls all screen and window properties at the browser engine level
 
 | Problem | Solution |
 |---------|----------|
-| Viewport doesn't match profile | Do not set `defaultViewport` in Puppeteer. Do not set viewport options in Playwright. Let the profile control dimensions. |
+| Viewport doesn't match profile | Profile-backed viewports ignore normal Playwright or Puppeteer viewport overrides without an error. Select the size with `--bot-window=WxH`. |
 | Screen size shows host display in headful mode | Set `--bot-screen=profile` and `--bot-window=profile` explicitly for headful. |
 | Frame dimensions inconsistent with claimed OS | Verify the profile matches your intended platform. Frame borders are OS-specific. |
 | devicePixelRatio shows host value | Load the intended profile and select `--bot-dpr=profile`. GUI scaling is controlled separately. |

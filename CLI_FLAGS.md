@@ -730,6 +730,8 @@ BotBrowser auto-generates matching `navigator.userAgentData` (brands, fullVersio
   - `real` - Use actual system window dimensions (default for desktop headful)
   - `WxH` - Direct size specification (e.g., `1920x1080`), sets innerWidth/innerHeight with outerWidth/outerHeight auto-derived from profile borders
   - `JSON` - Full customization (e.g., `'{"innerWidth":1920,"innerHeight":1080,"devicePixelRatio":2}'`)
+
+  When a profile is loaded, `Emulation.setDeviceMetricsOverride` from Playwright or Puppeteer does not replace the profile-backed viewport. Mobile profiles ignore the command. Desktop profiles ignore a request whose width and height both fit inside the reported screen; an expansion beyond that screen is allowed for full-page capture. These ignored commands return success. Use `--bot-window=WxH` to select the window's inner dimensions.
 <a id="flag-bot-config-screen"></a>
 <a id="flag-bot-screen"></a>
 - `--bot-screen=<value>`: Screen properties with multiple formats. Guide: [Screen and Window](docs/guides/fingerprint/SCREEN_WINDOW.md).
